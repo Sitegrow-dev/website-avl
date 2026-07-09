@@ -1,0 +1,24 @@
+---
+interface Props {
+  /** Nom du fichier SVG dans public/icons/ (sans extension). */
+  name: string;
+  size?: number;
+  width?: number;
+  height?: number;
+  class?: string;
+}
+
+const { name, size = 32, width, height, class: className } = Astro.props;
+const w = width ?? size;
+const h = height ?? size;
+---
+<img
+  src={`/icons/${name}.svg`}
+  alt=""
+  width={w}
+  height={h}
+  class={className}
+  aria-hidden="true"
+  loading="lazy"
+  decoding="async"
+/>

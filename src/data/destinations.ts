@@ -158,7 +158,7 @@ export const destinations: Destination[] = [
         },
         {
           step: '03',
-          icon: 'plane',
+          icon: 'plane-takeoff',
           title: 'Organiser le séjour',
           description: 'Hébergement, transport et lune de miel en Italie.',
           link: { label: 'Lune de miel en Italie →', href: '/#lune-de-miel' },

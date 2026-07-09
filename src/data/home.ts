@@ -97,13 +97,13 @@ export const homeContent = {
       },
       {
         step: '03',
-        icon: 'plane',
+        icon: 'plane-takeoff',
         title: 'Voyage',
         description: 'Logistique et accueil de vos invités en Italie.',
       },
       {
         step: '04',
-        icon: 'sparkles',
+        icon: 'atom',
         title: 'Le jour J',
         description: 'Célébration et accompagnement sur place.',
       },

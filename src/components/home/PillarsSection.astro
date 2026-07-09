@@ -2,30 +2,16 @@
 import { homeContent } from '@/data/home';
 import Container from '@components/ui/Container.astro';
 import TextLink from '@components/ui/TextLink.astro';
+import FigmaIcon from '@components/ui/FigmaIcon.astro';
 
 const { pillars } = homeContent;
-
-const icons: Record<string, string> = {
-  church:
-    '<path d="M12 2 4 7v2h16V7L12 2Zm-1 4h2v2h-2V6Zm-3 9v7h2v-5h6v5h2v-7l-5-3-5 3Z"/>',
-  compass:
-    '<circle cx="12" cy="12" r="9"/><path d="m15 9-2 5-5 2 2-5 5-2Z"/>',
-  archive:
-    '<path d="M4 4h16v4H4V4Zm0 6h16v10H4V10Zm4 2v6h8v-6H8Z"/>',
-};
 ---
 <section class="bg-bg-alt py-24 lg:py-28" id="patrimoine">
   <Container>
     <div class="grid gap-6 lg:grid-cols-3">
       {pillars.items.map((item) => (
         <article class="rounded-sm border border-border bg-white p-12">
-          <svg
-            class="h-10 w-10 text-brand"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            aria-hidden="true"
-            set:html={icons[item.icon]}
-          />
+          <FigmaIcon name={item.icon} size={40} />
           <div class="mt-8">
             <h2 class="font-display text-3xl text-ink">{item.title}</h2>
             <p class="mt-4 text-lg text-muted">{item.subtitle}</p>

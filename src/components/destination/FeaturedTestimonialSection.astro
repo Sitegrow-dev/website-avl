@@ -1,6 +1,7 @@
 ---
 import Container from '@components/ui/Container.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
+import FigmaIcon from '@components/ui/FigmaIcon.astro';
 
 interface Props {
   quote: string;
@@ -24,9 +25,7 @@ const { quote, name, location, image } = Astro.props;
         />
       </div>
       <div class="flex flex-col justify-center p-10 lg:w-3/5 lg:p-16">
-        <svg class="h-8 w-10 text-brand/30" viewBox="0 0 40 32" fill="currentColor" aria-hidden="true">
-          <path d="M0 32V19.2C0 8.5 6.4 2.1 19.2 0v8.5c-6.4 1.1-9.6 4.3-9.6 9.6H19V32H0Zm23.5 0V19.2c0-10.7 6.4-17.1 19.2-19.2v8.5c-6.4 1.1-9.6 4.3-9.6 9.6h9.6V32h-19.2Z"/>
-        </svg>
+        <FigmaIcon name="quote" width={40} height={32} />
         <blockquote class="mt-8 font-display text-2xl leading-relaxed text-ink lg:text-3xl">
           "{quote}"
         </blockquote>

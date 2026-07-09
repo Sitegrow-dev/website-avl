@@ -3,7 +3,7 @@
  * Usage: node scripts/download-figma-images.mjs
  */
 import sharp from 'sharp';
-import { mkdirSync, existsSync } from 'fs';
+import { mkdirSync, existsSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -209,6 +209,48 @@ const assets = [
   },
 ];
 
+/** @type {{ url: string; out: string }[]} */
+const iconAssets = [
+  {
+    url: 'https://www.figma.com/api/mcp/asset/ece15009-5d6b-4776-a43c-97d018987278',
+    out: 'file-check',
+  },
+  {
+    url: 'https://www.figma.com/api/mcp/asset/c8235471-81ef-4204-bf22-9f731847cd86',
+    out: 'map-pin',
+  },
+  {
+    url: 'https://www.figma.com/api/mcp/asset/1632e60c-e075-4257-9ad6-244775cc10a1',
+    out: 'plane-takeoff',
+  },
+  {
+    url: 'https://www.figma.com/api/mcp/asset/115b5826-26e5-41d6-a7b1-6e364ebd2ca7',
+    out: 'atom',
+  },
+  {
+    url: 'https://www.figma.com/api/mcp/asset/9fbd0e1a-9b9a-44f7-9ef0-119b393bffd5',
+    out: 'church',
+  },
+  {
+    url: 'https://www.figma.com/api/mcp/asset/67d37e68-74f8-4063-bf4a-88058789ac6c',
+    out: 'compass',
+  },
+  {
+    url: 'https://www.figma.com/api/mcp/asset/2de0ee8e-d765-4035-a548-ab8c5b7f7b6d',
+    out: 'archive',
+  },
+  {
+    url: 'https://www.figma.com/api/mcp/asset/b963b5bf-2ecf-4986-a9f4-606d9cb09fb7',
+    out: 'text-quote',
+  },
+  {
+    url: 'https://www.figma.com/api/mcp/asset/da28e242-ce44-462f-bd37-3ab5ac43ff0a',
+    out: 'quote',
+  },
+];
+
+const iconsRoot = join(__dirname, '..', 'public', 'icons');
+
 async function downloadBuffer(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status} for ${url}`);
@@ -246,12 +288,29 @@ async function processAsset({ url, out, width, height }) {
   console.log(`✓ ${out}`);
 }
 
+async function processIcon({ url, out }) {
+  if (!existsSync(iconsRoot)) mkdirSync(iconsRoot, { recursive: true });
+  const buf = await downloadBuffer(url);
+  writeFileSync(join(iconsRoot, `${out}.svg`), buf);
+  console.log(`✓ icons/${out}.svg`);
+}
+
 console.log('Downloading Figma assets...\n');
 for (const asset of assets) {
   try {
     await processAsset(asset);
   } catch (err) {
     console.error(`✗ ${asset.out}:`, err.message);
+    process.exitCode = 1;
+  }
+}
+
+console.log('\nDownloading Figma icons...\n');
+for (const icon of iconAssets) {
+  try {
+    await processIcon(icon);
+  } catch (err) {
+    console.error(`✗ icons/${icon.out}:`, err.message);
     process.exitCode = 1;
   }
 }

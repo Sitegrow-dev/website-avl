@@ -2,6 +2,7 @@
 import { homeContent } from '@/data/home';
 import Container from '@components/ui/Container.astro';
 import SectionHeader from '@components/ui/SectionHeader.astro';
+import FigmaIcon from '@components/ui/FigmaIcon.astro';
 
 const { testimonials } = homeContent;
 ---
@@ -11,9 +12,7 @@ const { testimonials } = homeContent;
     <div class="mt-16 grid gap-8 lg:grid-cols-3">
       {testimonials.items.map((item) => (
         <blockquote class="rounded-sm border border-border bg-white p-10">
-          <svg class="h-6 w-8 text-brand/40" viewBox="0 0 32 24" fill="currentColor" aria-hidden="true">
-            <path d="M0 24V14.4C0 6.4 4.8 1.6 14.4 0v6.4c-4.8.8-7.2 3.2-7.2 7.2H14V24H0Zm17.6 0V14.4c0-8 4.8-12.8 14.4-14.4v6.4c-4.8.8-7.2 3.2-7.2 7.2h7.2V24h-14.4Z"/>
-          </svg>
+          <FigmaIcon name="text-quote" width={32} height={24} />
           <p class="mt-8 text-lg leading-relaxed text-ink">{item.quote}</p>
           <footer class="mt-10">
             <p class="font-semibold text-ink">{item.name}</p>
