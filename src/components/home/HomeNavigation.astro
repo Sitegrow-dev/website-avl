@@ -3,31 +3,39 @@ import { siteConfig } from '@/config/site';
 import SiteLogo from '@components/home/SiteLogo.astro';
 
 interface Props {
-  activeNav?: string;
-  /** 'fr' | 'en' — ajuste quelques libellés. */
+  activeHref?: string;
   lang?: 'fr' | 'en';
 }
 
 const { nav, navCta } = siteConfig;
-const { activeNav, lang = 'fr' } = Astro.props;
+const { activeHref, lang = 'fr' } = Astro.props;
 const menuLabel = lang === 'en' ? 'Open menu' : 'Ouvrir le menu';
 const closeLabel = lang === 'en' ? 'Close menu' : 'Fermer le menu';
 const navLabel = lang === 'en' ? 'Main navigation' : 'Navigation principale';
----
-<header class="sticky top-0 z-50 border-b border-black/5 bg-white/80 backdrop-blur-md">
-  <div class="relative z-[110] mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-6 sm:px-8 lg:px-10">
-    <SiteLogo height={40} />
 
-    <nav class="hidden items-center gap-8 md:flex" aria-label={navLabel}>
+function isActive(href: string) {
+  if (!activeHref) return false;
+  if (href.startsWith('/#')) return activeHref === href;
+  return activeHref === href || activeHref.startsWith(href);
+}
+---
+<header class="sticky top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur-md">
+  <div class="relative z-[110] mx-auto flex h-[72px] max-w-[1440px] items-center justify-between gap-6 px-5 lg:px-20">
+    <SiteLogo />
+
+    <nav class="hidden items-center gap-8 xl:flex" aria-label={navLabel}>
       {nav.map((link) => (
         <a
           href={link.href}
           class:list={[
-            'text-[15px] font-medium transition-colors',
-            activeNav === link.label ? 'text-brand' : 'text-muted hover:text-ink',
+            'relative text-[15px] font-medium transition-colors',
+            isActive(link.href) ? 'text-brand' : 'text-ink/80 hover:text-ink',
           ]}
         >
           {link.label}
+          {isActive(link.href) && (
+            <span class="absolute -bottom-[27px] left-0 h-0.5 w-5 bg-brand" aria-hidden="true"></span>
+          )}
         </a>
       ))}
     </nav>
@@ -35,7 +43,7 @@ const navLabel = lang === 'en' ? 'Main navigation' : 'Navigation principale';
     <div class="flex items-center gap-3">
       <a
         href={navCta.href}
-        class="hidden rounded-md bg-brand px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-hover md:inline-flex"
+        class="hidden rounded-sm bg-brand px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-brand-hover xl:inline-flex"
       >
         {navCta.label}
       </a>
@@ -43,7 +51,7 @@ const navLabel = lang === 'en' ? 'Main navigation' : 'Navigation principale';
       <button
         type="button"
         id="home-mobile-menu-btn"
-        class="relative flex h-10 w-10 flex-col items-center justify-center gap-1.5 md:hidden"
+        class="relative flex h-10 w-10 flex-col items-center justify-center gap-1.5 xl:hidden"
         aria-label={menuLabel}
         aria-expanded="false"
         aria-controls="home-mobile-menu"
@@ -58,7 +66,7 @@ const navLabel = lang === 'en' ? 'Main navigation' : 'Navigation principale';
 
 <div
   id="home-mobile-menu"
-  class="fixed inset-0 z-[100] hidden flex-col items-center justify-center gap-8 bg-white/95 px-6 opacity-0 backdrop-blur-lg transition-opacity duration-300 md:hidden"
+  class="fixed inset-0 z-[100] hidden flex-col items-center justify-center gap-8 bg-white/95 px-6 opacity-0 backdrop-blur-lg transition-opacity duration-300 xl:hidden"
   aria-hidden="true"
   role="dialog"
   aria-modal="true"
@@ -67,20 +75,20 @@ const navLabel = lang === 'en' ? 'Main navigation' : 'Navigation principale';
   <button
     type="button"
     id="home-mobile-menu-close"
-    class="absolute right-5 top-6 flex h-10 w-10 items-center justify-center text-ink sm:right-8"
+    class="absolute right-5 top-6 flex h-10 w-10 items-center justify-center text-ink"
     aria-label={closeLabel}
   >
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
       <line x1="18" y1="6" x2="6" y2="18"></line>
       <line x1="6" y1="6" x2="18" y2="18"></line>
     </svg>
   </button>
-  <nav class="flex flex-col items-center gap-6" aria-label={lang === 'en' ? 'Mobile navigation' : 'Navigation mobile'}>
+  <nav class="flex flex-col items-center gap-6">
     {nav.map((link) => (
       <a href={link.href} class="text-xl font-semibold text-ink">{link.label}</a>
     ))}
   </nav>
-  <a href={navCta.href} class="rounded-md bg-brand px-6 py-3 text-sm font-semibold text-white">
+  <a href={navCta.href} class="rounded-sm bg-brand px-6 py-3 text-sm font-semibold uppercase text-white">
     {navCta.label}
   </a>
 </div>
@@ -117,7 +125,6 @@ const navLabel = lang === 'en' ? 'Main navigation' : 'Navigation principale';
       btn.setAttribute('aria-label', openLabel);
       menu.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('overflow-hidden');
-
       const onEnd = () => {
         if (menu.classList.contains('opacity-0')) {
           menu.classList.remove('flex');
@@ -138,25 +145,14 @@ const navLabel = lang === 'en' ? 'Main navigation' : 'Navigation principale';
     }
 
     btn.onclick = () => {
-      if (btn.getAttribute('aria-expanded') === 'true') {
-        closeMenu();
-      } else {
-        openMenu();
-      }
+      if (btn.getAttribute('aria-expanded') === 'true') closeMenu();
+      else openMenu();
     };
-
-    const closeBtn = document.getElementById('home-mobile-menu-close');
-    if (closeBtn) closeBtn.onclick = () => closeMenu();
-
-    menu.querySelectorAll('a').forEach((link) => {
-      link.onclick = () => closeMenu();
+    document.getElementById('home-mobile-menu-close')?.addEventListener('click', closeMenu);
+    menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') closeMenu();
     });
-
-    document.onkeydown = (event) => {
-      if (event.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
-        closeMenu();
-      }
-    };
   }
 
   if (document.readyState === 'loading') {

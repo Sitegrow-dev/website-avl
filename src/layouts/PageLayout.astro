@@ -30,6 +30,8 @@ interface Props {
   showBreadcrumb?: boolean;
   /** Afficher le footer (default true) */
   showFooter?: boolean;
+  /** Lien actif pour la navigation */
+  activeHref?: string;
 }
 
 const {
@@ -45,6 +47,7 @@ const {
   showNav = true,
   showBreadcrumb = true,
   showFooter = true,
+  activeHref,
 } = Astro.props;
 
 const renderBreadcrumb = showBreadcrumb && breadcrumbs && breadcrumbs.length > 0;
@@ -63,12 +66,11 @@ const skipLabel = isEnPage ? 'Skip to main content' : 'Aller au contenu principa
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
-      href="/fonts/inter-latin-var.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap"
+      rel="stylesheet"
     />
     {description && <meta name="description" content={description} />}
     <meta name="robots" content={robotsContent} />
@@ -84,7 +86,7 @@ const skipLabel = isEnPage ? 'Skip to main content' : 'Aller au contenu principa
     >
       {skipLabel}
     </a>
-    {showNav && <HomeNavigation lang={navLang} />}
+    {showNav && <HomeNavigation lang={navLang} activeHref={activeHref} />}
     {renderBreadcrumb && <Breadcrumb items={breadcrumbs} />}
     <div id="main-content">
       <slot />

@@ -29,14 +29,14 @@ export const GET: APIRoute = ({ site }) => {
   // Accueil
   out.push('## Accueil');
   out.push('');
-  out.push(homeContent.hero.title.join(' '));
+  out.push(homeContent.hero.title);
   out.push('');
   out.push(homeContent.hero.subtitle);
   out.push('');
-  out.push(`### ${homeContent.features.title}`);
+  out.push('### Piliers');
   out.push('');
-  for (const item of homeContent.features.items) {
-    out.push(`- **${item.title}** — ${item.description}`);
+  for (const item of homeContent.pillars.items) {
+    out.push(`- **${item.title}** — ${item.subtitle}`);
   }
   out.push('');
 

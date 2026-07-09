@@ -3,7 +3,7 @@ import PageLayout from '@layouts/PageLayout.astro';
 import JsonLd from '@components/JsonLd.astro';
 import PostHero from '@components/post/PostHero.astro';
 import PostBody from '@components/post/PostBody.astro';
-import { breadcrumbTrails } from '@/lib/breadcrumb';
+import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
 import { buildArticleGraph } from '@/lib/schema';
 import { formatTitle } from '@/lib/seo';
 import type { Post } from '@/data/posts';
@@ -26,11 +26,13 @@ const articleGraph = buildArticleGraph(post, origin, { path, lang: 'fr-CA' });
   imageAlt={post.imageAlt}
   type="article"
   ampUrl={ampUrl}
-  breadcrumbs={breadcrumbTrails.post(post.title, 'fr')}
+  showBreadcrumb={false}
+  activeHref="/blog/"
 >
   <JsonLd schema={articleGraph} />
   <main>
     <PostHero post={post} />
     <PostBody post={post} />
+    <FinalCtaSection />
   </main>
 </PageLayout>

@@ -1,7 +1,15 @@
 ---
 import PageLayout from '@layouts/PageLayout.astro';
 import HomeHero from '@components/home/HomeHero.astro';
-import HomeFeaturesSection from '@components/home/HomeFeaturesSection.astro';
+import PillarsSection from '@components/home/PillarsSection.astro';
+import DestinationsGridSection from '@components/home/DestinationsGridSection.astro';
+import EditorialSection from '@components/home/EditorialSection.astro';
+import StepsSection from '@components/home/StepsSection.astro';
+import SplitMediaSection from '@components/home/SplitMediaSection.astro';
+import TestimonialsSection from '@components/home/TestimonialsSection.astro';
+import BlogPreviewSection from '@components/home/BlogPreviewSection.astro';
+import FaqSection from '@components/home/FaqSection.astro';
+import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
 import JsonLd from '@components/JsonLd.astro';
 import { buildHomeGraph } from '@/lib/schema';
 import { siteConfig } from '@/config/site';
@@ -10,13 +18,22 @@ const origin = Astro.site ?? new URL(Astro.url.origin);
 const homeGraph = buildHomeGraph(origin, { lang: 'fr-CA' });
 ---
 <PageLayout
-  title={`${siteConfig.siteName} | ${siteConfig.city}, ${siteConfig.region}`}
+  title={`${siteConfig.siteName} | Mariage catholique en Italie`}
   description={siteConfig.defaultDescription}
   showBreadcrumb={false}
+  activeHref="/"
 >
   <JsonLd schema={homeGraph} />
   <main>
     <HomeHero />
-    <HomeFeaturesSection />
+    <PillarsSection />
+    <DestinationsGridSection />
+    <EditorialSection />
+    <StepsSection />
+    <SplitMediaSection />
+    <TestimonialsSection />
+    <BlogPreviewSection />
+    <FaqSection />
+    <FinalCtaSection />
   </main>
 </PageLayout>

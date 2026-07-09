@@ -1,0 +1,40 @@
+---
+import type { DestinationChurch } from '@/data/destinations';
+import Container from '@components/ui/Container.astro';
+import SectionHeader from '@components/ui/SectionHeader.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+import TextLink from '@components/ui/TextLink.astro';
+
+interface Props {
+  title: string;
+  subtitle: string;
+  items: DestinationChurch[];
+}
+
+const { title, subtitle, items } = Astro.props;
+---
+<section class="bg-bg-alt py-24 lg:py-28">
+  <Container>
+    <SectionHeader title={title} subtitle={subtitle} />
+    <div class="mt-16 grid gap-8 lg:grid-cols-2">
+      {items.map((church) => (
+        <article class="group">
+          <a href={church.href} class="block overflow-hidden rounded-sm">
+            <ResponsiveImage
+              src={church.image}
+              alt={church.name}
+              width={624}
+              height={320}
+              class="aspect-[624/320] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </a>
+          <div class="mt-6">
+            <h3 class="font-display text-3xl text-ink">{church.name}</h3>
+            <p class="mt-2 text-muted">{church.location}</p>
+            <TextLink href={church.href} class="mt-4 inline-block">En savoir plus →</TextLink>
+          </div>
+        </article>
+      ))}
+    </div>
+  </Container>
+</section>

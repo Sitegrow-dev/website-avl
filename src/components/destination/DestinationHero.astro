@@ -1,0 +1,33 @@
+---
+import type { Destination } from '@/data/destinations';
+import Container from '@components/ui/Container.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+
+interface Props {
+  destination: Destination;
+}
+
+const { destination } = Astro.props;
+const { hero } = destination;
+---
+<section class="relative flex min-h-[480px] items-end lg:min-h-[640px]">
+  <div class="absolute inset-0">
+    <ResponsiveImage
+      src={hero.image}
+      alt={hero.imageAlt}
+      width={1440}
+      height={640}
+      loading="eager"
+      fetchpriority="high"
+      sizes="100vw"
+      class="h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-black/50"></div>
+  </div>
+  <Container class="relative pb-16 pt-32 lg:pb-20">
+    <div class="max-w-2xl text-white">
+      <h1 class="font-display text-5xl leading-tight lg:text-[64px]">{hero.title}</h1>
+      <p class="mt-4 text-xl opacity-90">{hero.subtitle}</p>
+    </div>
+  </Container>
+</section>

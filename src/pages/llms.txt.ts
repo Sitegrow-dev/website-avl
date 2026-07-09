@@ -1,7 +1,6 @@
 import type { APIRoute } from 'astro';
 import { siteConfig } from '@/config/site';
 import { homeContent } from '@/data/home';
-import { servicesContent } from '@/data/services';
 import { aboutContent } from '@/data/about';
 import { contactContent } from '@/data/contact';
 import { getPublishedPosts } from '@/data/posts';
@@ -20,7 +19,7 @@ export const GET: APIRoute = ({ site }) => {
 
   const pages = [
     { title: 'Accueil', href: '/', desc: homeContent.hero.subtitle },
-    { title: servicesContent.title, href: '/services/', desc: servicesContent.metaDescription },
+    { title: 'Destinations', href: '/destinations/rome/', desc: 'Mariage catholique à Rome' },
     { title: aboutContent.title, href: '/a-propos/', desc: aboutContent.metaDescription },
     { title: contactContent.title, href: '/contact/', desc: contactContent.subtitle },
   ];

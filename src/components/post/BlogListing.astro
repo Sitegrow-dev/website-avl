@@ -1,0 +1,34 @@
+---
+import Container from '@components/ui/Container.astro';
+import {
+  blogCategories,
+  getFeaturedPost,
+  getPublishedPosts,
+  postUi,
+} from '@/data/posts';
+import BlogHeader from '@components/post/BlogHeader.astro';
+import FilterBar from '@components/post/FilterBar.astro';
+import FeaturedPost from '@components/post/FeaturedPost.astro';
+import BlogCard from '@components/post/BlogCard.astro';
+import Pagination from '@components/post/Pagination.astro';
+
+const featured = getFeaturedPost();
+const posts = getPublishedPosts().filter((p) => !p.featured);
+---
+<BlogHeader title={postUi.listTitle} subtitle={postUi.listSubtitle} />
+<FilterBar categories={blogCategories} />
+<section class="py-16 lg:py-20">
+  <Container>
+    {featured && (
+      <div class="mb-16">
+        <FeaturedPost post={featured} />
+      </div>
+    )}
+    <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+      {posts.map((post) => (
+        <BlogCard post={post} />
+      ))}
+    </div>
+    <Pagination />
+  </Container>
+</section>

@@ -1,0 +1,36 @@
+---
+import Container from '@components/ui/Container.astro';
+import TextLink from '@components/ui/TextLink.astro';
+
+interface Props {
+  title: string;
+  quote: string;
+  items: { label: string; range: string }[];
+  link: { label: string; href: string };
+}
+
+const { title, quote, items, link } = Astro.props;
+---
+<section class="bg-bg-alt py-24 lg:py-28">
+  <Container>
+    <h2 class="font-display text-4xl text-ink lg:text-[52px]">{title}</h2>
+    <div class="mt-12 grid gap-0 overflow-hidden rounded-sm border border-border lg:grid-cols-2">
+      <div class="flex items-center bg-white p-12 lg:p-16">
+        <blockquote class="font-display text-2xl leading-snug text-ink lg:text-3xl">
+          "{quote}"
+        </blockquote>
+      </div>
+      <div class="bg-white p-12 lg:p-16">
+        <ul class="space-y-6">
+          {items.map((item) => (
+            <li class="flex items-center justify-between border-b border-border pb-6 last:border-0">
+              <span class="text-lg text-ink">{item.label}</span>
+              <span class="text-xl font-semibold text-brand">{item.range}</span>
+            </li>
+          ))}
+        </ul>
+        <TextLink href={link.href} class="mt-10 inline-block">{link.label}</TextLink>
+      </div>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,25 @@
+---
+import { homeContent } from '@/data/home';
+import { faqItems } from '@/data/faq';
+import Container from '@components/ui/Container.astro';
+import SectionHeader from '@components/ui/SectionHeader.astro';
+import TextLink from '@components/ui/TextLink.astro';
+
+const { faq } = homeContent;
+---
+<section class="bg-bg-alt py-24 lg:py-28" id="voyage">
+  <Container>
+    <SectionHeader eyebrow={faq.eyebrow} title={faq.title} />
+    <div class="mx-auto mt-16 max-w-3xl divide-y divide-border">
+      {faqItems.map((item) => (
+        <div class="py-8 first:pt-0">
+          <h3 class="text-lg font-semibold text-ink">{item.question}</h3>
+          <p class="mt-4 leading-relaxed text-muted">{item.answer}</p>
+        </div>
+      ))}
+    </div>
+    <div class="mt-12 text-center">
+      <TextLink href={faq.link.href}>{faq.link.label}</TextLink>
+    </div>
+  </Container>
+</section>

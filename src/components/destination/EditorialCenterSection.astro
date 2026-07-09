@@ -1,0 +1,25 @@
+---
+import Container from '@components/ui/Container.astro';
+import TextLink from '@components/ui/TextLink.astro';
+
+interface Props {
+  title: string;
+  text: string;
+  links: { label: string; href: string }[];
+}
+
+const { title, text, links } = Astro.props;
+---
+<section class="py-24 lg:py-40">
+  <Container>
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="font-display text-4xl text-ink lg:text-[52px]">{title}</h2>
+      <p class="mt-8 text-lg leading-relaxed text-muted">{text}</p>
+      <div class="mt-10 flex flex-wrap items-center justify-center gap-8">
+        {links.map((link) => (
+          <TextLink href={link.href}>{link.label}</TextLink>
+        ))}
+      </div>
+    </div>
+  </Container>
+</section>

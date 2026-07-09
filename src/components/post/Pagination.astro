@@ -1,0 +1,18 @@
+---
+---
+<nav class="flex justify-center gap-2 py-10" aria-label="Pagination">
+  <span class="px-4 py-2 text-sm text-muted">← Précédent</span>
+  {[1, 2, 3].map((n) => (
+    <span
+      class:list={[
+        'flex h-8 w-8 items-center justify-center rounded-sm text-sm',
+        n === 1 ? 'bg-brand text-white' : 'text-ink hover:bg-bg-alt',
+      ]}
+    >
+      {n}
+    </span>
+  ))}
+  <span class="flex h-8 w-8 items-center justify-center text-sm text-muted">…</span>
+  <span class="flex h-8 w-8 items-center justify-center text-sm text-ink hover:bg-bg-alt">8</span>
+  <span class="px-4 py-2 text-sm text-brand">Suivant →</span>
+</nav>

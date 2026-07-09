@@ -1,0 +1,73 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import { getDestinationBySlug } from '@/data/destinations';
+import DestinationHero from '@components/destination/DestinationHero.astro';
+import TrustBadges from '@components/destination/TrustBadges.astro';
+import WhyDestinationSection from '@components/destination/WhyDestinationSection.astro';
+import ChurchesGridSection from '@components/destination/ChurchesGridSection.astro';
+import DestinationStepsSection from '@components/destination/DestinationStepsSection.astro';
+import BudgetSection from '@components/destination/BudgetSection.astro';
+import EditorialCenterSection from '@components/destination/EditorialCenterSection.astro';
+import FeaturedTestimonialSection from '@components/destination/FeaturedTestimonialSection.astro';
+import OtherDestinationsSection from '@components/destination/OtherDestinationsSection.astro';
+import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
+import { siteConfig } from '@/config/site';
+
+const destination = getDestinationBySlug('rome');
+if (!destination) {
+  return Astro.redirect('/404/');
+}
+---
+<PageLayout
+  title={`${destination.seo.title} | ${siteConfig.siteName}`}
+  description={destination.seo.description}
+  showBreadcrumb={false}
+  activeHref="/destinations/rome/"
+>
+  <main>
+    <DestinationHero destination={destination} />
+    <TrustBadges badges={destination.trustBadges} />
+    <WhyDestinationSection
+      title={destination.why.title}
+      paragraphs={destination.why.paragraphs}
+      image={destination.why.image}
+      imageAlt={destination.why.imageAlt}
+    />
+    <ChurchesGridSection
+      title={destination.churches.title}
+      subtitle={destination.churches.subtitle}
+      items={destination.churches.items}
+    />
+    <DestinationStepsSection
+      eyebrow={destination.steps.eyebrow}
+      title={destination.steps.title}
+      items={destination.steps.items}
+    />
+    <BudgetSection
+      title={destination.budget.title}
+      quote={destination.budget.quote}
+      items={destination.budget.items}
+      link={destination.budget.link}
+    />
+    <EditorialCenterSection
+      title={destination.editorial.title}
+      text={destination.editorial.text}
+      links={destination.editorial.links}
+    />
+    <FeaturedTestimonialSection
+      quote={destination.testimonial.quote}
+      name={destination.testimonial.name}
+      location={destination.testimonial.location}
+      image={destination.testimonial.image}
+    />
+    <OtherDestinationsSection
+      title={destination.otherDestinations.title}
+      items={destination.otherDestinations.items}
+    />
+    <FinalCtaSection
+      title={destination.finalCta.title}
+      ctaLabel={destination.finalCta.cta.label}
+      ctaHref={destination.finalCta.cta.href}
+    />
+  </main>
+</PageLayout>

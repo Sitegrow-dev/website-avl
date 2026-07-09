@@ -1,0 +1,36 @@
+---
+import Container from '@components/ui/Container.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+
+interface Props {
+  title: string;
+  paragraphs: string[];
+  image: string;
+  imageAlt: string;
+}
+
+const { title, paragraphs, image, imageAlt } = Astro.props;
+---
+<section class="py-24 lg:py-32">
+  <Container>
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <h2 class="font-display text-4xl leading-tight text-ink lg:text-[52px]">{title}</h2>
+        <div class="mt-8 space-y-6 text-lg leading-relaxed text-muted">
+          {paragraphs.map((p) => (
+            <p>{p}</p>
+          ))}
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-sm">
+        <ResponsiveImage
+          src={image}
+          alt={imageAlt}
+          width={560}
+          height={720}
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </Container>
+</section>

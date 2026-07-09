@@ -1,0 +1,61 @@
+---
+interface Props {
+  categories: readonly { slug: string; label: string }[];
+  activeCategory?: string;
+}
+
+const { categories, activeCategory = 'all' } = Astro.props;
+---
+<div class="border-b border-border bg-white py-8">
+  <div class="mx-auto flex max-w-[1280px] flex-wrap gap-3 px-5 lg:px-20">
+    {categories.map((cat) => (
+      <button
+        type="button"
+        data-filter={cat.slug}
+        class:list={[
+          'rounded-full border px-6 py-2 text-sm font-medium transition-colors',
+          activeCategory === cat.slug
+            ? 'border-brand bg-brand text-white'
+            : 'border-border bg-white text-ink hover:border-brand/30',
+        ]}
+      >
+        {cat.label}
+      </button>
+    ))}
+  </div>
+</div>
+
+<script>
+  function initBlogFilters() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+    const cards = document.querySelectorAll<HTMLElement>('[data-category]');
+    if (!buttons.length || !cards.length) return;
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter ?? 'all';
+        buttons.forEach((b) => {
+          const active = b.dataset.filter === filter;
+          b.classList.toggle('border-brand', active);
+          b.classList.toggle('bg-brand', active);
+          b.classList.toggle('text-white', active);
+          b.classList.toggle('border-border', !active);
+          b.classList.toggle('bg-white', !active);
+          b.classList.toggle('text-ink', !active);
+        });
+        cards.forEach((card) => {
+          const cat = card.dataset.category ?? '';
+          const show = filter === 'all' || cat === filter;
+          card.classList.toggle('hidden', !show);
+        });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBlogFilters);
+  } else {
+    initBlogFilters();
+  }
+  document.addEventListener('astro:page-load', initBlogFilters);
+</script>

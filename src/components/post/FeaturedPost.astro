@@ -1,0 +1,42 @@
+---
+import type { Post } from '@/data/posts';
+import { getPostHref } from '@/data/posts';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+import Button from '@components/ui/Button.astro';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+---
+<article class="overflow-hidden rounded-sm border border-border bg-white lg:flex">
+  {post.image && (
+    <a href={getPostHref(post)} class="block lg:w-1/2">
+      <ResponsiveImage
+        src={post.image}
+        alt={post.imageAlt ?? post.title}
+        width={640}
+        height={500}
+        class="h-full min-h-[280px] w-full object-cover"
+      />
+    </a>
+  )}
+  <div class="flex flex-col justify-center p-10 lg:w-1/2 lg:p-16">
+    <p class="text-sm text-muted">
+      Article à la une · {post.category}
+    </p>
+    <h2 class="mt-4 font-display text-3xl leading-tight text-ink lg:text-4xl">
+      <a href={getPostHref(post)} class="hover:text-brand">{post.title}</a>
+    </h2>
+    <p class="mt-6 text-lg leading-relaxed text-muted">{post.summary}</p>
+    {post.author && (
+      <p class="mt-6 text-sm text-muted">
+        Par {post.author.name} · {post.readingTimeMinutes ?? 5} min de lecture
+      </p>
+    )}
+    <div class="mt-8">
+      <Button href={getPostHref(post)}>Lire l'article →</Button>
+    </div>
+  </div>
+</article>

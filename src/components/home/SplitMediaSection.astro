@@ -1,0 +1,33 @@
+---
+import { homeContent } from '@/data/home';
+import Container from '@components/ui/Container.astro';
+import ResponsiveImage from '@components/ResponsiveImage.astro';
+import TextLink from '@components/ui/TextLink.astro';
+
+const { honeymoon } = homeContent;
+---
+<section class="py-24 lg:py-28" id={honeymoon.id}>
+  <Container>
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div class="overflow-hidden rounded-sm">
+        <ResponsiveImage
+          src={honeymoon.image}
+          alt={honeymoon.imageAlt}
+          width={624}
+          height={500}
+          class="h-full w-full object-cover"
+        />
+      </div>
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.12em] text-brand">{honeymoon.eyebrow}</p>
+        <h2 class="mt-4 font-display text-4xl leading-tight text-ink lg:text-[52px]">{honeymoon.title}</h2>
+        <p class="mt-6 text-lg leading-relaxed text-muted">{honeymoon.description}</p>
+        <div class="mt-8 flex flex-col gap-3">
+          {honeymoon.links.map((link) => (
+            <TextLink href={link.href}>{link.label}</TextLink>
+          ))}
+        </div>
+      </div>
+    </div>
+  </Container>
+</section>
