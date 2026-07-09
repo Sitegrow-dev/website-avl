@@ -1,6 +1,6 @@
 ---
 import { homeContent } from '@/data/home';
-import { getPublishedPosts } from '@/data/posts';
+import { getPostBySlug } from '@/data/posts';
 import Container from '@components/ui/Container.astro';
 import SectionHeader from '@components/ui/SectionHeader.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
@@ -8,18 +8,22 @@ import TextLink from '@components/ui/TextLink.astro';
 import { getPostHref } from '@/data/posts';
 
 const { blog } = homeContent;
-const posts = getPublishedPosts().slice(0, 3);
+const posts = blog.previewSlugs
+  .map((slug) => getPostBySlug(slug))
+  .filter((post): post is NonNullable<typeof post> => post !== undefined);
 ---
 <section class="py-24 lg:py-28">
   <Container>
     <SectionHeader eyebrow={blog.eyebrow} title={blog.title} />
     <div class="mt-16 grid gap-8 lg:grid-cols-3">
-      {posts.map((post) => (
+      {posts.map((post) => {
+        const image = blog.previewImages[post.slug as keyof typeof blog.previewImages] ?? post.image;
+        return (
         <article class="group">
-          {post.image && (
+          {image && (
             <a href={getPostHref(post)} class="block overflow-hidden rounded-sm">
               <ResponsiveImage
-                src={post.image}
+                src={image}
                 alt={post.imageAlt ?? post.title}
                 width={405}
                 height={260}
@@ -35,7 +39,8 @@ const posts = getPublishedPosts().slice(0, 3);
             <TextLink href={getPostHref(post)} class="mt-4 inline-block">Lire →</TextLink>
           </div>
         </article>
-      ))}
+        );
+      })}
     </div>
   </Container>
 </section>

@@ -6,7 +6,7 @@ import ResponsiveImage from '@components/ResponsiveImage.astro';
 
 const { destinations } = homeContent;
 const featured = destinations.items.find((d) => 'featured' in d && d.featured)!;
-const others = destinations.items.filter((d) => !('featured' in d && d.featured));
+const [rome, ...bottomRow] = destinations.items.filter((d) => !('featured' in d && d.featured));
 ---
 <section class="py-24 lg:py-28">
   <Container>
@@ -22,12 +22,26 @@ const others = destinations.items.filter((d) => !('featured' in d && d.featured)
         />
         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
         <div class="absolute bottom-0 left-0 p-8 text-white">
-          <p class="text-sm uppercase tracking-wider opacity-80">{featured.subtitle}</p>
-          <h3 class="mt-2 font-display text-4xl">{featured.title}</h3>
+          <h3 class="font-display text-2xl lg:text-3xl">{featured.title}</h3>
         </div>
       </a>
-      {others.map((item) => (
-        <a href={item.href} class="group relative overflow-hidden rounded-sm lg:col-span-5">
+      {rome && (
+        <a href={rome.href} class="group relative overflow-hidden rounded-sm lg:col-span-5">
+          <ResponsiveImage
+            src={rome.image}
+            alt={rome.title}
+            width={405}
+            height={284}
+            class="h-full min-h-[200px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-6 text-white lg:p-8">
+            <h3 class="font-display text-2xl">{rome.title}</h3>
+          </div>
+        </a>
+      )}
+      {bottomRow.map((item) => (
+        <a href={item.href} class="group relative overflow-hidden rounded-sm lg:col-span-4">
           <ResponsiveImage
             src={item.image}
             alt={item.title}
@@ -36,9 +50,8 @@ const others = destinations.items.filter((d) => !('featured' in d && d.featured)
             class="h-full min-h-[200px] w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
-          <div class="absolute bottom-0 left-0 p-6 text-white">
-            <p class="text-xs uppercase tracking-wider opacity-80">{item.subtitle}</p>
-            <h3 class="mt-1 font-display text-2xl">{item.title}</h3>
+          <div class="absolute bottom-0 left-0 p-6 text-white lg:p-8">
+            <h3 class="font-display text-2xl">{item.title}</h3>
           </div>
         </a>
       ))}

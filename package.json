@@ -24,6 +24,7 @@
     "optimize-logo": "node scripts/optimize-logo.js",
     "generate-og": "node scripts/generate-og-default.js",
     "generate-placeholders": "node scripts/generate-placeholders.js",
+    "download-figma-images": "node scripts/download-figma-images.mjs",
     "setup": "node scripts/setup-other-machine.js"
   },
   "dependencies": {

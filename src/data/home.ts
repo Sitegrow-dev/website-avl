@@ -36,39 +36,34 @@ export const homeContent = {
     title: 'Choisissez votre destination',
     items: [
       {
-        slug: 'rome',
-        title: 'Rome',
-        subtitle: 'Cœur de la chrétienté',
-        image: '/images/home/destinations/rome-large',
+        slug: 'vatican',
+        title: 'Vatican · Saint-Pierre',
+        image: '/images/home/destinations/vatican-large',
         href: '/destinations/rome/',
         featured: true,
       },
       {
-        slug: 'vatican',
-        title: 'Vatican',
-        subtitle: 'Basiliques pontificales',
-        image: '/images/home/destinations/vatican',
+        slug: 'rome',
+        title: 'Rome',
+        image: '/images/home/destinations/rome',
         href: '/destinations/rome/',
       },
       {
         slug: 'toscane',
         title: 'Toscane',
-        subtitle: 'Vignes et villages',
         image: '/images/home/destinations/toscane',
-        href: '/destinations/rome/',
-      },
-      {
-        slug: 'amalfi',
-        title: 'Côte Amalfitaine',
-        subtitle: 'Rivages méditerranéens',
-        image: '/images/home/destinations/amalfi',
         href: '/destinations/rome/',
       },
       {
         slug: 'como',
         title: 'Lac de Côme',
-        subtitle: 'Villas et lacs',
         image: '/images/home/destinations/como',
+        href: '/destinations/rome/',
+      },
+      {
+        slug: 'amalfi',
+        title: 'Côte Amalfitaine',
+        image: '/images/home/destinations/amalfi',
         href: '/destinations/rome/',
       },
     ],
@@ -158,6 +153,16 @@ export const homeContent = {
   blog: {
     eyebrow: 'Magazine',
     title: 'Ressources & guides',
+    previewSlugs: [
+      'quel-budget-mariage-italie',
+      'plus-belles-eglises-rome',
+      'mariage-catholique-etranger-delais-documents',
+    ] as const,
+    previewImages: {
+      'quel-budget-mariage-italie': '/images/home/blog/budget',
+      'plus-belles-eglises-rome': '/images/home/blog/eglises-rome',
+      'mariage-catholique-etranger-delais-documents': '/images/home/blog/demarches',
+    },
   },
   faq: {
     eyebrow: 'Aide',

@@ -9,12 +9,13 @@ interface Props {
 }
 
 const { post } = Astro.props;
+const listingImage = post.listingImage ?? post.image;
 ---
 <article class="overflow-hidden rounded-sm border border-border bg-white lg:flex">
-  {post.image && (
+  {listingImage && (
     <a href={getPostHref(post)} class="block lg:w-1/2">
       <ResponsiveImage
-        src={post.image}
+        src={listingImage}
         alt={post.imageAlt ?? post.title}
         width={640}
         height={500}
@@ -31,9 +32,18 @@ const { post } = Astro.props;
     </h2>
     <p class="mt-6 text-lg leading-relaxed text-muted">{post.summary}</p>
     {post.author && (
-      <p class="mt-6 text-sm text-muted">
-        Par {post.author.name} · {post.readingTimeMinutes ?? 5} min de lecture
-      </p>
+      <div class="mt-6 flex items-center gap-4">
+        <ResponsiveImage
+          src="/images/blog/author-marie-leclair"
+          alt={post.author.name}
+          width={32}
+          height={32}
+          class="h-8 w-8 rounded-full object-cover"
+        />
+        <p class="text-sm text-muted">
+          Par {post.author.name} · {post.readingTimeMinutes ?? 5} min de lecture
+        </p>
+      </div>
     )}
     <div class="mt-8">
       <Button href={getPostHref(post)}>Lire l'article →</Button>

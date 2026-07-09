@@ -27,6 +27,8 @@ export type Post = {
   published: boolean;
   featured?: boolean;
   image?: string;
+  /** Image pour les cartes / listing (si différente du hero article). */
+  listingImage?: string;
   imageAlt?: string;
   author?: {
     name: string;
@@ -74,12 +76,13 @@ const demarchesArticle: Post = {
   published: true,
   featured: true,
   image: '/images/blog/demarches-hero',
+  listingImage: '/images/blog/featured',
   imageAlt: 'Documents pour un mariage catholique en Italie',
   author: {
     name: 'Marie-Claire Fontaine',
     role: 'Spécialiste mariage catholique',
     bio: "Spécialiste du mariage catholique à l'étranger, Marie-Claire accompagne les couples francophones dans leurs démarches depuis plus de 8 ans.",
-    image: '/images/blog/author',
+    image: '/images/blog/author-marie-claire',
   },
   toc: [
     { id: 'situation', label: 'Situation du couple' },
