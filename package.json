@@ -25,7 +25,7 @@
     "generate-og": "node scripts/generate-og-default.js",
     "generate-placeholders": "node scripts/generate-placeholders.js",
     "download-figma-images": "node scripts/download-figma-images.mjs",
-    "holding:status": "node scripts/holding-sync-status.js",
+    "holding:status": "node --env-file=.env scripts/holding-sync-status.js",
     "setup": "node scripts/setup-other-machine.js"
   },
   "dependencies": {
