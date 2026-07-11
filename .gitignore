@@ -34,3 +34,4 @@ pnpm-debug.log*
 
 # Firecrawl local cache
 .firecrawl/
+.env*
