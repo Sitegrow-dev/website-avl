@@ -14,10 +14,8 @@ const PAGE_SOURCES: Record<string, string[]> = {
   '/': ['src/pages/index.astro', 'src/data/home.ts'],
   '/about.htm': ['src/pages/about/index.astro', 'src/data/about.ts'],
   '/photos.htm': ['src/pages/photos/index.astro', 'src/data/photos.ts'],
-  '/a-propos/': ['src/pages/a-propos/index.astro', 'src/data/about.ts'],
   '/blog/': ['src/pages/blog/index.astro', 'src/data/posts.ts'],
   '/contact/': ['src/pages/contact/index.astro', 'src/data/contact.ts'],
-  '/services/': ['src/pages/services/index.astro', 'src/data/services.ts'],
   '/destinations/rome/': [
     'src/pages/destinations/rome/index.astro',
     'src/data/destinations.ts',
@@ -27,22 +25,19 @@ const PAGE_SOURCES: Record<string, string[]> = {
   '/en/photos.htm': ['src/pages/en/photos/index.astro', 'src/data/photos.ts'],
   '/en/blog/': ['src/pages/en/blog/index.astro', 'src/data/posts.ts'],
   '/en/contact/': ['src/pages/en/contact/index.astro', 'src/data/contact.ts'],
-  '/en/services/': ['src/pages/en/services/index.astro', 'src/data/services.ts'],
 };
 
 /**
  * Pages statiques FR.
  * Liste maintenue à la main : synchronisée avec src/pages/*.astro.
- * /a-propos/ est listée sans hreflang EN (cible partagée avec /about.htm).
+ * /a-propos/ et /services/ exclus (redirection / retiré).
  */
 const FR_STATIC_PAGES = [
   '/',
   '/about.htm',
   '/photos.htm',
-  '/a-propos/',
   '/blog/',
   '/contact/',
-  '/services/',
   '/destinations/rome/',
 ];
 
@@ -56,7 +51,6 @@ const EN_STATIC_PAGES = [
   '/en/photos.htm',
   '/en/blog/',
   '/en/contact/',
-  '/en/services/',
 ];
 
 type Alternate = { hreflang: string; href: string };

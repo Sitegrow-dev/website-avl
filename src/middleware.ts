@@ -97,6 +97,13 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   if (pathname === '/a-propos' || pathname === '/a-propos/') {
     return context.redirect('/about.htm', 301);
   }
+  // Ancienne page skeleton Services (contenu placeholder) → accueil
+  if (pathname === '/services' || pathname === '/services/') {
+    return context.redirect('/', 301);
+  }
+  if (pathname === '/en/services' || pathname === '/en/services/') {
+    return context.redirect('/en/', 301);
+  }
   // Destinations FR-only : pas de miroir /en/destinations/* (évite 404)
   if (pathname === '/en/destinations' || pathname === '/en/destinations/') {
     return context.redirect('/destinations/rome/', 301);

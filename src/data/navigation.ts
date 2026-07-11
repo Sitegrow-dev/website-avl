@@ -5,15 +5,14 @@ import type { Lang } from '@/lib/i18n';
  * Les `href` sont stockés en chemins « FR » (sans /en/) ; le préfixe
  * et les slugs EN traduits sont appliqués via `localizedHref`.
  *
- * Paires de slugs (voir src/lib/i18n.ts) : conventions skeleton + legacy AFVL :
- * - /a-propos/ → /en/about.htm (legacy .htm)
+ * Paires de slugs (voir src/lib/i18n.ts) : legacy AFVL + plan du site :
+ * - /about.htm ↔ /en/about.htm, /photos.htm ↔ /en/photos.htm (pages OK, hors nav header)
  * - /plan-du-site/ → /en/plan-du-site/
- * - /about.htm ↔ /en/about.htm, /photos.htm ↔ /en/photos.htm
+ * - /a-propos/ redirige vers /about.htm (non listé au menu)
  */
 export const navigationByLang = {
   fr: {
     nav: [
-      { label: 'À propos', href: '/about.htm' },
       { label: 'Galerie photos', href: '/photos.htm' },
       { label: 'Destinations', href: '/destinations/rome/' },
       { label: 'Patrimoine & Vatican', href: '/#patrimoine' },
@@ -43,7 +42,7 @@ export const navigationByLang = {
         {
           title: 'Informations',
           links: [
-            { label: 'À propos', href: '/a-propos/' },
+            { label: 'Plan du site', href: '/plan-du-site/' },
             { label: 'Contact', href: '/contact/' },
           ],
         },
@@ -56,7 +55,6 @@ export const navigationByLang = {
   },
   en: {
     nav: [
-      { label: 'About Us', href: '/about.htm' },
       { label: 'Photo Gallery', href: '/photos.htm' },
       { label: 'Destinations', href: '/destinations/rome/' },
       { label: 'Heritage & Vatican', href: '/#patrimoine' },
@@ -86,7 +84,7 @@ export const navigationByLang = {
         {
           title: 'Information',
           links: [
-            { label: 'About', href: '/a-propos/' },
+            { label: 'Sitemap', href: '/plan-du-site/' },
             { label: 'Contact', href: '/contact/' },
           ],
         },

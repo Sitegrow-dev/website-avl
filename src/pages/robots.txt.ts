@@ -5,7 +5,11 @@ import { AI_CRAWLERS } from '@/lib/ai-crawlers';
 export const prerender = true;
 
 export const GET: APIRoute = ({ site }) => {
-  const base = (site?.href.replace(/\/$/, '') ?? siteConfig.url).replace(/\/$/, '');
+  // Préférer siteConfig.url si Astro.site vaut encore le fallback skeleton.
+  const fromAstro = site?.href.replace(/\/$/, '') ?? '';
+  const base = (
+    !fromAstro || fromAstro.includes('exemple.com') ? siteConfig.url : fromAstro
+  ).replace(/\/$/, '');
 
   // Bloc IA : une politique explicite est un signal clair pour les moteurs
   // génératifs. `allowAiCrawlers` pilote Allow (visibilité GEO) vs Disallow.

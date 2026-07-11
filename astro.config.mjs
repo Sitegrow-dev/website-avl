@@ -49,6 +49,19 @@ export default defineConfig({
   output: 'static',
   adapter: vercel(),
   trailingSlash: 'always',
+  // Redirections build-time (preview local + static) — complètent middleware / vercel.json
+  redirects: {
+    '/about': '/about.htm',
+    '/photos': '/photos.htm',
+    '/a-propos': '/about.htm',
+    '/a-propos/': '/about.htm',
+    '/services': '/',
+    '/services/': '/',
+    '/en/about': '/en/about.htm',
+    '/en/photos': '/en/photos.htm',
+    '/en/services': '/en/',
+    '/en/services/': '/en/',
+  },
   compressHTML: 'jsx',
   build: {
     /** Réduit les feuilles externes bloquantes quand le CSS reste sous le seuil */

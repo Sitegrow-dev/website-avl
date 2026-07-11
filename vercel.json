@@ -111,6 +111,26 @@
       "statusCode": 301
     },
     {
+      "source": "/services",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/services/",
+      "destination": "/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/services",
+      "destination": "/en/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/services/",
+      "destination": "/en/",
+      "statusCode": 301
+    },
+    {
       "source": "/en/destinations",
       "destination": "/destinations/rome/",
       "statusCode": 301

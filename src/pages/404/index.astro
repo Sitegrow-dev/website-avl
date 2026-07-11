@@ -1,15 +1,12 @@
 ---
 /**
  * 404 localisée : middleware pose `locals.notFoundLang = 'en'` pour les URLs /en/*.
- * Page autonome (pattern skeleton) pour que Vercel serve correctement 404.html,
- * avec branding AFVL (fonts, couleurs, logo) plutôt qu’un gabarit nu.
+ * Même chrome que le reste du site (HomeNavigation + HomeFooter via PageLayout).
  */
-import '@/styles/global.css';
-import { siteConfig } from '@/config/site';
-import FaviconHead from '@components/FaviconHead.astro';
-import SiteLogo from '@components/home/SiteLogo.astro';
+import PageLayout from '@layouts/PageLayout.astro';
 import Button from '@components/ui/Button.astro';
 import Container from '@components/ui/Container.astro';
+import { siteConfig } from '@/config/site';
 import { localizedHref } from '@/lib/i18n';
 import { formatTitle } from '@/lib/seo';
 
@@ -38,78 +35,42 @@ const copy = isEn
 
 const pageTitle = formatTitle(copy.title);
 ---
-<!doctype html>
-<html lang={isEn ? 'en-CA' : 'fr-CA'} class="scroll-smooth">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={copy.description} />
-    <meta name="robots" content="noindex, follow" />
-    <link rel="canonical" href={new URL('/404/', siteConfig.url).href} />
-    <title>{pageTitle}</title>
-    <link
-      rel="preload"
-      href="/fonts/schibsted-grotesk-normal-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/instrument-serif-normal-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <FaviconHead />
-  </head>
-  <body class="bg-bg-alt text-ink font-sans antialiased">
-    <div class="not-found-shell relative flex min-h-dvh flex-col">
-      <div class="not-found-atmosphere pointer-events-none absolute inset-0" aria-hidden="true"></div>
+<PageLayout
+  title={pageTitle}
+  description={copy.description}
+  lang={isEn ? 'en-CA' : 'fr-CA'}
+  robots="noindex, follow"
+  canonicalPath="/404/"
+  showBreadcrumb={false}
+>
+  <main class="not-found-shell relative flex min-h-[60vh] flex-col">
+    <div class="not-found-atmosphere pointer-events-none absolute inset-0" aria-hidden="true"></div>
 
-      <header class="relative z-10 border-b border-border/80 bg-bg/70 backdrop-blur-sm">
-        <Container class="flex items-center justify-between py-5">
-          <SiteLogo variant="dark" height={48} href={homeHref} />
-          <a
-            href={contactHref}
-            class="text-sm font-semibold uppercase tracking-wide text-muted transition-colors hover:text-brand"
-          >
-            {copy.contactLabel}
-          </a>
-        </Container>
-      </header>
-
-      <main class="relative z-10 flex flex-1 items-center py-16 lg:py-24">
-        <Container class="text-center">
-          <p class="not-found-mark font-display text-[clamp(5rem,18vw,9rem)] leading-none text-brand/15 select-none" aria-hidden="true">
-            404
-          </p>
-          <p class="not-found-rise not-found-rise--1 mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand">
-            {copy.codeLabel}
-          </p>
-          <h1 class="not-found-rise not-found-rise--2 mt-4 font-display text-4xl text-ink lg:text-5xl">
-            {copy.title}
-          </h1>
-          <p class="not-found-rise not-found-rise--3 mx-auto mt-5 max-w-lg text-lg leading-relaxed text-muted">
-            {copy.body}
-          </p>
-          <div class="not-found-rise not-found-rise--4 mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button href={homeHref}>{copy.homeLabel}</Button>
-            <Button href={contactHref} variant="secondary">{copy.contactLabel}</Button>
-          </div>
-        </Container>
-      </main>
-
-      <footer class="relative z-10 border-t border-border/80 py-6">
-        <Container class="text-center text-sm text-muted">
-          <span class="font-display text-base text-ink">{siteConfig.siteName}</span>
-          <span class="mx-2 text-muted-light" aria-hidden="true">·</span>
-          <span>{siteConfig.city}</span>
-        </Container>
-      </footer>
+    <div class="relative z-10 flex flex-1 items-center py-16 lg:py-24">
+      <Container class="text-center">
+        <p
+          class="not-found-mark font-display text-[clamp(5rem,18vw,9rem)] leading-none text-brand/15 select-none"
+          aria-hidden="true"
+        >
+          404
+        </p>
+        <p class="not-found-rise not-found-rise--1 mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+          {copy.codeLabel}
+        </p>
+        <h1 class="not-found-rise not-found-rise--2 mt-4 font-display text-4xl text-ink lg:text-5xl">
+          {copy.title}
+        </h1>
+        <p class="not-found-rise not-found-rise--3 mx-auto mt-5 max-w-lg text-lg leading-relaxed text-muted">
+          {copy.body}
+        </p>
+        <div class="not-found-rise not-found-rise--4 mt-10 flex flex-wrap items-center justify-center gap-4">
+          <Button href={homeHref}>{copy.homeLabel}</Button>
+          <Button href={contactHref} variant="secondary">{copy.contactLabel}</Button>
+        </div>
+      </Container>
     </div>
-  </body>
-</html>
+  </main>
+</PageLayout>
 
 <style>
   .not-found-atmosphere {
