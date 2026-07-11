@@ -78,17 +78,23 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   if (pathname === '/sitemap.html' || pathname === '/sitemap.html/') {
     return context.redirect('/plan-du-site/', 301);
   }
-  if (pathname === '/en/sitemap' || pathname === '/en/sitemap/') {
-    return context.redirect('/en/plan-du-site/', 301);
-  }
-  // Alias EN courants → slugs skeleton
+  // Plan du site EN : slug traduit /en/site-map/ (+ alias historiques)
   if (
-    pathname === '/en/site-map' ||
-    pathname === '/en/site-map/' ||
+    pathname === '/en/plan-du-site' ||
+    pathname === '/en/plan-du-site/' ||
+    pathname === '/en/sitemap' ||
+    pathname === '/en/sitemap/' ||
     pathname === '/en/sitemap.html' ||
     pathname === '/en/sitemap.html/'
   ) {
-    return context.redirect('/en/plan-du-site/', 301);
+    return context.redirect('/en/site-map/', 301);
+  }
+  // Ancien slug FR réutilisé sous /en/blog/ (hreflang erroné avant paire EN)
+  if (
+    pathname === '/en/blog/marier-a-la-basilique-saint-pierre' ||
+    pathname === '/en/blog/marier-a-la-basilique-saint-pierre/'
+  ) {
+    return context.redirect('/en/blog/getting-married-st-peters-basilica/', 301);
   }
   if (pathname === '/en/a-propos' || pathname === '/en/a-propos/') {
     return context.redirect('/en/about.htm', 301);

@@ -45,6 +45,11 @@ const subjectPrefix = lang === 'en' ? 'New message' : 'Nouveau message';
           data-success-reset={form.successReset}
           data-error-generic={form.errorGeneric}
           data-error-network={form.errorNetwork}
+          data-error-validation={form.errorValidation}
+          data-required-name={form.requiredName}
+          data-required-email={form.requiredEmail}
+          data-invalid-email={form.invalidEmail}
+          data-required-message={form.requiredMessage}
           novalidate
         >
           <p
@@ -150,6 +155,11 @@ const subjectPrefix = lang === 'en' ? 'New message' : 'Nouveau message';
       successReset: form.dataset.successReset || 'Envoyer un autre message',
       errorGeneric: form.dataset.errorGeneric || 'Une erreur est survenue.',
       errorNetwork: form.dataset.errorNetwork || 'Connexion impossible.',
+      errorValidation: form.dataset.errorValidation || 'Veuillez corriger les champs indiqués.',
+      requiredName: form.dataset.requiredName || 'Veuillez indiquer votre nom.',
+      requiredEmail: form.dataset.requiredEmail || 'Veuillez indiquer votre adresse courriel.',
+      invalidEmail: form.dataset.invalidEmail || 'Veuillez indiquer une adresse courriel valide.',
+      requiredMessage: form.dataset.requiredMessage || 'Veuillez écrire votre message.',
     };
 
     type FieldErrors = Record<string, string>;
@@ -171,28 +181,84 @@ const subjectPrefix = lang === 'en' ? 'New message' : 'Nouveau message';
     function clearFieldErrors() {
       form.querySelectorAll<HTMLElement>('.contact-field').forEach((field) => {
         field.removeAttribute('aria-invalid');
+        field.classList.remove('border-red-400');
+        if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
+          field.setCustomValidity('');
+        }
         const next = field.parentElement?.querySelector('[data-field-error]');
         if (next) next.remove();
       });
     }
 
     function showFieldErrors(errors: FieldErrors) {
+      let firstInvalid: HTMLElement | null = null;
       Object.entries(errors).forEach(([name, msg]) => {
         const field = form.querySelector<HTMLElement>(`[name="${name}"]`);
         if (!field) return;
         field.setAttribute('aria-invalid', 'true');
+        field.classList.add('border-red-400');
+        if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement) {
+          field.setCustomValidity(msg);
+        }
         const errEl = document.createElement('p');
         errEl.className = 'mt-1.5 text-sm text-red-600';
         errEl.dataset.fieldError = 'true';
+        errEl.setAttribute('role', 'alert');
         errEl.textContent = msg;
         field.parentElement?.appendChild(errEl);
+        if (!firstInvalid) firstInvalid = field;
       });
+      firstInvalid?.focus();
+    }
+
+    function validateClient(): boolean {
+      clearFieldErrors();
+      const errors: FieldErrors = {};
+
+      const nameField = form.elements.namedItem('name');
+      const emailField = form.elements.namedItem('email');
+      const messageField = form.elements.namedItem('message');
+
+      const nameValue =
+        nameField instanceof HTMLInputElement ? nameField.value.trim() : '';
+      const emailValue =
+        emailField instanceof HTMLInputElement ? emailField.value.trim() : '';
+      const messageValue =
+        messageField instanceof HTMLTextAreaElement ? messageField.value.trim() : '';
+
+      if (!nameValue) errors.name = labels.requiredName;
+      if (!emailValue) {
+        errors.email = labels.requiredEmail;
+      } else if (
+        emailField instanceof HTMLInputElement &&
+        !emailField.checkValidity()
+      ) {
+        errors.email = labels.invalidEmail;
+      }
+      if (!messageValue) errors.message = labels.requiredMessage;
+
+      if (Object.keys(errors).length > 0) {
+        showFieldErrors(errors);
+        setStatus('error', labels.errorValidation);
+        return false;
+      }
+
+      // Sync trimmed values so Formspree receives non-whitespace content
+      if (nameField instanceof HTMLInputElement) nameField.value = nameValue;
+      if (emailField instanceof HTMLInputElement) emailField.value = emailValue;
+      if (messageField instanceof HTMLTextAreaElement) messageField.value = messageValue;
+
+      return form.checkValidity();
     }
 
     async function handleSubmit(event: SubmitEvent) {
       event.preventDefault();
-      clearFieldErrors();
 
+      if (!validateClient()) {
+        return;
+      }
+
+      clearFieldErrors();
       submitBtn.disabled = true;
       submitBtn.textContent = labels.submitting;
       setStatus('idle', '');
@@ -211,6 +277,7 @@ const subjectPrefix = lang === 'en' ? 'New message' : 'Nouveau message';
             'success',
             `${labels.successTitle} ${labels.successMessage}`,
           );
+          form.reset();
           const formWrapper = form;
           formWrapper.style.display = 'none';
 
@@ -220,7 +287,6 @@ const subjectPrefix = lang === 'en' ? 'New message' : 'Nouveau message';
             'mt-4 inline-flex items-center justify-center rounded-md border border-black/[0.08] bg-white px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-gray-50';
           resetBtn.textContent = labels.successReset;
           resetBtn.onclick = () => {
-            formWrapper.reset();
             formWrapper.style.display = '';
             statusEl.classList.add('hidden');
             resetBtn.remove();
@@ -237,10 +303,12 @@ const subjectPrefix = lang === 'en' ? 'New message' : 'Nouveau message';
           const body = await res.json();
           if (body?.errors && Array.isArray(body.errors)) {
             errors = Object.fromEntries(
-              body.errors.map((e: { field?: string; message?: string }) => [
-                e.field,
-                e.message || 'Champ invalide.',
-              ]),
+              body.errors
+                .filter((e: { field?: string }) => e.field)
+                .map((e: { field?: string; message?: string }) => [
+                  e.field,
+                  e.message || 'Champ invalide.',
+                ]),
             );
           }
         } catch {

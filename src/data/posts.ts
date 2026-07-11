@@ -2,6 +2,24 @@ import { fetchHoldingArticles, hasHoldingApiKey } from '@/lib/holding';
 import { mapHoldingArticlesToPosts } from '@/lib/holding-map';
 import { setBlogSlugPairs, type Lang } from '@/lib/i18n';
 import { localPosts } from '@/data/local-posts';
+import {
+  BASILIQUE_EN_SLUG,
+  BASILIQUE_FR_SLUG,
+} from '@/data/local-post-basilique';
+
+/**
+ * Paires de slugs blog connues (locales + Holding).
+ * Appliquées après fusion pour :
+ * - câbler alternateSlug même si Holding écrase l’entrée FR locale
+ * - renommer un éventuel miroir EN Holding encore publié sous le slug FR
+ */
+const KNOWN_BLOG_SLUG_PAIRS: Array<{ fr: string; en: string }> = [
+  {
+    fr: 'se-marier-eglise-catholique-italie',
+    en: 'getting-married-catholic-church-italy',
+  },
+  { fr: BASILIQUE_FR_SLUG, en: BASILIQUE_EN_SLUG },
+];
 
 export type TimelineItem = {
   step: string;
@@ -105,10 +123,47 @@ function mergePosts(holding: Post[], local: Post[]): Post[] {
   );
 }
 
+function applyKnownBlogSlugPairs(all: Post[]): Post[] {
+  const map = new Map<string, Post>();
+  for (const post of all) map.set(postKey(post), post);
+
+  for (const pair of KNOWN_BLOG_SLUG_PAIRS) {
+    const wrongEnKey = postKey({ slug: pair.fr, lang: 'en' });
+    const rightEnKey = postKey({ slug: pair.en, lang: 'en' });
+    const wrongEn = map.get(wrongEnKey);
+    if (wrongEn && !map.has(rightEnKey)) {
+      wrongEn.slug = pair.en;
+      map.delete(wrongEnKey);
+      map.set(rightEnKey, wrongEn);
+    }
+
+    const fr = map.get(postKey({ slug: pair.fr, lang: 'fr' }));
+    const en = map.get(postKey({ slug: pair.en, lang: 'en' }));
+    if (fr) fr.alternateSlug = pair.en;
+    if (en) en.alternateSlug = pair.fr;
+  }
+
+  return Array.from(map.values()).sort((a, b) =>
+    a.date < b.date ? 1 : a.date > b.date ? -1 : 0
+  );
+}
+
 function registerAlternates(all: Post[]): void {
   const pairs: Array<{ fr: string; en: string }> = [];
+  const seen = new Set<string>();
+
+  for (const pair of KNOWN_BLOG_SLUG_PAIRS) {
+    const key = `${pair.fr}→${pair.en}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    pairs.push(pair);
+  }
+
   for (const post of all) {
     if ((post.lang ?? 'fr') !== 'fr' || !post.alternateSlug) continue;
+    const key = `${post.slug}→${post.alternateSlug}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
     pairs.push({ fr: post.slug, en: post.alternateSlug });
   }
   setBlogSlugPairs(pairs);
@@ -136,7 +191,9 @@ async function loadPostsFromHolding(): Promise<Post[]> {
 const holdingPosts = await loadPostsFromHolding();
 
 /** Tous les articles (Holding + locaux), FR et EN. */
-export const posts: Post[] = mergePosts(holdingPosts, localPosts);
+export const posts: Post[] = applyKnownBlogSlugPairs(
+  mergePosts(holdingPosts, localPosts)
+);
 registerAlternates(posts);
 
 function hasRenderableBody(post: Post): boolean {

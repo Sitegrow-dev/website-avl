@@ -4,6 +4,7 @@
  */
 import { tocFromMarkdown } from '@/lib/markdown';
 import type { Post } from '@/data/posts';
+import { basiliquePosts } from '@/data/local-post-basilique';
 
 const FR_SLUG = 'se-marier-eglise-catholique-italie';
 const EN_SLUG = 'getting-married-catholic-church-italy';
@@ -379,4 +380,4 @@ const enPost = buildPost({
 });
 
 /** Articles locaux publiés (FR + EN). */
-export const localPosts: Post[] = [frPost, enPost];
+export const localPosts: Post[] = [frPost, enPost, ...basiliquePosts];

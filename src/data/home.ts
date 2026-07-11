@@ -157,6 +157,8 @@ const homeFr = {
     previewImages: {
       'se-marier-eglise-catholique-italie': '/images/home/blog/demarches',
       'getting-married-catholic-church-italy': '/images/home/blog/demarches',
+      'marier-a-la-basilique-saint-pierre': '/images/home/blog/eglises-rome',
+      'getting-married-st-peters-basilica': '/images/home/blog/eglises-rome',
     } as Record<string, string>,
   },
   faq: {
@@ -331,6 +333,8 @@ const homeEn = {
     previewImages: {
       'se-marier-eglise-catholique-italie': '/images/home/blog/demarches',
       'getting-married-catholic-church-italy': '/images/home/blog/demarches',
+      'marier-a-la-basilique-saint-pierre': '/images/home/blog/eglises-rome',
+      'getting-married-st-peters-basilica': '/images/home/blog/eglises-rome',
     } as Record<string, string>,
   },
   faq: {

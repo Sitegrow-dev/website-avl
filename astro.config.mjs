@@ -61,6 +61,12 @@ export default defineConfig({
     '/en/photos': '/en/photos.htm',
     '/en/services': '/en/',
     '/en/services/': '/en/',
+    '/en/plan-du-site': '/en/site-map/',
+    '/en/plan-du-site/': '/en/site-map/',
+    '/en/blog/marier-a-la-basilique-saint-pierre':
+      '/en/blog/getting-married-st-peters-basilica/',
+    '/en/blog/marier-a-la-basilique-saint-pierre/':
+      '/en/blog/getting-married-st-peters-basilica/',
   },
   compressHTML: 'jsx',
   build: {

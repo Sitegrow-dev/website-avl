@@ -40,6 +40,11 @@ const contactFr = {
     errorGeneric:
       'Une erreur est survenue. Veuillez réessayer ou nous écrire directement par courriel.',
     errorNetwork: 'Connexion impossible. Vérifiez votre réseau et réessayez.',
+    errorValidation: 'Veuillez corriger les champs indiqués.',
+    requiredName: 'Veuillez indiquer votre nom.',
+    requiredEmail: 'Veuillez indiquer votre adresse courriel.',
+    invalidEmail: 'Veuillez indiquer une adresse courriel valide.',
+    requiredMessage: 'Veuillez écrire votre message.',
     notConfiguredTitle: 'Formulaire non configuré',
     notConfiguredMessage:
       'Définissez PUBLIC_FORMSPREE_ID dans votre fichier .env pour activer le formulaire. Créez un formulaire gratuit sur formspree.io/forms.',
@@ -84,6 +89,11 @@ const contactEn = {
     successReset: 'Send another message',
     errorGeneric: 'Something went wrong. Please try again or email us directly.',
     errorNetwork: 'Unable to connect. Check your network and try again.',
+    errorValidation: 'Please correct the highlighted fields.',
+    requiredName: 'Please enter your name.',
+    requiredEmail: 'Please enter your email address.',
+    invalidEmail: 'Please enter a valid email address.',
+    requiredMessage: 'Please enter your message.',
     notConfiguredTitle: 'Form not configured',
     notConfiguredMessage:
       'Set PUBLIC_FORMSPREE_ID in your .env file to enable the form. Create a free form at formspree.io/forms.',

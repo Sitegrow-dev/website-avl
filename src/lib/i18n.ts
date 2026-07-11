@@ -2,7 +2,7 @@
  * Helpers i18n : alignés sur le skeleton Sitegrow :
  * - locale par défaut `fr` sans préfixe
  * - anglais sous `/en/`
- * - slugs traduits quand le skeleton le fait (a-propos→about)
+ * - slugs traduits quand le skeleton le fait (a-propos→about, plan-du-site→site-map)
  * - chemins legacy AFVL `.htm` sous chaque locale
  */
 
@@ -21,6 +21,7 @@ export const HREFLANG = {
  * Paires FR ↔ EN dont le slug diffère (pas un simple préfixe /en).
  * Conventions skeleton : /a-propos/↔/en/about/
  * AFVL : about/photos restent en `.htm` (URLs publiques legacy).
+ * Plan du site : /plan-du-site/ ↔ /en/site-map/
  */
 const SLUG_PAIRS: Array<{ fr: string; en: string }> = [
   { fr: '/about.htm', en: '/en/about.htm' },
@@ -30,7 +31,7 @@ const SLUG_PAIRS: Array<{ fr: string; en: string }> = [
   { fr: '/photos/', en: '/en/photos/' },
   // Skeleton-style translated slugs (about public EN = legacy .htm)
   { fr: '/a-propos/', en: '/en/about.htm' },
-  { fr: '/plan-du-site/', en: '/en/plan-du-site/' },
+  { fr: '/plan-du-site/', en: '/en/site-map/' },
 ];
 
 /** Paires de slugs blog FR ↔ EN (enregistrées depuis `src/data/posts.ts`). */
@@ -82,6 +83,17 @@ function isFrOnlyPath(path: string): boolean {
   return FR_ONLY_PATHS.has(normalized) || normalized.startsWith('/destinations/');
 }
 
+/** Article blog (hors index) : exige une paire FR↔EN enregistrée. */
+function isBlogPostPath(path: string): boolean {
+  const stripped = normalizePath(stripLocalePrefix(path));
+  return stripped.startsWith('/blog/') && stripped !== '/blog/';
+}
+
+function findSlugPair(path: string): { fr: string; en: string } | undefined {
+  const normalized = normalizePath(path);
+  return allSlugPairs().find((p) => p.fr === normalized || p.en === normalized);
+}
+
 /** Ajoute le préfixe /en (chemins déjà préfixés inchangés). */
 export function withLocalePrefix(path: string, lang: Lang): string {
   const pairs = allSlugPairs();
@@ -129,13 +141,15 @@ export function localizedHref(href: string, lang: Lang): string {
 export function alternatePath(pathname: string, targetLang: Lang): string {
   const normalized = normalizePath(pathname);
 
-  const pair = allSlugPairs().find((p) => p.fr === normalized || p.en === normalized);
+  const pair = findSlugPair(normalized);
   if (pair) return targetLang === 'en' ? pair.en : pair.fr;
 
   if (targetLang === 'en') {
     if (normalized === '/en' || normalized.startsWith('/en/')) return normalized;
     // Pas de miroir EN : renvoyer le chemin FR (évite `/en/destinations/...` → 404).
     if (isFrOnlyPath(normalized)) return stripLocalePrefix(normalized);
+    // Article blog sans paire : ne pas inventer `/en/blog/<slug-fr>/`.
+    if (isBlogPostPath(normalized)) return normalizePath(stripLocalePrefix(normalized));
     return withLocalePrefix(normalized, 'en');
   }
 
@@ -144,11 +158,19 @@ export function alternatePath(pathname: string, targetLang: Lang): string {
 
 /** True si un alternate EN indexable existe pour ce chemin public. */
 export function hasEnAlternate(pathname: string): boolean {
-  const frPath = alternatePath(normalizePath(pathname), 'fr');
+  const normalized = normalizePath(pathname);
+  const frPath = normalizePath(stripLocalePrefix(alternatePath(normalized, 'fr')));
+
   if (FR_ONLY_PATHS.has(frPath)) return false;
   if (frPath.startsWith('/destinations/')) return false;
   // Partage la cible EN avec /about.htm : éviter un cluster hreflang dupliqué.
   if (frPath === '/a-propos/') return false;
+
+  // Articles blog : uniquement s’il existe une paire FR↔EN enregistrée.
+  if (isBlogPostPath(frPath) || isBlogPostPath(normalized)) {
+    return Boolean(findSlugPair(normalized) || findSlugPair(frPath));
+  }
+
   return true;
 }
 

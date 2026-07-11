@@ -72,22 +72,27 @@
     },
     {
       "source": "/en/sitemap",
-      "destination": "/en/plan-du-site/",
+      "destination": "/en/site-map/",
       "statusCode": 301
     },
     {
       "source": "/en/sitemap/",
-      "destination": "/en/plan-du-site/",
+      "destination": "/en/site-map/",
       "statusCode": 301
     },
     {
-      "source": "/en/site-map",
-      "destination": "/en/plan-du-site/",
+      "source": "/en/plan-du-site",
+      "destination": "/en/site-map/",
       "statusCode": 301
     },
     {
-      "source": "/en/site-map/",
-      "destination": "/en/plan-du-site/",
+      "source": "/en/plan-du-site/",
+      "destination": "/en/site-map/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/sitemap.html",
+      "destination": "/en/site-map/",
       "statusCode": 301
     },
     {
@@ -98,6 +103,16 @@
     {
       "source": "/en/a-propos/",
       "destination": "/en/about.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/marier-a-la-basilique-saint-pierre",
+      "destination": "/en/blog/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/marier-a-la-basilique-saint-pierre/",
+      "destination": "/en/blog/getting-married-st-peters-basilica/",
       "statusCode": 301
     },
     {

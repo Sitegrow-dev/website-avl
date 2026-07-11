@@ -7,7 +7,7 @@ import type { Lang } from '@/lib/i18n';
  *
  * Paires de slugs (voir src/lib/i18n.ts) : legacy AFVL + plan du site :
  * - /about.htm ↔ /en/about.htm, /photos.htm ↔ /en/photos.htm (pages OK, hors nav header)
- * - /plan-du-site/ → /en/plan-du-site/
+ * - /plan-du-site/ → /en/site-map/
  * - /a-propos/ redirige vers /about.htm (non listé au menu)
  */
 export const navigationByLang = {

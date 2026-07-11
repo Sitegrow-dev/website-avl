@@ -114,5 +114,5 @@ export const enPagesList: SitePageLink[] = [
   { label: labels.en.photos, href: '/en/photos.htm', section: 'main' },
   { label: labels.en.blog, href: '/en/blog/', section: 'main' },
   { label: labels.en.contact, href: '/en/contact/', section: 'main' },
-  { label: labels.en.plan, href: '/en/plan-du-site/', section: 'legal' },
+  { label: labels.en.plan, href: '/en/site-map/', section: 'legal' },
 ];
