@@ -2,7 +2,7 @@
  * Helpers i18n — alignés sur le skeleton Sitegrow :
  * - locale par défaut `fr` sans préfixe
  * - anglais sous `/en/`
- * - slugs traduits quand le skeleton le fait (a-propos→about, politique→privacy)
+ * - slugs traduits quand le skeleton le fait (a-propos→about)
  * - chemins legacy AFVL `.htm` sous chaque locale
  */
 
@@ -19,7 +19,7 @@ export const HREFLANG = {
 
 /**
  * Paires FR ↔ EN dont le slug diffère (pas un simple préfixe /en).
- * Conventions skeleton : /a-propos/↔/en/about/, /politique…/↔/en/privacy/
+ * Conventions skeleton : /a-propos/↔/en/about/
  * AFVL : about/photos restent en `.htm` (URLs publiques legacy).
  */
 const SLUG_PAIRS: Array<{ fr: string; en: string }> = [
@@ -30,7 +30,6 @@ const SLUG_PAIRS: Array<{ fr: string; en: string }> = [
   { fr: '/photos/', en: '/en/photos/' },
   // Skeleton-style translated slugs (about public EN = legacy .htm)
   { fr: '/a-propos/', en: '/en/about.htm' },
-  { fr: '/politique-de-confidentialite/', en: '/en/privacy/' },
   { fr: '/plan-du-site/', en: '/en/plan-du-site/' },
 ];
 

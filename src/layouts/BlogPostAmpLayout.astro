@@ -47,6 +47,39 @@ const ampCustomCss = `
   p { font-size: 17px; color: #4b5563; margin: 0 0 16px; }
   ul { padding-left: 20px; margin: 0 0 16px; }
   li { font-size: 17px; color: #4b5563; margin-bottom: 8px; }
+  .table-wrap {
+    margin: 24px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #e8e4df;
+    border-radius: 2px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #6b6560;
+  }
+  thead { background: #f5f0eb; }
+  th {
+    padding: 12px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-align: left;
+    color: #1a1a1a;
+    border-bottom: 1px solid #e8e4df;
+  }
+  td {
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  tbody tr:nth-child(even) { background: #faf9f7; }
+  tbody tr:last-child td { border-bottom: none; }
   .author {
     display: flex;
     align-items: center;

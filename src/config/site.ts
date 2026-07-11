@@ -72,15 +72,11 @@ export const siteConfig = {
         links: [
           { label: 'À propos', href: '/a-propos/' },
           { label: 'Contact', href: '/contact/' },
-          { label: 'Confidentialité', href: '/politique-de-confidentialite/' },
         ],
       },
     ],
     legal: {
-      links: [
-        { label: 'Plan du site', href: '/plan-du-site/' },
-        { label: 'Politique de confidentialité', href: '/politique-de-confidentialite/' },
-      ],
+      links: [{ label: 'Plan du site', href: '/plan-du-site/' }],
     },
   },
 } as const;

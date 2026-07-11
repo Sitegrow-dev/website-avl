@@ -15,7 +15,6 @@ const labels = {
     contact: 'Nous joindre',
     services: 'Services',
     destinations: 'Destinations',
-    privacy: 'Politique de confidentialité',
     notFound: 'Page introuvable',
     plan: 'Plan du site',
   },
@@ -27,7 +26,6 @@ const labels = {
     contact: 'Contact',
     services: 'Services',
     destinations: 'Destinations',
-    privacy: 'Privacy Policy',
     notFound: 'Page not found',
     plan: 'Sitemap',
   },
@@ -75,10 +73,6 @@ export const breadcrumbTrails = {
     { label: labels[lang].destinations },
     { label: name },
   ],
-  privacy: (lang: Lang = 'fr'): BreadcrumbItem[] => [
-    homeItem(lang),
-    { label: labels[lang].privacy },
-  ],
   plan: (lang: Lang = 'fr'): BreadcrumbItem[] => [homeItem(lang), { label: labels[lang].plan }],
   notFound: (lang: Lang = 'fr'): BreadcrumbItem[] => [
     homeItem(lang),
@@ -104,7 +98,6 @@ export const frPagesList: SitePageLink[] = [
   { label: labels.fr.blog, href: '/blog/', section: 'main' },
   { label: labels.fr.contact, href: '/contact/', section: 'main' },
   { label: labels.fr.plan, href: '/plan-du-site/', section: 'legal' },
-  { label: labels.fr.privacy, href: '/politique-de-confidentialite/', section: 'legal' },
 ];
 
 /** Liste centralisée des pages pour le plan du site HTML (EN) — slugs skeleton + legacy .htm. */
@@ -115,5 +108,4 @@ export const enPagesList: SitePageLink[] = [
   { label: labels.en.blog, href: '/en/blog/', section: 'main' },
   { label: labels.en.contact, href: '/en/contact/', section: 'main' },
   { label: labels.en.plan, href: '/en/plan-du-site/', section: 'legal' },
-  { label: labels.en.privacy, href: '/en/privacy/', section: 'legal' },
 ];

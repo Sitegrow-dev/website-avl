@@ -7,7 +7,6 @@ import type { Lang } from '@/lib/i18n';
  *
  * Paires de slugs (voir src/lib/i18n.ts) — conventions skeleton + legacy AFVL :
  * - /a-propos/ → /en/about.htm (legacy .htm)
- * - /politique-de-confidentialite/ → /en/privacy/
  * - /plan-du-site/ → /en/plan-du-site/
  * - /about.htm ↔ /en/about.htm, /photos.htm ↔ /en/photos.htm
  */
@@ -46,15 +45,11 @@ export const navigationByLang = {
           links: [
             { label: 'À propos', href: '/a-propos/' },
             { label: 'Contact', href: '/contact/' },
-            { label: 'Confidentialité', href: '/politique-de-confidentialite/' },
           ],
         },
       ],
       legal: {
-        links: [
-          { label: 'Plan du site', href: '/plan-du-site/' },
-          { label: 'Politique de confidentialité', href: '/politique-de-confidentialite/' },
-        ],
+        links: [{ label: 'Plan du site', href: '/plan-du-site/' }],
       },
       rights: 'Tous droits réservés.',
     },
@@ -93,15 +88,11 @@ export const navigationByLang = {
           links: [
             { label: 'About', href: '/a-propos/' },
             { label: 'Contact', href: '/contact/' },
-            { label: 'Privacy', href: '/politique-de-confidentialite/' },
           ],
         },
       ],
       legal: {
-        links: [
-          { label: 'Sitemap', href: '/plan-du-site/' },
-          { label: 'Privacy Policy', href: '/politique-de-confidentialite/' },
-        ],
+        links: [{ label: 'Sitemap', href: '/plan-du-site/' }],
       },
       rights: 'All rights reserved.',
     },

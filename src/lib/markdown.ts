@@ -14,6 +14,10 @@ renderer.heading = function ({ text, depth }) {
   const id = slugifyHeading(text.replace(/<[^>]+>/g, ''));
   return `<h${depth} id="${id}">${text}</h${depth}>\n`;
 };
+const defaultTable = renderer.table.bind(renderer);
+renderer.table = function (token) {
+  return `<div class="table-wrap">${defaultTable(token)}</div>\n`;
+};
 
 marked.setOptions({
   gfm: true,

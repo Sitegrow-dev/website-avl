@@ -28,7 +28,7 @@ const breadcrumbSchema = {
 const ariaLabel = lang === 'en' ? 'Breadcrumb' : "Fil d'Ariane";
 ---
 <JsonLd schema={breadcrumbSchema} />
-<nav aria-label={ariaLabel} class="border-b border-black/[0.04] bg-bg-alt/60">
+<nav aria-label={ariaLabel} class="border-b border-black/[0.04]">
   <div class="mx-auto max-w-[1440px] px-5 py-3 lg:px-20">
     <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] tracking-wide">
       {items.map((item, index) => {

@@ -91,26 +91,6 @@
       "statusCode": 301
     },
     {
-      "source": "/en/privacy-policy",
-      "destination": "/en/privacy/",
-      "statusCode": 301
-    },
-    {
-      "source": "/en/privacy-policy/",
-      "destination": "/en/privacy/",
-      "statusCode": 301
-    },
-    {
-      "source": "/en/politique-de-confidentialite",
-      "destination": "/en/privacy/",
-      "statusCode": 301
-    },
-    {
-      "source": "/en/politique-de-confidentialite/",
-      "destination": "/en/privacy/",
-      "statusCode": 301
-    },
-    {
       "source": "/en/a-propos",
       "destination": "/en/about.htm",
       "statusCode": 301

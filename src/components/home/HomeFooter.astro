@@ -11,7 +11,7 @@ interface Props {
 
 const { lang = 'fr' } = Astro.props;
 const { footer } = getNavigation(lang);
-const { siteName, contactEmail, phone, social } = siteConfig;
+const { siteName, phone, social } = siteConfig;
 const year = new Date().getFullYear();
 const homeHref = localizedHref('/', lang);
 
@@ -25,10 +25,17 @@ const socialLinks = [
   { label: 'YouTube', href: social.youtube },
   { label: 'X', href: social.x },
 ].filter((l) => l.href);
+
+const showContactColumn = Boolean(phone) || socialLinks.length > 0;
 ---
 <footer class="border-t border-border bg-white pb-10 pt-20 lg:pt-24">
   <Container>
-    <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+    <div
+      class:list={[
+        'grid grid-cols-1 gap-12 sm:grid-cols-2',
+        showContactColumn ? 'lg:grid-cols-4' : 'lg:grid-cols-3',
+      ]}
+    >
       <div>
         <SiteLogo variant="dark" height={88} href={homeHref} />
         <p class="mt-6 max-w-xs text-[15px] leading-6 text-muted">{footer.tagline}</p>
@@ -52,45 +59,41 @@ const socialLinks = [
         </div>
       ))}
 
-      <div>
-        <p class="text-[15px] font-semibold text-ink">{contactTitle}</p>
-        <ul class="mt-6 flex flex-col gap-3">
-          {contactEmail && (
-            <li>
-              <a
-                href={`mailto:${contactEmail}`}
-                class="text-[15px] text-muted transition-colors hover:text-ink"
-              >
-                {contactEmail}
-              </a>
-            </li>
-          )}
+      {showContactColumn && (
+        <div>
           {phone && (
-            <li>
-              <span class="text-[15px] text-muted">{phone}</span>
-            </li>
-          )}
-        </ul>
-        {socialLinks.length > 0 && (
-          <>
-            <p class="mt-6 text-[15px] font-semibold text-ink">{followTitle}</p>
-            <ul class="mt-4 flex flex-col gap-3">
-              {socialLinks.map((link) => (
+            <>
+              <p class="text-[15px] font-semibold text-ink">{contactTitle}</p>
+              <ul class="mt-6 flex flex-col gap-3">
                 <li>
-                  <a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-[15px] text-muted transition-colors hover:text-ink"
-                  >
-                    {link.label}
-                  </a>
+                  <span class="text-[15px] text-muted">{phone}</span>
                 </li>
-              ))}
-            </ul>
-          </>
-        )}
-      </div>
+              </ul>
+            </>
+          )}
+          {socialLinks.length > 0 && (
+            <>
+              <p class:list={['text-[15px] font-semibold text-ink', phone && 'mt-6']}>
+                {followTitle}
+              </p>
+              <ul class="mt-4 flex flex-col gap-3">
+                {socialLinks.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-[15px] text-muted transition-colors hover:text-ink"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      )}
     </div>
 
     <div class="mt-16 flex flex-col items-center gap-4 border-t border-border pt-10 sm:flex-row sm:justify-between">

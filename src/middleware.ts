@@ -88,14 +88,6 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   ) {
     return context.redirect('/en/plan-du-site/', 301);
   }
-  if (
-    pathname === '/en/privacy-policy' ||
-    pathname === '/en/privacy-policy/' ||
-    pathname === '/en/politique-de-confidentialite' ||
-    pathname === '/en/politique-de-confidentialite/'
-  ) {
-    return context.redirect('/en/privacy/', 301);
-  }
   if (pathname === '/en/a-propos' || pathname === '/en/a-propos/') {
     return context.redirect('/en/about.htm', 301);
   }
