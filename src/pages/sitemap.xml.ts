@@ -22,14 +22,12 @@ const PAGE_SOURCES: Record<string, string[]> = {
     'src/pages/destinations/rome/index.astro',
     'src/data/destinations.ts',
   ],
-  '/plan-du-site/': ['src/pages/plan-du-site/index.astro'],
   '/en/': ['src/pages/en/index.astro', 'src/data/home.ts'],
   '/en/about.htm': ['src/pages/en/about/index.astro', 'src/data/about.ts'],
   '/en/photos.htm': ['src/pages/en/photos/index.astro', 'src/data/photos.ts'],
   '/en/blog/': ['src/pages/en/blog/index.astro', 'src/data/posts.ts'],
   '/en/contact/': ['src/pages/en/contact/index.astro', 'src/data/contact.ts'],
   '/en/services/': ['src/pages/en/services/index.astro', 'src/data/services.ts'],
-  '/en/plan-du-site/': ['src/pages/en/plan-du-site/index.astro'],
 };
 
 /**
@@ -46,7 +44,6 @@ const FR_STATIC_PAGES = [
   '/contact/',
   '/services/',
   '/destinations/rome/',
-  '/plan-du-site/',
 ];
 
 /**
@@ -60,7 +57,6 @@ const EN_STATIC_PAGES = [
   '/en/blog/',
   '/en/contact/',
   '/en/services/',
-  '/en/plan-du-site/',
 ];
 
 type Alternate = { hreflang: string; href: string };
