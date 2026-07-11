@@ -1,6 +1,63 @@
+import { siteConfig } from '@/config/site';
 import type { HoldingArticle } from '@/lib/holding';
 import { stripLeadingH1, tocFromMarkdown } from '@/lib/markdown';
 import type { Post } from '@/data/posts';
+
+/**
+ * Hôtes de déploiement / preview à traiter comme le site lui-même.
+ * Holding génère parfois des liens absolus vers le domaine Vercel au lieu du domaine canonique.
+ */
+function ownSiteHosts(): Set<string> {
+  const hosts = new Set<string>();
+  const add = (raw?: string) => {
+    if (!raw?.trim()) return;
+    try {
+      const withProto = raw.includes('://') ? raw : `https://${raw}`;
+      hosts.add(new URL(withProto).hostname.replace(/^www\./, '').toLowerCase());
+    } catch {
+      /* ignore */
+    }
+  };
+  add(siteConfig.domain);
+  add(siteConfig.url);
+  add(process.env.SITE_DOMAIN);
+  add(process.env.SITE_URL);
+  add(process.env.VERCEL_URL);
+  // Preview / alias Vercel historiques du projet
+  add('website-avl.vercel.app');
+  return hosts;
+}
+
+/** Convertit une URL absolue du site (ou preview) en chemin relatif ; laisse le reste intact. */
+export function toSiteRelativeHref(href: string): string {
+  if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) {
+    return href;
+  }
+  if (!/^https?:\/\//i.test(href) && !href.startsWith('//')) {
+    return href;
+  }
+  try {
+    const url = new URL(href.startsWith('//') ? `https:${href}` : href);
+    const host = url.hostname.replace(/^www\./, '').toLowerCase();
+    if (!ownSiteHosts().has(host)) return href;
+    const path = `${url.pathname}${url.search}${url.hash}` || '/';
+    return path.startsWith('/') ? path : `/${path}`;
+  } catch {
+    return href;
+  }
+}
+
+/** Réécrit les URLs absolues du site dans le Markdown Holding en chemins relatifs. */
+export function rewriteOwnSiteUrlsInMarkdown(markdown: string): string {
+  if (!markdown) return markdown;
+  return markdown.replace(
+    /\[([^\]]*)]\((https?:\/\/[^)\s]+)\)/gi,
+    (full, label: string, href: string) => {
+      const next = toSiteRelativeHref(href);
+      return next === href ? full : `[${label}](${next})`;
+    }
+  );
+}
 
 const CATEGORY_FROM_KEYWORD: Record<string, { category: string; categorySlug: string }> = {
   demarche: { category: 'Démarches', categorySlug: 'demarches' },
@@ -49,11 +106,27 @@ function usefulLinks(article: HoldingArticle): Post['usefulLinks'] {
   const links = (article.internal_links ?? [])
     .filter(Boolean)
     .slice(0, 6)
-    .map((href) => ({
-      label: href === '/' ? 'Accueil →' : `${href.replace(/\/$/, '').split('/').pop() || href} →`,
-      href: href.endsWith('/') || href.startsWith('http') ? href : `${href}/`,
-    }));
+    .map((raw) => {
+      const href = toSiteRelativeHref(raw);
+      const normalized =
+        href.endsWith('/') || href.startsWith('http') || href.startsWith('#') ? href : `${href}/`;
+      return {
+        label:
+          normalized === '/'
+            ? 'Accueil →'
+            : `${normalized.replace(/\/$/, '').split('/').pop() || normalized} →`,
+        href: normalized,
+      };
+    });
   return links.length > 0 ? links : undefined;
+}
+
+function rewriteFaq(faq: HoldingArticle['faq'] | undefined): Post['faq'] {
+  if (!faq?.length) return undefined;
+  return faq.map((item) => ({
+    question: item.question,
+    answer: rewriteOwnSiteUrlsInMarkdown(item.answer),
+  }));
 }
 
 /** Mappe un article Holding vers le modèle UI `Post`. */
@@ -65,7 +138,9 @@ export function mapHoldingArticleToPost(
   const { src: image, alt: imageAlt } = firstImage(article);
   const date = article.published_at?.slice(0, 10) || article.published_at;
   const relatedSlugs = allSlugs.filter((s) => s !== article.slug).slice(0, 3);
-  const bodyMarkdown = stripLeadingH1(article.body_markdown || '');
+  const bodyMarkdown = rewriteOwnSiteUrlsInMarkdown(
+    stripLeadingH1(article.body_markdown || '')
+  );
 
   return {
     slug: article.slug,
@@ -83,7 +158,7 @@ export function mapHoldingArticleToPost(
     imageAlt,
     metaTitle: article.meta_title,
     bodyMarkdown,
-    faq: article.faq?.length ? article.faq : undefined,
+    faq: rewriteFaq(article.faq),
     primaryKeyword: article.primary_keyword,
     toc: tocFromMarkdown(bodyMarkdown),
     usefulLinks: usefulLinks(article),
