@@ -1,12 +1,14 @@
 ---
 import { siteConfig } from '@/config/site';
 import type { Post } from '@/data/posts';
+import { renderMarkdown } from '@/lib/markdown';
 
 interface Props {
   post: Post;
 }
 
 const { post } = Astro.props;
+const bodyHtml = post.bodyMarkdown ? renderMarkdown(post.bodyMarkdown) : '';
 
 const origin = Astro.site ?? new URL(Astro.url.origin);
 const canonicalPath = `/blog/${post.slug}/`;
@@ -105,17 +107,33 @@ const ampCustomCss = `
         ></amp-img>
       </div>
 
-      {post.sections.map((section) => (
+      {bodyHtml ? (
+        <div class="holding-body" set:html={bodyHtml} />
+      ) : (
+        post.sections.map((section) => (
+          <section>
+            {section.heading && <h2>{section.heading}</h2>}
+            {section.paragraphs.map((p) => <p>{p}</p>)}
+            {section.bullets && (
+              <ul>
+                {section.bullets.map((item) => <li>{item}</li>)}
+              </ul>
+            )}
+          </section>
+        ))
+      )}
+
+      {post.faq && post.faq.length > 0 && (
         <section>
-          {section.heading && <h2>{section.heading}</h2>}
-          {section.paragraphs.map((p) => <p>{p}</p>)}
-          {section.bullets && (
-            <ul>
-              {section.bullets.map((item) => <li>{item}</li>)}
-            </ul>
-          )}
+          <h2>Questions fréquentes</h2>
+          {post.faq.map((item) => (
+            <div>
+              <h3>{item.question}</h3>
+              <p>{item.answer}</p>
+            </div>
+          ))}
         </section>
-      ))}
+      )}
 
       {post.author && (
         <div class="author">

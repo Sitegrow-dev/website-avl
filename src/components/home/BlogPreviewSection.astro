@@ -1,23 +1,21 @@
 ---
 import { homeContent } from '@/data/home';
-import { getPostBySlug } from '@/data/posts';
+import { getPublishedPosts, getPostHref } from '@/data/posts';
 import Container from '@components/ui/Container.astro';
 import SectionHeader from '@components/ui/SectionHeader.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import TextLink from '@components/ui/TextLink.astro';
-import { getPostHref } from '@/data/posts';
 
 const { blog } = homeContent;
-const posts = blog.previewSlugs
-  .map((slug) => getPostBySlug(slug))
-  .filter((post): post is NonNullable<typeof post> => post !== undefined);
+const posts = getPublishedPosts().slice(0, 3);
 ---
+{posts.length > 0 && (
 <section class="py-24 lg:py-28">
   <Container>
     <SectionHeader eyebrow={blog.eyebrow} title={blog.title} />
     <div class="mt-16 grid gap-8 lg:grid-cols-3">
       {posts.map((post) => {
-        const image = blog.previewImages[post.slug as keyof typeof blog.previewImages] ?? post.image;
+        const image = blog.previewImages[post.slug] ?? post.image;
         return (
         <article class="group">
           {image && (
@@ -44,3 +42,4 @@ const posts = blog.previewSlugs
     </div>
   </Container>
 </section>
+)}

@@ -4,7 +4,7 @@ import JsonLd from '@components/JsonLd.astro';
 import PostHero from '@components/post/PostHero.astro';
 import PostBody from '@components/post/PostBody.astro';
 import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
-import { buildArticleGraph } from '@/lib/schema';
+import { buildArticleGraph, buildFaqSchema } from '@/lib/schema';
 import { formatTitle } from '@/lib/seo';
 import type { Post } from '@/data/posts';
 
@@ -18,9 +18,10 @@ const origin = Astro.site ?? new URL(Astro.url.origin);
 const path = `/blog/${post.slug}/`;
 const ampUrl = new URL(`/blog/${post.slug}/amp/`, origin).href;
 const articleGraph = buildArticleGraph(post, origin, { path, lang: 'fr-CA' });
+const faqSchema = post.faq?.length ? buildFaqSchema(post.faq) : null;
 ---
 <PageLayout
-  title={formatTitle(post.title)}
+  title={formatTitle(post.metaTitle || post.title)}
   description={post.summary}
   image={post.image ? `${post.image}.webp` : undefined}
   imageAlt={post.imageAlt}
@@ -30,6 +31,7 @@ const articleGraph = buildArticleGraph(post, origin, { path, lang: 'fr-CA' });
   activeHref="/blog/"
 >
   <JsonLd schema={articleGraph} />
+  {faqSchema && <JsonLd schema={faqSchema} />}
   <main>
     <PostHero post={post} />
     <PostBody post={post} />

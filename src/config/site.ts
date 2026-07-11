@@ -50,12 +50,9 @@ export const siteConfig = {
         title: 'Mariage',
         links: [
           { label: 'Mariage catholique Italie', href: '/' },
-          {
-            label: 'Démarches canoniques',
-            href: '/blog/mariage-catholique-etranger-delais-documents/',
-          },
+          { label: 'Démarches canoniques', href: '/blog/' },
           { label: 'Destinations', href: '/destinations/rome/' },
-          { label: 'Coûts et budget', href: '/blog/quel-budget-mariage-italie/' },
+          { label: 'Guides & ressources', href: '/blog/' },
         ],
       },
       {

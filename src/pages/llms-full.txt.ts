@@ -84,17 +84,32 @@ export const GET: APIRoute = ({ site }) => {
       out.push('');
       out.push(post.summary);
       out.push('');
-      for (const section of post.sections) {
-        if (section.heading) {
-          out.push(`#### ${section.heading}`);
-          out.push('');
+      if (post.bodyMarkdown?.trim()) {
+        out.push(post.bodyMarkdown.trim());
+        out.push('');
+      } else {
+        for (const section of post.sections) {
+          if (section.heading) {
+            out.push(`#### ${section.heading}`);
+            out.push('');
+          }
+          for (const para of section.paragraphs) {
+            out.push(para);
+            out.push('');
+          }
+          if (section.bullets?.length) {
+            for (const b of section.bullets) out.push(`- ${b}`);
+            out.push('');
+          }
         }
-        for (const para of section.paragraphs) {
-          out.push(para);
+      }
+      if (post.faq?.length) {
+        out.push('#### FAQ');
+        out.push('');
+        for (const item of post.faq) {
+          out.push(`**${item.question}**`);
           out.push('');
-        }
-        if (section.bullets?.length) {
-          for (const b of section.bullets) out.push(`- ${b}`);
+          out.push(item.answer);
           out.push('');
         }
       }

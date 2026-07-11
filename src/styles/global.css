@@ -39,3 +39,57 @@ body {
   font-weight: 700;
   color: var(--color-ink);
 }
+
+/* Corps Markdown issu de Holding */
+.holding-body > * + * {
+  margin-top: 1.25rem;
+}
+.holding-body h2 {
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 2vw + 1rem, 2.25rem);
+  font-weight: 700;
+  color: var(--color-ink);
+  scroll-margin-top: 6rem;
+}
+.holding-body h3 {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+.holding-body p,
+.holding-body li {
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--color-muted);
+}
+.holding-body ul,
+.holding-body ol {
+  padding-left: 1.25rem;
+}
+.holding-body ul {
+  list-style: disc;
+}
+.holding-body ol {
+  list-style: decimal;
+}
+.holding-body blockquote {
+  margin-top: 2rem;
+  border: 1px solid color-mix(in oklab, var(--color-brand) 20%, transparent);
+  background: var(--color-brand-light, color-mix(in oklab, var(--color-brand) 8%, white));
+  padding: 2rem;
+  font-size: 1.125rem;
+  line-height: 1.75;
+  color: var(--color-ink);
+}
+.holding-body a {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.holding-body strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}

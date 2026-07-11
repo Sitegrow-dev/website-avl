@@ -109,8 +109,8 @@ export const homeContent = {
       },
     ],
     link: {
-      label: 'Voir les documents requis →',
-      href: '/blog/mariage-catholique-etranger-delais-documents/',
+      label: 'Voir les guides →',
+      href: '/blog/',
     },
   },
   honeymoon: {
@@ -153,16 +153,8 @@ export const homeContent = {
   blog: {
     eyebrow: 'Magazine',
     title: 'Ressources & guides',
-    previewSlugs: [
-      'quel-budget-mariage-italie',
-      'plus-belles-eglises-rome',
-      'mariage-catholique-etranger-delais-documents',
-    ] as const,
-    previewImages: {
-      'quel-budget-mariage-italie': '/images/home/blog/budget',
-      'plus-belles-eglises-rome': '/images/home/blog/eglises-rome',
-      'mariage-catholique-etranger-delais-documents': '/images/home/blog/demarches',
-    },
+    /** Images optionnelles par slug Holding (sinon image de l’article). */
+    previewImages: {} as Record<string, string>,
   },
   faq: {
     eyebrow: 'Aide',

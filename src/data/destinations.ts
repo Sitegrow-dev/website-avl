@@ -145,8 +145,8 @@ export const destinations: Destination[] = [
           title: 'Dossier canonique',
           description: 'Constitution des pièces requises pour votre diocèse.',
           link: {
-            label: 'Voir les documents requis →',
-            href: '/blog/mariage-catholique-etranger-delais-documents/',
+            label: 'Voir les guides →',
+            href: '/blog/',
           },
         },
         {

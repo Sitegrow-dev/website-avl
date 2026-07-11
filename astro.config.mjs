@@ -76,6 +76,17 @@ export default defineConfig({
         access: 'public',
         optional: true,
       }),
+      HOLDING_API_KEY: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: true,
+      }),
+      HOLDING_API_URL: envField.string({
+        context: 'server',
+        access: 'public',
+        optional: true,
+        url: true,
+      }),
       // Optionnel : serveur de dev
       PORT: envField.number({ context: 'server', access: 'public', optional: true, default: 4325 }),
       DEV_HTTPS: envField.boolean({ context: 'server', access: 'public', optional: true }),
