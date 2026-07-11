@@ -13,17 +13,37 @@ import tailwindcss from '@tailwindcss/vite';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
-// Vérification anti-oubli : en prod, SITE_URL doit être défini pour que les
-// URLs canoniques, sitemaps et OG pointent sur le bon domaine.
-// On ne déclenche le check QUE sur `astro build` (pas `astro check` ni `astro dev`).
-if (process.argv[1]?.includes('astro') && process.argv[2] === 'build' && !process.env.SITE_URL) {
+/** SITE_URL explicite, sinon URL Vercel (preview / production .vercel.app). */
+function resolveSiteUrl() {
+  const explicit = process.env.SITE_URL?.trim();
+  if (explicit) return explicit.replace(/\/$/, '');
+
+  const vercel = process.env.VERCEL_URL?.trim();
+  if (vercel) {
+    const host = vercel.replace(/^https?:\/\//, '');
+    return `https://${host}`;
+  }
+
+  return 'https://exemple.com';
+}
+
+const siteUrl = resolveSiteUrl();
+
+// Hors Vercel : exiger SITE_URL au build pour éviter des canoniques/OG incorrects.
+// Sur Vercel, VERCEL_URL est toujours fourni → preview .vercel.app OK sans config.
+if (
+  process.argv[1]?.includes('astro') &&
+  process.argv[2] === 'build' &&
+  !process.env.SITE_URL &&
+  !process.env.VERCEL_URL
+) {
   throw new Error(
-    '[astro.config] SITE_URL manquant en production. Définissez la variable d’environnement SITE_URL avant de builder (ex. https://exemple.com).'
+    '[astro.config] SITE_URL manquant. Définissez SITE_URL (ex. https://exemple.com) ou buildez sur Vercel (VERCEL_URL).'
   );
 }
 
 export default defineConfig({
-  site: process.env.SITE_URL || 'https://exemple.com',
+  site: siteUrl,
   // Astro v5+ : 'hybrid' a fusionné avec 'static'. Les routes dynamiques
   // (middleware, /rss.xml, etc.) fonctionnent toujours via l'adaptateur.
   output: 'static',
