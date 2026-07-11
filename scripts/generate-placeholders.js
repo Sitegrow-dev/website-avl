@@ -50,16 +50,21 @@ await generateImage({
 await generateImage({
   svg: memberSvg,
   outDir: join(projectRoot, 'public', 'images', 'team'),
-  slug: 'member-1',
+  slug: 'team-member-placeholder',
   width: 400,
   height: 400,
 });
 
-for (const n of [1, 2, 3]) {
+const serviceSlugs = [
+  ['service-decouverte', 'Découverte'],
+  ['service-planification', 'Planification'],
+  ['service-execution', 'Exécution'],
+];
+for (const [slug, label] of serviceSlugs) {
   await generateImage({
-    svg: serviceSvg(`Service ${n}`),
+    svg: serviceSvg(label),
     outDir: join(projectRoot, 'public', 'images', 'services'),
-    slug: `service-${n}`,
+    slug,
     width: 800,
     height: 600,
   });

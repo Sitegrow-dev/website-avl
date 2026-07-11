@@ -154,7 +154,10 @@ const homeFr = {
   blog: {
     eyebrow: 'Magazine',
     title: 'Ressources & guides',
-    previewImages: {} as Record<string, string>,
+    previewImages: {
+      'se-marier-eglise-catholique-italie': '/images/home/blog/demarches',
+      'getting-married-catholic-church-italy': '/images/home/blog/demarches',
+    } as Record<string, string>,
   },
   faq: {
     eyebrow: 'Aide',
@@ -325,7 +328,10 @@ const homeEn = {
   blog: {
     eyebrow: 'Magazine',
     title: 'Resources & guides',
-    previewImages: {} as Record<string, string>,
+    previewImages: {
+      'se-marier-eglise-catholique-italie': '/images/home/blog/demarches',
+      'getting-married-catholic-church-italy': '/images/home/blog/demarches',
+    } as Record<string, string>,
   },
   faq: {
     eyebrow: 'Help',

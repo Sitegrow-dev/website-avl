@@ -97,9 +97,19 @@ function firstImage(article: HoldingArticle): { src?: string; alt?: string } {
   const sorted = [...(article.images ?? [])].sort((a, b) => a.position - b.position);
   const withUrl = sorted.find((img) => img.url);
   if (!withUrl?.url) return {};
-  // ResponsiveImage attend un chemin sans extension si local ; URLs absolues passent telles quelles.
-  const src = withUrl.url.replace(/\.(avif|webp|jpe?g|png)$/i, '');
-  return { src, alt: withUrl.alt_fr || article.h1_title };
+  const raw = withUrl.url;
+  const alt = withUrl.alt_fr || article.h1_title;
+  // URL absolue du site → chemin local sans extension (ResponsiveImage).
+  if (/^https?:\/\//i.test(raw) || raw.startsWith('//')) {
+    const relative = toSiteRelativeHref(raw.startsWith('//') ? `https:${raw}` : raw);
+    if (relative.startsWith('/')) {
+      return { src: relative.replace(/\.(avif|webp|jpe?g|png)$/i, ''), alt };
+    }
+    // CDN externe : garder l’URL complète (pas de hotlink idéal — télécharger en local si possible).
+    return { src: raw, alt };
+  }
+  // Chemin local : ResponsiveImage attend un base sans extension.
+  return { src: raw.replace(/\.(avif|webp|jpe?g|png)$/i, ''), alt };
 }
 
 function usefulLinks(article: HoldingArticle): Post['usefulLinks'] {

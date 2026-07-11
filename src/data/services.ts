@@ -25,7 +25,7 @@ export const services: Service[] = [
   {
     title: 'Service 1',
     description: 'Décrivez ce service : ce qu’il inclut, pour qui, et le résultat attendu.',
-    image: '/images/services/service-1',
+    image: '/images/services/service-decouverte',
     imageAlt: '',
     features: ['Point clé 1', 'Point clé 2', 'Point clé 3'],
     reverse: false,
@@ -33,7 +33,7 @@ export const services: Service[] = [
   {
     title: 'Service 2',
     description: 'Décrivez ce service : ce qu’il inclut, pour qui, et le résultat attendu.',
-    image: '/images/services/service-2',
+    image: '/images/services/service-planification',
     imageAlt: '',
     features: ['Point clé 1', 'Point clé 2', 'Point clé 3'],
     reverse: true,
@@ -41,7 +41,7 @@ export const services: Service[] = [
   {
     title: 'Service 3',
     description: 'Décrivez ce service : ce qu’il inclut, pour qui, et le résultat attendu.',
-    image: '/images/services/service-3',
+    image: '/images/services/service-execution',
     imageAlt: '',
     features: ['Point clé 1', 'Point clé 2', 'Point clé 3'],
     reverse: false,

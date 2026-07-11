@@ -241,6 +241,13 @@ function wordCount(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length;
 }
 
+const AUTHOR = {
+  name: 'Marie Leclair',
+  role: 'Rédactrice',
+  bio: 'Guides pratiques sur le mariage catholique et le patrimoine en Italie.',
+  image: '/images/blog/author-marie-leclair',
+} as const;
+
 function buildPost(opts: {
   lang: 'fr' | 'en';
   slug: string;
@@ -270,6 +277,8 @@ function buildPost(opts: {
     readingTimeMinutes: Math.max(1, Math.ceil(wordCount(bodyMarkdown) / 200)),
     published: true,
     featured: opts.featured ?? false,
+    image: '/images/blog/demarches-hero',
+    listingImage: '/images/blog/mariage-eglise-italie',
     imageAlt:
       opts.lang === 'en'
         ? 'Couple exchanging consent before a priest in an Italian church'
@@ -281,6 +290,14 @@ function buildPost(opts: {
       opts.lang === 'en'
         ? 'catholic wedding italy'
         : 'mariage catholique italie',
+    author: {
+      ...AUTHOR,
+      role: opts.lang === 'en' ? 'Editor' : AUTHOR.role,
+      bio:
+        opts.lang === 'en'
+          ? 'Practical guides on Catholic marriage and heritage in Italy.'
+          : AUTHOR.bio,
+    },
     toc: tocFromMarkdown(bodyMarkdown),
     usefulLinks: opts.usefulLinks,
     sections: [],

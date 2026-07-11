@@ -16,7 +16,9 @@ const origin = Astro.site ?? new URL(Astro.url.origin);
 const canonicalPath = `/blog/${post.slug}/`;
 const canonicalUrl = new URL(canonicalPath, origin).href;
 const heroUrl = post.image
-  ? new URL(`${post.image}.webp`, origin).href
+  ? /^https?:\/\//i.test(post.image)
+    ? post.image
+    : new URL(`${post.image}.webp`, origin).href
   : new URL('/images/og-default.webp', origin).href;
 
 // CSS minimal inline pour AMP : doit faire < 75KB
@@ -173,7 +175,11 @@ const ampCustomCss = `
       {post.author && (
         <div class="author">
           <amp-img
-            src={new URL(`${post.author.image}.webp`, origin).href}
+            src={
+              /^https?:\/\//i.test(post.author.image)
+                ? post.author.image
+                : new URL(`${post.author.image}.webp`, origin).href
+            }
             alt={post.author.name}
             width="56"
             height="56"

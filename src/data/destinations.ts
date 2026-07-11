@@ -112,7 +112,7 @@ export const destinations: Destination[] = [
         {
           name: 'Basilique Saint-Pierre · Vatican',
           location: 'Cité du Vatican',
-          image: '/images/destinations/rome/churches/st-pierre',
+          image: '/images/destinations/rome/churches/saint-pierre',
           href: '/contact/',
         },
         {
@@ -124,7 +124,7 @@ export const destinations: Destination[] = [
         {
           name: "Sant'Agnese in Agone",
           location: 'Place Navone',
-          image: '/images/destinations/rome/churches/agnese',
+          image: '/images/destinations/rome/churches/sant-agnese',
           href: '/contact/',
         },
         {

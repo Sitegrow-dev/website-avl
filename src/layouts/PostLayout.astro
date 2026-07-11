@@ -31,7 +31,13 @@ const faqSchema = post.faq?.length ? buildFaqSchema(post.faq) : null;
   lang={lang === 'en' ? 'en-CA' : 'fr-CA'}
   title={formatTitle(post.metaTitle || post.title)}
   description={post.summary}
-  image={post.image ? `${post.image}.webp` : undefined}
+  image={
+    post.image
+      ? /^https?:\/\//i.test(post.image)
+        ? post.image
+        : `${post.image}.webp`
+      : undefined
+  }
   imageAlt={post.imageAlt}
   type="article"
   ampUrl={ampUrl}

@@ -7,15 +7,18 @@
  * (base-400.webp, base-800.webp, …). Si aucune variante n'existe, retombe sur
  * l'image unique base.webp/.avif → jamais de 404, compatible avec l'existant.
  *
+ * URLs absolues http(s) : rendu <img> direct (évite d'ajouter .webp localement).
+ * Préférer des assets locaux sous public/images/ quand c'est possible.
+ *
  * Exemple :
- *   <ResponsiveImage src="/images/services/service-1" alt="…" width={800}
+ *   <ResponsiveImage src="/images/services/service-decouverte" alt="…" width={800}
  *     height={600} sizes="(min-width: 1024px) 560px, 100vw" class="…" />
  */
 import fs from 'node:fs';
 import path from 'node:path';
 
 interface Props {
-  /** Chemin de base sans extension, ex. /images/services/service-1 */
+  /** Chemin de base sans extension, ex. /images/services/service-decouverte — ou URL http(s). */
   src: string;
   alt: string;
   /** Largeurs candidates (doivent correspondre à optimize-image.js). */
@@ -44,6 +47,8 @@ const {
   class: className,
 } = Astro.props;
 
+const isRemote = /^https?:\/\//i.test(src);
+
 const publicDir = path.join(process.cwd(), 'public');
 const rel = src.replace(/^\//, '');
 const hasFile = (p: string) => {
@@ -55,8 +60,8 @@ const hasFile = (p: string) => {
 };
 
 // Variantes de largeur réellement présentes dans public/ (ascendant).
-const variantWidths = widths.filter((w) => hasFile(`${rel}-${w}.webp`));
-const baseExists = hasFile(`${rel}.webp`);
+const variantWidths = isRemote ? [] : widths.filter((w) => hasFile(`${rel}-${w}.webp`));
+const baseExists = isRemote ? false : hasFile(`${rel}.webp`);
 
 // Descripteurs du srcset : variantes + image pleine taille (base) au descripteur
 // `width`, pour que la plus grande version reste sélectionnable sur desktop.
@@ -73,24 +78,42 @@ const srcset = (ext: string) =>
   responsive ? descriptors.map((d) => `${url(d, ext)} ${d.w}w`).join(', ') : `${src}.${ext}`;
 
 // Repli <img> : image de base pleine taille si présente, sinon plus grande variante.
-const fallbackSrc = baseExists
-  ? `${src}.webp`
-  : variantWidths.length > 0
-    ? `${src}-${variantWidths[variantWidths.length - 1]}.webp`
-    : `${src}.webp`;
+const fallbackSrc = isRemote
+  ? src
+  : baseExists
+    ? `${src}.webp`
+    : variantWidths.length > 0
+      ? `${src}-${variantWidths[variantWidths.length - 1]}.webp`
+      : `${src}.webp`;
 ---
 
-<picture>
-  <source type="image/avif" srcset={srcset('avif')} sizes={responsive ? sizes : undefined} />
-  <source type="image/webp" srcset={srcset('webp')} sizes={responsive ? sizes : undefined} />
-  <img
-    src={fallbackSrc}
-    alt={alt}
-    width={width}
-    height={height}
-    loading={loading}
-    fetchpriority={fetchpriority}
-    decoding={decoding}
-    class={className}
-  />
-</picture>
+{
+  isRemote ? (
+    <img
+      src={fallbackSrc}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      decoding={decoding}
+      class={className}
+      referrerpolicy="no-referrer"
+    />
+  ) : (
+    <picture>
+      <source type="image/avif" srcset={srcset('avif')} sizes={responsive ? sizes : undefined} />
+      <source type="image/webp" srcset={srcset('webp')} sizes={responsive ? sizes : undefined} />
+      <img
+        src={fallbackSrc}
+        alt={alt}
+        width={width}
+        height={height}
+        loading={loading}
+        fetchpriority={fetchpriority}
+        decoding={decoding}
+        class={className}
+      />
+    </picture>
+  )
+}

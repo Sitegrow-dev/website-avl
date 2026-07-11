@@ -93,7 +93,7 @@ const assets = [
   },
   {
     url: 'https://www.figma.com/api/mcp/asset/19a28748-a78d-4465-8fb5-659a59c595e0',
-    out: 'destinations/rome/churches/st-pierre',
+    out: 'destinations/rome/churches/saint-pierre',
     width: 624,
     height: 320,
   },
@@ -105,7 +105,7 @@ const assets = [
   },
   {
     url: 'https://www.figma.com/api/mcp/asset/0f4f0f07-b3c3-4726-87ac-48ba9f78ef7c',
-    out: 'destinations/rome/churches/agnese',
+    out: 'destinations/rome/churches/sant-agnese',
     width: 624,
     height: 320,
   },
@@ -149,7 +149,7 @@ const assets = [
   // Blog
   {
     url: 'https://www.figma.com/api/mcp/asset/71bd3201-e971-4dcb-a043-08d740403912',
-    out: 'blog/featured',
+    out: 'blog/mariage-eglise-italie',
     width: 640,
     height: 500,
   },
@@ -160,16 +160,10 @@ const assets = [
     height: 560,
   },
   {
-    url: 'https://www.figma.com/api/mcp/asset/545fe619-e237-40be-9ea6-1b9faf27332b',
-    out: 'blog/author-marie-claire',
-    width: 80,
-    height: 80,
-  },
-  {
     url: 'https://www.figma.com/api/mcp/asset/c7fb3257-cb76-4418-9abe-0b8aba5717f3',
     out: 'blog/author-marie-leclair',
-    width: 32,
-    height: 32,
+    width: 80,
+    height: 80,
   },
   {
     url: 'https://www.figma.com/api/mcp/asset/ce112992-8931-486d-89cf-df8e8407116a',

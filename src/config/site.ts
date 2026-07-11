@@ -68,10 +68,7 @@ export const siteConfig = {
       },
       {
         title: 'Informations',
-        links: [
-          { label: 'Plan du site', href: '/plan-du-site/' },
-          { label: 'Contact', href: '/contact/' },
-        ],
+        links: [{ label: 'Contact', href: '/contact/' }],
       },
     ],
     legal: {

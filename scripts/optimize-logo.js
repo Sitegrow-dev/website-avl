@@ -3,7 +3,7 @@
  *
  * Usage: node scripts/optimize-logo.js [chemin-vers-logo-original]
  *
- * Ce script convertit le logo en formats optimisés (AVIF, WebP, PNG)
+ * Ce script convertit le logo en formats optimisés (AVIF, WebP)
  * et les place dans public/images/logo/
  */
 

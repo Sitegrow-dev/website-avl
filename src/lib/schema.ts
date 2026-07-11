@@ -127,7 +127,11 @@ export function buildArticleGraph(post: Post, origin: URL, opts: { path: string;
   const lang = opts.lang ?? 'fr-CA';
   const pageUrl = absoluteUrl(opts.path, origin);
   const images = post.image
-    ? [absoluteUrl(`${post.image}.webp`, origin)]
+    ? [
+        /^https?:\/\//i.test(post.image)
+          ? post.image
+          : absoluteUrl(`${post.image}.webp`, origin),
+      ]
     : [absoluteUrl(OG_IMAGE.path, origin)];
   const datePublished = post.date || undefined;
   const dateModified = post.updated || post.date || undefined;

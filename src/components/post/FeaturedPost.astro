@@ -19,6 +19,8 @@ const listingImage = post.listingImage ?? post.image;
         alt={post.imageAlt ?? post.title}
         width={640}
         height={500}
+        loading="eager"
+        fetchpriority="high"
         class="h-full min-h-[280px] w-full object-cover"
       />
     </a>
@@ -34,7 +36,7 @@ const listingImage = post.listingImage ?? post.image;
     {post.author && (
       <div class="mt-6 flex items-center gap-4">
         <ResponsiveImage
-          src="/images/blog/author-marie-leclair"
+          src={post.author.image}
           alt={post.author.name}
           width={32}
           height={32}

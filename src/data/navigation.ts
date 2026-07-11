@@ -41,10 +41,7 @@ export const navigationByLang = {
         },
         {
           title: 'Informations',
-          links: [
-            { label: 'Plan du site', href: '/plan-du-site/' },
-            { label: 'Contact', href: '/contact/' },
-          ],
+          links: [{ label: 'Contact', href: '/contact/' }],
         },
       ],
       legal: {
@@ -83,10 +80,7 @@ export const navigationByLang = {
         },
         {
           title: 'Information',
-          links: [
-            { label: 'Sitemap', href: '/plan-du-site/' },
-            { label: 'Contact', href: '/contact/' },
-          ],
+          links: [{ label: 'Contact', href: '/contact/' }],
         },
       ],
       legal: {
