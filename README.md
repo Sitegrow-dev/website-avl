@@ -97,12 +97,23 @@ le header, le footer, le SEO et les JSON-LD — ne pas les recopier dans les `.a
 | `about.ts`        | Page À propos (intro, valeurs, équipe, CTA)         |
 | `contact.ts`      | Page Contact (blocs, sujets, libellés du formulaire) |
 | `services.ts`     | Liste de services + étapes du processus             |
-| `posts.ts`        | Articles de blog (vide par défaut)                  |
+| `posts.ts`        | Blog — charge les articles depuis Holding (voir ci-dessous) |
 | `privacy.ts`      | Politique de confidentialité (gabarit Loi 25)       |
 
-Pour ajouter un article : ouvrez `posts.ts` et ajoutez une entrée dans `posts[]`
-(voir le type `Post`). Le sitemap, le flux RSS et la page `/blog/` se mettent à
-jour automatiquement.
+### Blog Holding (DB)
+
+Les articles de `/blog/` viennent de la plateforme Holding Sitegrow
+([documentation API](https://holding.sitegrow.ca/docs)) — pas de contenu mock
+dans le dépôt.
+
+1. Holding → **Sites** → créer / ouvrir le site (ex. AFVL) → générer la clé API
+2. Définir `HOLDING_API_KEY` dans `.env` et dans les variables Vercel
+3. Publier / libérer des articles dans Holding (calendrier Cron)
+4. Vérifier : `npm run holding:status` puis rebuild
+
+Sans clé, le blog reste vide (« Bientôt disponible »). Le client HTTP est dans
+`src/lib/holding.ts` ; le mapping vers le type `Post` est dans
+`src/lib/holding-map.ts`.
 
 ### 3. Images — `public/images/`
 
@@ -223,10 +234,14 @@ Le gabarit est pensé pour être **compris et cité par les moteurs génératifs
 
 ## Déploiement (Vercel)
 
-1. Pousser le dépôt sur GitHub
+1. Pousser le dépôt sur GitHub (`https://github.com/Sitegrow-dev/website-avl`)
 2. Importer dans Vercel — le `vercel.json` et l’adaptateur `@astrojs/vercel`
    sont déjà configurés
-3. Définir les variables d’environnement (`SITE_URL`, `CONTACT_EMAIL`, etc.)
+3. Définir les variables d’environnement :
+   - `SITE_URL` (canonique prod ; en preview Vercel, `VERCEL_URL` suffit)
+   - `CONTACT_EMAIL`
+   - `PUBLIC_FORMSPREE_ID` (formulaire contact)
+   - `HOLDING_API_KEY` (blog — [docs Holding](https://holding.sitegrow.ca/docs))
 4. Le build Vercel lance automatiquement `npm run build`
 
 ## Avant de mettre en production
@@ -243,8 +258,9 @@ Le gabarit est pensé pour être **compris et cité par les moteurs génératifs
 - [ ] Ajouter un logo via `npm run optimize-logo`
 - [ ] Régénérer les favicons (`favicon.svg`, `favicon.ico`, `android-chrome-*`, etc.)
 - [ ] Configurer `PUBLIC_FORMSPREE_ID` dans `.env` (voir section « Formulaire de contact »)
+- [ ] Créer le site dans Holding, coller `HOLDING_API_KEY` dans `.env` + Vercel ([docs](https://holding.sitegrow.ca/docs))
 - [ ] Faire valider `privacy.ts` par un conseiller juridique
-- [ ] Définir `SITE_URL` et `SITE_DOMAIN` dans `.env` (le build échoue en prod si `SITE_URL` est absent)
+- [ ] Définir `SITE_URL` et `SITE_DOMAIN` dans `.env` (sur Vercel, `VERCEL_URL` couvre les previews)
 - [ ] Lancer `npm run check:all` (types + lint + format) — doit passer à 0 erreur
 - [ ] Lancer `npm run build && npm run check:links` pour vérifier les liens morts
 
