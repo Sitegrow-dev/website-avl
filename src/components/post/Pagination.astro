@@ -1,18 +1,24 @@
 ---
+interface Props {
+  currentPage?: number;
+  totalPages: number;
+}
+
+const { currentPage = 1, totalPages } = Astro.props;
 ---
-<nav class="flex justify-center gap-2 py-10" aria-label="Pagination">
-  <span class="px-4 py-2 text-sm text-muted">← Précédent</span>
-  {[1, 2, 3].map((n) => (
-    <span
-      class:list={[
-        'flex h-8 w-8 items-center justify-center rounded-sm text-sm',
-        n === 1 ? 'bg-brand text-white' : 'text-ink hover:bg-bg-alt',
-      ]}
-    >
-      {n}
-    </span>
-  ))}
-  <span class="flex h-8 w-8 items-center justify-center text-sm text-muted">…</span>
-  <span class="flex h-8 w-8 items-center justify-center text-sm text-ink hover:bg-bg-alt">8</span>
-  <span class="px-4 py-2 text-sm text-brand">Suivant →</span>
-</nav>
+{totalPages > 1 && (
+  <nav class="flex justify-center gap-2 py-10" aria-label="Pagination">
+    <span class:list={['px-4 py-2 text-sm', currentPage > 1 ? 'text-brand' : 'text-muted']}>← Précédent</span>
+    {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+      <span
+        class:list={[
+          'flex h-8 w-8 items-center justify-center rounded-sm text-sm',
+          n === currentPage ? 'bg-brand text-white' : 'text-ink hover:bg-bg-alt',
+        ]}
+      >
+        {n}
+      </span>
+    ))}
+    <span class:list={['px-4 py-2 text-sm', currentPage < totalPages ? 'text-brand' : 'text-muted']}>Suivant →</span>
+  </nav>
+)}
