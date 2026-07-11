@@ -23,7 +23,7 @@ type FeedOptions = {
   language: string;
   /** URL du flux lui-même (pour atom:link rel="self") */
   selfUrl: string;
-  /** Filtre les posts selon la langue (par défaut : tous — pas encore de traduction EN) */
+  /** Filtre les posts selon la langue (par défaut : tous : pas encore de traduction EN) */
   filterPosts?: (posts: Post[]) => Post[];
 };
 
@@ -32,7 +32,8 @@ type FeedOptions = {
  */
 export function buildRssFeed(site: URL | undefined, opts: FeedOptions): string {
   const base = (site?.href.replace(/\/$/, '') ?? siteConfig.url).replace(/\/$/, '');
-  const allPosts = getPublishedPosts();
+  // Par défaut : posts FR (le filtre EN est passé explicitement).
+  const allPosts = getPublishedPosts(opts.langPrefix === '/en' ? 'en' : 'fr');
   const posts = opts.filterPosts ? opts.filterPosts(allPosts) : allPosts;
 
   const items = posts

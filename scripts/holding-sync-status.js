@@ -32,5 +32,5 @@ for (const a of remote) {
   console.log(`  - ${a.slug}`);
 }
 if (remote.length === 0) {
-  console.log('(aucun article libéré pour l’instant — le blog restera vide)');
+  console.log('(aucun article libéré pour l’instant : le blog restera vide)');
 }

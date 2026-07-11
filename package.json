@@ -2,7 +2,7 @@
   "name": "website-avl",
   "type": "module",
   "version": "1.0.0",
-  "description": "Sitegrow Skeleton — gabarit Astro bilingue (FR/EN) réutilisable, propulsé par Astro v7 + Tailwind v4.",
+  "description": "Sitegrow Skeleton : gabarit Astro bilingue (FR/EN) réutilisable, propulsé par Astro v7 + Tailwind v4.",
   "engines": {
     "node": ">=20.0.0"
   },

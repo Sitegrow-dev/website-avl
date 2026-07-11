@@ -3,16 +3,16 @@ import PostLayout from '@layouts/PostLayout.astro';
 import { getPostBySlug, getPublishedPosts } from '@/data/posts';
 
 export function getStaticPaths() {
-  return getPublishedPosts().map((post) => ({
+  return getPublishedPosts('fr').map((post) => ({
     params: { slug: post.slug },
   }));
 }
 
 const { slug } = Astro.params;
-const post = slug ? getPostBySlug(slug) : undefined;
+const post = slug ? getPostBySlug(slug, 'fr') : undefined;
 
 if (!post) {
   return Astro.redirect('/404/');
 }
 ---
-<PostLayout post={post} />
+<PostLayout post={post} lang="fr" />

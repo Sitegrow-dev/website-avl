@@ -1,15 +1,15 @@
 import type { Lang } from '@/lib/i18n';
 
 /**
- * Contenu Photo Gallery — restauré depuis l’archive Wayback de afvl.org/photos.htm
+ * Contenu Photo Gallery : restauré depuis l’archive Wayback de afvl.org/photos.htm
  * (meilleure capture : 2010-09-15 ; la capture 2025-04-19 est vide/corrompue).
  */
 const imagesShared = [
   {
     src: '/images/archive/afvl-header',
     alt: {
-      fr: 'American Friends of the Vatican Library — en-tête archivé du site',
-      en: 'American Friends of the Vatican Library — archived site header',
+      fr: 'American Friends of the Vatican Library : en-tête archivé du site',
+      en: 'American Friends of the Vatican Library: archived site header',
     },
     caption: {
       fr: 'En-tête du site (archivé depuis afvl.org/images/header.jpg)',
@@ -59,7 +59,7 @@ function buildPhotos(lang: Lang) {
     return {
       title: 'Galerie photos',
       metaDescription:
-        'Galerie photos des American Friends of the Vatican Library — images d’archives restaurées depuis afvl.org.',
+        'Galerie photos des American Friends of the Vatican Library : images d’archives restaurées depuis afvl.org.',
       intro:
         'La galerie photos d’origine de l’AFVL était une présentation Flash interactive (gallery.swf) intégrée à cette page.',
       archiveNote: {
@@ -81,7 +81,7 @@ function buildPhotos(lang: Lang) {
   return {
     title: 'Photo Gallery',
     metaDescription:
-      'Photo gallery of the American Friends of the Vatican Library — restored archive imagery from afvl.org.',
+      'Photo gallery of the American Friends of the Vatican Library: restored archive imagery from afvl.org.',
     intro:
       'The original AFVL photo gallery was an interactive Flash presentation (gallery.swf) embedded on this page.',
     archiveNote: {

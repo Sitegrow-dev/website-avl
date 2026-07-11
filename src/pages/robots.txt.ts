@@ -11,14 +11,14 @@ export const GET: APIRoute = ({ site }) => {
   // génératifs. `allowAiCrawlers` pilote Allow (visibilité GEO) vs Disallow.
   const aiRule = siteConfig.allowAiCrawlers ? 'Allow: /' : 'Disallow: /';
   const aiBlock = [
-    `# Crawlers IA / moteurs génératifs — ${
+    `# Crawlers IA / moteurs génératifs : ${
       siteConfig.allowAiCrawlers ? 'autorisés (GEO)' : 'bloqués'
     }`,
     ...AI_CRAWLERS.map((c) => `User-agent: ${c.agent}`),
     aiRule,
   ].join('\n');
 
-  const body = `# robots.txt — ${siteConfig.siteName}
+  const body = `# robots.txt - ${siteConfig.siteName}
 
 User-agent: *
 Allow: /

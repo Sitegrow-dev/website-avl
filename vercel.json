@@ -109,6 +109,16 @@
       "source": "/a-propos/",
       "destination": "/about.htm",
       "statusCode": 301
+    },
+    {
+      "source": "/en/destinations",
+      "destination": "/destinations/rome/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/destinations/:path*",
+      "destination": "/destinations/:path*",
+      "statusCode": 301
     }
   ],
   "rewrites": [

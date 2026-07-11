@@ -8,7 +8,7 @@ import { getPublishedPosts } from '@/data/posts';
 export const prerender = true;
 
 /**
- * /llms-full.txt — contenu complet du site en un seul Markdown (spec llmstxt.org).
+ * /llms-full.txt : contenu complet du site en un seul Markdown (spec llmstxt.org).
  * Permet à un LLM d'ingérer tout le contenu sans crawler page par page.
  * Alimenté par src/config + src/data (pages clés + articles publiés en entier).
  */
@@ -38,7 +38,7 @@ export const GET: APIRoute = ({ site }) => {
   out.push('### Piliers');
   out.push('');
   for (const item of homeContent.pillars.items) {
-    out.push(`- **${item.title}** — ${item.subtitle}`);
+    out.push(`- **${item.title}** : ${item.subtitle}`);
   }
   out.push('');
 
@@ -68,12 +68,12 @@ export const GET: APIRoute = ({ site }) => {
   out.push(`### ${aboutContent.values.title}`);
   out.push('');
   for (const v of aboutContent.values.items) {
-    out.push(`- **${v.title}** — ${v.description}`);
+    out.push(`- **${v.title}** : ${v.description}`);
   }
   out.push('');
 
   // Blog (articles complets)
-  const posts = getPublishedPosts();
+  const posts = getPublishedPosts('fr');
   if (posts.length > 0) {
     out.push('## Blog');
     out.push('');

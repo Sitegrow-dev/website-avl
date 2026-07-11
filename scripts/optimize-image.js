@@ -56,7 +56,7 @@ async function optimizeImage(inputPath, outputDir = null, outputName = null) {
   try {
     const image = sharp(inputPath);
     const metadata = await image.metadata();
-    console.log(`🔄 ${basename(inputPath)} — source ${metadata.width}x${metadata.height}\n`);
+    console.log(`🔄 ${basename(inputPath)} : source ${metadata.width}x${metadata.height}\n`);
 
     // Largeurs à générer : celles strictement plus petites que la source.
     const targetWidths = WIDTHS.filter((w) => w < metadata.width);

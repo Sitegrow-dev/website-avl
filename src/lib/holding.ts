@@ -1,5 +1,5 @@
 /**
- * Client Holding Sitegrow — lecture des articles publiés.
+ * Client Holding Sitegrow : lecture des articles publiés.
  * @see https://holding.sitegrow.ca/docs
  */
 
@@ -62,7 +62,7 @@ async function fetchJson<T>(url: string, apiKey: string): Promise<T> {
   const res = await fetch(url, { headers: authHeaders(apiKey) });
   if (!res.ok) {
     const body = await res.text().catch(() => '');
-    throw new Error(`[holding] ${res.status} ${res.statusText} — ${url}${body ? `: ${body}` : ''}`);
+    throw new Error(`[holding] ${res.status} ${res.statusText} - ${url}${body ? `: ${body}` : ''}`);
   }
   return res.json() as Promise<T>;
 }

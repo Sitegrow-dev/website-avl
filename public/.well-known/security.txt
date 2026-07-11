@@ -1,4 +1,4 @@
-# security.txt — AFVL (Amor Fides Via Lux)
+# security.txt - AFVL (Amor Fides Via Lux)
 Contact: mailto:contact@afvl.org
 Preferred-Languages: fr, en
 Canonical: https://afvl.org/.well-known/security.txt

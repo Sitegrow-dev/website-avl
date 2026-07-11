@@ -94,7 +94,7 @@ body {
   font-weight: 600;
 }
 
-/* Tables — Markdown GFM + HTML (blog Holding, prose) */
+/* Tables : Markdown GFM + HTML (blog Holding, prose) */
 .holding-body .table-wrap,
 .prose-policy .table-wrap {
   margin-top: 2rem;

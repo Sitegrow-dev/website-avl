@@ -10,13 +10,13 @@ export type Service = {
 
 export const servicesContent = {
   title: 'Nos services',
-  metaDescription: 'Description de la page Services — à personnaliser dans src/data/services.ts.',
+  metaDescription: 'Description de la page Services : à personnaliser dans src/data/services.ts.',
   intro:
     'Présentez ici vos services principaux. Chaque carte peut inclure une image, une description, des points clés et un appel à l’action.',
   /**
    * FAQ optionnelle (éligible aux rich results FAQPage).
    * N'ajoutez des entrées QUE si ces questions/réponses sont réellement affichées
-   * sur la page — sinon Google peut considérer ça comme du balisage trompeur.
+   * sur la page ; sinon Google peut considérer ça comme du balisage trompeur.
    */
   faq: [] as { question: string; answer: string }[],
 };

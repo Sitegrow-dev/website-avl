@@ -5,7 +5,7 @@ import type { Lang } from '@/lib/i18n';
  * Les `href` sont stockés en chemins « FR » (sans /en/) ; le préfixe
  * et les slugs EN traduits sont appliqués via `localizedHref`.
  *
- * Paires de slugs (voir src/lib/i18n.ts) — conventions skeleton + legacy AFVL :
+ * Paires de slugs (voir src/lib/i18n.ts) : conventions skeleton + legacy AFVL :
  * - /a-propos/ → /en/about.htm (legacy .htm)
  * - /plan-du-site/ → /en/plan-du-site/
  * - /about.htm ↔ /en/about.htm, /photos.htm ↔ /en/photos.htm
@@ -21,7 +21,7 @@ export const navigationByLang = {
     ],
     navCta: { label: 'Nous joindre', href: '/contact/' },
     footer: {
-      tagline: 'Amor Fides Via Lux — Mariage catholique & pèlerinage en Italie.',
+      tagline: 'Amor Fides Via Lux : Mariage catholique & pèlerinage en Italie.',
       columns: [
         {
           title: 'AFVL',
@@ -64,7 +64,7 @@ export const navigationByLang = {
     ],
     navCta: { label: 'Contact Us', href: '/contact/' },
     footer: {
-      tagline: 'Amor Fides Via Lux — Catholic wedding & pilgrimage in Italy.',
+      tagline: 'Amor Fides Via Lux: Catholic wedding & pilgrimage in Italy.',
       columns: [
         {
           title: 'AFVL',

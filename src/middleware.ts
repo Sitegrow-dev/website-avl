@@ -1,4 +1,6 @@
 import type { APIContext, MiddlewareHandler, MiddlewareNext } from 'astro';
+// Enregistre les paires de slugs blog FR↔EN (hreflang / sélecteur de langue).
+import '@/data/posts';
 
 /**
  * Vercel sert le fallback 404.html pour les URLs inconnues.
@@ -41,7 +43,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     return context.redirect(redirectUrl.toString(), 301);
   }
 
-  // Routes legacy AFVL — URLs exactes .htm (réécriture vers pages Astro)
+  // Routes legacy AFVL : URLs exactes .htm (réécriture vers pages Astro)
   if (pathname === '/about.htm' || pathname === '/about.htm/') {
     return context.rewrite('/about/');
   }
@@ -60,7 +62,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   if (pathname === '/photos') {
     return context.redirect('/photos.htm', 301);
   }
-  // Sans slash final uniquement — /en/about/ reste la route Astro interne (réécrite depuis .htm)
+  // Sans slash final uniquement : /en/about/ reste la route Astro interne (réécrite depuis .htm)
   if (pathname === '/en/about') {
     return context.redirect('/en/about.htm', 301);
   }
@@ -94,6 +96,15 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   // Skeleton /a-propos/ → URL publique AFVL legacy
   if (pathname === '/a-propos' || pathname === '/a-propos/') {
     return context.redirect('/about.htm', 301);
+  }
+  // Destinations FR-only : pas de miroir /en/destinations/* (évite 404)
+  if (pathname === '/en/destinations' || pathname === '/en/destinations/') {
+    return context.redirect('/destinations/rome/', 301);
+  }
+  if (pathname.startsWith('/en/destinations/')) {
+    const target = pathname.replace(/^\/en/, '');
+    const targetWithSlash = target.endsWith('/') ? target : `${target}/`;
+    return context.redirect(targetWithSlash, 301);
   }
   if (pathname === '/en/404' || pathname === '/en/404/') {
     return context.redirect('/404/', 301);

@@ -2,7 +2,7 @@
  * Astro integration: processes all generated HTML at build time
  * to add target="_blank" rel="nofollow noopener" to external links.
  *
- * Runs on astro:build:done — modifies static HTML files in place.
+ * Runs on astro:build:done : modifies static HTML files in place.
  * Works alongside the rehype plugin (markdown) for full coverage.
  *
  * Compatible Astro v4-v6 (routes[]) et v7+ (pages[{pathname}]).
@@ -61,8 +61,8 @@ function processHtml(html) {
 
 /**
  * Extrait la liste des fichiers HTML à traiter, en gérant :
- *  - Astro v4-v6 (routes[] avec distURL)
- *  - Astro v7+ (pages[{ pathname }]) — fichier résolu via dir/pathname/index.html
+ * - Astro v4-v6 (routes[] avec distURL)
+ * - Astro v7+ (pages[{ pathname }]) : fichier résolu via dir/pathname/index.html
  */
 function getHtmlFiles({ dir, routes, pages }) {
   const outDir = fileURLToPath(dir);
@@ -107,7 +107,7 @@ export default function externalLinksIntegration() {
               processed++;
             }
           } catch {
-            // Fichier absent (route SSR) — ignore silencieusement
+            // Fichier absent (route SSR) : ignore silencieusement
           }
         }
 

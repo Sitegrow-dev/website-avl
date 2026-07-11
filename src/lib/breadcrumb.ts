@@ -89,22 +89,32 @@ export type SitePageLink = {
   section: 'main' | 'legal';
 };
 
-/** Liste centralisée des pages pour le plan du site HTML (FR). */
+/**
+ * Liste centralisée des pages pour le plan du site HTML (FR).
+ * Alignée sur les pages FR du sitemap XML (hors articles blog, listés à part).
+ * Exclut 404, AMP et utilitaires — comme le sitemap XML.
+ */
 export const frPagesList: SitePageLink[] = [
   { label: labels.fr.home, href: '/', section: 'main' },
   { label: labels.fr.about, href: '/about.htm', section: 'main' },
   { label: labels.fr.photos, href: '/photos.htm', section: 'main' },
+  { label: labels.fr.about, href: '/a-propos/', section: 'main' },
+  { label: labels.fr.services, href: '/services/', section: 'main' },
   { label: labels.fr.destinations, href: '/destinations/rome/', section: 'main' },
   { label: labels.fr.blog, href: '/blog/', section: 'main' },
   { label: labels.fr.contact, href: '/contact/', section: 'main' },
   { label: labels.fr.plan, href: '/plan-du-site/', section: 'legal' },
 ];
 
-/** Liste centralisée des pages pour le plan du site HTML (EN) — slugs skeleton + legacy .htm. */
+/**
+ * Liste centralisée des pages pour le plan du site HTML (EN).
+ * Miroirs indexables sous /en/ (pas de destinations FR-only).
+ */
 export const enPagesList: SitePageLink[] = [
   { label: labels.en.home, href: '/en/', section: 'main' },
   { label: labels.en.about, href: '/en/about.htm', section: 'main' },
   { label: labels.en.photos, href: '/en/photos.htm', section: 'main' },
+  { label: labels.en.services, href: '/en/services/', section: 'main' },
   { label: labels.en.blog, href: '/en/blog/', section: 'main' },
   { label: labels.en.contact, href: '/en/contact/', section: 'main' },
   { label: labels.en.plan, href: '/en/plan-du-site/', section: 'legal' },

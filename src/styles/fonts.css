@@ -1,4 +1,4 @@
-/* Self-hosted fonts — required for production CSP (font-src 'self') */
+/* Self-hosted fonts : required for production CSP (font-src 'self') */
 
 /* Instrument Serif */
 @font-face {

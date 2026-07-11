@@ -1,5 +1,5 @@
 /**
- * Génère public/images/og-default.png (1200×630) — image de partage social par défaut.
+ * Génère public/images/og-default.png (1200×630) : image de partage social par défaut.
  * SVG → PNG via Sharp. Aucune dépendance externe (police système).
  *
  * Usage: node scripts/generate-og-default.js

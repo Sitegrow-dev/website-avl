@@ -304,7 +304,7 @@ const homeEn = {
     items: [
       {
         quote:
-          'Impeccable organization. Marrying at the Vatican was a dream — they made it a serene reality.',
+          'Impeccable organization. Marrying at the Vatican was a dream: they made it a serene reality.',
         name: 'Clarisse & Jean',
         location: 'Lyon',
       },
@@ -316,7 +316,7 @@ const homeEn = {
       },
       {
         quote:
-          'The church chosen in Rome was sublime — exactly what we wanted for our faith.',
+          'The church chosen in Rome was sublime: exactly what we wanted for our faith.',
         name: 'Hélène & Pierre',
         location: 'Montreal',
       },
@@ -351,5 +351,5 @@ export function getHomeContent(lang: Lang) {
   return homeContent[lang];
 }
 
-/** @deprecated Prefer getHomeContent(lang) — alias FR pour compatibilité. */
+/** @deprecated Prefer getHomeContent(lang) : alias FR pour compatibilité. */
 export const homeContentFr = homeFr;

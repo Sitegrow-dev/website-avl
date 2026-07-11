@@ -2,14 +2,16 @@
 import PageLayout from '@layouts/PageLayout.astro';
 import { breadcrumbTrails, enPagesList } from '@/lib/breadcrumb';
 import { siteConfig } from '@/config/site';
+import { getPostHref, getPublishedPosts } from '@/data/posts';
 
 const mainLinks = enPagesList.filter((l) => l.section === 'main');
 const legalLinks = enPagesList.filter((l) => l.section === 'legal');
+const blogPosts = getPublishedPosts('en');
 ---
 <PageLayout
   lang="en-CA"
   title={`Sitemap | ${siteConfig.siteName}`}
-  description="Sitemap — find every page in one place."
+  description="Sitemap: find every page in one place."
   breadcrumbs={breadcrumbTrails.plan('en')}
 >
   <main class="px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
@@ -34,6 +36,25 @@ const legalLinks = enPagesList.filter((l) => l.section === 'legal');
             </li>
           ))}
         </ul>
+
+        {blogPosts.length > 0 && (
+          <>
+            <h2 class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-brand">Blog</h2>
+            <ul class="mt-6 flex flex-col gap-3">
+              {blogPosts.map((post) => (
+                <li>
+                  <a
+                    href={getPostHref(post)}
+                    class="inline-flex items-center gap-2 text-lg font-medium text-ink transition-colors hover:text-brand"
+                  >
+                    <span aria-hidden="true">→</span>
+                    {post.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
 
         <h2 class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-brand">Legal</h2>
         <ul class="mt-6 flex flex-col gap-3">

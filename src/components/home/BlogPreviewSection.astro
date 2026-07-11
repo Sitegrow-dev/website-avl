@@ -5,11 +5,11 @@ import Container from '@components/ui/Container.astro';
 import SectionHeader from '@components/ui/SectionHeader.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import TextLink from '@components/ui/TextLink.astro';
-import { localizedHref, resolveLang } from '@/lib/i18n';
+import { resolveLang } from '@/lib/i18n';
 
 const lang = resolveLang(Astro.currentLocale, Astro.url.pathname);
 const { blog } = getHomeContent(lang);
-const posts = getPublishedPosts().slice(0, 3);
+const posts = getPublishedPosts(lang).slice(0, 3);
 const readLabel = lang === 'en' ? 'Read →' : 'Lire →';
 ---
 {posts.length > 0 && (
@@ -18,8 +18,11 @@ const readLabel = lang === 'en' ? 'Read →' : 'Lire →';
     <SectionHeader eyebrow={blog.eyebrow} title={blog.title} />
     <div class="mt-16 grid gap-8 lg:grid-cols-3">
       {posts.map((post) => {
-        const image = blog.previewImages[post.slug] ?? post.image;
-        const href = localizedHref(getPostHref(post), lang);
+        const image =
+          blog.previewImages[post.slug] ??
+          (post.alternateSlug ? blog.previewImages[post.alternateSlug] : undefined) ??
+          post.image;
+        const href = getPostHref(post);
         return (
         <article class="group">
           {image && (

@@ -7,7 +7,7 @@ import { alternatePath, hasEnAlternate } from '@/lib/i18n';
 export const prerender = true;
 
 /**
- * Fichiers source par route — servent à calculer un <lastmod> RÉEL via git
+ * Fichiers source par route : servent à calculer un <lastmod> RÉEL via git
  * (date du dernier commit touchant la page ou ses données). Voir lib/git-lastmod.
  */
 const PAGE_SOURCES: Record<string, string[]> = {
@@ -32,7 +32,7 @@ const PAGE_SOURCES: Record<string, string[]> = {
 
 /**
  * Pages statiques FR.
- * Liste maintenue à la main — synchronisée avec src/pages/*.astro.
+ * Liste maintenue à la main : synchronisée avec src/pages/*.astro.
  * /a-propos/ est listée sans hreflang EN (cible partagée avec /about.htm).
  */
 const FR_STATIC_PAGES = [
@@ -47,7 +47,7 @@ const FR_STATIC_PAGES = [
 ];
 
 /**
- * Miroirs EN — pages réelles sous src/pages/en/ (URLs publiques).
+ * Miroirs EN : pages réelles sous src/pages/en/ (URLs publiques).
  * /en/blog/[slug]/ n'est pas listée (générée dynamiquement).
  */
 const EN_STATIC_PAGES = [
@@ -106,13 +106,24 @@ export const GET: APIRoute = ({ site }) => {
     }
   }
 
-  for (const post of getPublishedPosts()) {
+  for (const post of getPublishedPosts('fr')) {
     const path = `/blog/${post.slug}/`;
     entries.push({
       loc: `${base}${path}`,
       lastmod: post.updated || post.date || undefined,
       alts: buildAlternates(path, base),
     });
+  }
+
+  if (siteConfig.enIndexable) {
+    for (const post of getPublishedPosts('en')) {
+      const path = `/en/blog/${post.slug}/`;
+      entries.push({
+        loc: `${base}${path}`,
+        lastmod: post.updated || post.date || undefined,
+        alts: buildAlternates(path, base),
+      });
+    }
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

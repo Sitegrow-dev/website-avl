@@ -137,6 +137,7 @@ export function mapHoldingArticleToPost(
   const { category, categorySlug } = inferCategory(article);
   const { src: image, alt: imageAlt } = firstImage(article);
   const date = article.published_at?.slice(0, 10) || article.published_at;
+  const lang = article.language?.toLowerCase().startsWith('en') ? 'en' : 'fr';
   const relatedSlugs = allSlugs.filter((s) => s !== article.slug).slice(0, 3);
   const bodyMarkdown = rewriteOwnSiteUrlsInMarkdown(
     stripLeadingH1(article.body_markdown || '')
@@ -144,6 +145,7 @@ export function mapHoldingArticleToPost(
 
   return {
     slug: article.slug,
+    lang,
     title: article.h1_title || article.meta_title,
     date,
     updated: date,
@@ -170,7 +172,8 @@ export function mapHoldingArticleToPost(
 export function mapHoldingArticlesToPosts(articles: HoldingArticle[]): Post[] {
   const slugs = articles.map((a) => a.slug);
   const posts = articles.map((a) => mapHoldingArticleToPost(a, slugs));
-  // Premier article = featured (listing)
-  if (posts[0]) posts[0].featured = true;
+  // Premier article FR = featured (listing)
+  const firstFr = posts.find((p) => (p.lang ?? 'fr') === 'fr');
+  if (firstFr) firstFr.featured = true;
   return posts.sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 }

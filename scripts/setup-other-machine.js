@@ -58,7 +58,7 @@ async function main() {
     }
   } else {
     envContent = readFileSync(envPath, 'utf-8');
-    console.log('2. .env existe déjà — va être mis à jour avec vos réponses.');
+    console.log('2. .env existe déjà : va être mis à jour avec vos réponses.');
   }
 
   console.log('\nVariables de configuration (Entrée = garder la valeur actuelle):\n');
@@ -75,7 +75,7 @@ async function main() {
   );
   const email = await ask('Courriel de contact', currentEmail || 'info@exemple.com');
   const formspree = await ask(
-    'Formspree ID (vide pour désactiver le formulaire — voir README)',
+    'Formspree ID (vide pour désactiver le formulaire ; voir README)',
     currentFormspree,
   );
 

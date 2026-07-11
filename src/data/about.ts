@@ -1,7 +1,7 @@
 import type { Lang } from '@/lib/i18n';
 
 /**
- * Contenu About Us — restauré depuis l’archive Wayback de afvl.org/about.htm
+ * Contenu About Us : restauré depuis l’archive Wayback de afvl.org/about.htm
  * (meilleure capture disponible : 2014-03-20 ; la capture 2021-02-09 est corrompue).
  */
 export type BoardMember = {
@@ -128,14 +128,14 @@ const aboutFr = {
   title: 'À propos',
   brandEyebrow: 'American Friends of the Vatican Library',
   metaDescription:
-    'Mission, histoire et direction des American Friends of the Vatican Library — soutien à la recherche et aux projets de la Bibliothèque apostolique.',
+    'Mission, histoire et direction des American Friends of the Vatican Library : soutien à la recherche et aux projets de la Bibliothèque apostolique.',
   intro: [
     'La mission des American Friends of the Vatican Library est de faire connaître la Bibliothèque vaticane aux États-Unis. L’organisation contribue aussi au financement de publications savantes, de projets spéciaux et d’autres besoins au-delà du budget de fonctionnement de la Bibliothèque apostolique.',
   ],
   history: {
     title: 'Histoire des American Friends of the Vatican Library',
     paragraphs: [
-      'Les American Friends of the Vatican Library, premier groupe auxiliaire de ce type dans la longue histoire de la Bibliothèque vaticane, ont été fondés en 1981 par deux bibliothécaires américains — Mgr Francis X. Canfield et Sœur Claudia Carlen, IHM.',
+      'Les American Friends of the Vatican Library, premier groupe auxiliaire de ce type dans la longue histoire de la Bibliothèque vaticane, ont été fondés en 1981 par deux bibliothécaires américains, Mgr Francis X. Canfield et Sœur Claudia Carlen, IHM.',
       'Mgr Canfield et Sœur Carlen ont proposé l’idée au Père Alfons Stickler, préfet de la Bibliothèque, plus tard cardinal bibliothécaire-archiviste de l’Église catholique. Le Père Stickler a reçu le 9 octobre 1981 une lettre du cardinal Casaroli, secrétaire d’État du Vatican, accordant l’approbation de l’organisation par le pape Jean-Paul II. Le Saint-Père a exprimé sa gratitude et encouragé les Friends à promouvoir la Bibliothèque apostolique.',
     ],
   },
@@ -208,14 +208,14 @@ const aboutEn = {
   title: 'About Us',
   brandEyebrow: 'American Friends of the Vatican Library',
   metaDescription:
-    'Purpose, history, and leadership of the American Friends of the Vatican Library — supporting scholarship and special projects of the Apostolic Library.',
+    'Purpose, history, and leadership of the American Friends of the Vatican Library: supporting scholarship and special projects of the Apostolic Library.',
   intro: [
     'The purpose of the American Friends of the Vatican Library is to develop an awareness of the Vatican Library in the United States. The institution also helps to provide funds for the publication of scholarship, special projects and other needs beyond the operations budget of the Apostolic Library.',
   ],
   history: {
     title: 'History of the American Friends of the Vatican Library',
     paragraphs: [
-      'The American Friends of the Vatican Library, the first auxiliary group of its kind in the long history of the Vatican Library, was founded by two American librarians in 1981 — Msgr. Francis X. Canfield and Sr. Claudia Carlen, IHM.',
+      'The American Friends of the Vatican Library, the first auxiliary group of its kind in the long history of the Vatican Library, was founded by two American librarians in 1981: Msgr. Francis X. Canfield and Sr. Claudia Carlen, IHM.',
       'Msgr. Canfield and Sr. Carlen proposed the idea for the group to Fr. Alfons Stickler, Prefect for the Library and later Cardinal Librarian-Archivist of the Catholic Church. Fr. Stickler received a letter on Oct. 9, 1981, from Cardinal Casaroli, the Vatican Secretary of State, which granted the approval of the organization by Pope John Paul II. The late Holy Father expressed his gratitude and he encouraged the Friends to promote the Apostolic Library.',
     ],
   },

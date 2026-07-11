@@ -9,7 +9,7 @@ import type { Post } from '@/data/posts';
  * et les entités se référencent entre elles par `@id` plutôt que d'être dupliquées.
  * C'est la forme recommandée pour le « knowledge graph » d'un site (style Yoast).
  *
- * Le BreadcrumbList est émis séparément par Breadcrumb.astro — on ne le duplique
+ * Le BreadcrumbList est émis séparément par Breadcrumb.astro : on ne le duplique
  * pas ici (Google fusionne les blocs JSON-LD d'une même page).
  */
 

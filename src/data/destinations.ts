@@ -169,9 +169,9 @@ export const destinations: Destination[] = [
       title: 'Budget pour un mariage à Rome',
       quote: "Le coût varie selon l'église, la cérémonie et vos prestataires locaux.",
       items: [
-        { label: "Droits d'église", range: '€ — €€' },
+        { label: "Droits d'église", range: '€ - €€' },
         { label: 'Dossier et accompagnement', range: '€€' },
-        { label: 'Logistique voyage', range: '€€ — €€€' },
+        { label: 'Logistique voyage', range: '€€ - €€€' },
       ],
       link: { label: 'Obtenir une estimation personnalisée →', href: '/contact/' },
     },

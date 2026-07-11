@@ -1,18 +1,18 @@
 /**
- * Configuration maîtresse du site AFVL — Amor Fides Via Lux.
+ * Configuration maîtresse du site AFVL - Amor Fides Via Lux.
  */
 export type BusinessType = 'Organization' | 'LocalBusiness' | 'WebSite';
 
 export const siteConfig = {
-  siteName: 'AFVL — Amor Fides Via Lux',
+  siteName: 'AFVL - Amor Fides Via Lux',
   city: 'Rome',
   region: 'Italie',
   domain: 'afvl.org',
   url: 'https://afvl.org',
   defaultDescription:
-    'AFVL — Amor Fides Via Lux : mariage catholique et pèlerinage en Italie. Accompagnement pour votre union au cœur du patrimoine et de la foi.',
+    'AFVL - Amor Fides Via Lux : mariage catholique et pèlerinage en Italie. Accompagnement pour votre union au cœur du patrimoine et de la foi.',
   /**
-   * Miroir /en/ traduit — indexable + inclus dans hreflang / sitemap.
+   * Miroir /en/ traduit : indexable + inclus dans hreflang / sitemap.
    * Navigation bilingue : voir aussi src/data/navigation.ts.
    */
   enIndexable: true,
@@ -48,7 +48,7 @@ export const siteConfig = {
   ],
   navCta: { label: 'Nous joindre', href: '/contact/' },
   footer: {
-    tagline: 'Amor Fides Via Lux — Mariage catholique & pèlerinage en Italie.',
+    tagline: 'Amor Fides Via Lux : Mariage catholique & pèlerinage en Italie.',
     columns: [
       {
         title: 'AFVL',

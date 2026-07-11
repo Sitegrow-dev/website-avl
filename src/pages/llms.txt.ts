@@ -8,7 +8,7 @@ import { getPublishedPosts } from '@/data/posts';
 export const prerender = true;
 
 /**
- * /llms.txt — index lisible par les LLM (spec llmstxt.org).
+ * /llms.txt : index lisible par les LLM (spec llmstxt.org).
  * Un résumé + des liens curés vers les pages/articles clés, en Markdown.
  * Aide les moteurs génératifs (ChatGPT, Claude, Perplexity, Gemini) à
  * comprendre et citer le site. Alimenté par src/config + src/data.
@@ -27,12 +27,12 @@ export const GET: APIRoute = ({ site }) => {
     {
       title: 'Galerie photos',
       href: '/photos.htm',
-      desc: 'Galerie AFVL — images d’archives restaurées',
+      desc: 'Galerie AFVL : images d’archives restaurées',
     },
     { title: contact.title, href: '/contact/', desc: contact.subtitle },
   ];
 
-  const posts = getPublishedPosts();
+  const posts = getPublishedPosts('fr');
 
   const out: string[] = [];
   out.push(`# ${siteConfig.siteName}`);

@@ -4,7 +4,7 @@
 pour démarrer rapidement un site marketing multi-pages. Propulsé par **Astro v7 +
 Tailwind v4 + Vercel**.
 
-Tout le contenu vit dans `src/config/site.ts` et `src/data/*.ts` — aucune donnée
+Tout le contenu vit dans `src/config/site.ts` et `src/data/*.ts` : aucune donnée
 n’est hardcodée dans les composants `.astro`.
 
 - Racine (`/`) : français
@@ -36,25 +36,25 @@ fonctionne sans backend à maintenir.
 
 1. Créez un formulaire gratuit sur <https://formspree.io/forms> (le plan gratuit
    autorise 50 soumissions/mois).
-2. Copiez l’ID du formulaire — le dernier segment de l’URL d’endpoint, par
+2. Copiez l’ID du formulaire : le dernier segment de l’URL d’endpoint, par
    exemple `xxxxx` dans `https://formspree.io/f/xxxxx`.
 3. Définissez `PUBLIC_FORMSPREE_ID=xxxxx` dans votre fichier `.env`
    (ou dans les variables d’environnement Vercel en production).
 
-C’est tout — le formulaire fonctionne automatiquement en dev et en prod.
+C’est tout : le formulaire fonctionne automatiquement en dev et en prod.
 
 ### Comportement
 
-- **Soumission asynchrone** (`fetch` + JSON) — l’utilisateur reste sur la page.
+- **Soumission asynchrone** (`fetch` + JSON) : l’utilisateur reste sur la page.
 - **État visuel** : bouton « Envoi… » désactivé pendant la requête, puis message
   de succès avec option « Envoyer un autre message ». Les erreurs réseau et de
   validation (champ par champ) sont affichées en clair.
 - **Anti-spam** : le filtre Formspree est activé par défaut. Le champ caché
   `_captcha=false` désactive le captcha visible côté utilisateur.
 - **Sujet d’email** : `_subject` est pré-rempli avec
-  `Nouveau message : <siteName>` — modifiable dans `ContactSection.astro`.
+  `Nouveau message : <siteName>` : modifiable dans `ContactSection.astro`.
 - **Sujet du message** : le menu déroulant « Sujet » mappe vers un champ `topic`
-  libre — adaptez les options dans `src/data/contact.ts`.
+  libre : adaptez les options dans `src/data/contact.ts`.
 - **ID manquant** : si `PUBLIC_FORMSPREE_ID` est vide, le formulaire est remplacé
   par un avertissement de configuration + un lien `mailto:` vers
   `siteConfig.contactEmail`.
@@ -68,14 +68,14 @@ C’est tout — le formulaire fonctionne automatiquement en dev et en prod.
 
 ## Personnalisation
 
-### 1. Contenu maître — `src/config/site.ts`
+### 1. Contenu maître : `src/config/site.ts`
 
 C’est le point d’entrée : `siteName`, `city`, `region`, `domain`, `url`,
 `defaultDescription`, `contactEmail`, `phone`, `logo`, `twitterHandle`,
 `address` (structuré),
 `businessType` (`'Organization'` par défaut, `'LocalBusiness'` pour activer le SEO local),
 `openingHours`, `geo`, `social`, `nav`, `navCta`, `footer`. Ces valeurs alimentent
-le header, le footer, le SEO et les JSON-LD — ne pas les recopier dans les `.astro`.
+le header, le footer, le SEO et les JSON-LD : ne pas les recopier dans les `.astro`.
 
 > **`logo`** : chemin du logo (ex. `/images/logo/logo.png`) utilisé comme
 > `publisher.logo` dans les JSON-LD. Vide = repli sur l’image OG par défaut.
@@ -89,7 +89,7 @@ le header, le footer, le SEO et les JSON-LD — ne pas les recopier dans les `.a
 > Par défaut, `siteName` vaut `'Sitegrow Skeleton'` (placeholder du gabarit).
 > Remplacez-le par la marque du client avant publication.
 
-### 2. Données éditoriales — `src/data/*.ts`
+### 2. Données éditoriales : `src/data/*.ts`
 
 | Fichier           | Rôle                                                |
 | ----------------- | --------------------------------------------------- |
@@ -97,13 +97,13 @@ le header, le footer, le SEO et les JSON-LD — ne pas les recopier dans les `.a
 | `about.ts`        | Page À propos (intro, valeurs, équipe, CTA)         |
 | `contact.ts`      | Page Contact (blocs, sujets, libellés du formulaire) |
 | `services.ts`     | Liste de services + étapes du processus             |
-| `posts.ts`        | Blog — charge les articles depuis Holding (voir ci-dessous) |
+| `posts.ts`        | Blog : charge les articles depuis Holding (voir ci-dessous) |
 | `privacy.ts`      | Politique de confidentialité (gabarit Loi 25)       |
 
 ### Blog Holding (DB)
 
 Les articles de `/blog/` viennent de la plateforme Holding Sitegrow
-([documentation API](https://holding.sitegrow.ca/docs)) — pas de contenu mock
+([documentation API](https://holding.sitegrow.ca/docs)) : pas de contenu mock
 dans le dépôt.
 
 1. Holding → **Sites** → créer / ouvrir le site (ex. AFVL) → générer la clé API
@@ -115,7 +115,7 @@ Sans clé, le blog reste vide (« Bientôt disponible »). Le client HTTP est da
 `src/lib/holding.ts` ; le mapping vers le type `Post` est dans
 `src/lib/holding-map.ts`.
 
-### 3. Images — `public/images/`
+### 3. Images : `public/images/`
 
 Dossiers prêts : `blog/`, `logo/`, `services/`, `team/`, `home/`, `contact/`,
 `carousel/`, `testimonials/`, `about/`.
@@ -144,7 +144,7 @@ npm run optimize-logo -- ./logo-source.png
 # → public/images/logo/logo.avif et .webp
 ```
 
-### 4. Variables d’environnement — `.env`
+### 4. Variables d’environnement : `.env`
 
 Voir `.env.example`. Minimum : `SITE_URL`, `SITE_DOMAIN`, `CONTACT_EMAIL`.
 
@@ -160,7 +160,7 @@ Voir `.env.example`. Minimum : `SITE_URL`, `SITE_DOMAIN`, `CONTACT_EMAIL`.
 | `lint:fix`         | ESLint avec `--fix`                                           |
 | `format`           | Prettier `--write .`                                          |
 | `format:check`     | Prettier `--check .`                                          |
-| `check:links`      | `linkinator dist/` (après `npm run build`) — vérifie les liens morts |
+| `check:links`      | `linkinator dist/` (après `npm run build`) : vérifie les liens morts |
 | `validate`         | Valide uniquement `siteConfig`                                |
 | `optimize-logo`    | Logo → AVIF + WebP                                            |
 | `new-post`         | Crée un squelette d’article (`src/content/blog/`)             |
@@ -194,7 +194,7 @@ src/
   Twitter Card (`twitter:site`/`creator` via `twitterHandle`), `hreflang`
   (fr-CA / en-CA / x-default) via `SeoHead.astro`
 - Directive `robots` par défaut `index, follow, max-image-preview:large, …`
-  (aperçus riches) — surcharger avec la prop `robots` pour désindexer une page
+  (aperçus riches) : surcharger avec la prop `robots` pour désindexer une page
 - Helpers SEO centralisés dans `src/lib/seo.ts` (`formatTitle`, `absoluteUrl`,
   `OG_IMAGE`, `DEFAULT_ROBOTS`)
 
@@ -210,19 +210,19 @@ src/
 - Liens externes : `target="_blank"` + `rel="nofollow noopener"` automatiques
   (rehype + integration `astro-external-links.js`)
 - `trailingSlash: 'always'` (301 vers la version avec slash)
-- AMP sur les posts FR (`/blog/<slug>/amp/`) — layout dédié respectant la spec AMP
+- AMP sur les posts FR (`/blog/<slug>/amp/`) : layout dédié respectant la spec AMP
 
 ## GEO / optimisation pour les LLM
 
 Le gabarit est pensé pour être **compris et cité par les moteurs génératifs**
 (ChatGPT, Claude, Perplexity, Gemini) :
 
-- **`/llms.txt`** — index Markdown lisible par les LLM (spec [llmstxt.org](https://llmstxt.org)) :
+- **`/llms.txt`** : index Markdown lisible par les LLM (spec [llmstxt.org](https://llmstxt.org)) :
   résumé du site + liens curés vers les pages et articles clés. Généré depuis
   `src/config` + `src/data` (`src/pages/llms.txt.ts`).
-- **`/llms-full.txt`** — tout le contenu du site (pages clés + articles complets)
+- **`/llms-full.txt`** : tout le contenu du site (pages clés + articles complets)
   en un seul Markdown, pour ingestion directe (`src/pages/llms-full.txt.ts`).
-- **`robots.txt`** — politique **explicite** pour les crawlers IA (GPTBot, ClaudeBot,
+- **`robots.txt`** : politique **explicite** pour les crawlers IA (GPTBot, ClaudeBot,
   PerplexityBot, Google-Extended, Applebot-Extended…). Le flag
   `siteConfig.allowAiCrawlers` (défaut `true`) bascule entre `Allow: /` (visibilité
   GEO maximale) et `Disallow: /`. Liste des robots dans `src/lib/ai-crawlers.ts`.
@@ -235,13 +235,13 @@ Le gabarit est pensé pour être **compris et cité par les moteurs génératifs
 ## Déploiement (Vercel)
 
 1. Pousser le dépôt sur GitHub (`https://github.com/Sitegrow-dev/website-avl`)
-2. Importer dans Vercel — le `vercel.json` et l’adaptateur `@astrojs/vercel`
+2. Importer dans Vercel : le `vercel.json` et l’adaptateur `@astrojs/vercel`
    sont déjà configurés
 3. Définir les variables d’environnement :
    - `SITE_URL` (canonique prod ; en preview Vercel, `VERCEL_URL` suffit)
    - `CONTACT_EMAIL`
    - `PUBLIC_FORMSPREE_ID` (formulaire contact)
-   - `HOLDING_API_KEY` (blog — [docs Holding](https://holding.sitegrow.ca/docs))
+   - `HOLDING_API_KEY` (blog : [docs Holding](https://holding.sitegrow.ca/docs))
 4. Le build Vercel lance automatiquement `npm run build`
 
 ## Avant de mettre en production
@@ -261,7 +261,7 @@ Le gabarit est pensé pour être **compris et cité par les moteurs génératifs
 - [ ] Créer le site dans Holding, coller `HOLDING_API_KEY` dans `.env` + Vercel ([docs](https://holding.sitegrow.ca/docs))
 - [ ] Faire valider `privacy.ts` par un conseiller juridique
 - [ ] Définir `SITE_URL` et `SITE_DOMAIN` dans `.env` (sur Vercel, `VERCEL_URL` couvre les previews)
-- [ ] Lancer `npm run check:all` (types + lint + format) — doit passer à 0 erreur
+- [ ] Lancer `npm run check:all` (types + lint + format) : doit passer à 0 erreur
 - [ ] Lancer `npm run build && npm run check:links` pour vérifier les liens morts
 
 ---

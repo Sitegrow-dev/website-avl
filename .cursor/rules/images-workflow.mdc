@@ -3,7 +3,7 @@ description: Téléchargement, nom SEO, optimisation AVIF/WebP pour toute image 
 alwaysApply: true
 ---
 
-# Images — ajout, remplacement, URL externe
+# Images : ajout, remplacement, URL externe
 
 Quand l'utilisateur demande d'**ajouter**, **changer** ou **remplacer** une image (fichier fourni, chemin dans le workspace, ou **lien externe**), exécuter ce flux **sans qu'il ait à le redire**.
 

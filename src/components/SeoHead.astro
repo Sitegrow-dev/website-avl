@@ -24,7 +24,7 @@ interface Props {
   imageWidth?: number;
   imageHeight?: number;
   type?: 'website' | 'article';
-  /** Chemin canonique forcé (ex. /about.htm) — sinon Astro.url.pathname */
+  /** Chemin canonique forcé (ex. /about.htm) : sinon Astro.url.pathname */
   canonicalPath?: string;
 }
 
@@ -74,7 +74,7 @@ const showEnAlternate = siteConfig.enIndexable && hasEnAlternate(pathname);
 
 // Flux RSS correspondant à la langue de la page (découverte par les agrégateurs).
 const rssUrl = absoluteUrl(isEn ? '/en/rss.xml' : '/rss.xml', site);
-const rssTitle = isEn ? `${siteConfig.siteName} — RSS feed` : `${siteConfig.siteName} — Flux RSS`;
+const rssTitle = isEn ? `${siteConfig.siteName} - RSS feed` : `${siteConfig.siteName} - Flux RSS`;
 
 const twitter = siteConfig.twitterHandle;
 ---

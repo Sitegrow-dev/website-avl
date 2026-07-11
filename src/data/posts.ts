@@ -1,5 +1,7 @@
 import { fetchHoldingArticles, hasHoldingApiKey } from '@/lib/holding';
 import { mapHoldingArticlesToPosts } from '@/lib/holding-map';
+import { setBlogSlugPairs, type Lang } from '@/lib/i18n';
+import { localPosts } from '@/data/local-posts';
 
 export type TimelineItem = {
   step: string;
@@ -24,6 +26,10 @@ export type PostFaq = {
 
 export type Post = {
   slug: string;
+  /** Langue du contenu (défaut fr). Les miroirs EN ont leur propre entrée + slug. */
+  lang?: Lang;
+  /** Slug de la version dans l’autre langue (hreflang / sélecteur). */
+  alternateSlug?: string;
   title: string;
   date: string;
   updated?: string;
@@ -39,7 +45,7 @@ export type Post = {
   listingImage?: string;
   imageAlt?: string;
   metaTitle?: string;
-  /** Corps Holding (Markdown) — rendu HTML côté site. */
+  /** Corps Holding (Markdown) : rendu HTML côté site. */
   bodyMarkdown?: string;
   faq?: PostFaq[];
   primaryKeyword?: string;
@@ -75,11 +81,44 @@ export const postUi = {
   comingSoon: 'Bientôt disponible',
 } as const;
 
+export const postUiEn = {
+  backLink: 'Back to blog',
+  listEyebrow: 'Blog',
+  listTitle: 'Guides & resources',
+  listSubtitle:
+    'Practical advice, procedures, destinations and inspiration for your Catholic wedding in Italy.',
+  readArticle: 'Read the article',
+  comingSoon: 'Coming soon',
+} as const;
+
+function postKey(post: Pick<Post, 'slug' | 'lang'>): string {
+  return `${post.lang ?? 'fr'}:${post.slug}`;
+}
+
+function mergePosts(holding: Post[], local: Post[]): Post[] {
+  const map = new Map<string, Post>();
+  for (const post of local) map.set(postKey(post), post);
+  // Holding gagne en cas de collision (CMS = source de vérité).
+  for (const post of holding) map.set(postKey(post), post);
+  return Array.from(map.values()).sort((a, b) =>
+    a.date < b.date ? 1 : a.date > b.date ? -1 : 0
+  );
+}
+
+function registerAlternates(all: Post[]): void {
+  const pairs: Array<{ fr: string; en: string }> = [];
+  for (const post of all) {
+    if ((post.lang ?? 'fr') !== 'fr' || !post.alternateSlug) continue;
+    pairs.push({ fr: post.slug, en: post.alternateSlug });
+  }
+  setBlogSlugPairs(pairs);
+}
+
 async function loadPostsFromHolding(): Promise<Post[]> {
   if (!hasHoldingApiKey()) {
     if (process.env.NODE_ENV !== 'test') {
       console.warn(
-        '[posts] HOLDING_API_KEY absent — blog vide jusqu’à liaison Holding (https://holding.sitegrow.ca/docs).'
+        '[posts] HOLDING_API_KEY absent : articles locaux uniquement (https://holding.sitegrow.ca/docs).'
       );
     }
     return [];
@@ -94,32 +133,43 @@ async function loadPostsFromHolding(): Promise<Post[]> {
   }
 }
 
-/** Articles publiés depuis Holding (vide tant que la clé / le site ne sont pas branchés). */
-export const posts: Post[] = await loadPostsFromHolding();
+const holdingPosts = await loadPostsFromHolding();
 
-export function getPostHref(post: Pick<Post, 'slug' | 'published'>): string {
-  return post.published ? `/blog/${post.slug}/` : '#';
+/** Tous les articles (Holding + locaux), FR et EN. */
+export const posts: Post[] = mergePosts(holdingPosts, localPosts);
+registerAlternates(posts);
+
+function hasRenderableBody(post: Post): boolean {
+  return Boolean(post.bodyMarkdown?.trim()) || post.sections.length > 0;
 }
 
-export function getPostBySlug(slug: string): Post | undefined {
-  const post = posts.find((item) => item.slug === slug);
+export function getPostHref(post: Pick<Post, 'slug' | 'published' | 'lang'>): string {
+  if (!post.published) return '#';
+  return (post.lang ?? 'fr') === 'en' ? `/en/blog/${post.slug}/` : `/blog/${post.slug}/`;
+}
+
+export function getPostBySlug(slug: string, lang: Lang = 'fr'): Post | undefined {
+  const post = posts.find((item) => item.slug === slug && (item.lang ?? 'fr') === lang);
   if (!post?.published) return undefined;
-  const hasBody = Boolean(post.bodyMarkdown?.trim()) || post.sections.length > 0;
-  if (!hasBody) return undefined;
+  if (!hasRenderableBody(post)) return undefined;
   return post;
 }
 
-export function getPublishedPosts(): Post[] {
+export function getPublishedPosts(lang: Lang = 'fr'): Post[] {
   return posts.filter((item) => {
     if (!item.published) return false;
-    return Boolean(item.bodyMarkdown?.trim()) || item.sections.length > 0;
+    if ((item.lang ?? 'fr') !== lang) return false;
+    return hasRenderableBody(item);
   });
 }
 
-export function getFeaturedPost(): Post | undefined {
-  return getPublishedPosts().find((p) => p.featured) ?? getPublishedPosts()[0];
+export function getFeaturedPost(lang: Lang = 'fr'): Post | undefined {
+  const published = getPublishedPosts(lang);
+  return published.find((p) => p.featured) ?? published[0];
 }
 
-export function getRelatedPosts(slugs: string[]): Post[] {
-  return slugs.map((slug) => getPostBySlug(slug)).filter((p): p is Post => p !== undefined);
+export function getRelatedPosts(slugs: string[], lang: Lang = 'fr'): Post[] {
+  return slugs
+    .map((slug) => getPostBySlug(slug, lang))
+    .filter((p): p is Post => p !== undefined);
 }

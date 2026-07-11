@@ -1,37 +1,167 @@
 ---
+/**
+ * 404 localisée : middleware pose `locals.notFoundLang = 'en'` pour les URLs /en/*.
+ * Page autonome (pattern skeleton) pour que Vercel serve correctement 404.html,
+ * avec branding AFVL (fonts, couleurs, logo) plutôt qu’un gabarit nu.
+ */
+import '@/styles/global.css';
 import { siteConfig } from '@/config/site';
 import FaviconHead from '@components/FaviconHead.astro';
+import SiteLogo from '@components/home/SiteLogo.astro';
+import Button from '@components/ui/Button.astro';
+import Container from '@components/ui/Container.astro';
+import { localizedHref } from '@/lib/i18n';
+import { formatTitle } from '@/lib/seo';
 
-/**
- * 404 localisée — middleware pose `locals.notFoundLang = 'en'` pour les URLs /en/*.
- * Même pattern que le skeleton (signal via locals), avec contenu FR/EN réel.
- */
 const isEn = Astro.locals.notFoundLang === 'en';
-const homeHref = isEn ? '/en/' : '/';
-const title = isEn ? 'Page not found' : 'Page introuvable';
-const description = isEn
-  ? `The page you are looking for does not exist or has been moved. Return to the ${siteConfig.siteName} home page.`
-  : `La page que vous cherchez n'existe pas ou a été déplacée. Retournez à l'accueil de ${siteConfig.siteName}.`;
-const body = isEn
-  ? 'This page does not exist or has been moved.'
-  : 'Cette page n’existe pas ou a été déplacée.';
-const homeLabel = isEn ? 'Back to home' : 'Retour à l’accueil';
+const lang = isEn ? 'en' : 'fr';
+const homeHref = localizedHref('/', lang);
+const contactHref = localizedHref('/contact/', lang);
+
+const copy = isEn
+  ? {
+      title: 'Page not found',
+      description: `The page you are looking for does not exist or has been moved. Return to the ${siteConfig.siteName} home page.`,
+      codeLabel: 'Error 404',
+      body: 'This page does not exist or has been moved. The link may be outdated, or the address may contain a typo.',
+      homeLabel: 'Back to home',
+      contactLabel: 'Contact us',
+    }
+  : {
+      title: 'Page introuvable',
+      description: `La page que vous cherchez n'existe pas ou a été déplacée. Retournez à l'accueil de ${siteConfig.siteName}.`,
+      codeLabel: 'Erreur 404',
+      body: 'Cette page n’existe pas ou a été déplacée. Le lien est peut-être obsolète, ou l’adresse contient une faute de frappe.',
+      homeLabel: 'Retour à l’accueil',
+      contactLabel: 'Nous joindre',
+    };
+
+const pageTitle = formatTitle(copy.title);
 ---
 <!doctype html>
-<html lang={isEn ? 'en-CA' : 'fr-CA'}>
+<html lang={isEn ? 'en-CA' : 'fr-CA'} class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
+    <meta name="description" content={copy.description} />
     <meta name="robots" content="noindex, follow" />
-    <title>{title} | {siteConfig.siteName}</title>
+    <link rel="canonical" href={new URL('/404/', siteConfig.url).href} />
+    <title>{pageTitle}</title>
+    <link
+      rel="preload"
+      href="/fonts/schibsted-grotesk-normal-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/instrument-serif-normal-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <FaviconHead />
   </head>
-  <body>
-    <main style="font-family: system-ui; max-width: 40rem; margin: 2rem auto; padding: 0 1rem;">
-      <h1>{title}</h1>
-      <p>{body}</p>
-      <p><a href={homeHref}>{homeLabel}</a></p>
-    </main>
+  <body class="bg-bg-alt text-ink font-sans antialiased">
+    <div class="not-found-shell relative flex min-h-dvh flex-col">
+      <div class="not-found-atmosphere pointer-events-none absolute inset-0" aria-hidden="true"></div>
+
+      <header class="relative z-10 border-b border-border/80 bg-bg/70 backdrop-blur-sm">
+        <Container class="flex items-center justify-between py-5">
+          <SiteLogo variant="dark" height={48} href={homeHref} />
+          <a
+            href={contactHref}
+            class="text-sm font-semibold uppercase tracking-wide text-muted transition-colors hover:text-brand"
+          >
+            {copy.contactLabel}
+          </a>
+        </Container>
+      </header>
+
+      <main class="relative z-10 flex flex-1 items-center py-16 lg:py-24">
+        <Container class="text-center">
+          <p class="not-found-mark font-display text-[clamp(5rem,18vw,9rem)] leading-none text-brand/15 select-none" aria-hidden="true">
+            404
+          </p>
+          <p class="not-found-rise not-found-rise--1 mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-brand">
+            {copy.codeLabel}
+          </p>
+          <h1 class="not-found-rise not-found-rise--2 mt-4 font-display text-4xl text-ink lg:text-5xl">
+            {copy.title}
+          </h1>
+          <p class="not-found-rise not-found-rise--3 mx-auto mt-5 max-w-lg text-lg leading-relaxed text-muted">
+            {copy.body}
+          </p>
+          <div class="not-found-rise not-found-rise--4 mt-10 flex flex-wrap items-center justify-center gap-4">
+            <Button href={homeHref}>{copy.homeLabel}</Button>
+            <Button href={contactHref} variant="secondary">{copy.contactLabel}</Button>
+          </div>
+        </Container>
+      </main>
+
+      <footer class="relative z-10 border-t border-border/80 py-6">
+        <Container class="text-center text-sm text-muted">
+          <span class="font-display text-base text-ink">{siteConfig.siteName}</span>
+          <span class="mx-2 text-muted-light" aria-hidden="true">·</span>
+          <span>{siteConfig.city}</span>
+        </Container>
+      </footer>
+    </div>
   </body>
 </html>
+
+<style>
+  .not-found-atmosphere {
+    background:
+      radial-gradient(ellipse 80% 55% at 50% -10%, color-mix(in oklab, var(--color-brand) 14%, transparent), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in oklab, var(--color-brand) 6%, transparent), transparent 65%),
+      linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-alt) 55%, var(--color-surface) 100%);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .not-found-mark {
+      animation: not-found-fade 1s ease-out both;
+    }
+
+    .not-found-rise {
+      animation: not-found-rise 0.7s ease-out both;
+    }
+
+    .not-found-rise--1 {
+      animation-delay: 0.04s;
+    }
+
+    .not-found-rise--2 {
+      animation-delay: 0.1s;
+    }
+
+    .not-found-rise--3 {
+      animation-delay: 0.18s;
+    }
+
+    .not-found-rise--4 {
+      animation-delay: 0.26s;
+    }
+  }
+
+  @keyframes not-found-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes not-found-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>

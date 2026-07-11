@@ -42,7 +42,7 @@ const faqSchema = post.faq?.length ? buildFaqSchema(post.faq) : null;
   {faqSchema && <JsonLd schema={faqSchema} />}
   <main>
     <PostHero post={post} lang={lang} />
-    <PostBody post={post} />
+    <PostBody post={post} lang={lang} />
     <FinalCtaSection />
   </main>
 </PageLayout>

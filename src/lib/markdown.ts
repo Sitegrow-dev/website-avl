@@ -27,7 +27,7 @@ marked.setOptions({
 
 /**
  * Retire le H1 ATX initial (`# Titre`) du Markdown.
- * Le titre est déjà rendu dans le hero article — éviter un second H1 avant le corps.
+ * Le titre est déjà rendu dans le hero article : éviter un second H1 avant le corps.
  */
 export function stripLeadingH1(markdown: string): string {
   if (!markdown) return '';

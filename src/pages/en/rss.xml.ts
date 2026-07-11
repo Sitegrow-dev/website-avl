@@ -9,9 +9,7 @@ export const GET: APIRoute = ({ site }) => {
     langPrefix: '/en',
     language: 'en-CA',
     selfUrl: `${base}/en/rss.xml`,
-    // Le modèle de données n'a pas encore de posts EN — le flux est valide mais vide
-    // pour l'instant. Quand des traductions EN existeront, remplacer filterPosts.
-    filterPosts: () => [],
+    filterPosts: (posts) => posts.filter((p) => (p.lang ?? 'fr') === 'en'),
   });
   return new Response(xml, {
     headers: { 'Content-Type': 'application/xml; charset=utf-8' },

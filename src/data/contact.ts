@@ -49,7 +49,7 @@ const contactFr = {
 
 const contactEn = {
   title: 'Contact Us',
-  subtitle: 'A question, a project, or a quote request? Write to us — we reply promptly.',
+  subtitle: 'A question, a project, or a quote request? Write to us: we reply promptly.',
   blocks: [
     {
       title: 'Wedding & paperwork',
