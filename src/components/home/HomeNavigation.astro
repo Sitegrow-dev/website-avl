@@ -1,32 +1,42 @@
 ---
-import { siteConfig } from '@/config/site';
 import SiteLogo from '@components/home/SiteLogo.astro';
+import LanguageSwitcher from '@components/LanguageSwitcher.astro';
+import { getNavigation } from '@/data/navigation';
+import { localizedHref, type Lang } from '@/lib/i18n';
 
 interface Props {
   activeHref?: string;
-  lang?: 'fr' | 'en';
+  lang?: Lang;
+  /** Chemin public pour le sélecteur de langue (ex. /about.htm). */
+  switchPath?: string;
 }
 
-const { nav, navCta } = siteConfig;
-const { activeHref, lang = 'fr' } = Astro.props;
+const { activeHref, lang = 'fr', switchPath } = Astro.props;
+const { nav, navCta } = getNavigation(lang);
 const menuLabel = lang === 'en' ? 'Open menu' : 'Ouvrir le menu';
 const closeLabel = lang === 'en' ? 'Close menu' : 'Fermer le menu';
 const navLabel = lang === 'en' ? 'Main navigation' : 'Navigation principale';
+const homeHref = localizedHref('/', lang);
 
 function isActive(href: string) {
+  const localized = localizedHref(href, lang);
   if (!activeHref) return false;
-  if (href.startsWith('/#')) return activeHref === href;
-  return activeHref === href || activeHref.startsWith(href);
+  if (href.startsWith('/#')) return activeHref === href || activeHref === localized;
+  return (
+    activeHref === localized ||
+    activeHref === href ||
+    (localized !== '/' && activeHref.startsWith(localized))
+  );
 }
 ---
 <header class="sticky top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur-md">
-  <div class="relative z-[110] mx-auto flex h-[96px] max-w-[1440px] items-center justify-between gap-6 px-5 lg:px-20">
-    <SiteLogo variant="dark" height={72} />
+  <div class="relative z-[110] mx-auto flex h-[84px] max-w-[1440px] items-center justify-between gap-6 px-5 lg:px-20">
+    <SiteLogo variant="dark" height={58} href={homeHref} />
 
     <nav class="hidden items-center gap-8 xl:flex" aria-label={navLabel}>
       {nav.map((link) => (
         <a
-          href={link.href}
+          href={localizedHref(link.href, lang)}
           class:list={[
             'relative text-[15px] font-medium transition-colors',
             isActive(link.href) ? 'text-brand' : 'text-ink/80 hover:text-ink',
@@ -34,15 +44,16 @@ function isActive(href: string) {
         >
           {link.label}
           {isActive(link.href) && (
-            <span class="absolute -bottom-[39px] left-0 h-0.5 w-5 bg-brand" aria-hidden="true"></span>
+            <span class="absolute -bottom-[31px] left-0 h-0.5 w-5 bg-brand" aria-hidden="true"></span>
           )}
         </a>
       ))}
     </nav>
 
     <div class="flex items-center gap-3">
+      <LanguageSwitcher lang={lang} path={switchPath} class="hidden xl:flex" />
       <a
-        href={navCta.href}
+        href={localizedHref(navCta.href, lang)}
         class="hidden rounded-sm bg-brand px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-brand-hover xl:inline-flex"
       >
         {navCta.label}
@@ -83,13 +94,14 @@ function isActive(href: string) {
       <line x1="6" y1="6" x2="18" y2="18"></line>
     </svg>
   </button>
-  <SiteLogo variant="dark" height={80} class="mb-6" />
-  <nav class="flex flex-col items-center gap-6">
+  <SiteLogo variant="dark" height={64} class="mb-6" href={homeHref} />
+  <nav class="flex flex-col items-center gap-6" aria-label={lang === 'en' ? 'Mobile navigation' : 'Navigation mobile'}>
     {nav.map((link) => (
-      <a href={link.href} class="text-xl font-semibold text-ink">{link.label}</a>
+      <a href={localizedHref(link.href, lang)} class="text-xl font-semibold text-ink">{link.label}</a>
     ))}
   </nav>
-  <a href={navCta.href} class="rounded-sm bg-brand px-6 py-3 text-sm font-semibold uppercase text-white">
+  <LanguageSwitcher lang={lang} path={switchPath} class="justify-center" />
+  <a href={localizedHref(navCta.href, lang)} class="rounded-sm bg-brand px-6 py-3 text-sm font-semibold uppercase text-white">
     {navCta.label}
   </a>
 </div>

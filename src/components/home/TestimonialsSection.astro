@@ -1,10 +1,12 @@
 ---
-import { homeContent } from '@/data/home';
+import { getHomeContent } from '@/data/home';
 import Container from '@components/ui/Container.astro';
 import SectionHeader from '@components/ui/SectionHeader.astro';
 import FigmaIcon from '@components/ui/FigmaIcon.astro';
+import { resolveLang } from '@/lib/i18n';
 
-const { testimonials } = homeContent;
+const lang = resolveLang(Astro.currentLocale, Astro.url.pathname);
+const { testimonials } = getHomeContent(lang);
 ---
 <section class="bg-bg-alt py-24 lg:py-28">
   <Container>

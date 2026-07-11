@@ -1,19 +1,21 @@
-export const contactContent = {
+import type { Lang } from '@/lib/i18n';
+
+const contactFr = {
   title: 'Nous joindre',
   subtitle:
     'Une question, un projet ou une demande de soumission ? Écrivez-nous, on vous répond rapidement.',
   blocks: [
     {
-      title: 'Bloc 1',
-      text: 'Décrivez ici un type de demande (information générale, partenariat, etc.).',
+      title: 'Mariage & démarches',
+      text: 'Questions sur le dossier canonique, le choix d’église ou le calendrier de votre union en Italie.',
     },
     {
-      title: 'Bloc 2',
-      text: 'Décrivez ici un autre type de demande (devis, soutien technique, etc.).',
+      title: 'Pèlerinage & voyage',
+      text: 'Itinéraires, hébergement et accompagnement pour un séjour spirituel à Rome et au-delà.',
     },
     {
-      title: 'Bloc 3',
-      text: 'Décrivez ici un troisième type de demande pertinent.',
+      title: 'Soutien & partenariat',
+      text: 'Adhésion, dons et collaborations avec les American Friends of the Vatican Library.',
     },
   ],
   topics: [
@@ -44,3 +46,56 @@ export const contactContent = {
     fallbackCta: 'Écrivez-nous par courriel',
   },
 } as const;
+
+const contactEn = {
+  title: 'Contact Us',
+  subtitle: 'A question, a project, or a quote request? Write to us — we reply promptly.',
+  blocks: [
+    {
+      title: 'Wedding & paperwork',
+      text: 'Questions about the canonical file, church selection, or the timeline of your union in Italy.',
+    },
+    {
+      title: 'Pilgrimage & travel',
+      text: 'Itineraries, lodging, and accompaniment for a spiritual stay in Rome and beyond.',
+    },
+    {
+      title: 'Support & partnership',
+      text: 'Membership, gifts, and collaborations with the American Friends of the Vatican Library.',
+    },
+  ],
+  topics: [
+    { value: 'general', label: 'General inquiry' },
+    { value: 'quote', label: 'Quote request' },
+    { value: 'partnership', label: 'Partnership' },
+    { value: 'other', label: 'Other' },
+  ],
+  form: {
+    title: 'Send us a message',
+    name: 'Name',
+    email: 'Email address',
+    topic: 'Topic',
+    message: 'Message',
+    placeholder: 'Your message…',
+    submit: 'Send',
+    submitting: 'Sending…',
+    successTitle: 'Message sent',
+    successMessage: 'Thank you! Your message was sent. We will get back to you shortly.',
+    successReset: 'Send another message',
+    errorGeneric: 'Something went wrong. Please try again or email us directly.',
+    errorNetwork: 'Unable to connect. Check your network and try again.',
+    notConfiguredTitle: 'Form not configured',
+    notConfiguredMessage:
+      'Set PUBLIC_FORMSPREE_ID in your .env file to enable the form. Create a free form at formspree.io/forms.',
+    fallbackCta: 'Email us instead',
+  },
+} as const;
+
+export const contactContent = {
+  fr: contactFr,
+  en: contactEn,
+} as const;
+
+export function getContactContent(lang: Lang) {
+  return contactContent[lang];
+}

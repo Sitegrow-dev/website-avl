@@ -1,13 +1,16 @@
 ---
-import { homeContent } from '@/data/home';
+import { getHomeContent } from '@/data/home';
 import { getPublishedPosts, getPostHref } from '@/data/posts';
 import Container from '@components/ui/Container.astro';
 import SectionHeader from '@components/ui/SectionHeader.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import TextLink from '@components/ui/TextLink.astro';
+import { localizedHref, resolveLang } from '@/lib/i18n';
 
-const { blog } = homeContent;
+const lang = resolveLang(Astro.currentLocale, Astro.url.pathname);
+const { blog } = getHomeContent(lang);
 const posts = getPublishedPosts().slice(0, 3);
+const readLabel = lang === 'en' ? 'Read →' : 'Lire →';
 ---
 {posts.length > 0 && (
 <section class="py-24 lg:py-28">
@@ -16,10 +19,11 @@ const posts = getPublishedPosts().slice(0, 3);
     <div class="mt-16 grid gap-8 lg:grid-cols-3">
       {posts.map((post) => {
         const image = blog.previewImages[post.slug] ?? post.image;
+        const href = localizedHref(getPostHref(post), lang);
         return (
         <article class="group">
           {image && (
-            <a href={getPostHref(post)} class="block overflow-hidden rounded-sm">
+            <a href={href} class="block overflow-hidden rounded-sm">
               <ResponsiveImage
                 src={image}
                 alt={post.imageAlt ?? post.title}
@@ -32,9 +36,9 @@ const posts = getPublishedPosts().slice(0, 3);
           <div class="mt-6">
             <p class="text-xs font-semibold uppercase tracking-wider text-brand">{post.category}</p>
             <h3 class="mt-3 font-display text-2xl leading-snug text-ink">
-              <a href={getPostHref(post)} class="hover:text-brand">{post.title}</a>
+              <a href={href} class="hover:text-brand">{post.title}</a>
             </h3>
-            <TextLink href={getPostHref(post)} class="mt-4 inline-block">Lire →</TextLink>
+            <TextLink href={href} class="mt-4 inline-block">{readLabel}</TextLink>
           </div>
         </article>
         );

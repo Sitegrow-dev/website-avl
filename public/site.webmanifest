@@ -1,6 +1,7 @@
 {
   "name": "AFVL — Amor Fides Via Lux",
   "short_name": "AFVL",
+  "description": "Mariage catholique et pèlerinage en Italie",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +14,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#1a1a1a",
-  "background_color": "#1a1a1a",
+  "theme_color": "#009246",
+  "background_color": "#ffffff",
   "display": "standalone"
 }

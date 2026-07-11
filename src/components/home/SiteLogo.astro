@@ -4,20 +4,24 @@ import { siteConfig } from '@/config/site';
 interface Props {
   class?: string;
   /**
-   * `light` = logo clair (fonds sombres, header).
-   * `dark` = logo sombre (fonds clairs, footer / menu mobile).
+   * `light` = texte clair (fonds sombres).
+   * `dark` = texte noir (header / footer blancs).
    */
   variant?: 'light' | 'dark';
   /** Hauteur d’affichage en px (largeur auto). */
   height?: number;
+  /** Lien d’accueil (localisé, défaut `/`). */
+  href?: string;
 }
 
-const { class: className = '', variant = 'light', height = 64 } = Astro.props;
+const { class: className = '', variant = 'light', height = 64, href = '/' } = Astro.props;
 const base = variant === 'dark' ? '/images/logo/logo-dark' : '/images/logo/logo';
-const width = Math.round((height * 300) / 100);
+/** Ratio source recadré : 279×96 */
+const aspect = 279 / 96;
+const width = Math.round(height * aspect);
 ---
 <a
-  href="/"
+  href={href}
   class:list={['inline-flex shrink-0 items-center', className]}
   aria-label={siteConfig.siteName}
 >
@@ -29,7 +33,7 @@ const width = Math.round((height * 300) / 100);
       alt={siteConfig.siteName}
       width={width}
       height={height}
-      class="w-auto max-w-[min(100%,280px)] object-contain"
+      class="w-auto max-w-[min(100%,420px)] object-contain"
       style={`height: ${height}px; width: auto;`}
       loading="eager"
       fetchpriority="high"

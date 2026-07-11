@@ -1,4 +1,4 @@
-# Remplacer l'adresse avant mise en production.
-Contact: mailto:contact@exemple.com
+# security.txt — AFVL (Amor Fides Via Lux)
+Contact: mailto:contact@afvl.org
 Preferred-Languages: fr, en
-Canonical: https://exemple.com/.well-known/security.txt
+Canonical: https://afvl.org/.well-known/security.txt

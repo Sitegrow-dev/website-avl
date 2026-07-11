@@ -1,11 +1,13 @@
 ---
-import { homeContent } from '@/data/home';
+import { getHomeContent } from '@/data/home';
 import Container from '@components/ui/Container.astro';
 import SectionHeader from '@components/ui/SectionHeader.astro';
 import TextLink from '@components/ui/TextLink.astro';
 import FigmaIcon from '@components/ui/FigmaIcon.astro';
+import { localizedHref, resolveLang } from '@/lib/i18n';
 
-const { steps } = homeContent;
+const lang = resolveLang(Astro.currentLocale, Astro.url.pathname);
+const { steps } = getHomeContent(lang);
 ---
 <section class="py-24 lg:py-28" id="processus">
   <Container>
@@ -23,7 +25,7 @@ const { steps } = homeContent;
       ))}
     </div>
     <div class="mt-12 text-center">
-      <TextLink href={steps.link.href}>{steps.link.label}</TextLink>
+      <TextLink href={localizedHref(steps.link.href, lang)}>{steps.link.label}</TextLink>
     </div>
   </Container>
 </section>

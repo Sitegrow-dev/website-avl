@@ -1,22 +1,37 @@
 ---
 import { siteConfig } from '@/config/site';
 import FaviconHead from '@components/FaviconHead.astro';
+
+/**
+ * 404 localisée — middleware pose `locals.notFoundLang = 'en'` pour les URLs /en/*.
+ * Même pattern que le skeleton (signal via locals), avec contenu FR/EN réel.
+ */
+const isEn = Astro.locals.notFoundLang === 'en';
+const homeHref = isEn ? '/en/' : '/';
+const title = isEn ? 'Page not found' : 'Page introuvable';
+const description = isEn
+  ? `The page you are looking for does not exist or has been moved. Return to the ${siteConfig.siteName} home page.`
+  : `La page que vous cherchez n'existe pas ou a été déplacée. Retournez à l'accueil de ${siteConfig.siteName}.`;
+const body = isEn
+  ? 'This page does not exist or has been moved.'
+  : 'Cette page n’existe pas ou a été déplacée.';
+const homeLabel = isEn ? 'Back to home' : 'Retour à l’accueil';
 ---
 <!doctype html>
-<html lang="fr-CA">
+<html lang={isEn ? 'en-CA' : 'fr-CA'}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={`La page que vous cherchez n'existe pas ou a été déplacée. Retournez à l'accueil de ${siteConfig.siteName}.`} />
+    <meta name="description" content={description} />
     <meta name="robots" content="noindex, follow" />
-    <title>Page introuvable | {siteConfig.siteName}</title>
+    <title>{title} | {siteConfig.siteName}</title>
     <FaviconHead />
   </head>
   <body>
     <main style="font-family: system-ui; max-width: 40rem; margin: 2rem auto; padding: 0 1rem;">
-      <h1>Page introuvable</h1>
-      <p>Cette page n’existe pas ou a été déplacée.</p>
-      <p><a href="/">Retour à l’accueil</a></p>
+      <h1>{title}</h1>
+      <p>{body}</p>
+      <p><a href={homeHref}>{homeLabel}</a></p>
     </main>
   </body>
 </html>

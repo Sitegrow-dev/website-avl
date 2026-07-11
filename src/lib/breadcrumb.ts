@@ -14,6 +14,7 @@ const labels = {
     photos: 'Galerie photos',
     contact: 'Nous joindre',
     services: 'Services',
+    destinations: 'Destinations',
     privacy: 'Politique de confidentialité',
     notFound: 'Page introuvable',
     plan: 'Plan du site',
@@ -25,6 +26,7 @@ const labels = {
     photos: 'Photo Gallery',
     contact: 'Contact',
     services: 'Services',
+    destinations: 'Destinations',
     privacy: 'Privacy Policy',
     notFound: 'Page not found',
     plan: 'Sitemap',
@@ -50,14 +52,14 @@ export const breadcrumbTrails = {
     { label: title },
   ],
   about: (lang: Lang = 'fr'): BreadcrumbItem[] => [homeItem(lang), { label: labels[lang].about }],
-  /** Routes legacy AFVL (.htm) — libellés EN comme sur l’ancien site. */
-  aboutHtm: (): BreadcrumbItem[] => [
-    { label: labels.en.home, href: '/' },
-    { label: labels.en.about },
+  /** Routes legacy AFVL (.htm) sous chaque locale. */
+  aboutHtm: (lang: Lang = 'fr'): BreadcrumbItem[] => [
+    homeItem(lang),
+    { label: labels[lang].about },
   ],
-  photosHtm: (): BreadcrumbItem[] => [
-    { label: labels.en.home, href: '/' },
-    { label: labels.en.photos },
+  photosHtm: (lang: Lang = 'fr'): BreadcrumbItem[] => [
+    homeItem(lang),
+    { label: labels[lang].photos },
   ],
   contact: (lang: Lang = 'fr'): BreadcrumbItem[] => [
     homeItem(lang),
@@ -66,6 +68,12 @@ export const breadcrumbTrails = {
   services: (lang: Lang = 'fr'): BreadcrumbItem[] => [
     homeItem(lang),
     { label: labels[lang].services },
+  ],
+  /** Pas d’index destinations : Accueil › Destinations › {ville}. */
+  destination: (name: string, lang: Lang = 'fr'): BreadcrumbItem[] => [
+    homeItem(lang),
+    { label: labels[lang].destinations },
+    { label: name },
   ],
   privacy: (lang: Lang = 'fr'): BreadcrumbItem[] => [
     homeItem(lang),
@@ -81,7 +89,7 @@ export const breadcrumbTrails = {
 export type SitePageLink = {
   /** Libellé localisé */
   label: string;
-  /** Chemin FR (sans slash final doublé) */
+  /** Chemin public (déjà préfixé /en/ pour la liste EN) */
   href: string;
   /** Section logique pour le groupement */
   section: 'main' | 'legal';
@@ -90,21 +98,22 @@ export type SitePageLink = {
 /** Liste centralisée des pages pour le plan du site HTML (FR). */
 export const frPagesList: SitePageLink[] = [
   { label: labels.fr.home, href: '/', section: 'main' },
-  { label: labels.fr.services, href: '/services/', section: 'main' },
+  { label: labels.fr.about, href: '/about.htm', section: 'main' },
+  { label: labels.fr.photos, href: '/photos.htm', section: 'main' },
+  { label: labels.fr.destinations, href: '/destinations/rome/', section: 'main' },
   { label: labels.fr.blog, href: '/blog/', section: 'main' },
-  { label: labels.en.about, href: '/about.htm', section: 'main' },
-  { label: labels.en.photos, href: '/photos.htm', section: 'main' },
-  { label: labels.fr.about, href: '/a-propos/', section: 'main' },
   { label: labels.fr.contact, href: '/contact/', section: 'main' },
+  { label: labels.fr.plan, href: '/plan-du-site/', section: 'legal' },
   { label: labels.fr.privacy, href: '/politique-de-confidentialite/', section: 'legal' },
 ];
 
-/** Liste centralisée des pages pour le plan du site HTML (EN). */
+/** Liste centralisée des pages pour le plan du site HTML (EN) — slugs skeleton + legacy .htm. */
 export const enPagesList: SitePageLink[] = [
   { label: labels.en.home, href: '/en/', section: 'main' },
-  { label: labels.en.services, href: '/en/services/', section: 'main' },
+  { label: labels.en.about, href: '/en/about.htm', section: 'main' },
+  { label: labels.en.photos, href: '/en/photos.htm', section: 'main' },
   { label: labels.en.blog, href: '/en/blog/', section: 'main' },
-  { label: labels.en.about, href: '/en/about/', section: 'main' },
   { label: labels.en.contact, href: '/en/contact/', section: 'main' },
+  { label: labels.en.plan, href: '/en/plan-du-site/', section: 'legal' },
   { label: labels.en.privacy, href: '/en/privacy/', section: 'legal' },
 ];

@@ -35,7 +35,7 @@ const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   ${
     city
       ? `<text x="600" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="500"
-        fill="rgba(255,255,255,0.8)" text-anchor="middle" dominant-baseline="middle">Mission Catholique Francophone en Chine</text>`
+        fill="rgba(255,255,255,0.8)" text-anchor="middle" dominant-baseline="middle">Mariage catholique &amp; pèlerinage en Italie</text>`
       : ''
   }
   <text x="600" y="540" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="500"

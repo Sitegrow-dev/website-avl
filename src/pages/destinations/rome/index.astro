@@ -12,6 +12,7 @@ import FeaturedTestimonialSection from '@components/destination/FeaturedTestimon
 import OtherDestinationsSection from '@components/destination/OtherDestinationsSection.astro';
 import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
 import { siteConfig } from '@/config/site';
+import { breadcrumbTrails } from '@/lib/breadcrumb';
 
 const destination = getDestinationBySlug('rome');
 if (!destination) {
@@ -21,7 +22,7 @@ if (!destination) {
 <PageLayout
   title={`${destination.seo.title} | ${siteConfig.siteName}`}
   description={destination.seo.description}
-  showBreadcrumb={false}
+  breadcrumbs={breadcrumbTrails.destination(destination.title, 'fr')}
   activeHref="/destinations/rome/"
 >
   <main>

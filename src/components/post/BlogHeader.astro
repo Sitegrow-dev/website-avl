@@ -1,8 +1,6 @@
 ---
 import Container from '@components/ui/Container.astro';
-import Breadcrumb from '@components/Breadcrumb.astro';
 import { postUi } from '@/data/posts';
-import { breadcrumbTrails } from '@/lib/breadcrumb';
 
 interface Props {
   title?: string;
@@ -11,10 +9,9 @@ interface Props {
 
 const { title = postUi.listTitle, subtitle = postUi.listSubtitle } = Astro.props;
 ---
-<section class="bg-bg-alt pb-12 pt-28">
+<section class="bg-bg-alt pb-12 pt-12 lg:pt-16">
   <Container>
-    <Breadcrumb items={breadcrumbTrails.blog('fr')} />
-    <div class="mt-8 max-w-3xl">
+    <div class="max-w-3xl">
       <h1 class="font-display text-5xl leading-tight text-ink lg:text-[70px]">{title}</h1>
       <p class="mt-6 text-xl leading-relaxed text-muted">{subtitle}</p>
     </div>

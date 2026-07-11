@@ -2,6 +2,7 @@ import type { APIRoute } from 'astro';
 import { getPublishedPosts } from '@/data/posts';
 import { siteConfig } from '@/config/site';
 import { gitLastmod } from '@/lib/git-lastmod';
+import { alternatePath, hasEnAlternate } from '@/lib/i18n';
 
 export const prerender = true;
 
@@ -17,13 +18,18 @@ const PAGE_SOURCES: Record<string, string[]> = {
   '/blog/': ['src/pages/blog/index.astro', 'src/data/posts.ts'],
   '/contact/': ['src/pages/contact/index.astro', 'src/data/contact.ts'],
   '/services/': ['src/pages/services/index.astro', 'src/data/services.ts'],
+  '/destinations/rome/': [
+    'src/pages/destinations/rome/index.astro',
+    'src/data/destinations.ts',
+  ],
   '/politique-de-confidentialite/': [
     'src/pages/politique-de-confidentialite/index.astro',
     'src/data/privacy.ts',
   ],
   '/plan-du-site/': ['src/pages/plan-du-site/index.astro'],
   '/en/': ['src/pages/en/index.astro', 'src/data/home.ts'],
-  '/en/about/': ['src/pages/en/about/index.astro', 'src/data/about.ts'],
+  '/en/about.htm': ['src/pages/en/about/index.astro', 'src/data/about.ts'],
+  '/en/photos.htm': ['src/pages/en/photos/index.astro', 'src/data/photos.ts'],
   '/en/blog/': ['src/pages/en/blog/index.astro', 'src/data/posts.ts'],
   '/en/contact/': ['src/pages/en/contact/index.astro', 'src/data/contact.ts'],
   '/en/services/': ['src/pages/en/services/index.astro', 'src/data/services.ts'],
@@ -32,9 +38,9 @@ const PAGE_SOURCES: Record<string, string[]> = {
 };
 
 /**
- * Pages statiques du site FR.
- * Liste maintenue à la main — garder synchronisée avec src/pages/*.astro
- * (et ne lister que des routes qui existent réellement, sinon 404 dans le sitemap).
+ * Pages statiques FR.
+ * Liste maintenue à la main — synchronisée avec src/pages/*.astro.
+ * /a-propos/ est listée sans hreflang EN (cible partagée avec /about.htm).
  */
 const FR_STATIC_PAGES = [
   '/',
@@ -44,17 +50,19 @@ const FR_STATIC_PAGES = [
   '/blog/',
   '/contact/',
   '/services/',
+  '/destinations/rome/',
   '/politique-de-confidentialite/',
   '/plan-du-site/',
 ];
 
 /**
- * Miroirs EN — uniquement les pages qui existent réellement sous src/pages/en/.
- * /en/blog/[slug]/ n'est pas listée (générée dynamiquement dans le sitemap).
+ * Miroirs EN — pages réelles sous src/pages/en/ (URLs publiques).
+ * /en/blog/[slug]/ n'est pas listée (générée dynamiquement).
  */
 const EN_STATIC_PAGES = [
   '/en/',
-  '/en/about/',
+  '/en/about.htm',
+  '/en/photos.htm',
   '/en/blog/',
   '/en/contact/',
   '/en/services/',
@@ -64,19 +72,11 @@ const EN_STATIC_PAGES = [
 
 type Alternate = { hreflang: string; href: string };
 
-function buildAlternates(frPath: string, base: string): Alternate[] {
-  // Pages legacy .htm : pas de miroir EN séparé (contenu déjà en anglais).
-  if (frPath.endsWith('.htm')) {
-    return [
-      { hreflang: 'en', href: `${base}${frPath}` },
-      { hreflang: 'x-default', href: `${base}${frPath}` },
-    ];
-  }
-  const enPath = frPath === '/' ? '/en/' : `/en${frPath}`;
+function buildAlternates(path: string, base: string): Alternate[] {
+  const frPath = alternatePath(path, 'fr');
   const alts: Alternate[] = [{ hreflang: 'fr-CA', href: `${base}${frPath}` }];
-  // N'inclure l'alternative EN que si le miroir anglais est indexable.
-  if (siteConfig.enIndexable) {
-    alts.push({ hreflang: 'en-CA', href: `${base}${enPath}` });
+  if (siteConfig.enIndexable && hasEnAlternate(frPath)) {
+    alts.push({ hreflang: 'en-CA', href: `${base}${alternatePath(frPath, 'en')}` });
   }
   alts.push({ hreflang: 'x-default', href: `${base}${frPath}` });
   return alts;
@@ -99,7 +99,6 @@ export const GET: APIRoute = ({ site }) => {
 
   const entries: Entry[] = [];
 
-  // Pages statiques FR — <lastmod> réel dérivé de git (undefined si git absent).
   for (const p of FR_STATIC_PAGES) {
     entries.push({
       loc: `${base}${p}`,
@@ -108,19 +107,16 @@ export const GET: APIRoute = ({ site }) => {
     });
   }
 
-  // Pages EN — uniquement si le miroir anglais est traduit et indexable.
   if (siteConfig.enIndexable) {
     for (const p of EN_STATIC_PAGES) {
-      const frPath = p === '/en/' ? '/' : p.replace(/^\/en(\/|$)/, '/');
       entries.push({
         loc: `${base}${p}`,
         lastmod: gitLastmod(PAGE_SOURCES[p] ?? []),
-        alts: buildAlternates(frPath, base),
+        alts: buildAlternates(p, base),
       });
     }
   }
 
-  // Articles de blog FR — <lastmod> réel (date de modif ou de publication).
   for (const post of getPublishedPosts()) {
     const path = `/blog/${post.slug}/`;
     entries.push({

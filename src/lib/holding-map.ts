@@ -1,5 +1,5 @@
 import type { HoldingArticle } from '@/lib/holding';
-import { tocFromMarkdown } from '@/lib/markdown';
+import { stripLeadingH1, tocFromMarkdown } from '@/lib/markdown';
 import type { Post } from '@/data/posts';
 
 const CATEGORY_FROM_KEYWORD: Record<string, { category: string; categorySlug: string }> = {
@@ -65,6 +65,7 @@ export function mapHoldingArticleToPost(
   const { src: image, alt: imageAlt } = firstImage(article);
   const date = article.published_at?.slice(0, 10) || article.published_at;
   const relatedSlugs = allSlugs.filter((s) => s !== article.slug).slice(0, 3);
+  const bodyMarkdown = stripLeadingH1(article.body_markdown || '');
 
   return {
     slug: article.slug,
@@ -81,10 +82,10 @@ export function mapHoldingArticleToPost(
     image,
     imageAlt,
     metaTitle: article.meta_title,
-    bodyMarkdown: article.body_markdown,
+    bodyMarkdown,
     faq: article.faq?.length ? article.faq : undefined,
     primaryKeyword: article.primary_keyword,
-    toc: tocFromMarkdown(article.body_markdown || ''),
+    toc: tocFromMarkdown(bodyMarkdown),
     usefulLinks: usefulLinks(article),
     relatedSlugs: relatedSlugs.length ? relatedSlugs : undefined,
     sections: [],

@@ -1,9 +1,11 @@
 ---
-import { homeContent } from '@/data/home';
+import { getHomeContent } from '@/data/home';
 import Container from '@components/ui/Container.astro';
 import TextLink from '@components/ui/TextLink.astro';
+import { localizedHref, resolveLang } from '@/lib/i18n';
 
-const { editorial } = homeContent;
+const lang = resolveLang(Astro.currentLocale, Astro.url.pathname);
+const { editorial } = getHomeContent(lang);
 ---
 <section class="bg-bg-alt py-24 lg:py-40">
   <Container>
@@ -16,7 +18,7 @@ const { editorial } = homeContent;
       </div>
       <div class="mt-10 flex flex-wrap items-center justify-center gap-8">
         {editorial.links.map((link) => (
-          <TextLink href={link.href}>{link.label}</TextLink>
+          <TextLink href={localizedHref(link.href, lang)}>{link.label}</TextLink>
         ))}
       </div>
     </div>

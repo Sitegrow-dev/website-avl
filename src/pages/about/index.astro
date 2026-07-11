@@ -2,12 +2,14 @@
 import PageLayout from '@layouts/PageLayout.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import { siteConfig } from '@/config/site';
-import { aboutContent } from '@/data/about';
+import { getAboutContent } from '@/data/about';
 import { breadcrumbTrails } from '@/lib/breadcrumb';
-import { DEFAULT_ROBOTS } from '@/lib/seo';
+import { localizedHref } from '@/lib/i18n';
 
+const lang = 'fr' as const;
 const {
   title,
+  brandEyebrow,
   metaDescription,
   intro,
   history,
@@ -15,21 +17,20 @@ const {
   termBoard,
   honoraryBoard,
   cta,
-} = aboutContent;
+} = getAboutContent(lang);
 ---
 <PageLayout
-  lang="en"
-  robots={DEFAULT_ROBOTS}
+  lang="fr-CA"
   title={`${title} | ${siteConfig.siteName}`}
   description={metaDescription}
-  breadcrumbs={breadcrumbTrails.aboutHtm()}
+  breadcrumbs={breadcrumbTrails.aboutHtm(lang)}
   activeHref="/about.htm"
   canonicalPath="/about.htm"
 >
   <main>
     <section class="px-5 pb-10 pt-16 sm:px-8 sm:pb-12 sm:pt-20 lg:px-10">
       <div class="mx-auto max-w-3xl">
-        <p class="text-sm font-semibold uppercase tracking-[0.12em] text-brand">American Friends of the Vatican Library</p>
+        <p class="text-sm font-semibold uppercase tracking-[0.12em] text-brand">{brandEyebrow}</p>
         <h1 class="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl lg:text-[52px] lg:leading-[1.1]">
           {title}
         </h1>
@@ -43,7 +44,7 @@ const {
       <div class="mx-auto max-w-3xl">
         <ResponsiveImage
           src="/images/archive/afvl-header"
-          alt="American Friends of the Vatican Library"
+          alt={brandEyebrow}
           width={860}
           height={130}
           sizes="(min-width: 768px) 48rem, 100vw"
@@ -130,7 +131,7 @@ const {
         <div>
           <p class="text-lg leading-relaxed text-muted">{cta.text}</p>
           <a
-            href={cta.button.href}
+            href={localizedHref(cta.button.href, lang)}
             class="mt-6 inline-flex items-center justify-center rounded-md bg-brand px-7 py-3.5 text-base font-semibold text-white shadow-[0_4px_7px_rgba(0,0,0,0.1)] transition-colors hover:bg-brand-hover"
           >
             {cta.button.label}

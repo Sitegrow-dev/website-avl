@@ -1,10 +1,12 @@
 ---
-import { homeContent } from '@/data/home';
+import { getHomeContent } from '@/data/home';
 import Container from '@components/ui/Container.astro';
 import TextLink from '@components/ui/TextLink.astro';
 import FigmaIcon from '@components/ui/FigmaIcon.astro';
+import { localizedHref, resolveLang } from '@/lib/i18n';
 
-const { pillars } = homeContent;
+const lang = resolveLang(Astro.currentLocale, Astro.url.pathname);
+const { pillars } = getHomeContent(lang);
 ---
 <section class="bg-bg-alt py-24 lg:py-28" id="patrimoine">
   <Container>
@@ -17,7 +19,7 @@ const { pillars } = homeContent;
             <p class="mt-4 text-lg text-muted">{item.subtitle}</p>
           </div>
           <div class="mt-8">
-            <TextLink href={item.cta.href}>{item.cta.label} →</TextLink>
+            <TextLink href={localizedHref(item.cta.href, lang)}>{item.cta.label} →</TextLink>
           </div>
         </article>
       ))}

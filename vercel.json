@@ -46,6 +46,11 @@
       "statusCode": 301
     },
     {
+      "source": "/sitemap.html",
+      "destination": "/plan-du-site/",
+      "statusCode": 301
+    },
+    {
       "source": "/about",
       "destination": "/about.htm",
       "statusCode": 301
@@ -53,6 +58,76 @@
     {
       "source": "/photos",
       "destination": "/photos.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/about",
+      "destination": "/en/about.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/photos",
+      "destination": "/en/photos.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/sitemap",
+      "destination": "/en/plan-du-site/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/sitemap/",
+      "destination": "/en/plan-du-site/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/site-map",
+      "destination": "/en/plan-du-site/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/site-map/",
+      "destination": "/en/plan-du-site/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/privacy-policy",
+      "destination": "/en/privacy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/privacy-policy/",
+      "destination": "/en/privacy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/politique-de-confidentialite",
+      "destination": "/en/privacy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/politique-de-confidentialite/",
+      "destination": "/en/privacy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/a-propos",
+      "destination": "/en/about.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/a-propos/",
+      "destination": "/en/about.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/a-propos",
+      "destination": "/about.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/a-propos/",
+      "destination": "/about.htm",
       "statusCode": 301
     }
   ],
@@ -64,6 +139,14 @@
     {
       "source": "/photos.htm",
       "destination": "/photos/"
+    },
+    {
+      "source": "/en/about.htm",
+      "destination": "/en/about/"
+    },
+    {
+      "source": "/en/photos.htm",
+      "destination": "/en/photos/"
     }
   ]
 }

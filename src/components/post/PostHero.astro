@@ -1,32 +1,28 @@
 ---
 import type { Post } from '@/data/posts';
 import Container from '@components/ui/Container.astro';
-import Breadcrumb from '@components/Breadcrumb.astro';
-import { breadcrumbTrails } from '@/lib/breadcrumb';
 
 interface Props {
   post: Post;
+  lang?: 'fr' | 'en';
 }
 
-const { post } = Astro.props;
+const { post, lang = 'fr' } = Astro.props;
 
 function formatDate(date: string) {
-  return new Date(date).toLocaleDateString('fr-FR', {
+  return new Date(date).toLocaleDateString(lang === 'en' ? 'en-CA' : 'fr-CA', {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   });
 }
 
-const crumbs = [
-  ...breadcrumbTrails.blog('fr'),
-  { label: post.category, href: `/blog/?cat=${post.categorySlug}` },
-];
+const updatedLabel = lang === 'en' ? 'Updated' : 'Mis à jour le';
+const readLabel = lang === 'en' ? 'min read' : 'min de lecture';
 ---
-<section class="bg-bg-alt pb-12 pt-28">
+<section class="bg-bg-alt pb-12 pt-12 lg:pt-16">
   <Container>
-    <Breadcrumb items={crumbs} />
-    <div class="mt-8 max-w-4xl">
+    <div class="max-w-4xl">
       <span class="inline-block rounded-sm bg-brand-light px-4 py-2 text-xs font-semibold uppercase tracking-wider text-brand">
         {post.category}
       </span>
@@ -34,7 +30,7 @@ const crumbs = [
         {post.title}
       </h1>
       <p class="mt-6 text-sm text-muted">
-        Mis à jour le {formatDate(post.updated ?? post.date)} · {post.readingTimeMinutes ?? 5} min de lecture
+        {updatedLabel} {formatDate(post.updated ?? post.date)} · {post.readingTimeMinutes ?? 5} {readLabel}
       </p>
       {post.chapo && (
         <p class="mt-6 max-w-3xl text-xl leading-relaxed text-muted">{post.chapo}</p>

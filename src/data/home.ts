@@ -1,11 +1,12 @@
-export const homeContent = {
+import type { Lang } from '@/lib/i18n';
+
+const homeFr = {
   hero: {
     title: 'Se marier catholiquement en Italie',
     subtitle: 'Accompagnement des démarches canoniques et choix de vos destinations en Italie.',
     image: '/images/home/hero',
     imageAlt: "Intérieur d'une basilique italienne",
     primaryCta: { label: 'Planifier mon mariage', href: '/contact/' },
-    secondaryCta: { label: 'Télécharger le guide gratuit', href: '/contact/' },
   },
   pillars: {
     items: [
@@ -153,7 +154,6 @@ export const homeContent = {
   blog: {
     eyebrow: 'Magazine',
     title: 'Ressources & guides',
-    /** Images optionnelles par slug Holding (sinon image de l’article). */
     previewImages: {} as Record<string, string>,
   },
   faq: {
@@ -161,4 +161,195 @@ export const homeContent = {
     title: 'Questions fréquentes',
     link: { label: 'Voir toutes les questions →', href: '/contact/' },
   },
+  finalCta: {
+    title: 'Prêts à commencer ?',
+    ctaLabel: 'Nous contacter',
+    ctaHref: '/contact/',
+  },
+  meta: {
+    titleSuffix: 'Mariage catholique & pèlerinage en Italie',
+  },
 } as const;
+
+const homeEn = {
+  hero: {
+    title: 'Catholic wedding in Italy',
+    subtitle: 'Canonical paperwork support and destination planning across Italy.',
+    image: '/images/home/hero',
+    imageAlt: 'Interior of an Italian basilica',
+    primaryCta: { label: 'Plan my wedding', href: '/contact/' },
+  },
+  pillars: {
+    items: [
+      {
+        id: 'mariage',
+        icon: 'church',
+        title: 'Catholic wedding in Italy',
+        subtitle: 'Paperwork, church, and the big day',
+        cta: { label: 'Discover', href: '/#processus' },
+      },
+      {
+        id: 'voyage',
+        icon: 'compass',
+        title: 'Travel & pilgrimage',
+        subtitle: 'Rome, the Vatican, sacred routes',
+        cta: { label: 'Explore', href: '/#voyage' },
+      },
+      {
+        id: 'patrimoine',
+        icon: 'archive',
+        title: 'Heritage & Vatican',
+        subtitle: 'Libraries, basilicas, sacred art',
+        cta: { label: 'Visit', href: '/#patrimoine' },
+      },
+    ],
+  },
+  destinations: {
+    title: 'Choose your destination',
+    items: [
+      {
+        slug: 'vatican',
+        title: 'Vatican · St. Peter’s',
+        image: '/images/home/destinations/vatican-large',
+        href: '/destinations/rome/',
+        featured: true,
+      },
+      {
+        slug: 'rome',
+        title: 'Rome',
+        image: '/images/home/destinations/rome',
+        href: '/destinations/rome/',
+      },
+      {
+        slug: 'toscane',
+        title: 'Tuscany',
+        image: '/images/home/destinations/toscane',
+        href: '/destinations/rome/',
+      },
+      {
+        slug: 'como',
+        title: 'Lake Como',
+        image: '/images/home/destinations/como',
+        href: '/destinations/rome/',
+      },
+      {
+        slug: 'amalfi',
+        title: 'Amalfi Coast',
+        image: '/images/home/destinations/amalfi',
+        href: '/destinations/rome/',
+      },
+    ],
+  },
+  editorial: {
+    title: 'Italy, cradle of Catholic marriage',
+    paragraphs: [
+      'Since the earliest centuries, Rome and the Vatican have been the beating heart of Christianity. Marrying in Italy places your union in a millennial lineage of faith, under the care of the Petrine See.',
+      'Every basilica and village chapel tells a story of devotion and sacred art. We open the doors of this universal heritage for a celebration beyond time.',
+    ],
+    links: [
+      { label: 'Visit the Vatican →', href: '/#patrimoine' },
+      { label: 'Vatican Library →', href: '/#patrimoine' },
+    ],
+  },
+  steps: {
+    eyebrow: 'Process',
+    title: 'Catholic marriage abroad, step by step',
+    items: [
+      {
+        step: '01',
+        icon: 'file-check',
+        title: 'Religious file',
+        description: 'Prepare the required canonical documents.',
+      },
+      {
+        step: '02',
+        icon: 'map-pin',
+        title: 'Venue & church',
+        description: 'Choose the ideal basilica or chapel.',
+      },
+      {
+        step: '03',
+        icon: 'plane-takeoff',
+        title: 'Travel',
+        description: 'Logistics and hospitality for your guests in Italy.',
+      },
+      {
+        step: '04',
+        icon: 'atom',
+        title: 'The big day',
+        description: 'Celebration and on-site accompaniment.',
+      },
+    ],
+    link: {
+      label: 'See the guides →',
+      href: '/blog/',
+    },
+  },
+  honeymoon: {
+    id: 'lune-de-miel',
+    eyebrow: 'Escape',
+    title: 'Extend the journey: honeymoon in Italy',
+    description:
+      'After the emotion of the ceremony, discover Italian dolce vita. From the hills of Tuscany to the Amalfi Coast, we craft a tailored itinerary for you.',
+    image: '/images/home/honeymoon',
+    imageAlt: 'Italian landscape for a honeymoon',
+    links: [
+      { label: 'Honeymoon ideas →', href: '/#lune-de-miel' },
+      { label: '3-day Rome itinerary →', href: '/destinations/rome/' },
+    ],
+  },
+  testimonials: {
+    eyebrow: 'Testimonials',
+    title: 'They said yes in Italy',
+    items: [
+      {
+        quote:
+          'Impeccable organization. Marrying at the Vatican was a dream — they made it a serene reality.',
+        name: 'Clarisse & Jean',
+        location: 'Lyon',
+      },
+      {
+        quote:
+          'Support with religious documents saved us precious time.',
+        name: 'Sophie & Marc',
+        location: 'Brussels',
+      },
+      {
+        quote:
+          'The church chosen in Rome was sublime — exactly what we wanted for our faith.',
+        name: 'Hélène & Pierre',
+        location: 'Montreal',
+      },
+    ],
+  },
+  blog: {
+    eyebrow: 'Magazine',
+    title: 'Resources & guides',
+    previewImages: {} as Record<string, string>,
+  },
+  faq: {
+    eyebrow: 'Help',
+    title: 'Frequently asked questions',
+    link: { label: 'See all questions →', href: '/contact/' },
+  },
+  finalCta: {
+    title: 'Ready to begin?',
+    ctaLabel: 'Contact us',
+    ctaHref: '/contact/',
+  },
+  meta: {
+    titleSuffix: 'Catholic wedding & pilgrimage in Italy',
+  },
+} as const;
+
+export const homeContent = {
+  fr: homeFr,
+  en: homeEn,
+} as const;
+
+export function getHomeContent(lang: Lang) {
+  return homeContent[lang];
+}
+
+/** @deprecated Prefer getHomeContent(lang) — alias FR pour compatibilité. */
+export const homeContentFr = homeFr;

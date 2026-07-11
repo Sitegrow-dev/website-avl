@@ -1,9 +1,9 @@
 /**
- * Émet les fichiers plats /about.htm et /photos.htm à partir des pages Astro
- * /about/ et /photos/ (Astro + trailingSlash:always ne peut pas générer de
- * vrais fichiers *.htm.astro — seulement des stubs de redirection).
+ * Émet les fichiers plats *.htm à partir des pages Astro (Astro + trailingSlash:always
+ * ne peut pas générer de vrais fichiers *.htm.astro).
  *
- * Résultat : URL exacte de l’ancien site AFVL, ex. https://domaine/about.htm
+ * FR : /about.htm, /photos.htm
+ * EN : /en/about.htm, /en/photos.htm
  */
 import { copyFileSync, existsSync, mkdirSync, rmSync } from 'fs';
 import { dirname, join } from 'path';
@@ -16,6 +16,8 @@ const root = join(__dirname, '..');
 const MAP = [
   { from: 'about/index.html', to: 'about.htm' },
   { from: 'photos/index.html', to: 'photos.htm' },
+  { from: 'en/about/index.html', to: 'en/about.htm' },
+  { from: 'en/photos/index.html', to: 'en/photos.htm' },
 ];
 
 function emitIn(baseDir) {
@@ -28,6 +30,7 @@ function emitIn(baseDir) {
       continue;
     }
     const dest = join(baseDir, to);
+    mkdirSync(dirname(dest), { recursive: true });
     // Si un dossier homonyme existe (ancien build), le retirer
     try {
       rmSync(dest, { recursive: true, force: true });

@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
 import { siteConfig } from '@/config/site';
-import { homeContent } from '@/data/home';
-import { aboutContent } from '@/data/about';
-import { contactContent } from '@/data/contact';
+import { getHomeContent } from '@/data/home';
+import { getAboutContent } from '@/data/about';
+import { getContactContent } from '@/data/contact';
 import { getPublishedPosts } from '@/data/posts';
 
 export const prerender = true;
@@ -16,13 +16,20 @@ export const prerender = true;
 export const GET: APIRoute = ({ site }) => {
   const base = (site?.href.replace(/\/$/, '') ?? siteConfig.url).replace(/\/$/, '');
   const abs = (p: string) => `${base}${p}`;
+  const home = getHomeContent('fr');
+  const about = getAboutContent('fr');
+  const contact = getContactContent('fr');
 
   const pages = [
-    { title: 'Accueil', href: '/', desc: homeContent.hero.subtitle },
+    { title: 'Accueil', href: '/', desc: home.hero.subtitle },
     { title: 'Destinations', href: '/destinations/rome/', desc: 'Mariage catholique à Rome' },
-    { title: aboutContent.title, href: '/about.htm', desc: aboutContent.metaDescription },
-    { title: 'Photo Gallery', href: '/photos.htm', desc: 'AFVL photo gallery — restored archive imagery' },
-    { title: contactContent.title, href: '/contact/', desc: contactContent.subtitle },
+    { title: about.title, href: '/about.htm', desc: about.metaDescription },
+    {
+      title: 'Galerie photos',
+      href: '/photos.htm',
+      desc: 'Galerie AFVL — images d’archives restaurées',
+    },
+    { title: contact.title, href: '/contact/', desc: contact.subtitle },
   ];
 
   const posts = getPublishedPosts();

@@ -41,18 +41,31 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     return context.redirect(redirectUrl.toString(), 301);
   }
 
-  // Routes legacy AFVL — URLs exactes .htm (réécriture vers pages Astro /about/ et /photos/)
+  // Routes legacy AFVL — URLs exactes .htm (réécriture vers pages Astro)
   if (pathname === '/about.htm' || pathname === '/about.htm/') {
     return context.rewrite('/about/');
   }
   if (pathname === '/photos.htm' || pathname === '/photos.htm/') {
     return context.rewrite('/photos/');
   }
+  if (pathname === '/en/about.htm' || pathname === '/en/about.htm/') {
+    return context.rewrite('/en/about/');
+  }
+  if (pathname === '/en/photos.htm' || pathname === '/en/photos.htm/') {
+    return context.rewrite('/en/photos/');
+  }
   if (pathname === '/about') {
     return context.redirect('/about.htm', 301);
   }
   if (pathname === '/photos') {
     return context.redirect('/photos.htm', 301);
+  }
+  // Sans slash final uniquement — /en/about/ reste la route Astro interne (réécrite depuis .htm)
+  if (pathname === '/en/about') {
+    return context.redirect('/en/about.htm', 301);
+  }
+  if (pathname === '/en/photos') {
+    return context.redirect('/en/photos.htm', 301);
   }
 
   // /sitemap → sitemap.xml (indexation), redirections permanentes en 301
@@ -65,6 +78,30 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   }
   if (pathname === '/en/sitemap' || pathname === '/en/sitemap/') {
     return context.redirect('/en/plan-du-site/', 301);
+  }
+  // Alias EN courants → slugs skeleton
+  if (
+    pathname === '/en/site-map' ||
+    pathname === '/en/site-map/' ||
+    pathname === '/en/sitemap.html' ||
+    pathname === '/en/sitemap.html/'
+  ) {
+    return context.redirect('/en/plan-du-site/', 301);
+  }
+  if (
+    pathname === '/en/privacy-policy' ||
+    pathname === '/en/privacy-policy/' ||
+    pathname === '/en/politique-de-confidentialite' ||
+    pathname === '/en/politique-de-confidentialite/'
+  ) {
+    return context.redirect('/en/privacy/', 301);
+  }
+  if (pathname === '/en/a-propos' || pathname === '/en/a-propos/') {
+    return context.redirect('/en/about.htm', 301);
+  }
+  // Skeleton /a-propos/ → URL publique AFVL legacy
+  if (pathname === '/a-propos' || pathname === '/a-propos/') {
+    return context.redirect('/about.htm', 301);
   }
   if (pathname === '/en/404' || pathname === '/en/404/') {
     return context.redirect('/404/', 301);

@@ -6,9 +6,12 @@
  *
  * NOTE: l'URL canonique dépend de `site` dans astro.config (process.env.SITE_URL).
  * En prod, SITE_URL DOIT être défini, sinon les URLs pointent sur le placeholder.
+ *
+ * hreflang : fr-CA / en-CA + x-default (URL FR). og:locale : fr_CA / en_CA.
  */
 import { siteConfig } from '@/config/site';
 import { OG_IMAGE, absoluteUrl } from '@/lib/seo';
+import { alternatePath, hasEnAlternate } from '@/lib/i18n';
 
 interface Props {
   title: string;
@@ -51,27 +54,23 @@ const ogWidth = usingDefaultImage ? OG_IMAGE.width : imageWidth;
 const ogHeight = usingDefaultImage ? OG_IMAGE.height : imageHeight;
 const ogImageType = usingDefaultImage ? OG_IMAGE.type : undefined;
 
-// i18n : détecte la langue via le préfixe /en/
-const isEn = pathname === '/en' || pathname.startsWith('/en/') || pathname.endsWith('.htm');
+// i18n : détecte la langue via le préfixe /en/ (ou chemin canonique EN .htm)
+const isEn =
+  pathname === '/en' ||
+  pathname.startsWith('/en/') ||
+  pathname === '/en/about.htm' ||
+  pathname === '/en/photos.htm';
 const ogLocale = isEn ? 'en_CA' : 'fr_CA';
 const ogLocaleAlt = isEn ? 'fr_CA' : 'en_CA';
 
-// Pages legacy .htm (AFVL) : contenu EN unique, pas de cluster hreflang FR/EN.
-const isLegacyHtm = pathname.endsWith('.htm');
-
-// URLs alternates (FR = sans /en/, EN = avec /en/)
-const stripEn = (p: string) => (p === '/en' || p === '/en/' ? '/' : p.replace(/^\/en(\/|$)/, '/'));
-const addEn = (p: string) => (p === '/' ? '/en/' : `/en${p}`);
-const frPath = stripEn(pathname);
-const enPath = addEn(frPath);
+const frPath = alternatePath(pathname, 'fr');
+const enPath = alternatePath(pathname, 'en');
 const frUrl = absoluteUrl(frPath, site);
 const enUrl = absoluteUrl(enPath, site);
 const xDefaultUrl = frUrl;
 
-// N'annoncer l'alternative EN que si le miroir anglais est réellement indexable.
-// Sinon on ne référence pas une page noindex dans le cluster hreflang.
-const showEnAlternate = siteConfig.enIndexable && !isLegacyHtm;
-const showHreflang = !isLegacyHtm;
+// N'annoncer l'alternative EN que si le miroir est indexable ET qu'une paire existe.
+const showEnAlternate = siteConfig.enIndexable && hasEnAlternate(pathname);
 
 // Flux RSS correspondant à la langue de la page (découverte par les agrégateurs).
 const rssUrl = absoluteUrl(isEn ? '/en/rss.xml' : '/rss.xml', site);
@@ -81,11 +80,9 @@ const twitter = siteConfig.twitterHandle;
 ---
 <link rel="canonical" href={canonical} />
 
-{showHreflang && <link rel="alternate" hreflang="fr-CA" href={frUrl} />}
+<link rel="alternate" hreflang="fr-CA" href={frUrl} />
 {showEnAlternate && <link rel="alternate" hreflang="en-CA" href={enUrl} />}
-{showHreflang && <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />}
-{isLegacyHtm && <link rel="alternate" hreflang="en" href={canonical} />}
-{isLegacyHtm && <link rel="alternate" hreflang="x-default" href={canonical} />}
+<link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
 
 <link rel="alternate" type="application/rss+xml" title={rssTitle} href={rssUrl} />
 

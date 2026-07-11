@@ -4,36 +4,44 @@ import JsonLd from '@components/JsonLd.astro';
 import PostHero from '@components/post/PostHero.astro';
 import PostBody from '@components/post/PostBody.astro';
 import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
+import { breadcrumbTrails } from '@/lib/breadcrumb';
 import { buildArticleGraph, buildFaqSchema } from '@/lib/schema';
 import { formatTitle } from '@/lib/seo';
 import type { Post } from '@/data/posts';
+import type { Lang } from '@/lib/i18n';
 
 interface Props {
   post: Post;
+  lang?: Lang;
 }
 
-const { post } = Astro.props;
+const { post, lang = 'fr' } = Astro.props;
 
 const origin = Astro.site ?? new URL(Astro.url.origin);
-const path = `/blog/${post.slug}/`;
-const ampUrl = new URL(`/blog/${post.slug}/amp/`, origin).href;
-const articleGraph = buildArticleGraph(post, origin, { path, lang: 'fr-CA' });
+const path = lang === 'en' ? `/en/blog/${post.slug}/` : `/blog/${post.slug}/`;
+const ampUrl =
+  lang === 'fr' ? new URL(`/blog/${post.slug}/amp/`, origin).href : undefined;
+const articleGraph = buildArticleGraph(post, origin, {
+  path,
+  lang: lang === 'en' ? 'en-CA' : 'fr-CA',
+});
 const faqSchema = post.faq?.length ? buildFaqSchema(post.faq) : null;
 ---
 <PageLayout
+  lang={lang === 'en' ? 'en-CA' : 'fr-CA'}
   title={formatTitle(post.metaTitle || post.title)}
   description={post.summary}
   image={post.image ? `${post.image}.webp` : undefined}
   imageAlt={post.imageAlt}
   type="article"
   ampUrl={ampUrl}
-  showBreadcrumb={false}
-  activeHref="/blog/"
+  breadcrumbs={breadcrumbTrails.post(post.title, lang)}
+  activeHref={lang === 'en' ? '/en/blog/' : '/blog/'}
 >
   <JsonLd schema={articleGraph} />
   {faqSchema && <JsonLd schema={faqSchema} />}
   <main>
-    <PostHero post={post} />
+    <PostHero post={post} lang={lang} />
     <PostBody post={post} />
     <FinalCtaSection />
   </main>

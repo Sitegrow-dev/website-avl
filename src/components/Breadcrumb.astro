@@ -4,9 +4,11 @@ import JsonLd from '@components/JsonLd.astro';
 
 interface Props {
   items?: BreadcrumbItem[] | null;
+  /** Langue pour l’aria-label (défaut : fr) */
+  lang?: 'fr' | 'en';
 }
 
-const { items } = Astro.props;
+const { items, lang = 'fr' } = Astro.props;
 
 if (!items?.length) return;
 
@@ -22,26 +24,37 @@ const breadcrumbSchema = {
     ...(item.href ? { item: new URL(item.href, origin).href } : {}),
   })),
 };
+
+const ariaLabel = lang === 'en' ? 'Breadcrumb' : "Fil d'Ariane";
 ---
 <JsonLd schema={breadcrumbSchema} />
-<nav aria-label="Fil d'Ariane">
-  <div class="mx-auto max-w-6xl px-5 py-3 sm:px-8 lg:px-10">
-    <ol class="flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm">
+<nav aria-label={ariaLabel} class="border-b border-black/[0.04] bg-bg-alt/60">
+  <div class="mx-auto max-w-[1440px] px-5 py-3 lg:px-20">
+    <ol class="flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] tracking-wide">
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
         return (
-          <li class="flex min-w-0 items-center gap-1.5">
+          <li class="flex min-w-0 items-center gap-2">
             {index > 0 && (
-              <span class="text-muted/50 select-none" aria-hidden="true">
-                ›
+              <span class="text-muted/40 select-none" aria-hidden="true">
+                /
               </span>
             )}
             {item.href && !isLast ? (
-              <a href={item.href} class="font-medium text-brand transition-colors hover:text-brand-hover">
+              <a
+                href={item.href}
+                class="font-medium text-muted transition-colors hover:text-brand"
+              >
                 {item.label}
               </a>
             ) : (
-              <span class="truncate font-medium text-muted" aria-current="page">
+              <span
+                class:list={[
+                  'truncate font-medium',
+                  isLast ? 'text-ink' : 'text-muted',
+                ]}
+                aria-current={isLast ? 'page' : undefined}
+              >
                 {item.label}
               </span>
             )}

@@ -1,8 +1,8 @@
 import type { APIRoute } from 'astro';
 import { siteConfig } from '@/config/site';
-import { homeContent } from '@/data/home';
+import { getHomeContent } from '@/data/home';
 import { servicesContent, services } from '@/data/services';
-import { aboutContent } from '@/data/about';
+import { getAboutContent } from '@/data/about';
 import { getPublishedPosts } from '@/data/posts';
 
 export const prerender = true;
@@ -14,6 +14,8 @@ export const prerender = true;
  */
 export const GET: APIRoute = ({ site }) => {
   const base = (site?.href.replace(/\/$/, '') ?? siteConfig.url).replace(/\/$/, '');
+  const homeContent = getHomeContent('fr');
+  const aboutContent = getAboutContent('fr');
 
   const out: string[] = [];
 

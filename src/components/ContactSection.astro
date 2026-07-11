@@ -1,11 +1,14 @@
 ---
-import { contactContent } from '@/data/contact';
+import { getContactContent } from '@/data/contact';
 import { siteConfig } from '@/config/site';
 import { PUBLIC_FORMSPREE_ID } from 'astro:env/client';
+import { resolveLang } from '@/lib/i18n';
 
-const { title, subtitle, blocks, topics, form } = contactContent;
+const lang = resolveLang(Astro.currentLocale, Astro.url.pathname);
+const { title, subtitle, blocks, topics, form } = getContactContent(lang);
 const formspreeId = PUBLIC_FORMSPREE_ID?.trim();
 const endpoint = formspreeId ? `https://formspree.io/f/${formspreeId}` : null;
+const subjectPrefix = lang === 'en' ? 'New message' : 'Nouveau message';
 ---
 
 <section class="px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
@@ -52,7 +55,7 @@ const endpoint = formspreeId ? `https://formspree.io/f/${formspreeId}` : null;
           >
           </p>
 
-          <input type="hidden" name="_subject" value={`Nouveau message : ${siteConfig.siteName}`} />
+          <input type="hidden" name="_subject" value={`${subjectPrefix} : ${siteConfig.siteName}`} />
           {/* Formspree : désactive le captcha côté service (on s'en remet à son filtre anti-spam intégré) */}
           <input type="hidden" name="_captcha" value="false" />
 

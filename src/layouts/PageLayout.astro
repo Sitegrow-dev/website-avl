@@ -104,11 +104,17 @@ const skipLabel = isEnPage ? 'Skip to main content' : 'Aller au contenu principa
     >
       {skipLabel}
     </a>
-    {showNav && <HomeNavigation lang={navLang} activeHref={activeHref} />}
-    {renderBreadcrumb && <Breadcrumb items={breadcrumbs} />}
+    {showNav && (
+      <HomeNavigation
+        lang={navLang}
+        activeHref={activeHref}
+        switchPath={canonicalPath ?? Astro.url.pathname}
+      />
+    )}
+    {renderBreadcrumb && <Breadcrumb items={breadcrumbs} lang={navLang} />}
     <div id="main-content">
       <slot />
     </div>
-    {showFooter && <HomeFooter />}
+    {showFooter && <HomeFooter lang={navLang} />}
   </body>
 </html>

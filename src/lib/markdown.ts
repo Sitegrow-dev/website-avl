@@ -21,10 +21,24 @@ marked.setOptions({
   renderer,
 });
 
+/**
+ * Retire le H1 ATX initial (`# Titre`) du Markdown.
+ * Le titre est déjà rendu dans le hero article — éviter un second H1 avant le corps.
+ */
+export function stripLeadingH1(markdown: string): string {
+  if (!markdown) return '';
+  return markdown.replace(/^\uFEFF?\s*#(?!#)\s+[^\n]+(?:\n+|$)/, '');
+}
+
 /** Rend du Markdown Holding en HTML sûr pour `set:html` (contenu éditorial de confiance). */
-export function renderMarkdown(markdown: string): string {
+export function renderMarkdown(
+  markdown: string,
+  opts: { stripLeadingH1?: boolean } = {}
+): string {
   if (!markdown?.trim()) return '';
-  return marked.parse(markdown, { async: false }) as string;
+  const source = opts.stripLeadingH1 ? stripLeadingH1(markdown) : markdown;
+  if (!source.trim()) return '';
+  return marked.parse(source, { async: false }) as string;
 }
 
 /** Extrait une TOC depuis les titres ## du Markdown. */
