@@ -41,6 +41,20 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     return context.redirect(redirectUrl.toString(), 301);
   }
 
+  // Routes legacy AFVL — URLs exactes .htm (réécriture vers pages Astro /about/ et /photos/)
+  if (pathname === '/about.htm' || pathname === '/about.htm/') {
+    return context.rewrite('/about/');
+  }
+  if (pathname === '/photos.htm' || pathname === '/photos.htm/') {
+    return context.rewrite('/photos/');
+  }
+  if (pathname === '/about') {
+    return context.redirect('/about.htm', 301);
+  }
+  if (pathname === '/photos') {
+    return context.redirect('/photos.htm', 301);
+  }
+
   // /sitemap → sitemap.xml (indexation), redirections permanentes en 301
   if (pathname === '/sitemap' || pathname === '/sitemap/') {
     return context.redirect('/sitemap.xml', 301);

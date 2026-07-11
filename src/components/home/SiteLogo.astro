@@ -3,11 +3,37 @@ import { siteConfig } from '@/config/site';
 
 interface Props {
   class?: string;
+  /**
+   * `light` = logo clair (fonds sombres, header).
+   * `dark` = logo sombre (fonds clairs, footer / menu mobile).
+   */
+  variant?: 'light' | 'dark';
+  /** Hauteur d’affichage en px (largeur auto). */
   height?: number;
 }
 
-const { class: className = '' } = Astro.props;
+const { class: className = '', variant = 'light', height = 64 } = Astro.props;
+const base = variant === 'dark' ? '/images/logo/logo-dark' : '/images/logo/logo';
+const width = Math.round((height * 300) / 100);
 ---
-<a href="/" class:list={['inline-flex shrink-0 items-center', className]} aria-label={siteConfig.siteName}>
-  <span class="font-display text-xl text-ink lg:text-[26px]">{siteConfig.siteName}</span>
+<a
+  href="/"
+  class:list={['inline-flex shrink-0 items-center', className]}
+  aria-label={siteConfig.siteName}
+>
+  <picture>
+    <source srcset={`${base}.avif`} type="image/avif" />
+    <source srcset={`${base}.webp`} type="image/webp" />
+    <img
+      src={`${base}.webp`}
+      alt={siteConfig.siteName}
+      width={width}
+      height={height}
+      class="w-auto max-w-[min(100%,280px)] object-contain"
+      style={`height: ${height}px; width: auto;`}
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
 </a>

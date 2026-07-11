@@ -1,14 +1,16 @@
 ---
 import { siteConfig } from '@/config/site';
 import Container from '@components/ui/Container.astro';
+import SiteLogo from '@components/home/SiteLogo.astro';
 
-const { footer } = siteConfig;
+const { footer, siteName } = siteConfig;
+const year = new Date().getFullYear();
 ---
 <footer class="border-t border-border bg-white pb-10 pt-20 lg:pt-24">
   <Container>
     <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
       <div>
-        <p class="font-display text-2xl text-ink">Mariage &amp; Patrimoine</p>
+        <SiteLogo variant="dark" height={88} />
         <p class="mt-6 max-w-xs text-[15px] leading-6 text-muted">{footer.tagline}</p>
       </div>
 
@@ -30,7 +32,7 @@ const { footer } = siteConfig;
 
     <div class="mt-16 border-t border-border pt-10">
       <p class="text-sm text-muted">
-        &copy; 2024 Mariage &amp; Patrimoine Italie. Tous droits réservés.
+        &copy; {year} {siteName}. Tous droits réservés.
       </p>
     </div>
   </Container>

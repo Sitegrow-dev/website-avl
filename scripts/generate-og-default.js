@@ -21,25 +21,25 @@ if (!existsSync(outputDir)) mkdirSync(outputDir, { recursive: true });
 const siteName = siteConfig.siteName || 'Site';
 const city = siteConfig.city || '';
 
-// 1200×630, fond violet brand (#8A5CF6), texte blanc centré.
+// 1200×630, fond sombre AFVL (#1a1a1a), texte blanc centré.
 const svg = `<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#8A5CF6"/>
-      <stop offset="100%" stop-color="#7C4FE0"/>
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#2a1515"/>
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <text x="600" y="300" font-family="system-ui, -apple-system, sans-serif" font-size="84" font-weight="700"
+  <text x="600" y="270" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="700"
         fill="white" text-anchor="middle" dominant-baseline="middle">${escapeXml(siteName)}</text>
   ${
     city
-      ? `<text x="600" y="400" font-family="system-ui, -apple-system, sans-serif" font-size="36" font-weight="500"
-        fill="rgba(255,255,255,0.85)" text-anchor="middle" dominant-baseline="middle">${escapeXml(city)}</text>`
+      ? `<text x="600" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="28" font-weight="500"
+        fill="rgba(255,255,255,0.8)" text-anchor="middle" dominant-baseline="middle">Mission Catholique Francophone en Chine</text>`
       : ''
   }
   <text x="600" y="540" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="500"
-        fill="rgba(255,255,255,0.6)" text-anchor="middle" dominant-baseline="middle">Sitegrow Skeleton</text>
+        fill="rgba(255,255,255,0.45)" text-anchor="middle" dominant-baseline="middle">Amor Fides Via Lux</text>
 </svg>`;
 
 function escapeXml(s) {

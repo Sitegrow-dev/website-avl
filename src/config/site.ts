@@ -1,28 +1,28 @@
 /**
- * Configuration maîtresse du site AVL — Mariage en Italie.
+ * Configuration maîtresse du site AFVL — Amor Fides Via Lux.
  */
 export type BusinessType = 'Organization' | 'LocalBusiness' | 'WebSite';
 
 export const siteConfig = {
-  siteName: 'Mariage en Italie',
-  city: 'Rome',
-  region: 'Italie',
-  domain: 'mariage-en-italie.exemple.com',
-  url: 'https://mariage-en-italie.exemple.com',
+  siteName: 'AFVL — Amor Fides Via Lux',
+  city: 'Chine',
+  region: 'Asie',
+  domain: 'afvl.org',
+  url: 'https://afvl.org',
   defaultDescription:
-    'Accompagnement expert pour votre mariage catholique en Italie : démarches canoniques, choix de destination et organisation de votre célébration.',
+    'AFVL — Amor Fides Via Lux : Mission Catholique Francophone en Chine. Foi, fraternité et service au service de l’Évangile.',
   enIndexable: false,
-  contactEmail: 'contact@mariage-en-italie.exemple.com',
+  contactEmail: 'contact@afvl.org',
   phone: '',
-  logo: '',
+  logo: '/images/logo/logo.webp',
   twitterHandle: '',
   allowAiCrawlers: true,
   address: {
     street: '',
-    city: 'Rome',
-    region: 'Lazio',
+    city: '',
+    region: '',
     postalCode: '',
-    country: 'IT',
+    country: 'CN',
   },
   businessType: 'Organization' as BusinessType,
   openingHours: [] as string[],
@@ -35,33 +35,32 @@ export const siteConfig = {
     x: '',
   },
   nav: [
-    { label: 'Mariage catholique', href: '/#processus' },
+    { label: 'About Us', href: '/about.htm' },
+    { label: 'Photo Gallery', href: '/photos.htm' },
     { label: 'Destinations', href: '/destinations/rome/' },
-    { label: 'Voyage & pèlerinage', href: '/#voyage' },
     { label: 'Patrimoine & Vatican', href: '/#patrimoine' },
     { label: 'Blog', href: '/blog/' },
   ],
-  navCta: { label: 'Planifier mon mariage', href: '/contact/' },
+  navCta: { label: 'Contact Us', href: '/contact/' },
   footer: {
     tagline:
-      "Accompagnement expert pour votre union catholique au cœur de l'histoire et du patrimoine italien.",
+      'Mission Catholique Francophone en Chine — Amor Fides Via Lux.',
     columns: [
       {
-        title: 'Mariage',
+        title: 'AFVL',
         links: [
-          { label: 'Mariage catholique Italie', href: '/' },
-          { label: 'Démarches canoniques', href: '/blog/' },
-          { label: 'Destinations', href: '/destinations/rome/' },
-          { label: 'Guides & ressources', href: '/blog/' },
+          { label: 'Accueil', href: '/' },
+          { label: 'About Us', href: '/about.htm' },
+          { label: 'Photo Gallery', href: '/photos.htm' },
+          { label: 'Contact', href: '/contact/' },
         ],
       },
       {
-        title: 'Voyage & Patrimoine',
+        title: 'Ressources',
         links: [
-          { label: 'Visiter le Vatican', href: '/#patrimoine' },
-          { label: 'Pèlerinage sacré', href: '/#voyage' },
-          { label: 'Lune de miel', href: '/#lune-de-miel' },
-          { label: 'Bibliothèque vaticane', href: '/#patrimoine' },
+          { label: 'Blog', href: '/blog/' },
+          { label: 'Destinations', href: '/destinations/rome/' },
+          { label: 'Patrimoine & Vatican', href: '/#patrimoine' },
         ],
       },
       {
@@ -69,7 +68,6 @@ export const siteConfig = {
         links: [
           { label: 'À propos', href: '/a-propos/' },
           { label: 'Contact', href: '/contact/' },
-          { label: 'Mentions légales', href: '/politique-de-confidentialite/' },
           { label: 'Confidentialité', href: '/politique-de-confidentialite/' },
         ],
       },

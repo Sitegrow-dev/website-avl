@@ -44,6 +44,26 @@
       "source": "/sitemap/",
       "destination": "/sitemap.xml",
       "statusCode": 301
+    },
+    {
+      "source": "/about",
+      "destination": "/about.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/photos",
+      "destination": "/photos.htm",
+      "statusCode": 301
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/about.htm",
+      "destination": "/about/"
+    },
+    {
+      "source": "/photos.htm",
+      "destination": "/photos/"
     }
   ]
 }

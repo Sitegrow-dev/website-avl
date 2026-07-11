@@ -1,6 +1,6 @@
 {
-  "name": "Sitegrow Skeleton",
-  "short_name": "Sitegrow",
+  "name": "AFVL — Amor Fides Via Lux",
+  "short_name": "AFVL",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#8A5CF6",
-  "background_color": "#ffffff",
+  "theme_color": "#1a1a1a",
+  "background_color": "#1a1a1a",
   "display": "standalone"
 }

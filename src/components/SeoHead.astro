@@ -21,6 +21,8 @@ interface Props {
   imageWidth?: number;
   imageHeight?: number;
   type?: 'website' | 'article';
+  /** Chemin canonique forcé (ex. /about.htm) — sinon Astro.url.pathname */
+  canonicalPath?: string;
 }
 
 const {
@@ -31,10 +33,11 @@ const {
   imageWidth,
   imageHeight,
   type = 'website',
+  canonicalPath,
 } = Astro.props;
 
 const site = Astro.site ?? new URL(siteConfig.url);
-const pathname = Astro.url.pathname;
+const pathname = canonicalPath ?? Astro.url.pathname;
 
 // URL canonique (toutes les routes portent un slash final grâce au middleware)
 const canonical = absoluteUrl(pathname, site);
@@ -49,9 +52,12 @@ const ogHeight = usingDefaultImage ? OG_IMAGE.height : imageHeight;
 const ogImageType = usingDefaultImage ? OG_IMAGE.type : undefined;
 
 // i18n : détecte la langue via le préfixe /en/
-const isEn = pathname === '/en' || pathname.startsWith('/en/');
+const isEn = pathname === '/en' || pathname.startsWith('/en/') || pathname.endsWith('.htm');
 const ogLocale = isEn ? 'en_CA' : 'fr_CA';
 const ogLocaleAlt = isEn ? 'fr_CA' : 'en_CA';
+
+// Pages legacy .htm (AFVL) : contenu EN unique, pas de cluster hreflang FR/EN.
+const isLegacyHtm = pathname.endsWith('.htm');
 
 // URLs alternates (FR = sans /en/, EN = avec /en/)
 const stripEn = (p: string) => (p === '/en' || p === '/en/' ? '/' : p.replace(/^\/en(\/|$)/, '/'));
@@ -64,7 +70,8 @@ const xDefaultUrl = frUrl;
 
 // N'annoncer l'alternative EN que si le miroir anglais est réellement indexable.
 // Sinon on ne référence pas une page noindex dans le cluster hreflang.
-const showEnAlternate = siteConfig.enIndexable;
+const showEnAlternate = siteConfig.enIndexable && !isLegacyHtm;
+const showHreflang = !isLegacyHtm;
 
 // Flux RSS correspondant à la langue de la page (découverte par les agrégateurs).
 const rssUrl = absoluteUrl(isEn ? '/en/rss.xml' : '/rss.xml', site);
@@ -74,9 +81,11 @@ const twitter = siteConfig.twitterHandle;
 ---
 <link rel="canonical" href={canonical} />
 
-<link rel="alternate" hreflang="fr-CA" href={frUrl} />
+{showHreflang && <link rel="alternate" hreflang="fr-CA" href={frUrl} />}
 {showEnAlternate && <link rel="alternate" hreflang="en-CA" href={enUrl} />}
-<link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
+{showHreflang && <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />}
+{isLegacyHtm && <link rel="alternate" hreflang="en" href={canonical} />}
+{isLegacyHtm && <link rel="alternate" hreflang="x-default" href={canonical} />}
 
 <link rel="alternate" type="application/rss+xml" title={rssTitle} href={rssUrl} />
 

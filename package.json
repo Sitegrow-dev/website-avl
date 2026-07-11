@@ -10,7 +10,7 @@
     "dev": "astro dev --port 4325 --host",
     "start": "astro dev --port 4325 --host",
     "validate": "tsx scripts/validate-site-config.ts",
-    "build": "npm run validate && astro build && node scripts/fix-vercel-runtime.js",
+    "build": "npm run validate && astro build && node scripts/flatten-htm-routes.js && node scripts/fix-vercel-runtime.js",
     "check": "astro check",
     "check:all": "astro check && prettier --check . && eslint .",
     "lint": "eslint .",

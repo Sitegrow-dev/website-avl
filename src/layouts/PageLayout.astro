@@ -32,6 +32,8 @@ interface Props {
   showFooter?: boolean;
   /** Lien actif pour la navigation */
   activeHref?: string;
+  /** Chemin canonique forcé (ex. /about.htm pour les routes legacy) */
+  canonicalPath?: string;
 }
 
 const {
@@ -48,6 +50,7 @@ const {
   showBreadcrumb = true,
   showFooter = true,
   activeHref,
+  canonicalPath,
 } = Astro.props;
 
 const renderBreadcrumb = showBreadcrumb && breadcrumbs && breadcrumbs.length > 0;
@@ -83,7 +86,14 @@ const skipLabel = isEnPage ? 'Skip to main content' : 'Aller au contenu principa
     {description && <meta name="description" content={description} />}
     <meta name="robots" content={robotsContent} />
     <title>{title}</title>
-    <SeoHead title={title} description={description} image={image} imageAlt={imageAlt} type={type} />
+    <SeoHead
+      title={title}
+      description={description}
+      image={image}
+      imageAlt={imageAlt}
+      type={type}
+      canonicalPath={canonicalPath}
+    />
     {ampUrl && <link rel="amphtml" href={ampUrl} />}
     <FaviconHead />
   </head>

@@ -20,7 +20,8 @@ export const GET: APIRoute = ({ site }) => {
   const pages = [
     { title: 'Accueil', href: '/', desc: homeContent.hero.subtitle },
     { title: 'Destinations', href: '/destinations/rome/', desc: 'Mariage catholique à Rome' },
-    { title: aboutContent.title, href: '/a-propos/', desc: aboutContent.metaDescription },
+    { title: aboutContent.title, href: '/about.htm', desc: aboutContent.metaDescription },
+    { title: 'Photo Gallery', href: '/photos.htm', desc: 'AFVL photo gallery — restored archive imagery' },
     { title: contactContent.title, href: '/contact/', desc: contactContent.subtitle },
   ];
 

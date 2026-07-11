@@ -11,6 +11,8 @@ export const prerender = true;
  */
 const PAGE_SOURCES: Record<string, string[]> = {
   '/': ['src/pages/index.astro', 'src/data/home.ts'],
+  '/about.htm': ['src/pages/about/index.astro', 'src/data/about.ts'],
+  '/photos.htm': ['src/pages/photos/index.astro', 'src/data/photos.ts'],
   '/a-propos/': ['src/pages/a-propos/index.astro', 'src/data/about.ts'],
   '/blog/': ['src/pages/blog/index.astro', 'src/data/posts.ts'],
   '/contact/': ['src/pages/contact/index.astro', 'src/data/contact.ts'],
@@ -36,6 +38,8 @@ const PAGE_SOURCES: Record<string, string[]> = {
  */
 const FR_STATIC_PAGES = [
   '/',
+  '/about.htm',
+  '/photos.htm',
   '/a-propos/',
   '/blog/',
   '/contact/',
@@ -61,6 +65,13 @@ const EN_STATIC_PAGES = [
 type Alternate = { hreflang: string; href: string };
 
 function buildAlternates(frPath: string, base: string): Alternate[] {
+  // Pages legacy .htm : pas de miroir EN séparé (contenu déjà en anglais).
+  if (frPath.endsWith('.htm')) {
+    return [
+      { hreflang: 'en', href: `${base}${frPath}` },
+      { hreflang: 'x-default', href: `${base}${frPath}` },
+    ];
+  }
   const enPath = frPath === '/' ? '/en/' : `/en${frPath}`;
   const alts: Alternate[] = [{ hreflang: 'fr-CA', href: `${base}${frPath}` }];
   // N'inclure l'alternative EN que si le miroir anglais est indexable.

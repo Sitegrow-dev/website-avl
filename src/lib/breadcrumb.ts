@@ -11,6 +11,7 @@ const labels = {
     home: 'Accueil',
     blog: 'Blog',
     about: 'À propos',
+    photos: 'Galerie photos',
     contact: 'Nous joindre',
     services: 'Services',
     privacy: 'Politique de confidentialité',
@@ -20,7 +21,8 @@ const labels = {
   en: {
     home: 'Home',
     blog: 'Blog',
-    about: 'About',
+    about: 'About Us',
+    photos: 'Photo Gallery',
     contact: 'Contact',
     services: 'Services',
     privacy: 'Privacy Policy',
@@ -48,6 +50,15 @@ export const breadcrumbTrails = {
     { label: title },
   ],
   about: (lang: Lang = 'fr'): BreadcrumbItem[] => [homeItem(lang), { label: labels[lang].about }],
+  /** Routes legacy AFVL (.htm) — libellés EN comme sur l’ancien site. */
+  aboutHtm: (): BreadcrumbItem[] => [
+    { label: labels.en.home, href: '/' },
+    { label: labels.en.about },
+  ],
+  photosHtm: (): BreadcrumbItem[] => [
+    { label: labels.en.home, href: '/' },
+    { label: labels.en.photos },
+  ],
   contact: (lang: Lang = 'fr'): BreadcrumbItem[] => [
     homeItem(lang),
     { label: labels[lang].contact },
@@ -81,6 +92,8 @@ export const frPagesList: SitePageLink[] = [
   { label: labels.fr.home, href: '/', section: 'main' },
   { label: labels.fr.services, href: '/services/', section: 'main' },
   { label: labels.fr.blog, href: '/blog/', section: 'main' },
+  { label: labels.en.about, href: '/about.htm', section: 'main' },
+  { label: labels.en.photos, href: '/photos.htm', section: 'main' },
   { label: labels.fr.about, href: '/a-propos/', section: 'main' },
   { label: labels.fr.contact, href: '/contact/', section: 'main' },
   { label: labels.fr.privacy, href: '/politique-de-confidentialite/', section: 'legal' },
