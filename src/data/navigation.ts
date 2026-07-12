@@ -20,18 +20,22 @@ const mariageChildrenFr = [
   {
     label: 'Se marier à l’église catholique',
     href: '/se-marier-eglise-catholique-italie/',
+    description: 'Page pilier : étapes, diocèses et conseils depuis le Québec',
   },
   {
     label: 'Documents pour un mariage religieux',
     href: '/documents-mariage-religieux-etranger/',
+    description: 'Dossier canonique, délais et pièces à préparer',
   },
   {
     label: 'Coût d’un mariage en Italie',
     href: '/cout-mariage-italie/',
+    description: 'Budget réaliste, postes de frais et fourchettes',
   },
   {
     label: 'Wedding planner mariage en Italie',
     href: '/wedding-planner-mariage-italie/',
+    description: 'Coordination locale, lieux et fournisseurs',
   },
 ] as const;
 
@@ -77,18 +81,22 @@ const mariageChildrenEn = [
   {
     label: 'Getting married in a Catholic church',
     href: '/se-marier-eglise-catholique-italie/',
+    description: 'Pillar guide: steps, dioceses, and tips from Quebec',
   },
   {
     label: 'Documents for a religious marriage abroad',
     href: '/documents-mariage-religieux-etranger/',
+    description: 'Canonical file, timelines, and paperwork to prepare',
   },
   {
     label: 'Cost of a wedding in Italy',
     href: '/cout-mariage-italie/',
+    description: 'Realistic budget, cost items, and ranges',
   },
   {
     label: 'Wedding planner for Italy',
     href: '/wedding-planner-mariage-italie/',
+    description: 'Local coordination, venues, and vendors',
   },
 ] as const;
 
@@ -147,6 +155,7 @@ export const navigationByLang = {
       {
         label: 'Mariage catholique en Italie',
         href: '/se-marier-eglise-catholique-italie/',
+        variant: 'mega' as const,
         children: mariageChildrenFr,
       },
       {
@@ -234,6 +243,7 @@ export const navigationByLang = {
       {
         label: 'Catholic wedding in Italy',
         href: '/se-marier-eglise-catholique-italie/',
+        variant: 'mega' as const,
         children: mariageChildrenEn,
       },
       {
