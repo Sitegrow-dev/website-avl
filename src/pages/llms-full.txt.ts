@@ -3,7 +3,7 @@ import { siteConfig } from '@/config/site';
 import { getHomeContent } from '@/data/home';
 import { servicesContent, services } from '@/data/services';
 import { getAboutContent } from '@/data/about';
-import { getPublishedPosts, getPostHref } from '@/data/posts';
+import { getGuidePosts, getPostHref } from '@/data/posts';
 
 export const prerender = true;
 
@@ -73,7 +73,7 @@ export const GET: APIRoute = ({ site }) => {
   out.push('');
 
   // Guides & articles complets
-  const posts = getPublishedPosts('fr');
+  const posts = getGuidePosts('fr');
   if (posts.length > 0) {
     out.push('## Guides & blog');
     out.push('');

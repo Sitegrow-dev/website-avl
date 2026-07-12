@@ -22,6 +22,7 @@ const POSTS_PER_PAGE = 9;
 
 const { lang = 'fr' } = Astro.props;
 const ui = lang === 'en' ? postUiEn : postUi;
+/** Uniquement les vrais articles blog (Holding) — jamais les guides. */
 const featured = getFeaturedPost(lang);
 const posts = getPublishedPosts(lang).filter((p) => !p.featured);
 const hasPosts = Boolean(featured) || posts.length > 0;

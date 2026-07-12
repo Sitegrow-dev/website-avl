@@ -4,7 +4,7 @@ import { getHomeContent } from '@/data/home';
 import { getAboutContent } from '@/data/about';
 import { getContactContent } from '@/data/contact';
 import { getPhotosContent } from '@/data/photos';
-import { getPublishedPosts, getPostHref } from '@/data/posts';
+import { getGuidePosts, getPostHref } from '@/data/posts';
 
 export const prerender = true;
 
@@ -34,7 +34,7 @@ export const GET: APIRoute = ({ site }) => {
     { title: contact.title, href: '/contact/', desc: contact.intro },
   ];
 
-  const posts = getPublishedPosts('fr');
+  const posts = getGuidePosts('fr');
 
   const out: string[] = [];
   out.push(`# ${siteConfig.siteName}`);

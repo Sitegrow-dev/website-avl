@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getPostHref, getPublishedPosts } from '@/data/posts';
+import { getGuidePosts, getPostHref, getPublishedPosts } from '@/data/posts';
 import { siteConfig } from '@/config/site';
 import { gitLastmod } from '@/lib/git-lastmod';
 import { alternatePath, hasEnAlternate, isEnOnlyPath } from '@/lib/i18n';
@@ -27,9 +27,7 @@ const PAGE_SOURCES: Record<string, string[]> = {
 
 /**
  * Pages statiques FR (+ pages EN-only à la racine).
- * Liste maintenue à la main : synchronisée avec src/pages/*.astro.
- * /a-propos/ et /services/ exclus (redirection / retiré).
- * /about.htm et /photos.htm sont EN-only mais restent dans le sitemap (URL racine unique).
+ * Guides exclus (listés via getGuidePosts). Blog = Holding uniquement.
  */
 const FR_STATIC_PAGES = [
   '/',
@@ -42,7 +40,6 @@ const FR_STATIC_PAGES = [
 
 /**
  * Miroirs EN : pages réelles sous src/pages/en/ (URLs publiques).
- * Pas de /en/about.htm ni /en/photos.htm (redirigent vers les URLs racine).
  */
 const EN_STATIC_PAGES = [
   '/en/',
@@ -112,6 +109,15 @@ export const GET: APIRoute = ({ site }) => {
     }
   }
 
+  for (const post of getGuidePosts('fr')) {
+    const path = getPostHref(post);
+    entries.push({
+      loc: `${base}${path}`,
+      lastmod: post.updated || post.date || undefined,
+      alts: buildAlternates(path, base),
+    });
+  }
+
   for (const post of getPublishedPosts('fr')) {
     const path = getPostHref(post);
     entries.push({
@@ -122,6 +128,14 @@ export const GET: APIRoute = ({ site }) => {
   }
 
   if (siteConfig.enIndexable) {
+    for (const post of getGuidePosts('en')) {
+      const path = getPostHref(post);
+      entries.push({
+        loc: `${base}${path}`,
+        lastmod: post.updated || post.date || undefined,
+        alts: buildAlternates(path, base),
+      });
+    }
     for (const post of getPublishedPosts('en')) {
       const path = getPostHref(post);
       entries.push({

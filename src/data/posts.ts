@@ -45,12 +45,10 @@ import {
 } from '@/data/local-post-itineraire-rome';
 
 /**
- * Paires de slugs blog connues (locales + Holding).
- * Appliquées après fusion pour :
- * - câbler alternateSlug même si Holding écrase l’entrée FR locale
- * - renommer un éventuel miroir EN Holding encore publié sous le slug FR
+ * Paires de slugs guides FR ↔ EN (pages pilier à l’URL racine).
+ * Ne concerne pas le blog Holding.
  */
-const KNOWN_BLOG_SLUG_PAIRS: Array<{ fr: string; en: string }> = [
+const KNOWN_GUIDE_SLUG_PAIRS: Array<{ fr: string; en: string }> = [
   {
     fr: 'se-marier-eglise-catholique-italie',
     en: 'getting-married-catholic-church-italy',
@@ -152,48 +150,38 @@ export const blogCategories = [
 export const postUi = {
   backLink: 'Retour au blog',
   listEyebrow: 'Blog',
-  listTitle: 'Guides & ressources',
+  listTitle: 'Blog',
   listSubtitle:
-    'Conseils pratiques, démarches, destinations et inspirations pour votre mariage catholique en Italie.',
-  metaTitle: 'Guides & ressources - Mariage catholique en Italie',
+    'Articles et actualités depuis notre rédaction, distincts des guides mariage et voyage.',
+  metaTitle: 'Blog - AFVL Amor Fides Via Lux',
   metaDescription:
-    'Découvrez conseils pratiques, démarches et inspirations pour organiser votre mariage catholique en Italie, de Rome aux plus beaux diocèses.',
+    'Lisez les articles du blog AFVL sur le mariage catholique, le patrimoine et le voyage en Italie.',
   readArticle: "Lire l'article",
-  comingSoon: 'Bientôt disponible',
+  comingSoon: 'Les articles du blog arriveront bientôt.',
 } as const;
 
 export const postUiEn = {
   backLink: 'Back to blog',
   listEyebrow: 'Blog',
-  listTitle: 'Guides & resources',
+  listTitle: 'Blog',
   listSubtitle:
-    'Practical advice, procedures, destinations and inspiration for your Catholic wedding in Italy.',
-  metaTitle: 'Catholic Wedding in Italy: Guides & Resources - AFVL',
+    'Articles and updates from our editorial team — separate from the wedding and travel guides.',
+  metaTitle: 'Blog - AFVL Amor Fides Via Lux',
   metaDescription:
-    'Explore practical guides on Catholic weddings in Italy: canonical steps, required documents, church destinations, and tips to plan your ceremony with',
+    'Read AFVL blog articles on Catholic weddings, heritage, and travel in Italy.',
   readArticle: 'Read the article',
-  comingSoon: 'Coming soon',
+  comingSoon: 'Blog articles coming soon.',
 } as const;
 
 function postKey(post: Pick<Post, 'slug' | 'lang'>): string {
   return `${post.lang ?? 'fr'}:${post.slug}`;
 }
 
-function mergePosts(holding: Post[], local: Post[]): Post[] {
-  const map = new Map<string, Post>();
-  for (const post of local) map.set(postKey(post), post);
-  // Holding gagne en cas de collision (CMS = source de vérité).
-  for (const post of holding) map.set(postKey(post), post);
-  return Array.from(map.values()).sort((a, b) =>
-    a.date < b.date ? 1 : a.date > b.date ? -1 : 0
-  );
-}
-
-function applyKnownBlogSlugPairs(all: Post[]): Post[] {
+function applyKnownGuideSlugPairs(all: Post[]): Post[] {
   const map = new Map<string, Post>();
   for (const post of all) map.set(postKey(post), post);
 
-  for (const pair of KNOWN_BLOG_SLUG_PAIRS) {
+  for (const pair of KNOWN_GUIDE_SLUG_PAIRS) {
     const wrongEnKey = postKey({ slug: pair.fr, lang: 'en' });
     const rightEnKey = postKey({ slug: pair.en, lang: 'en' });
     const wrongEn = map.get(wrongEnKey);
@@ -231,7 +219,7 @@ function registerAlternates(all: Post[]): void {
     return { fr: `/blog/${frSlug}/`, en: `/en/blog/${enSlug}/` };
   };
 
-  for (const pair of KNOWN_BLOG_SLUG_PAIRS) {
+  for (const pair of KNOWN_GUIDE_SLUG_PAIRS) {
     const key = `${pair.fr}→${pair.en}`;
     if (seen.has(key)) continue;
     seen.add(key);
@@ -252,7 +240,7 @@ async function loadPostsFromHolding(): Promise<Post[]> {
   if (!hasHoldingApiKey()) {
     if (process.env.NODE_ENV !== 'test') {
       console.warn(
-        '[posts] HOLDING_API_KEY absent : articles locaux uniquement (https://holding.sitegrow.ca/docs).'
+        '[posts] HOLDING_API_KEY absent : aucun article blog Holding (https://holding.sitegrow.ca/docs).'
       );
     }
     return [];
@@ -269,11 +257,20 @@ async function loadPostsFromHolding(): Promise<Post[]> {
 
 const holdingPosts = await loadPostsFromHolding();
 
-/** Tous les articles (Holding + locaux), FR et EN. */
-export const posts: Post[] = applyKnownBlogSlugPairs(
-  mergePosts(holdingPosts, localPosts)
-);
-registerAlternates(posts);
+/**
+ * Guides locaux (mariage, voyage, Vatican…) — URL racine, PAS le blog.
+ * Ne jamais fusionner dans `posts`.
+ */
+export const guides: Post[] = applyKnownGuideSlugPairs(localPosts);
+
+/**
+ * Vrais articles de blog (Holding CMS uniquement), sous `/blog/`.
+ */
+export const posts: Post[] = holdingPosts
+  .map((post) => ({ ...post, route: 'blog' as const }))
+  .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+
+registerAlternates([...guides, ...posts]);
 
 function hasRenderableBody(post: Post): boolean {
   return Boolean(post.bodyMarkdown?.trim()) || post.sections.length > 0;
@@ -283,7 +280,7 @@ export function getPostRoute(post: Pick<Post, 'route'>): PostRoute {
   return post.route ?? 'blog';
 }
 
-/** URL publique de l’article (racine pour les guides, /blog/ pour le reste). */
+/** URL publique : guide → `/slug/` ; blog → `/blog/slug/`. */
 export function getPostHref(
   post: Pick<Post, 'slug' | 'published' | 'lang' | 'route'>,
 ): string {
@@ -295,21 +292,21 @@ export function getPostHref(
   return isEn ? `/en/blog/${post.slug}/` : `/blog/${post.slug}/`;
 }
 
+/** Guides racine uniquement. */
+export function getGuidePosts(lang: Lang = 'fr'): Post[] {
+  return guides.filter((item) => {
+    if (!item.published) return false;
+    if ((item.lang ?? 'fr') !== lang) return false;
+    return hasRenderableBody(item);
+  });
+}
+
+/** Alias historique. */
 export function getRootPosts(lang: Lang = 'fr'): Post[] {
-  return getPublishedPosts(lang).filter((p) => getPostRoute(p) === 'root');
+  return getGuidePosts(lang);
 }
 
-export function getBlogRoutedPosts(lang: Lang = 'fr'): Post[] {
-  return getPublishedPosts(lang).filter((p) => getPostRoute(p) === 'blog');
-}
-
-export function getPostBySlug(slug: string, lang: Lang = 'fr'): Post | undefined {
-  const post = posts.find((item) => item.slug === slug && (item.lang ?? 'fr') === lang);
-  if (!post?.published) return undefined;
-  if (!hasRenderableBody(post)) return undefined;
-  return post;
-}
-
+/** Articles blog Holding uniquement (jamais les guides). */
 export function getPublishedPosts(lang: Lang = 'fr'): Post[] {
   return posts.filter((item) => {
     if (!item.published) return false;
@@ -318,14 +315,21 @@ export function getPublishedPosts(lang: Lang = 'fr'): Post[] {
   });
 }
 
+export function getBlogRoutedPosts(lang: Lang = 'fr'): Post[] {
+  return getPublishedPosts(lang);
+}
+
+export function getPostBySlug(slug: string, lang: Lang = 'fr'): Post | undefined {
+  const pool = [...guides, ...posts];
+  const post = pool.find((item) => item.slug === slug && (item.lang ?? 'fr') === lang);
+  if (!post?.published) return undefined;
+  if (!hasRenderableBody(post)) return undefined;
+  return post;
+}
+
 export function getFeaturedPost(lang: Lang = 'fr'): Post | undefined {
   const published = getPublishedPosts(lang);
   return published.find((p) => p.featured) ?? published[0];
-}
-
-/** Guides publiés à l’URL racine (aussi listés sur /blog/). */
-export function getGuidePosts(lang: Lang = 'fr'): Post[] {
-  return getRootPosts(lang);
 }
 
 export function getRelatedPosts(slugs: string[], lang: Lang = 'fr'): Post[] {

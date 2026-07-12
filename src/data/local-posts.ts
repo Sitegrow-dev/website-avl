@@ -400,7 +400,9 @@ const enPost = buildPost({
   usefulLinks: [{ label: 'Contact →', href: '/en/contact/' }],
 });
 
-/** Articles locaux publiés (FR + EN) — guides à l’URL racine, pas sous /blog/. */
+/** Guides locaux (mariage, voyage, Vatican…) — pages pilier à l’URL racine.
+ * Ce ne sont PAS des articles de blog : ils ne sont jamais fusionnés dans `posts`.
+ */
 export const localPosts: Post[] = [
   frPost,
   enPost,
