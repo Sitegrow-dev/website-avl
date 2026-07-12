@@ -29,7 +29,7 @@ export const GET: APIRoute = ({ site }) => {
       href: '/photos.htm',
       desc: 'Galerie AFVL : images d’archives restaurées',
     },
-    { title: contact.title, href: '/contact/', desc: contact.subtitle },
+    { title: contact.title, href: '/contact/', desc: contact.intro },
   ];
 
   const posts = getPublishedPosts('fr');
