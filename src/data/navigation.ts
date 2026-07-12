@@ -156,6 +156,7 @@ export const navigationByLang = {
         children: voyageChildrenFr,
       },
       { label: 'Destinations', href: '/destinations/rome/' },
+      { label: 'Blog', href: '/blog/' },
     ] satisfies NavLink[],
     navCta: { label: 'Nous joindre', href: '/contact/' },
     footer: {
@@ -217,6 +218,7 @@ export const navigationByLang = {
         {
           title: 'Ressources',
           links: [
+            { label: 'Blog', href: '/blog/' },
             { label: 'Destinations', href: '/destinations/rome/' },
           ],
         },
@@ -241,6 +243,7 @@ export const navigationByLang = {
         children: voyageChildrenEn,
       },
       { label: 'Destinations', href: '/destinations/rome/' },
+      { label: 'Blog', href: '/blog/' },
     ] satisfies NavLink[],
     navCta: { label: 'Contact Us', href: '/contact/' },
     footer: {
@@ -299,6 +302,7 @@ export const navigationByLang = {
         {
           title: 'Resources',
           links: [
+            { label: 'Blog', href: '/blog/' },
             { label: 'Destinations', href: '/destinations/rome/' },
           ],
         },

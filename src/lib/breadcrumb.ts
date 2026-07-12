@@ -104,6 +104,7 @@ export const frPagesList: SitePageLink[] = [
   { label: labels.fr.about, href: '/about.htm', section: 'main' },
   { label: labels.fr.photos, href: '/photos.htm', section: 'main' },
   { label: labels.fr.destinations, href: '/destinations/rome/', section: 'main' },
+  { label: labels.fr.blog, href: '/blog/', section: 'main' },
   { label: labels.fr.contact, href: '/contact/', section: 'main' },
   { label: labels.fr.plan, href: '/plan-du-site/', section: 'legal' },
 ];
@@ -116,6 +117,7 @@ export const enPagesList: SitePageLink[] = [
   { label: labels.en.home, href: '/en/', section: 'main' },
   { label: labels.en.about, href: '/about.htm', section: 'main' },
   { label: labels.en.photos, href: '/photos.htm', section: 'main' },
+  { label: labels.en.blog, href: '/en/blog/', section: 'main' },
   { label: labels.en.contact, href: '/en/contact/', section: 'main' },
   { label: labels.en.plan, href: '/en/site-map/', section: 'legal' },
 ];

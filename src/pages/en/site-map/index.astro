@@ -2,11 +2,11 @@
 import PageLayout from '@layouts/PageLayout.astro';
 import { breadcrumbTrails, enPagesList } from '@/lib/breadcrumb';
 import { siteConfig } from '@/config/site';
-import { getGuidePosts, getPostHref } from '@/data/posts';
+import { getPublishedPosts, getPostHref } from '@/data/posts';
 
 const mainLinks = enPagesList.filter((l) => l.section === 'main');
 const legalLinks = enPagesList.filter((l) => l.section === 'legal');
-const guidePosts = getGuidePosts('en');
+const guidePosts = getPublishedPosts('en');
 ---
 <PageLayout
   lang="en-CA"
