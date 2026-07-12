@@ -6,6 +6,7 @@ import TextLink from '@components/ui/TextLink.astro';
 import BlogCard from '@components/post/BlogCard.astro';
 import { getRelatedPosts } from '@/data/posts';
 import { renderMarkdown } from '@/lib/markdown';
+import { resolveImageAlt } from '@/lib/image-alt';
 import type { Lang } from '@/lib/i18n';
 
 interface Props {
@@ -50,7 +51,7 @@ const copy =
   <div class="w-full">
     <ResponsiveImage
       src={post.image}
-      alt={post.imageAlt ?? post.title}
+      alt={resolveImageAlt(post.imageAlt, post.title)}
       width={1440}
       height={560}
       loading="eager"

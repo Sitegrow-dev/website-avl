@@ -2,7 +2,7 @@ export type Service = {
   title: string;
   description: string;
   image: string;
-  imageAlt?: string;
+  imageAlt: string;
   features?: string[];
   reverse?: boolean;
   cta?: { label: string; href: string };
@@ -26,7 +26,7 @@ export const services: Service[] = [
     title: 'Service 1',
     description: 'Décrivez ce service : ce qu’il inclut, pour qui, et le résultat attendu.',
     image: '/images/services/service-decouverte',
-    imageAlt: '',
+    imageAlt: 'Étape de découverte : échange autour des besoins et objectifs du projet',
     features: ['Point clé 1', 'Point clé 2', 'Point clé 3'],
     reverse: false,
   },
@@ -34,7 +34,7 @@ export const services: Service[] = [
     title: 'Service 2',
     description: 'Décrivez ce service : ce qu’il inclut, pour qui, et le résultat attendu.',
     image: '/images/services/service-planification',
-    imageAlt: '',
+    imageAlt: 'Étape de planification : organisation du projet et échéancier',
     features: ['Point clé 1', 'Point clé 2', 'Point clé 3'],
     reverse: true,
   },
@@ -42,7 +42,7 @@ export const services: Service[] = [
     title: 'Service 3',
     description: 'Décrivez ce service : ce qu’il inclut, pour qui, et le résultat attendu.',
     image: '/images/services/service-execution',
-    imageAlt: '',
+    imageAlt: 'Étape d’exécution : mise en œuvre des actions convenues',
     features: ['Point clé 1', 'Point clé 2', 'Point clé 3'],
     reverse: false,
   },

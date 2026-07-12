@@ -20,24 +20,23 @@ export const HREFLANG = {
 /**
  * Paires FR ↔ EN dont le slug diffère (pas un simple préfixe /en).
  * Conventions skeleton : /a-propos/↔/en/about/
- * AFVL : about reste en `.htm` sous chaque locale.
- * /photos.htm est EN-only (pas de miroir /en/photos.htm).
+ * AFVL : /about.htm et /photos.htm sont EN-only (pas de miroir /en/*).
  * Plan du site : /plan-du-site/ ↔ /en/site-map/
  */
 const SLUG_PAIRS: Array<{ fr: string; en: string }> = [
-  { fr: '/about.htm', en: '/en/about.htm' },
-  // Routes Astro internes (réécrites depuis .htm) : pour le sélecteur au build
-  { fr: '/about/', en: '/en/about/' },
-  // Skeleton-style translated slugs (about public EN = legacy .htm)
-  { fr: '/a-propos/', en: '/en/about.htm' },
   { fr: '/plan-du-site/', en: '/en/site-map/' },
 ];
 
 /**
  * Pages anglaises servies à l’URL racine (hors /en/), sans miroir FR.
- * Ex. galerie photos héritée : uniquement https://afvl.org/photos.htm
+ * Ex. https://afvl.org/about.htm et https://afvl.org/photos.htm
  */
-const EN_ONLY_PATHS = new Set<string>(['/photos.htm', '/photos/']);
+const EN_ONLY_PATHS = new Set<string>([
+  '/about.htm',
+  '/about/',
+  '/photos.htm',
+  '/photos/',
+]);
 
 /** Paires de slugs blog FR ↔ EN (enregistrées depuis `src/data/posts.ts`). */
 let blogSlugPairs: Array<{ fr: string; en: string }> = [];
@@ -98,6 +97,7 @@ export function isEnOnlyPath(path: string): boolean {
 /** URL publique canonique d’une page EN-only (toujours sans /en/). */
 function enOnlyPublicPath(path: string): string {
   const stripped = normalizePath(stripLocalePrefix(path));
+  if (stripped === '/about/' || stripped === '/about.htm') return '/about.htm';
   if (stripped === '/photos/' || stripped === '/photos.htm') return '/photos.htm';
   return stripped;
 }
@@ -192,7 +192,7 @@ export function hasEnAlternate(pathname: string): boolean {
 
   if (FR_ONLY_PATHS.has(frPath)) return false;
   if (frPath.startsWith('/destinations/')) return false;
-  // Partage la cible EN avec /about.htm : éviter un cluster hreflang dupliqué.
+  // /a-propos/ redirige vers /about.htm (EN-only) : pas de hreflang.
   if (frPath === '/a-propos/') return false;
 
   // Articles blog : uniquement s’il existe une paire FR↔EN enregistrée.

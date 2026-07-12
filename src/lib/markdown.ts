@@ -9,6 +9,27 @@ export function slugifyHeading(label: string): string {
     .replace(/^-|-$/g, '');
 }
 
+function escapeHtmlAttr(value: string): string {
+  return value
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+/** Dérive un alt lisible depuis le nom de fichier si le Markdown n’en fournit pas. */
+function altFromSrc(href: string | null): string {
+  if (!href) return 'Illustration';
+  try {
+    const path = href.startsWith('http') ? new URL(href).pathname : href;
+    const base = path.split('/').pop()?.replace(/\.[a-z0-9]+$/i, '') ?? '';
+    const label = base.replace(/[-_]+/g, ' ').trim();
+    return label || 'Illustration';
+  } catch {
+    return 'Illustration';
+  }
+}
+
 const renderer = new Renderer();
 renderer.heading = function ({ text, depth }) {
   const id = slugifyHeading(text.replace(/<[^>]+>/g, ''));
@@ -17,6 +38,12 @@ renderer.heading = function ({ text, depth }) {
 const defaultTable = renderer.table.bind(renderer);
 renderer.table = function (token) {
   return `<div class="table-wrap">${defaultTable(token)}</div>\n`;
+};
+renderer.image = function ({ href, title, text }) {
+  const alt = (text || '').trim() || altFromSrc(href);
+  const titleAttr = title ? ` title="${escapeHtmlAttr(title)}"` : '';
+  const src = href ? escapeHtmlAttr(href) : '';
+  return `<img src="${src}" alt="${escapeHtmlAttr(alt)}"${titleAttr} loading="lazy" decoding="async" />`;
 };
 
 marked.setOptions({

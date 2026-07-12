@@ -19,7 +19,7 @@ const { lang, path, class: className = '' } = Astro.props;
 const pathname = path ?? Astro.url.pathname;
 const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
 /** Pas de lien vers une page EN absente / non indexable (ex. destinations). */
-/** Pages EN-only (/photos.htm) : pas de miroir FR — masquer le sélecteur. */
+/** Pages EN-only (/about.htm, /photos.htm) : pas de miroir FR — masquer le sélecteur. */
 const showSwitcher =
   !isEnOnlyPath(pathname) &&
   (otherLang === 'fr' || (siteConfig.enIndexable && hasEnAlternate(pathname)));

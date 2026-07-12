@@ -2,6 +2,7 @@ export type DestinationChurch = {
   name: string;
   location: string;
   image: string;
+  imageAlt: string;
   href: string;
 };
 
@@ -10,6 +11,7 @@ export type DestinationCard = {
   eyebrow: string;
   title: string;
   image: string;
+  imageAlt: string;
   href: string;
 };
 
@@ -62,6 +64,7 @@ export type Destination = {
     name: string;
     location: string;
     image: string;
+    imageAlt: string;
   };
   otherDestinations: {
     title: string;
@@ -113,24 +116,28 @@ export const destinations: Destination[] = [
           name: 'Basilique Saint-Pierre · Vatican',
           location: 'Cité du Vatican',
           image: '/images/destinations/rome/churches/saint-pierre',
+          imageAlt: 'Basilique Saint-Pierre et place Saint-Pierre au Vatican',
           href: '/contact/',
         },
         {
           name: 'Santa Maria Maggiore',
           location: 'Esquilin',
           image: '/images/destinations/rome/churches/santa-maria',
+          imageAlt: 'Basilique Santa Maria Maggiore à Rome',
           href: '/contact/',
         },
         {
           name: "Sant'Agnese in Agone",
           location: 'Place Navone',
           image: '/images/destinations/rome/churches/sant-agnese',
+          imageAlt: "Église Sant'Agnese in Agone sur la place Navone à Rome",
           href: '/contact/',
         },
         {
           name: 'San Luigi dei Francesi',
           location: 'Cœur historique',
           image: '/images/destinations/rome/churches/san-luigi',
+          imageAlt: 'Église San Luigi dei Francesi au cœur historique de Rome',
           href: '/contact/',
         },
       ],
@@ -189,6 +196,7 @@ export const destinations: Destination[] = [
       name: 'Claire & Antoine',
       location: 'Paris, France',
       image: '/images/destinations/rome/testimonial',
+      imageAlt: 'Claire et Antoine, couple marié à Rome avec AFVL',
     },
     otherDestinations: {
       title: 'Découvrez nos autres destinations',
@@ -198,6 +206,7 @@ export const destinations: Destination[] = [
           eyebrow: 'Campagne & Vignes',
           title: 'Toscane',
           image: '/images/destinations/cards/toscane',
+          imageAlt: 'Paysage de collines et vignobles en Toscane',
           href: '/contact/',
         },
         {
@@ -205,6 +214,7 @@ export const destinations: Destination[] = [
           eyebrow: 'Lacs & Villas',
           title: 'Lac de Côme',
           image: '/images/destinations/cards/como',
+          imageAlt: 'Vue du lac de Côme et de ses rives',
           href: '/contact/',
         },
         {
@@ -212,6 +222,7 @@ export const destinations: Destination[] = [
           eyebrow: 'Basiliques Sacrées',
           title: 'Vatican',
           image: '/images/destinations/cards/vatican',
+          imageAlt: 'Coupole de la basilique Saint-Pierre au Vatican',
           href: '/contact/',
         },
         {
@@ -219,6 +230,7 @@ export const destinations: Destination[] = [
           eyebrow: 'Rivages & Mer',
           title: 'Côte Amalfitaine',
           image: '/images/destinations/cards/amalfi',
+          imageAlt: 'Village côtier de la côte amalfitaine',
           href: '/contact/',
         },
       ],

@@ -62,7 +62,17 @@
     },
     {
       "source": "/en/about",
-      "destination": "/en/about.htm",
+      "destination": "/about.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/about/",
+      "destination": "/about.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/about.htm",
+      "destination": "/about.htm",
       "statusCode": 301
     },
     {
@@ -107,12 +117,12 @@
     },
     {
       "source": "/en/a-propos",
-      "destination": "/en/about.htm",
+      "destination": "/about.htm",
       "statusCode": 301
     },
     {
       "source": "/en/a-propos/",
-      "destination": "/en/about.htm",
+      "destination": "/about.htm",
       "statusCode": 301
     },
     {
@@ -264,10 +274,6 @@
     {
       "source": "/photos.htm",
       "destination": "/photos/"
-    },
-    {
-      "source": "/en/about.htm",
-      "destination": "/en/about/"
     }
   ]
 }

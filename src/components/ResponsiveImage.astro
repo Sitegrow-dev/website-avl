@@ -36,7 +36,7 @@ interface Props {
 
 const {
   src,
-  alt,
+  alt: altProp,
   widths = [400, 800, 1200, 1600],
   sizes = '100vw',
   width,
@@ -46,6 +46,14 @@ const {
   decoding = 'async',
   class: className,
 } = Astro.props;
+
+/** Texte alt obligatoire pour toute image de contenu (pas de chaîne vide). */
+const alt = altProp.trim();
+if (!alt) {
+  throw new Error(
+    `ResponsiveImage: alt text is required for "${src}". Empty alt is only allowed for decorative icons (FigmaIcon).`
+  );
+}
 
 const isRemote = /^https?:\/\//i.test(src);
 

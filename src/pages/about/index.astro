@@ -1,11 +1,15 @@
 ---
+/**
+ * /about.htm — English-only About Us page (legacy URL).
+ * No FR mirror; /en/about.htm redirects here (same pattern as /photos.htm).
+ */
 import PageLayout from '@layouts/PageLayout.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import { getAboutContent } from '@/data/about';
 import { breadcrumbTrails } from '@/lib/breadcrumb';
 import { localizedHref } from '@/lib/i18n';
 
-const lang = 'fr' as const;
+const lang = 'en' as const;
 const {
   title,
   brandEyebrow,
@@ -20,10 +24,10 @@ const {
 } = getAboutContent(lang);
 ---
 <PageLayout
-  lang="fr-CA"
+  lang="en-CA"
   title={metaTitle}
   description={metaDescription}
-  breadcrumbs={breadcrumbTrails.aboutHtm(lang)}
+  breadcrumbs={breadcrumbTrails.aboutHtm()}
   activeHref="/about.htm"
   canonicalPath="/about.htm"
 >
@@ -44,7 +48,7 @@ const {
       <div class="mx-auto max-w-3xl">
         <ResponsiveImage
           src="/images/archive/afvl-header"
-          alt={brandEyebrow}
+          alt={`${brandEyebrow} — historic header`}
           width={860}
           height={130}
           sizes="(min-width: 768px) 48rem, 100vw"

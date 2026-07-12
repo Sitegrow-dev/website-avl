@@ -53,7 +53,7 @@ export default defineConfig({
   // Ne PAS rediriger /about|/photos|/en/about|/en/photos ici : avec trailingSlash:'always'
   // ces clés collisionnent avec les pages Astro (/about/, etc.) et le build émet un
   // corps vide → pas de HTML → flatten-htm-routes ne peut pas créer les *.htm → 404.
-  // Les alias sans slash (/about → /about.htm) restent dans middleware.ts + vercel.json.
+  // /about.htm et /photos.htm sont EN-only ; /en/about* et /en/photos* → middleware + vercel.json.
   redirects: {
     '/a-propos': '/about.htm',
     '/a-propos/': '/about.htm',

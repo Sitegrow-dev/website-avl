@@ -1,8 +1,9 @@
 import type { Lang } from '@/lib/i18n';
 
 /**
- * Contenu About Us : restauré depuis l’archive Wayback de afvl.org/about.htm
+ * Contenu About Us (EN) : restauré depuis l’archive Wayback de afvl.org/about.htm
  * (meilleure capture disponible : 2014-03-20 ; la capture 2021-02-09 est corrompue).
+ * Servi uniquement à /about.htm (EN-only, comme /photos.htm).
  */
 export type BoardMember = {
   name: string;

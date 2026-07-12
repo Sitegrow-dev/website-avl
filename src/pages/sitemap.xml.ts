@@ -21,16 +21,15 @@ const PAGE_SOURCES: Record<string, string[]> = {
     'src/data/destinations.ts',
   ],
   '/en/': ['src/pages/en/index.astro', 'src/data/home.ts'],
-  '/en/about.htm': ['src/pages/en/about/index.astro', 'src/data/about.ts'],
   '/en/blog/': ['src/pages/en/blog/index.astro', 'src/data/posts.ts'],
   '/en/contact/': ['src/pages/en/contact/index.astro', 'src/data/contact.ts'],
 };
 
 /**
- * Pages statiques FR.
+ * Pages statiques FR (+ pages EN-only à la racine).
  * Liste maintenue à la main : synchronisée avec src/pages/*.astro.
  * /a-propos/ et /services/ exclus (redirection / retiré).
- * /photos.htm est EN-only mais reste dans le sitemap (URL racine unique).
+ * /about.htm et /photos.htm sont EN-only mais restent dans le sitemap (URL racine unique).
  */
 const FR_STATIC_PAGES = [
   '/',
@@ -44,11 +43,10 @@ const FR_STATIC_PAGES = [
 /**
  * Miroirs EN : pages réelles sous src/pages/en/ (URLs publiques).
  * /en/blog/[slug]/ n'est pas listée (générée dynamiquement).
- * Pas de /en/photos.htm (redirige vers /photos.htm).
+ * Pas de /en/about.htm ni /en/photos.htm (redirigent vers les URLs racine).
  */
 const EN_STATIC_PAGES = [
   '/en/',
-  '/en/about.htm',
   '/en/blog/',
   '/en/contact/',
 ];
@@ -57,7 +55,7 @@ type Alternate = { hreflang: string; href: string };
 
 function buildAlternates(path: string, base: string): Alternate[] {
   if (isEnOnlyPath(path)) {
-    const href = `${base}/photos.htm`;
+    const href = `${base}${enOnlyPublicHref(path)}`;
     return [
       { hreflang: 'en-CA', href },
       { hreflang: 'x-default', href },
@@ -71,6 +69,13 @@ function buildAlternates(path: string, base: string): Alternate[] {
   }
   alts.push({ hreflang: 'x-default', href: `${base}${frPath}` });
   return alts;
+}
+
+/** Canonical public path for EN-only legacy pages. */
+function enOnlyPublicHref(path: string): string {
+  if (path === '/about/' || path === '/about.htm') return '/about.htm';
+  if (path === '/photos/' || path === '/photos.htm') return '/photos.htm';
+  return path;
 }
 
 function renderAlternates(alts: Alternate[]): string {

@@ -22,7 +22,7 @@ const { title, subtitle, items } = Astro.props;
           <a href={church.href} class="block overflow-hidden rounded-sm">
             <ResponsiveImage
               src={church.image}
-              alt={church.name}
+              alt={church.imageAlt}
               width={624}
               height={320}
               class="aspect-[624/320] w-full object-cover transition-transform duration-500 group-hover:scale-105"

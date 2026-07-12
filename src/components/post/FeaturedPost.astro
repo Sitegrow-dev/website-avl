@@ -3,6 +3,7 @@ import type { Post } from '@/data/posts';
 import { getPostHref } from '@/data/posts';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import Button from '@components/ui/Button.astro';
+import { resolveImageAlt } from '@/lib/image-alt';
 
 interface Props {
   post: Post;
@@ -16,7 +17,7 @@ const listingImage = post.listingImage ?? post.image;
     <a href={getPostHref(post)} class="block lg:w-1/2">
       <ResponsiveImage
         src={listingImage}
-        alt={post.imageAlt ?? post.title}
+        alt={resolveImageAlt(post.imageAlt, post.title)}
         width={640}
         height={500}
         loading="eager"

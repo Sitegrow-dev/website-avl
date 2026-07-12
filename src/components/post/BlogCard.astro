@@ -3,6 +3,7 @@ import type { Post } from '@/data/posts';
 import { getPostHref } from '@/data/posts';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import TextLink from '@components/ui/TextLink.astro';
+import { resolveImageAlt } from '@/lib/image-alt';
 
 interface Props {
   post: Post;
@@ -27,7 +28,7 @@ function formatDate(date: string) {
     <a href={href}>
       <ResponsiveImage
         src={post.image}
-        alt={post.imageAlt ?? post.title}
+        alt={resolveImageAlt(post.imageAlt, post.title)}
         width={405}
         height={220}
         class="aspect-[405/220] w-full object-cover"

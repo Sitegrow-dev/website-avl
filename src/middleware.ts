@@ -50,10 +50,15 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   if (pathname === '/photos.htm' || pathname === '/photos.htm/') {
     return context.rewrite('/photos/');
   }
-  if (pathname === '/en/about.htm' || pathname === '/en/about.htm/') {
-    return context.rewrite('/en/about/');
+  // /about.htm et /photos.htm sont EN-only : plus de miroir /en/*
+  if (
+    pathname === '/en/about.htm' ||
+    pathname === '/en/about.htm/' ||
+    pathname === '/en/about' ||
+    pathname === '/en/about/'
+  ) {
+    return context.redirect('/about.htm', 301);
   }
-  // /photos.htm est EN-only : plus de miroir /en/photos*
   if (
     pathname === '/en/photos.htm' ||
     pathname === '/en/photos.htm/' ||
@@ -67,10 +72,6 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   }
   if (pathname === '/photos') {
     return context.redirect('/photos.htm', 301);
-  }
-  // Sans slash final uniquement : /en/about/ reste la route Astro interne (réécrite depuis .htm)
-  if (pathname === '/en/about') {
-    return context.redirect('/en/about.htm', 301);
   }
 
   // Alias briefs T-09…T-12 : URLs racine → articles blog
@@ -127,7 +128,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     return context.redirect('/en/blog/getting-married-st-peters-basilica/', 301);
   }
   if (pathname === '/en/a-propos' || pathname === '/en/a-propos/') {
-    return context.redirect('/en/about.htm', 301);
+    return context.redirect('/about.htm', 301);
   }
   // Skeleton /a-propos/ → URL publique AFVL legacy
   if (pathname === '/a-propos' || pathname === '/a-propos/') {

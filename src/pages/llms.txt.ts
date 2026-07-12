@@ -18,7 +18,7 @@ export const GET: APIRoute = ({ site }) => {
   const base = (site?.href.replace(/\/$/, '') ?? siteConfig.url).replace(/\/$/, '');
   const abs = (p: string) => `${base}${p}`;
   const home = getHomeContent('fr');
-  const about = getAboutContent('fr');
+  const about = getAboutContent('en');
   const contact = getContactContent('fr');
   const photos = getPhotosContent();
 

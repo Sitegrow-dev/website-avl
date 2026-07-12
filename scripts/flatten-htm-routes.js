@@ -2,8 +2,7 @@
  * Émet les fichiers plats *.htm à partir des pages Astro (Astro + trailingSlash:always
  * ne peut pas générer de vrais fichiers *.htm.astro).
  *
- * FR/legacy : /about.htm, /photos.htm (EN-only)
- * EN : /en/about.htm
+ * EN-only legacy : /about.htm, /photos.htm
  */
 import { copyFileSync, existsSync, mkdirSync, rmSync } from 'fs';
 import { dirname, join } from 'path';
@@ -16,7 +15,6 @@ const root = join(__dirname, '..');
 const MAP = [
   { from: 'about/index.html', to: 'about.htm' },
   { from: 'photos/index.html', to: 'photos.htm' },
-  { from: 'en/about/index.html', to: 'en/about.htm' },
 ];
 
 function emitIn(baseDir) {

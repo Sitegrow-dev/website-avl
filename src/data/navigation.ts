@@ -13,7 +13,7 @@ export type NavLink = {
  * et les slugs EN traduits sont appliqués via `localizedHref`.
  *
  * Paires de slugs (voir src/lib/i18n.ts) : legacy AFVL + plan du site :
- * - /about.htm ↔ /en/about.htm
+ * - /about.htm : EN-only (pas de miroir /en/about.htm)
  * - /photos.htm : EN-only (pas de miroir /en/photos.htm)
  * - /plan-du-site/ → /en/site-map/
  * - /a-propos/ redirige vers /about.htm (non listé au menu)

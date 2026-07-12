@@ -8,9 +8,10 @@ interface Props {
   name: string;
   location: string;
   image: string;
+  imageAlt: string;
 }
 
-const { quote, name, location, image } = Astro.props;
+const { quote, name, location, image, imageAlt } = Astro.props;
 ---
 <section class="pb-24 lg:pb-28">
   <Container>
@@ -18,7 +19,7 @@ const { quote, name, location, image } = Astro.props;
       <div class="lg:w-2/5">
         <ResponsiveImage
           src={image}
-          alt={name}
+          alt={imageAlt}
           width={400}
           height={500}
           class="h-full min-h-[300px] w-full object-cover"

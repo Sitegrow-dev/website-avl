@@ -1,6 +1,7 @@
 ---
 import { siteConfig } from '@/config/site';
 import type { Post } from '@/data/posts';
+import { resolveImageAlt } from '@/lib/image-alt';
 import { renderMarkdown } from '@/lib/markdown';
 import { formatTitle } from '@/lib/seo';
 
@@ -139,7 +140,7 @@ const ampCustomCss = `
       <div class="hero">
         <amp-img
           src={heroUrl}
-          alt={post.imageAlt ?? post.title}
+          alt={resolveImageAlt(post.imageAlt, post.title)}
           width="1200"
           height="630"
           layout="responsive"

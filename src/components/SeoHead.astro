@@ -10,6 +10,7 @@
  * hreflang : fr-CA / en-CA + x-default (URL FR). og:locale : fr_CA / en_CA.
  */
 import { siteConfig } from '@/config/site';
+import { resolveImageAlt } from '@/lib/image-alt';
 import { OG_IMAGE, absoluteUrl, cleanCanonicalPath } from '@/lib/seo';
 import { alternatePath, hasEnAlternate, isEnOnlyPath } from '@/lib/i18n';
 
@@ -50,18 +51,17 @@ const canonical = absoluteUrl(pathname, site);
 // défaut dont on connaît les dimensions et le type.
 const usingDefaultImage = !image;
 const ogImage = absoluteUrl(image ?? OG_IMAGE.path, site);
-const ogImageAlt = imageAlt ?? title;
+const ogImageAlt = resolveImageAlt(imageAlt, title);
 const ogWidth = usingDefaultImage ? OG_IMAGE.width : imageWidth;
 const ogHeight = usingDefaultImage ? OG_IMAGE.height : imageHeight;
 const ogImageType = usingDefaultImage ? OG_IMAGE.type : undefined;
 
-// i18n : préfixe /en/, chemins .htm EN, ou pages EN-only à la racine (/photos.htm)
+// i18n : préfixe /en/, ou pages EN-only à la racine (/about.htm, /photos.htm)
 const enOnly = isEnOnlyPath(pathname);
 const isEn =
   enOnly ||
   pathname === '/en' ||
-  pathname.startsWith('/en/') ||
-  pathname === '/en/about.htm';
+  pathname.startsWith('/en/');
 const ogLocale = isEn ? 'en_CA' : 'fr_CA';
 const ogLocaleAlt = isEn ? 'fr_CA' : 'en_CA';
 

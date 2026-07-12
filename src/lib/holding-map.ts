@@ -98,7 +98,7 @@ function firstImage(article: HoldingArticle): { src?: string; alt?: string } {
   const withUrl = sorted.find((img) => img.url);
   if (!withUrl?.url) return {};
   const raw = withUrl.url;
-  const alt = withUrl.alt_fr || article.h1_title;
+  const alt = withUrl.alt_fr?.trim() || article.h1_title || article.meta_title || 'Article image';
   // URL absolue du site → chemin local sans extension (ResponsiveImage).
   if (/^https?:\/\//i.test(raw) || raw.startsWith('//')) {
     const relative = toSiteRelativeHref(raw.startsWith('//') ? `https:${raw}` : raw);

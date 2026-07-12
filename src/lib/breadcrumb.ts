@@ -50,14 +50,14 @@ export const breadcrumbTrails = {
     { label: title },
   ],
   about: (lang: Lang = 'fr'): BreadcrumbItem[] => [homeItem(lang), { label: labels[lang].about }],
-  /** Routes legacy AFVL (.htm) sous chaque locale. */
-  aboutHtm: (lang: Lang = 'fr'): BreadcrumbItem[] => [
-    homeItem(lang),
-    { label: labels[lang].about },
+  /** Routes legacy AFVL EN-only (.htm) à la racine. */
+  aboutHtm: (): BreadcrumbItem[] => [
+    homeItem('en'),
+    { label: labels.en.about },
   ],
-  photosHtm: (lang: Lang = 'fr'): BreadcrumbItem[] => [
-    homeItem(lang),
-    { label: labels[lang].photos },
+  photosHtm: (): BreadcrumbItem[] => [
+    homeItem('en'),
+    { label: labels.en.photos },
   ],
   contact: (lang: Lang = 'fr'): BreadcrumbItem[] => [
     homeItem(lang),
@@ -110,7 +110,7 @@ export const frPagesList: SitePageLink[] = [
  */
 export const enPagesList: SitePageLink[] = [
   { label: labels.en.home, href: '/en/', section: 'main' },
-  { label: labels.en.about, href: '/en/about.htm', section: 'main' },
+  { label: labels.en.about, href: '/about.htm', section: 'main' },
   { label: labels.en.photos, href: '/photos.htm', section: 'main' },
   { label: labels.en.blog, href: '/en/blog/', section: 'main' },
   { label: labels.en.contact, href: '/en/contact/', section: 'main' },
