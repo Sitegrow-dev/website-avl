@@ -16,6 +16,11 @@ const PAGE_SOURCES: Record<string, string[]> = {
   '/photos.htm': ['src/pages/photos/index.astro', 'src/data/photos.ts'],
   '/blog/': ['src/pages/blog/index.astro', 'src/data/posts.ts'],
   '/contact/': ['src/pages/contact/index.astro', 'src/data/contact.ts'],
+  '/recherche/': [
+    'src/pages/recherche/index.astro',
+    'src/data/search.ts',
+    'src/lib/search-index.ts',
+  ],
   '/destinations/rome/': [
     'src/pages/destinations/rome/index.astro',
     'src/data/destinations.ts',
@@ -23,6 +28,11 @@ const PAGE_SOURCES: Record<string, string[]> = {
   '/en/': ['src/pages/en/index.astro', 'src/data/home.ts'],
   '/en/blog/': ['src/pages/en/blog/index.astro', 'src/data/posts.ts'],
   '/en/contact/': ['src/pages/en/contact/index.astro', 'src/data/contact.ts'],
+  '/en/search/': [
+    'src/pages/en/search/index.astro',
+    'src/data/search.ts',
+    'src/lib/search-index.ts',
+  ],
 };
 
 /**
@@ -35,6 +45,7 @@ const FR_STATIC_PAGES = [
   '/photos.htm',
   '/blog/',
   '/contact/',
+  '/recherche/',
   '/destinations/rome/',
 ];
 
@@ -45,6 +56,7 @@ const EN_STATIC_PAGES = [
   '/en/',
   '/en/blog/',
   '/en/contact/',
+  '/en/search/',
 ];
 
 type Alternate = { hreflang: string; href: string };

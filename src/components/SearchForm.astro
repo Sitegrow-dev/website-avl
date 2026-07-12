@@ -1,0 +1,91 @@
+---
+import { getSearchContent } from '@/data/search';
+import { type Lang } from '@/lib/i18n';
+
+interface Props {
+  lang?: Lang;
+  /** Prefill from URL or header. */
+  query?: string;
+  /** Compact header variant vs full results page. */
+  variant?: 'header' | 'page' | 'mobile';
+  class?: string;
+  autofocus?: boolean;
+}
+
+const {
+  lang = 'fr',
+  query = '',
+  variant = 'page',
+  class: className = '',
+  autofocus = false,
+} = Astro.props;
+
+const copy = getSearchContent(lang);
+const isHeader = variant === 'header';
+const isMobile = variant === 'mobile';
+---
+<form
+  action={copy.path}
+  method="get"
+  role="search"
+  class:list={[
+    className,
+    isHeader && 'hidden items-center xl:flex',
+    isMobile && 'w-full',
+    variant === 'page' && 'w-full',
+  ]}
+>
+  <label class="sr-only" for={`site-search-${variant}`}>{copy.submit}</label>
+  <div
+    class:list={[
+      'flex w-full items-center gap-2 rounded-sm border border-black/[0.1] bg-white',
+      isHeader && 'w-[min(16rem,28vw)] focus-within:w-[min(20rem,36vw)] transition-[width] duration-200',
+      isMobile && 'border-black/[0.08]',
+      variant === 'page' && 'border-black/[0.12] shadow-sm',
+    ]}
+  >
+    <span class="pl-3 text-ink/45" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="M20 20l-3.5-3.5"></path>
+      </svg>
+    </span>
+    <input
+      id={`site-search-${variant}`}
+      type="search"
+      name="q"
+      value={query}
+      placeholder={copy.placeholder}
+      autocomplete="off"
+      enterkeyhint="search"
+      autofocus={autofocus}
+      class:list={[
+        'min-w-0 flex-1 bg-transparent text-ink outline-none placeholder:text-ink/40',
+        isHeader && 'py-2 pr-2 text-sm',
+        isMobile && 'py-2.5 pr-2 text-sm',
+        variant === 'page' && 'py-3.5 pr-3 text-base',
+      ]}
+    />
+    <button
+      type="submit"
+      class:list={[
+        'shrink-0 font-semibold text-white bg-brand transition-colors hover:bg-brand-hover',
+        isHeader && 'rounded-r-[1px] px-3 py-2 text-xs uppercase tracking-wide',
+        isMobile && 'rounded-r-[1px] px-3 py-2.5 text-xs uppercase tracking-wide',
+        variant === 'page' && 'rounded-r-[1px] px-5 py-3.5 text-sm uppercase tracking-wide',
+      ]}
+    >
+      {isHeader || isMobile ? (
+        <span class="sr-only">{copy.submit}</span>
+      ) : (
+        copy.submit
+      )}
+      {(isHeader || isMobile) && (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M5 12h14"></path>
+          <path d="M13 6l6 6-6 6"></path>
+        </svg>
+      )}
+    </button>
+  </div>
+</form>

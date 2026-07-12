@@ -102,6 +102,7 @@ export const siteConfig = {
         links: [
           { label: 'Blog', href: '/blog/' },
           { label: 'Destinations', href: '/destinations/rome/' },
+          { label: 'Recherche', href: '/recherche/' },
         ],
       },
     ],

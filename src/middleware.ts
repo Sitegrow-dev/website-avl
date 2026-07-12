@@ -141,6 +141,13 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   if (pathname === '/sitemap.html' || pathname === '/sitemap.html/') {
     return context.redirect('/plan-du-site/', 301);
   }
+  // Recherche : slugs traduits FR/EN
+  if (pathname === '/search' || pathname === '/search/') {
+    return context.redirect('/en/search/', 301);
+  }
+  if (pathname === '/en/recherche' || pathname === '/en/recherche/') {
+    return context.redirect('/en/search/', 301);
+  }
   // Plan du site EN : slug traduit /en/site-map/ (+ alias historiques)
   if (
     pathname === '/en/plan-du-site' ||

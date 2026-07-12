@@ -1,0 +1,28 @@
+---
+import PageLayout from '@layouts/PageLayout.astro';
+import SearchForm from '@components/SearchForm.astro';
+import SearchResults from '@components/SearchResults.astro';
+import { getSearchContent } from '@/data/search';
+import { breadcrumbTrails } from '@/lib/breadcrumb';
+
+const copy = getSearchContent('fr');
+const query = Astro.url.searchParams.get('q')?.trim() ?? '';
+---
+<PageLayout
+  title={copy.metaTitle}
+  description={copy.metaDescription}
+  breadcrumbs={breadcrumbTrails.search('fr')}
+  activeHref="/recherche/"
+  canonicalPath="/recherche/"
+>
+  <main class="px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+    <div class="mx-auto max-w-3xl">
+      <h1 class="font-display text-4xl leading-tight text-ink sm:text-5xl">{copy.heading}</h1>
+      <p class="mt-4 text-lg leading-relaxed text-muted">{copy.intro}</p>
+      <div class="mt-8">
+        <SearchForm lang="fr" query={query} variant="page" autofocus />
+      </div>
+      <SearchResults lang="fr" query={query} />
+    </div>
+  </main>
+</PageLayout>

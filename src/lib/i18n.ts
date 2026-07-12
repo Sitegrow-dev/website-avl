@@ -25,6 +25,7 @@ export const HREFLANG = {
  */
 const SLUG_PAIRS: Array<{ fr: string; en: string }> = [
   { fr: '/plan-du-site/', en: '/en/site-map/' },
+  { fr: '/recherche/', en: '/en/search/' },
 ];
 
 /**

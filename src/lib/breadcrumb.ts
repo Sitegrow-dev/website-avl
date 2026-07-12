@@ -17,6 +17,7 @@ const labels = {
     destinations: 'Destinations',
     notFound: 'Page introuvable',
     plan: 'Plan du site',
+    search: 'Recherche',
   },
   en: {
     home: 'Home',
@@ -28,6 +29,7 @@ const labels = {
     destinations: 'Destinations',
     notFound: 'Page not found',
     plan: 'Sitemap',
+    search: 'Search',
   },
 } as const;
 
@@ -79,6 +81,10 @@ export const breadcrumbTrails = {
     { label: name },
   ],
   plan: (lang: Lang = 'fr'): BreadcrumbItem[] => [homeItem(lang), { label: labels[lang].plan }],
+  search: (lang: Lang = 'fr'): BreadcrumbItem[] => [
+    homeItem(lang),
+    { label: labels[lang].search },
+  ],
   notFound: (lang: Lang = 'fr'): BreadcrumbItem[] => [
     homeItem(lang),
     { label: labels[lang].notFound },
@@ -106,6 +112,7 @@ export const frPagesList: SitePageLink[] = [
   { label: labels.fr.destinations, href: '/destinations/rome/', section: 'main' },
   { label: labels.fr.blog, href: '/blog/', section: 'main' },
   { label: labels.fr.contact, href: '/contact/', section: 'main' },
+  { label: labels.fr.search, href: '/recherche/', section: 'main' },
   { label: labels.fr.plan, href: '/plan-du-site/', section: 'legal' },
 ];
 
@@ -119,5 +126,6 @@ export const enPagesList: SitePageLink[] = [
   { label: labels.en.photos, href: '/photos.htm', section: 'main' },
   { label: labels.en.blog, href: '/en/blog/', section: 'main' },
   { label: labels.en.contact, href: '/en/contact/', section: 'main' },
+  { label: labels.en.search, href: '/en/search/', section: 'main' },
   { label: labels.en.plan, href: '/en/site-map/', section: 'legal' },
 ];

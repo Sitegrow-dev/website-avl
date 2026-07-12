@@ -237,6 +237,7 @@ export const navigationByLang = {
           links: [
             { label: 'Blog', href: '/blog/' },
             { label: 'Destinations', href: '/destinations/rome/' },
+            { label: 'Recherche', href: '/recherche/' },
           ],
         },
       ],
@@ -330,6 +331,7 @@ export const navigationByLang = {
           links: [
             { label: 'Blog', href: '/blog/' },
             { label: 'Destinations', href: '/destinations/rome/' },
+            { label: 'Search', href: '/recherche/' },
           ],
         },
       ],

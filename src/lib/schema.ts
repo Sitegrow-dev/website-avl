@@ -79,6 +79,8 @@ function organizationNode(origin: URL) {
 
 /** Nœud WebSite (active la sitelinks search box potentielle + rattache le publisher). */
 function websiteNode(origin: URL, lang: string) {
+  const isEn = lang.toLowerCase().startsWith('en');
+  const searchPath = isEn ? '/en/search/' : '/recherche/';
   return {
     '@type': 'WebSite',
     '@id': websiteId(origin),
@@ -87,6 +89,14 @@ function websiteNode(origin: URL, lang: string) {
     description: siteConfig.defaultDescription,
     publisher: { '@id': orgId(origin) },
     inLanguage: lang,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${origin.origin}${searchPath}?q={search_term_string}`,
+      },
+      'query-input': 'required name=search_term_string',
+    },
   };
 }
 

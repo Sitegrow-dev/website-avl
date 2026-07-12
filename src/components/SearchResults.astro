@@ -1,0 +1,194 @@
+---
+import { getSearchContent } from '@/data/search';
+import { buildSearchIndex, type SearchRecord } from '@/lib/search-index';
+import type { Lang } from '@/lib/i18n';
+
+interface Props {
+  lang?: Lang;
+  query?: string;
+}
+
+const { lang = 'fr', query = '' } = Astro.props;
+const copy = getSearchContent(lang);
+const index: SearchRecord[] = buildSearchIndex(lang).map((item) => ({
+  id: item.id,
+  title: item.title,
+  url: item.url,
+  type: item.type,
+  excerpt: item.excerpt,
+  // Keep body for client scoring but trim heavily to limit payload.
+  body: item.body.slice(0, 1200),
+  category: item.category,
+}));
+---
+<section
+  id="search-results-root"
+  class="mt-10"
+  data-lang={lang}
+  data-query={query}
+  data-empty-query={copy.emptyQuery}
+  data-no-results={copy.noResults}
+  data-results-for={copy.resultsFor}
+  data-type-page={copy.types.page}
+  data-type-guide={copy.types.guide}
+  data-type-blog={copy.types.blog}
+>
+  <p id="search-results-status" class="text-sm text-muted" aria-live="polite"></p>
+  <ul id="search-results-list" class="mt-6 flex flex-col gap-4" role="list"></ul>
+  <script type="application/json" id="search-index-data" is:inline set:html={JSON.stringify(index)} />
+</section>
+
+<script>
+  type SearchRecord = {
+    id: string;
+    title: string;
+    url: string;
+    type: 'page' | 'guide' | 'blog';
+    excerpt: string;
+    body: string;
+    category?: string;
+  };
+
+  type SearchHit = SearchRecord & { score: number };
+
+  function normalizeSearchText(text: string): string {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function searchIndex(records: SearchRecord[], query: string, limit = 30): SearchHit[] {
+    const normalizedQuery = normalizeSearchText(query);
+    if (!normalizedQuery) return [];
+
+    const tokens = normalizedQuery.split(' ').filter((token) => token.length >= 2);
+    if (!tokens.length) return [];
+
+    const hits: SearchHit[] = [];
+
+    for (const record of records) {
+      const title = normalizeSearchText(record.title);
+      const excerpt = normalizeSearchText(record.excerpt);
+      const body = normalizeSearchText(record.body);
+      const category = normalizeSearchText(record.category ?? '');
+      const haystack = `${title} ${excerpt} ${category} ${body}`;
+
+      let score = 0;
+      let matchedAll = true;
+
+      for (const token of tokens) {
+        if (!haystack.includes(token)) {
+          matchedAll = false;
+          break;
+        }
+        if (title.includes(token)) score += title.startsWith(token) ? 12 : 8;
+        if (excerpt.includes(token)) score += 4;
+        if (category.includes(token)) score += 3;
+        if (body.includes(token)) score += 1;
+      }
+
+      if (!matchedAll || score <= 0) continue;
+      if (title.includes(normalizedQuery)) score += 20;
+      hits.push({ ...record, score });
+    }
+
+    return hits.sort((a, b) => b.score - a.score || a.title.localeCompare(b.title)).slice(0, limit);
+  }
+
+  function escapeHtml(value: string): string {
+    return value
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function initSearchResults() {
+    const root = document.getElementById('search-results-root');
+    const status = document.getElementById('search-results-status');
+    const list = document.getElementById('search-results-list');
+    const dataEl = document.getElementById('search-index-data');
+    if (!root || !status || !list || !dataEl) return;
+    if (root.dataset.searchInit === 'true') return;
+    root.dataset.searchInit = 'true';
+
+    let records: SearchRecord[] = [];
+    try {
+      records = JSON.parse(dataEl.textContent || '[]') as SearchRecord[];
+    } catch {
+      records = [];
+    }
+
+    const typeLabels: Record<string, string> = {
+      page: root.dataset.typePage || 'Page',
+      guide: root.dataset.typeGuide || 'Guide',
+      blog: root.dataset.typeBlog || 'Article',
+    };
+
+    const emptyQuery = root.dataset.emptyQuery || '';
+    const noResults = root.dataset.noResults || '';
+    const resultsFor = root.dataset.resultsFor || '';
+
+    function render(query: string) {
+      const q = query.trim();
+      list.innerHTML = '';
+
+      if (!q) {
+        status.textContent = emptyQuery;
+        return;
+      }
+
+      const hits = searchIndex(records, q);
+      if (!hits.length) {
+        status.textContent = `${noResults} « ${q} ».`;
+        return;
+      }
+
+      status.textContent = `${hits.length} ${resultsFor} « ${q} ».`;
+      list.innerHTML = hits
+        .map((hit) => {
+          const type = typeLabels[hit.type] || hit.type;
+          const category = hit.category
+            ? `<span class="text-muted"> · ${escapeHtml(hit.category)}</span>`
+            : '';
+          return `<li>
+            <a href="${escapeHtml(hit.url)}" class="block rounded-md border border-black/[0.06] bg-white px-5 py-4 transition-colors hover:border-brand/30 hover:bg-brand/[0.02]">
+              <p class="text-xs font-semibold uppercase tracking-[0.08em] text-brand">${escapeHtml(type)}${category}</p>
+              <h2 class="mt-1.5 text-lg font-semibold text-ink">${escapeHtml(hit.title)}</h2>
+              <p class="mt-1.5 text-sm leading-relaxed text-muted">${escapeHtml(hit.excerpt)}</p>
+            </a>
+          </li>`;
+        })
+        .join('');
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const initial = (root.dataset.query || params.get('q') || '').trim();
+    render(initial);
+
+    const form = document.querySelector<HTMLFormElement>('form[role="search"]');
+    const input = form?.querySelector<HTMLInputElement>('input[name="q"]');
+    if (form && input) {
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const next = input.value.trim();
+        const url = new URL(window.location.href);
+        if (next) url.searchParams.set('q', next);
+        else url.searchParams.delete('q');
+        window.history.replaceState({}, '', url);
+        render(next);
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSearchResults);
+  } else {
+    initSearchResults();
+  }
+  document.addEventListener('astro:page-load', initSearchResults);
+</script>
