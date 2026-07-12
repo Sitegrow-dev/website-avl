@@ -153,7 +153,7 @@ export const destinations: Destination[] = [
           description: 'Constitution des pièces requises pour votre diocèse.',
           link: {
             label: 'Voir les guides →',
-            href: '/blog/',
+            href: '/se-marier-eglise-catholique-italie/',
           },
         },
         {
@@ -168,7 +168,7 @@ export const destinations: Destination[] = [
           icon: 'plane-takeoff',
           title: 'Organiser le séjour',
           description: 'Hébergement, transport et lune de miel en Italie.',
-          link: { label: 'Lune de miel en Italie →', href: '/#lune-de-miel' },
+          link: { label: 'Lune de miel en Italie →', href: '/lune-de-miel-italie/' },
         },
       ],
     },

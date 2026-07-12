@@ -1,4 +1,4 @@
-import { getPostHref, getPublishedPosts, type Post } from '@/data/posts';
+import { getBlogRoutedPosts, getPostHref, type Post } from '@/data/posts';
 import { siteConfig } from '@/config/site';
 
 function escapeXml(s: string): string {
@@ -37,7 +37,7 @@ type FeedOptions = {
 export function buildRssFeed(site: URL | undefined, opts: FeedOptions): string {
   const base = (site?.href.replace(/\/$/, '') ?? siteConfig.url).replace(/\/$/, '');
   // Par défaut : posts FR (le filtre EN est passé explicitement).
-  const allPosts = getPublishedPosts(opts.langPrefix === '/en' ? 'en' : 'fr');
+  const allPosts = getBlogRoutedPosts(opts.langPrefix === '/en' ? 'en' : 'fr');
   const posts = opts.filterPosts ? opts.filterPosts(allPosts) : allPosts;
   const channelTitle = opts.title ?? siteConfig.siteName;
   const channelDescription = opts.description ?? siteConfig.defaultDescription;

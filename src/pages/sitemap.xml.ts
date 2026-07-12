@@ -14,14 +14,12 @@ const PAGE_SOURCES: Record<string, string[]> = {
   '/': ['src/pages/index.astro', 'src/data/home.ts'],
   '/about.htm': ['src/pages/about/index.astro', 'src/data/about.ts'],
   '/photos.htm': ['src/pages/photos/index.astro', 'src/data/photos.ts'],
-  '/blog/': ['src/pages/blog/index.astro', 'src/data/posts.ts'],
   '/contact/': ['src/pages/contact/index.astro', 'src/data/contact.ts'],
   '/destinations/rome/': [
     'src/pages/destinations/rome/index.astro',
     'src/data/destinations.ts',
   ],
   '/en/': ['src/pages/en/index.astro', 'src/data/home.ts'],
-  '/en/blog/': ['src/pages/en/blog/index.astro', 'src/data/posts.ts'],
   '/en/contact/': ['src/pages/en/contact/index.astro', 'src/data/contact.ts'],
 };
 
@@ -29,25 +27,24 @@ const PAGE_SOURCES: Record<string, string[]> = {
  * Pages statiques FR (+ pages EN-only à la racine).
  * Liste maintenue à la main : synchronisée avec src/pages/*.astro.
  * /a-propos/ et /services/ exclus (redirection / retiré).
+ * /blog/ exclu (vide / noindex tant qu’il n’y a pas d’articles Holding).
  * /about.htm et /photos.htm sont EN-only mais restent dans le sitemap (URL racine unique).
  */
 const FR_STATIC_PAGES = [
   '/',
   '/about.htm',
   '/photos.htm',
-  '/blog/',
   '/contact/',
   '/destinations/rome/',
 ];
 
 /**
  * Miroirs EN : pages réelles sous src/pages/en/ (URLs publiques).
- * /en/blog/[slug]/ n'est pas listée (générée dynamiquement).
  * Pas de /en/about.htm ni /en/photos.htm (redirigent vers les URLs racine).
+ * /en/blog/ exclu (vide / noindex).
  */
 const EN_STATIC_PAGES = [
   '/en/',
-  '/en/blog/',
   '/en/contact/',
 ];
 

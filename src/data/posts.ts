@@ -319,8 +319,14 @@ export function getPublishedPosts(lang: Lang = 'fr'): Post[] {
 }
 
 export function getFeaturedPost(lang: Lang = 'fr'): Post | undefined {
-  const published = getPublishedPosts(lang);
+  /** Featured réservé au vrai blog (/blog/), pas aux guides racine. */
+  const published = getBlogRoutedPosts(lang);
   return published.find((p) => p.featured) ?? published[0];
+}
+
+/** Guides publiés à l’URL racine (hors listing blog). */
+export function getGuidePosts(lang: Lang = 'fr'): Post[] {
+  return getRootPosts(lang);
 }
 
 export function getRelatedPosts(slugs: string[], lang: Lang = 'fr'): Post[] {

@@ -4,7 +4,7 @@ import Container from '@components/ui/Container.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import TextLink from '@components/ui/TextLink.astro';
 import BlogCard from '@components/post/BlogCard.astro';
-import { getRelatedPosts } from '@/data/posts';
+import { getPostRoute, getRelatedPosts } from '@/data/posts';
 import { renderMarkdown } from '@/lib/markdown';
 import { resolveImageAlt } from '@/lib/image-alt';
 import type { Lang } from '@/lib/i18n';
@@ -19,6 +19,7 @@ const related = getRelatedPosts(post.relatedSlugs ?? [], lang);
 const bodyHtml = post.bodyMarkdown
   ? renderMarkdown(post.bodyMarkdown, { stripLeadingH1: true })
   : '';
+const isBlogPost = getPostRoute(post) === 'blog';
 
 const copy =
   lang === 'en'
@@ -32,7 +33,7 @@ const copy =
         minutes: 'minutes',
         writtenBy: 'Written by',
         allArticles: 'See all articles →',
-        related: 'Related articles',
+        related: 'Related guides',
       }
     : {
         faq: 'Questions fréquentes',
@@ -44,7 +45,7 @@ const copy =
         minutes: 'minutes',
         writtenBy: 'Rédigé par',
         allArticles: 'Voir tous ses articles →',
-        related: 'Articles connexes',
+        related: 'Guides connexes',
       };
 ---
 {post.image && (
@@ -195,9 +196,11 @@ const copy =
           <p class="text-xs uppercase tracking-wider text-muted">{copy.writtenBy}</p>
           <p class="mt-2 text-2xl font-semibold text-ink">{post.author.name}</p>
           <p class="mt-3 max-w-3xl text-muted">{post.author.bio}</p>
-          <TextLink href={lang === 'en' ? '/en/blog/' : '/blog/'} class="mt-4 inline-block">
-            {copy.allArticles}
-          </TextLink>
+          {isBlogPost && (
+            <TextLink href={lang === 'en' ? '/en/blog/' : '/blog/'} class="mt-4 inline-block">
+              {copy.allArticles}
+            </TextLink>
+          )}
         </div>
       </div>
     </Container>

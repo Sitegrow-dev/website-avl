@@ -42,7 +42,6 @@ export const siteConfig = {
   nav: [
     { label: 'Destinations', href: '/destinations/rome/' },
     { label: 'Voyage Italie catholique', href: '/voyage-italie-catholique/' },
-    { label: 'Blog', href: '/blog/' },
   ],
   navCta: { label: 'Nous joindre', href: '/contact/' },
   footer: {
@@ -95,7 +94,6 @@ export const siteConfig = {
       {
         title: 'Ressources',
         links: [
-          { label: 'Blog', href: '/blog/' },
           { label: 'Destinations', href: '/destinations/rome/' },
         ],
       },

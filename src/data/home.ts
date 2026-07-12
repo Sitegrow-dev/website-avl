@@ -116,7 +116,7 @@ const homeFr = {
     ],
     link: {
       label: 'Voir les guides →',
-      href: '/blog/',
+      href: '/se-marier-eglise-catholique-italie/',
     },
   },
   honeymoon: {
@@ -128,8 +128,8 @@ const homeFr = {
     image: '/images/home/honeymoon',
     imageAlt: 'Paysage italien pour une lune de miel',
     links: [
-      { label: 'Idées de lune de miel →', href: '/#lune-de-miel' },
-      { label: 'Itinéraire Rome 3 jours →', href: '/destinations/rome/' },
+      { label: 'Idées de lune de miel →', href: '/lune-de-miel-italie/' },
+      { label: 'Itinéraire Rome 3 jours →', href: '/itineraire-rome-3-jours/' },
     ],
   },
   testimonials: {
@@ -299,7 +299,7 @@ const homeEn = {
     ],
     link: {
       label: 'See the guides →',
-      href: '/blog/',
+      href: '/se-marier-eglise-catholique-italie/',
     },
   },
   honeymoon: {
@@ -311,8 +311,8 @@ const homeEn = {
     image: '/images/home/honeymoon',
     imageAlt: 'Italian landscape for a honeymoon',
     links: [
-      { label: 'Honeymoon ideas →', href: '/#lune-de-miel' },
-      { label: '3-day Rome itinerary →', href: '/destinations/rome/' },
+      { label: 'Honeymoon ideas →', href: '/lune-de-miel-italie/' },
+      { label: '3-day Rome itinerary →', href: '/itineraire-rome-3-jours/' },
     ],
   },
   testimonials: {

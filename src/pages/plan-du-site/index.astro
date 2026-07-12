@@ -2,11 +2,11 @@
 import PageLayout from '@layouts/PageLayout.astro';
 import { breadcrumbTrails, frPagesList } from '@/lib/breadcrumb';
 import { siteConfig } from '@/config/site';
-import { getPostHref, getPublishedPosts } from '@/data/posts';
+import { getGuidePosts, getPostHref } from '@/data/posts';
 
 const mainLinks = frPagesList.filter((l) => l.section === 'main');
 const legalLinks = frPagesList.filter((l) => l.section === 'legal');
-const blogPosts = getPublishedPosts('fr');
+const guidePosts = getGuidePosts('fr');
 ---
 <PageLayout
   title="Plan du site - AFVL Amor Fides Via Lux"
@@ -36,11 +36,11 @@ const blogPosts = getPublishedPosts('fr');
           ))}
         </ul>
 
-        {blogPosts.length > 0 && (
+        {guidePosts.length > 0 && (
           <>
             <h2 class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-brand">Guides</h2>
             <ul class="mt-6 flex flex-col gap-3">
-              {blogPosts.map((post) => (
+              {guidePosts.map((post) => (
                 <li>
                   <a
                     href={getPostHref(post)}

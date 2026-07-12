@@ -3,7 +3,7 @@ import Container from '@components/ui/Container.astro';
 import {
   blogCategories,
   getFeaturedPost,
-  getPublishedPosts,
+  getBlogRoutedPosts,
   postUi,
   postUiEn,
 } from '@/data/posts';
@@ -23,7 +23,7 @@ const POSTS_PER_PAGE = 9;
 const { lang = 'fr' } = Astro.props;
 const ui = lang === 'en' ? postUiEn : postUi;
 const featured = getFeaturedPost(lang);
-const posts = getPublishedPosts(lang).filter((p) => !p.featured);
+const posts = getBlogRoutedPosts(lang).filter((p) => !p.featured);
 const hasPosts = Boolean(featured) || posts.length > 0;
 const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
 ---
