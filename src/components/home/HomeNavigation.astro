@@ -1,7 +1,6 @@
 ---
 import SiteLogo from '@components/home/SiteLogo.astro';
 import LanguageSwitcher from '@components/LanguageSwitcher.astro';
-import SearchForm from '@components/SearchForm.astro';
 import { getNavigation, type NavLink } from '@/data/navigation';
 import { getSearchContent } from '@/data/search';
 import { localizedHref, type Lang } from '@/lib/i18n';
@@ -39,7 +38,54 @@ function isGroupActive(link: NavLink) {
   return link.children?.some((child) => isActive(child.href)) ?? false;
 }
 ---
-<header class="sticky top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur-md">
+<header class="relative sticky top-0 z-50 border-b border-black/5 bg-white/95 backdrop-blur-md">
+  <div
+    id="site-search-panel"
+    class="pointer-events-none invisible absolute inset-x-0 top-0 z-[120] flex h-[84px] items-center border-b border-black/5 bg-white opacity-0 transition-[opacity,visibility] duration-200"
+    aria-hidden="true"
+    role="search"
+  >
+    <form
+      action={searchCopy.path}
+      method="get"
+      class="mx-auto flex h-full w-full max-w-[1440px] items-center gap-3 px-5 lg:px-20"
+    >
+      <label class="sr-only" for="site-search-nav">{searchCopy.submit}</label>
+      <span class="shrink-0 text-ink/45" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3.5-3.5"></path>
+        </svg>
+      </span>
+      <input
+        id="site-search-nav"
+        type="search"
+        name="q"
+        placeholder={searchCopy.placeholder}
+        autocomplete="off"
+        enterkeyhint="search"
+        class="min-w-0 flex-1 bg-transparent text-base text-ink outline-none placeholder:text-ink/40 sm:text-[15px]"
+      />
+      <button
+        type="submit"
+        class="hidden shrink-0 rounded-sm bg-brand px-4 py-2 text-xs font-semibold uppercase tracking-wide text-white transition-colors hover:bg-brand-hover sm:inline-flex"
+      >
+        {searchCopy.submit}
+      </button>
+      <button
+        type="button"
+        id="site-search-close"
+        class="flex h-11 w-11 shrink-0 items-center justify-center text-ink/70 transition-colors hover:text-ink"
+        aria-label={searchCopy.closeLabel}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </form>
+  </div>
+
   <div class="relative z-[110] mx-auto flex h-[84px] max-w-[1440px] items-center justify-between gap-6 px-5 lg:px-20">
     <SiteLogo variant="dark" height={58} href={homeHref} />
 
@@ -157,18 +203,20 @@ function isGroupActive(link: NavLink) {
       )}
     </nav>
 
-    <div class="flex items-center gap-3">
-      <SearchForm lang={lang} variant="header" />
-      <a
-        href={searchCopy.path}
-        class="flex h-11 w-11 items-center justify-center text-ink/70 transition-colors hover:text-ink xl:hidden"
+    <div class="flex items-center gap-2 sm:gap-3">
+      <button
+        type="button"
+        id="site-search-open"
+        class="flex h-11 w-11 items-center justify-center text-ink/70 transition-colors hover:text-ink"
         aria-label={searchCopy.openLabel}
+        aria-expanded="false"
+        aria-controls="site-search-panel"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
           <circle cx="11" cy="11" r="7"></circle>
           <path d="M20 20l-3.5-3.5"></path>
         </svg>
-      </a>
+      </button>
       <LanguageSwitcher lang={lang} path={switchPath} class="hidden xl:flex" />
       <a
         href={localizedHref(navCta.href, lang)}
@@ -236,7 +284,7 @@ function isGroupActive(link: NavLink) {
                 >
                   <path
                     fill-rule="evenodd"
-                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                    d="M5.23 7.21a.75.75 0 011.06.02L10 11.17l3.71-3.94a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
                     clip-rule="evenodd"
                   ></path>
                 </svg>
@@ -283,9 +331,8 @@ function isGroupActive(link: NavLink) {
     </ul>
   </nav>
 
-  <div class="shrink-0 space-y-3 border-t border-black/[0.06] bg-white px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-4">
-    <SearchForm lang={lang} variant="mobile" />
-    <LanguageSwitcher lang={lang} path={switchPath} />
+  <div class="shrink-0 border-t border-black/[0.06] bg-white px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-4">
+    <LanguageSwitcher lang={lang} path={switchPath} class="mb-3" />
     <a
       href={localizedHref(navCta.href, lang)}
       class="flex min-h-12 w-full items-center justify-center rounded-sm bg-brand px-6 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-brand-hover"
@@ -309,9 +356,48 @@ function isGroupActive(link: NavLink) {
   .mobile-nav-group[data-open='true'] .mobile-nav-chevron {
     transform: rotate(180deg);
   }
+
+  #site-search-panel.is-open {
+    pointer-events: auto;
+    visibility: visible;
+    opacity: 1;
+  }
 </style>
 
 <script>
+  function initSiteSearchPanel() {
+    const openBtn = document.getElementById('site-search-open');
+    const closeBtn = document.getElementById('site-search-close');
+    const panel = document.getElementById('site-search-panel');
+    const input = document.getElementById('site-search-nav') as HTMLInputElement | null;
+    if (!openBtn || !closeBtn || !panel || !input) return;
+    if (openBtn.dataset.searchInit === 'true') return;
+    openBtn.dataset.searchInit = 'true';
+
+    function openSearch() {
+      panel.classList.add('is-open');
+      panel.setAttribute('aria-hidden', 'false');
+      openBtn.setAttribute('aria-expanded', 'true');
+      requestAnimationFrame(() => input.focus());
+    }
+
+    function closeSearch() {
+      panel.classList.remove('is-open');
+      panel.setAttribute('aria-hidden', 'true');
+      openBtn.setAttribute('aria-expanded', 'false');
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', openSearch);
+    closeBtn.addEventListener('click', closeSearch);
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && panel.classList.contains('is-open')) {
+        event.preventDefault();
+        closeSearch();
+      }
+    });
+  }
+
   function initHomeMobileMenu() {
     const btnEl = document.getElementById('home-mobile-menu-btn');
     const menuEl = document.getElementById('home-mobile-menu');
@@ -389,10 +475,15 @@ function isGroupActive(link: NavLink) {
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initHomeMobileMenu);
-  } else {
+  function initNavChrome() {
+    initSiteSearchPanel();
     initHomeMobileMenu();
   }
-  document.addEventListener('astro:page-load', initHomeMobileMenu);
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNavChrome);
+  } else {
+    initNavChrome();
+  }
+  document.addEventListener('astro:page-load', initNavChrome);
 </script>
