@@ -84,8 +84,10 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     '/blog/cout-mariage-italie/': '/cout-mariage-italie/',
     '/blog/wedding-planner-mariage-italie': '/wedding-planner-mariage-italie/',
     '/blog/wedding-planner-mariage-italie/': '/wedding-planner-mariage-italie/',
-    '/blog/marier-a-la-basilique-saint-pierre': '/marier-a-la-basilique-saint-pierre/',
-    '/blog/marier-a-la-basilique-saint-pierre/': '/marier-a-la-basilique-saint-pierre/',
+    // Cet article FR vient du Holding → il vit sous /blog/ (avec ses images).
+    // On redirige l'ancienne URL racine vers /blog/ (au lieu de l'inverse).
+    '/marier-a-la-basilique-saint-pierre': '/blog/marier-a-la-basilique-saint-pierre/',
+    '/marier-a-la-basilique-saint-pierre/': '/blog/marier-a-la-basilique-saint-pierre/',
     '/mariage-catholique-italie': '/se-marier-eglise-catholique-italie/',
     '/mariage-catholique-italie/': '/se-marier-eglise-catholique-italie/',
     '/blog/voyage-italie-catholique': '/voyage-italie-catholique/',

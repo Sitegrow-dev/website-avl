@@ -404,7 +404,10 @@ const enPost = buildPost({
 export const localPosts: Post[] = [
   frPost,
   enPost,
-  ...basiliquePosts,
+  // « marier-a-la-basilique-saint-pierre » : la version FR vient désormais du
+  // Holding (avec ses images générées) ; on ne garde donc QUE le miroir EN local
+  // (le Holding n'a pas de version EN de cet article).
+  ...basiliquePosts.filter((p) => p.lang !== 'fr'),
   ...documentsPosts,
   ...coutPosts,
   ...weddingPlannerPosts,
