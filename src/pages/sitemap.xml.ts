@@ -21,10 +21,6 @@ const PAGE_SOURCES: Record<string, string[]> = {
     'src/data/search.ts',
     'src/lib/search-index.ts',
   ],
-  '/destinations/rome/': [
-    'src/pages/destinations/rome/index.astro',
-    'src/data/destinations.ts',
-  ],
   '/en/': ['src/pages/en/index.astro', 'src/data/home.ts'],
   '/en/blog/': ['src/pages/en/blog/index.astro', 'src/data/posts.ts'],
   '/en/contact/': ['src/pages/en/contact/index.astro', 'src/data/contact.ts'],
@@ -46,7 +42,6 @@ const FR_STATIC_PAGES = [
   '/blog/',
   '/contact/',
   '/recherche/',
-  '/destinations/rome/',
 ];
 
 /**

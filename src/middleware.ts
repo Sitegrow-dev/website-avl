@@ -180,14 +180,12 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   if (pathname === '/en/services' || pathname === '/en/services/') {
     return context.redirect('/en/', 301);
   }
-  // Destinations FR-only : pas de miroir /en/destinations/* (évite 404)
-  if (pathname === '/en/destinations' || pathname === '/en/destinations/') {
+  // Hub destinations sans index → Rome (FR) / Rome (EN)
+  if (pathname === '/destinations' || pathname === '/destinations/') {
     return context.redirect('/destinations/rome/', 301);
   }
-  if (pathname.startsWith('/en/destinations/')) {
-    const target = pathname.replace(/^\/en/, '');
-    const targetWithSlash = target.endsWith('/') ? target : `${target}/`;
-    return context.redirect(targetWithSlash, 301);
+  if (pathname === '/en/destinations' || pathname === '/en/destinations/') {
+    return context.redirect('/en/destinations/rome/', 301);
   }
   if (pathname === '/en/404' || pathname === '/en/404/') {
     return context.redirect('/404/', 301);

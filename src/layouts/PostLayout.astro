@@ -19,9 +19,11 @@ const { post, lang = 'fr' } = Astro.props;
 
 const origin = Astro.site ?? new URL(Astro.url.origin);
 const path = getPostHref({ ...post, published: true });
-const isRoot = getPostRoute(post) === 'root';
+const route = getPostRoute(post);
+const isRoot = route === 'root';
+const isDestination = route === 'destinations';
 const ampUrl =
-  lang === 'fr'
+  lang === 'fr' && !isDestination
     ? new URL(isRoot ? `/${post.slug}/amp/` : `/blog/${post.slug}/amp/`, origin).href
     : undefined;
 const articleGraph = buildArticleGraph(post, origin, {
@@ -29,9 +31,11 @@ const articleGraph = buildArticleGraph(post, origin, {
   lang: lang === 'en' ? 'en-CA' : 'fr-CA',
 });
 const faqSchema = post.faq?.length ? buildFaqSchema(post.faq) : null;
-const breadcrumbs = isRoot
-  ? breadcrumbTrails.guide(post.title, lang)
-  : breadcrumbTrails.post(post.title, lang);
+const breadcrumbs = isDestination
+  ? breadcrumbTrails.destination(post.title, lang)
+  : isRoot
+    ? breadcrumbTrails.guide(post.title, lang)
+    : breadcrumbTrails.post(post.title, lang);
 ---
 <PageLayout
   lang={lang === 'en' ? 'en-CA' : 'fr-CA'}

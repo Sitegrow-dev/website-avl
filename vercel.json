@@ -198,12 +198,22 @@
     },
     {
       "source": "/en/destinations",
+      "destination": "/en/destinations/rome/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/destinations/",
+      "destination": "/en/destinations/rome/",
+      "statusCode": 301
+    },
+    {
+      "source": "/destinations",
       "destination": "/destinations/rome/",
       "statusCode": 301
     },
     {
-      "source": "/en/destinations/:path*",
-      "destination": "/destinations/:path*",
+      "source": "/destinations/",
+      "destination": "/destinations/rome/",
       "statusCode": 301
     },
     {

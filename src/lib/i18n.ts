@@ -67,9 +67,9 @@ function allSlugPairs(): Array<{ fr: string; en: string }> {
 
 /**
  * Pages FR sans miroir EN indexable (pas de hreflang en-CA).
- * Ex. destinations pas encore traduites.
+ * Les destinations ont désormais des miroirs /en/destinations/* — ne plus les traiter ici.
  */
-const FR_ONLY_PATHS = new Set<string>(['/destinations/rome/']);
+const FR_ONLY_PATHS = new Set<string>([]);
 
 export function isLang(value: string | undefined | null): value is Lang {
   return value === 'fr' || value === 'en';
@@ -96,7 +96,7 @@ function normalizePath(path: string): string {
 /** True si le chemin FR n’a pas de miroir EN (ne pas inventer `/en/...`). */
 function isFrOnlyPath(path: string): boolean {
   const normalized = normalizePath(stripLocalePrefix(path));
-  return FR_ONLY_PATHS.has(normalized) || normalized.startsWith('/destinations/');
+  return FR_ONLY_PATHS.has(normalized);
 }
 
 /** True si la page est anglaise-only à l’URL racine (ex. /photos.htm). */

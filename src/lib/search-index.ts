@@ -119,17 +119,6 @@ function buildStaticPages(lang: Lang): SearchRecord[] {
     });
   }
 
-  if (!isEn) {
-    records.push({
-      id: 'fr:destinations-rome',
-      title: 'Destinations — Rome',
-      url: '/destinations/rome/',
-      type: 'page',
-      excerpt: 'Églises, quartiers et idées pour un mariage ou un séjour à Rome.',
-      body: 'destinations rome italie eglises vatican mariage catholique',
-    });
-  }
-
   return records;
 }
 

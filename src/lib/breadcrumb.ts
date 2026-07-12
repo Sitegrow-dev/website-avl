@@ -109,7 +109,11 @@ export const frPagesList: SitePageLink[] = [
   { label: labels.fr.home, href: '/', section: 'main' },
   { label: labels.fr.about, href: '/about.htm', section: 'main' },
   { label: labels.fr.photos, href: '/photos.htm', section: 'main' },
-  { label: labels.fr.destinations, href: '/destinations/rome/', section: 'main' },
+  { label: 'Rome', href: '/destinations/rome/', section: 'main' },
+  { label: 'Toscane', href: '/destinations/toscane/', section: 'main' },
+  { label: 'Venise', href: '/destinations/venise/', section: 'main' },
+  { label: 'Lac de Côme', href: '/destinations/lac-de-come/', section: 'main' },
+  { label: 'Côte amalfitaine', href: '/destinations/cote-amalfitaine/', section: 'main' },
   { label: labels.fr.blog, href: '/blog/', section: 'main' },
   { label: labels.fr.contact, href: '/contact/', section: 'main' },
   { label: labels.fr.search, href: '/recherche/', section: 'main' },
@@ -118,12 +122,17 @@ export const frPagesList: SitePageLink[] = [
 
 /**
  * Liste centralisée des pages pour le plan du site HTML (EN).
- * Miroirs indexables sous /en/ (pas de destinations FR-only).
+ * Miroirs indexables sous /en/.
  */
 export const enPagesList: SitePageLink[] = [
   { label: labels.en.home, href: '/en/', section: 'main' },
   { label: labels.en.about, href: '/about.htm', section: 'main' },
   { label: labels.en.photos, href: '/photos.htm', section: 'main' },
+  { label: 'Rome', href: '/en/destinations/rome/', section: 'main' },
+  { label: 'Tuscany', href: '/en/destinations/tuscany/', section: 'main' },
+  { label: 'Venice', href: '/en/destinations/venice/', section: 'main' },
+  { label: 'Lake Como', href: '/en/destinations/lake-como/', section: 'main' },
+  { label: 'Amalfi Coast', href: '/en/destinations/amalfi-coast/', section: 'main' },
   { label: labels.en.blog, href: '/en/blog/', section: 'main' },
   { label: labels.en.contact, href: '/en/contact/', section: 'main' },
   { label: labels.en.search, href: '/en/search/', section: 'main' },

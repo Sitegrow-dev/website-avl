@@ -24,7 +24,7 @@ export const GET: APIRoute = ({ site }) => {
 
   const pages = [
     { title: 'Accueil', href: '/', desc: home.hero.subtitle },
-    { title: 'Destinations', href: '/destinations/rome/', desc: 'Mariage catholique à Rome' },
+    { title: 'Destinations', href: '/destinations/rome/', desc: 'Guides Rome, Toscane, Venise, lac de Côme et côte amalfitaine' },
     { title: about.title, href: '/about.htm', desc: about.metaDescription },
     {
       title: photos.title,

@@ -51,9 +51,29 @@ import {
   PATRIMOINE_ROME_EN_SLUG,
   PATRIMOINE_ROME_FR_SLUG,
 } from '@/data/local-post-patrimoine-catholique-rome';
+import {
+  ROME_EN_SLUG,
+  ROME_FR_SLUG,
+} from '@/data/local-post-destination-rome';
+import {
+  TOSCANE_EN_SLUG,
+  TOSCANE_FR_SLUG,
+} from '@/data/local-post-destination-toscane';
+import {
+  VENISE_EN_SLUG,
+  VENISE_FR_SLUG,
+} from '@/data/local-post-destination-venise';
+import {
+  LAC_COME_EN_SLUG,
+  LAC_COME_FR_SLUG,
+} from '@/data/local-post-destination-lac-de-come';
+import {
+  COTE_AMALFI_EN_SLUG,
+  COTE_AMALFI_FR_SLUG,
+} from '@/data/local-post-destination-cote-amalfitaine';
 
 /**
- * Paires de slugs guides FR ↔ EN (pages pilier à l’URL racine).
+ * Paires de slugs guides FR ↔ EN (pages pilier à l’URL racine + destinations).
  * Ne concerne pas le blog Holding.
  */
 const KNOWN_GUIDE_SLUG_PAIRS: Array<{ fr: string; en: string }> = [
@@ -74,6 +94,11 @@ const KNOWN_GUIDE_SLUG_PAIRS: Array<{ fr: string; en: string }> = [
   { fr: ITINERAIRE_ROME_FR_SLUG, en: ITINERAIRE_ROME_EN_SLUG },
   { fr: BIBLIOTHEQUE_VATICANE_FR_SLUG, en: BIBLIOTHEQUE_VATICANE_EN_SLUG },
   { fr: PATRIMOINE_ROME_FR_SLUG, en: PATRIMOINE_ROME_EN_SLUG },
+  { fr: ROME_FR_SLUG, en: ROME_EN_SLUG },
+  { fr: TOSCANE_FR_SLUG, en: TOSCANE_EN_SLUG },
+  { fr: VENISE_FR_SLUG, en: VENISE_EN_SLUG },
+  { fr: LAC_COME_FR_SLUG, en: LAC_COME_EN_SLUG },
+  { fr: COTE_AMALFI_FR_SLUG, en: COTE_AMALFI_EN_SLUG },
 ];
 
 export type TimelineItem = {
@@ -97,8 +122,8 @@ export type PostFaq = {
   answer: string;
 };
 
-/** `root` = URL pilier `/slug/` ; `blog` = article sous `/slug/`. */
-export type PostRoute = 'root' | 'blog';
+/** `root` = URL pilier `/slug/` ; `blog` = article sous `/blog/slug/` ; `destinations` = `/destinations/slug/`. */
+export type PostRoute = 'root' | 'blog' | 'destinations';
 
 export type Post = {
   slug: string;
@@ -107,7 +132,8 @@ export type Post = {
   /**
    * Préfixe d’URL publique.
    * - `root` : `/slug/` et `/en/slug/` (guides / piliers)
-   * - `blog` : `/slug/` (défaut, Holding)
+   * - `blog` : `/blog/slug/` (défaut, Holding)
+   * - `destinations` : `/destinations/slug/` et `/en/destinations/slug/`
    */
   route?: PostRoute;
   /** Slug de la version dans l’autre langue (hreflang / sélecteur). */
@@ -226,6 +252,12 @@ function registerAlternates(all: Post[]): void {
     if (route === 'root') {
       return { fr: `/${frSlug}/`, en: `/en/${enSlug}/` };
     }
+    if (route === 'destinations') {
+      return {
+        fr: `/destinations/${frSlug}/`,
+        en: `/en/destinations/${enSlug}/`,
+      };
+    }
     return { fr: `/blog/${frSlug}/`, en: `/en/blog/${enSlug}/` };
   };
 
@@ -290,19 +322,25 @@ export function getPostRoute(post: Pick<Post, 'route'>): PostRoute {
   return post.route ?? 'blog';
 }
 
-/** URL publique : guide → `/slug/` ; blog → `/blog/slug/`. */
+/** URL publique : guide → `/slug/` ; destination → `/destinations/slug/` ; blog → `/blog/slug/`. */
 export function getPostHref(
   post: Pick<Post, 'slug' | 'published' | 'lang' | 'route'>,
 ): string {
   if (!post.published) return '#';
   const isEn = (post.lang ?? 'fr') === 'en';
-  if (getPostRoute(post) === 'root') {
+  const route = getPostRoute(post);
+  if (route === 'root') {
     return isEn ? `/en/${post.slug}/` : `/${post.slug}/`;
+  }
+  if (route === 'destinations') {
+    return isEn
+      ? `/en/destinations/${post.slug}/`
+      : `/destinations/${post.slug}/`;
   }
   return isEn ? `/en/blog/${post.slug}/` : `/blog/${post.slug}/`;
 }
 
-/** Guides racine uniquement. */
+/** Guides racine + destinations. */
 export function getGuidePosts(lang: Lang = 'fr'): Post[] {
   return guides.filter((item) => {
     if (!item.published) return false;
@@ -311,9 +349,14 @@ export function getGuidePosts(lang: Lang = 'fr'): Post[] {
   });
 }
 
-/** Alias historique. */
+/** Guides à l’URL racine uniquement (hors `/destinations/`). */
 export function getRootPosts(lang: Lang = 'fr'): Post[] {
-  return getGuidePosts(lang);
+  return getGuidePosts(lang).filter((p) => getPostRoute(p) === 'root');
+}
+
+/** Guides destination sous `/destinations/{slug}/`. */
+export function getDestinationPosts(lang: Lang = 'fr'): Post[] {
+  return getGuidePosts(lang).filter((p) => getPostRoute(p) === 'destinations');
 }
 
 /** Articles blog Holding uniquement (jamais les guides). */

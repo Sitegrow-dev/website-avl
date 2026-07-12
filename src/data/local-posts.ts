@@ -1,13 +1,12 @@
-/**
- * Articles locaux (FR + EN) fusionnés avec Holding dans `posts.ts`.
- * Holding gagne en cas de collision de slug+langue.
- */
-import { tocFromMarkdown } from '@/lib/markdown';
-import type { Post } from '@/data/posts';
 import { basiliquePosts } from '@/data/local-post-basilique';
 import { basiliqueVisitePosts } from '@/data/local-post-basilique-visite';
 import { bibliothequeVaticanePosts } from '@/data/local-post-bibliotheque-vaticane';
 import { coutPosts } from '@/data/local-post-cout';
+import { destinationCoteAmalfitainePosts } from '@/data/local-post-destination-cote-amalfitaine';
+import { destinationLacDeComePosts } from '@/data/local-post-destination-lac-de-come';
+import { destinationRomePosts } from '@/data/local-post-destination-rome';
+import { destinationToscanePosts } from '@/data/local-post-destination-toscane';
+import { destinationVenisePosts } from '@/data/local-post-destination-venise';
 import { documentsPosts } from '@/data/local-post-documents';
 import { itineraireRomePosts } from '@/data/local-post-itineraire-rome';
 import { luneDeMielPosts } from '@/data/local-post-lune-de-miel';
@@ -17,7 +16,8 @@ import { pelerinagePosts } from '@/data/local-post-pelerinage';
 import { visiterVaticanPosts } from '@/data/local-post-visiter-vatican';
 import { voyageItaliePosts } from '@/data/local-post-voyage-italie';
 import { weddingPlannerPosts } from '@/data/local-post-wedding-planner';
-
+import type { Post } from '@/data/posts';
+import { tocFromMarkdown } from '@/lib/markdown';
 const FR_SLUG = 'se-marier-eglise-catholique-italie';
 const EN_SLUG = 'getting-married-catholic-church-italy';
 const DATE = '2026-07-11';
@@ -405,7 +405,7 @@ const enPost = buildPost({
 /** Guides locaux (mariage, voyage, Vatican…) — pages pilier à l’URL racine.
  * Ce ne sont PAS des articles de blog : ils ne sont jamais fusionnés dans `posts`.
  */
-export const localPosts: Post[] = [
+const rootGuides: Post[] = [
   frPost,
   enPost,
   ...basiliquePosts,
@@ -422,3 +422,14 @@ export const localPosts: Post[] = [
   ...bibliothequeVaticanePosts,
   ...patrimoineRomePosts,
 ].map((post) => ({ ...post, route: 'root' as const }));
+
+/** Guides destination sous `/destinations/{slug}/`. */
+const destinationGuides: Post[] = [
+  ...destinationRomePosts,
+  ...destinationToscanePosts,
+  ...destinationVenisePosts,
+  ...destinationLacDeComePosts,
+  ...destinationCoteAmalfitainePosts,
+].map((post) => ({ ...post, route: 'destinations' as const }));
+
+export const localPosts: Post[] = [...rootGuides, ...destinationGuides];
