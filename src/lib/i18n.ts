@@ -20,19 +20,24 @@ export const HREFLANG = {
 /**
  * Paires FR ↔ EN dont le slug diffère (pas un simple préfixe /en).
  * Conventions skeleton : /a-propos/↔/en/about/
- * AFVL : about/photos restent en `.htm` (URLs publiques legacy).
+ * AFVL : about reste en `.htm` sous chaque locale.
+ * /photos.htm est EN-only (pas de miroir /en/photos.htm).
  * Plan du site : /plan-du-site/ ↔ /en/site-map/
  */
 const SLUG_PAIRS: Array<{ fr: string; en: string }> = [
   { fr: '/about.htm', en: '/en/about.htm' },
-  { fr: '/photos.htm', en: '/en/photos.htm' },
   // Routes Astro internes (réécrites depuis .htm) : pour le sélecteur au build
   { fr: '/about/', en: '/en/about/' },
-  { fr: '/photos/', en: '/en/photos/' },
   // Skeleton-style translated slugs (about public EN = legacy .htm)
   { fr: '/a-propos/', en: '/en/about.htm' },
   { fr: '/plan-du-site/', en: '/en/site-map/' },
 ];
+
+/**
+ * Pages anglaises servies à l’URL racine (hors /en/), sans miroir FR.
+ * Ex. galerie photos héritée : uniquement https://afvl.org/photos.htm
+ */
+const EN_ONLY_PATHS = new Set<string>(['/photos.htm', '/photos/']);
 
 /** Paires de slugs blog FR ↔ EN (enregistrées depuis `src/data/posts.ts`). */
 let blogSlugPairs: Array<{ fr: string; en: string }> = [];
@@ -83,6 +88,20 @@ function isFrOnlyPath(path: string): boolean {
   return FR_ONLY_PATHS.has(normalized) || normalized.startsWith('/destinations/');
 }
 
+/** True si la page est anglaise-only à l’URL racine (ex. /photos.htm). */
+export function isEnOnlyPath(path: string): boolean {
+  const stripped = normalizePath(stripLocalePrefix(path));
+  const normalized = normalizePath(path);
+  return EN_ONLY_PATHS.has(stripped) || EN_ONLY_PATHS.has(normalized);
+}
+
+/** URL publique canonique d’une page EN-only (toujours sans /en/). */
+function enOnlyPublicPath(path: string): string {
+  const stripped = normalizePath(stripLocalePrefix(path));
+  if (stripped === '/photos/' || stripped === '/photos.htm') return '/photos.htm';
+  return stripped;
+}
+
 /** Article blog (hors index) : exige une paire FR↔EN enregistrée. */
 function isBlogPostPath(path: string): boolean {
   const stripped = normalizePath(stripLocalePrefix(path));
@@ -96,6 +115,9 @@ function findSlugPair(path: string): { fr: string; en: string } | undefined {
 
 /** Ajoute le préfixe /en (chemins déjà préfixés inchangés). */
 export function withLocalePrefix(path: string, lang: Lang): string {
+  // Galerie photos : une seule URL publique, quelle que soit la langue de nav.
+  if (isEnOnlyPath(path)) return enOnlyPublicPath(path);
+
   const pairs = allSlugPairs();
   if (lang === 'fr') {
     const pair = pairs.find((p) => p.en === path);
@@ -141,6 +163,9 @@ export function localizedHref(href: string, lang: Lang): string {
 export function alternatePath(pathname: string, targetLang: Lang): string {
   const normalized = normalizePath(pathname);
 
+  // EN-only : pas d’alternate localisé — toujours l’URL publique unique.
+  if (isEnOnlyPath(normalized)) return enOnlyPublicPath(normalized);
+
   const pair = findSlugPair(normalized);
   if (pair) return targetLang === 'en' ? pair.en : pair.fr;
 
@@ -159,6 +184,10 @@ export function alternatePath(pathname: string, targetLang: Lang): string {
 /** True si un alternate EN indexable existe pour ce chemin public. */
 export function hasEnAlternate(pathname: string): boolean {
   const normalized = normalizePath(pathname);
+
+  // Page monolingue EN à la racine : pas de cluster hreflang FR↔EN.
+  if (isEnOnlyPath(normalized)) return false;
+
   const frPath = normalizePath(stripLocalePrefix(alternatePath(normalized, 'fr')));
 
   if (FR_ONLY_PATHS.has(frPath)) return false;

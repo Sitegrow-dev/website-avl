@@ -111,7 +111,7 @@ export const frPagesList: SitePageLink[] = [
 export const enPagesList: SitePageLink[] = [
   { label: labels.en.home, href: '/en/', section: 'main' },
   { label: labels.en.about, href: '/en/about.htm', section: 'main' },
-  { label: labels.en.photos, href: '/en/photos.htm', section: 'main' },
+  { label: labels.en.photos, href: '/photos.htm', section: 'main' },
   { label: labels.en.blog, href: '/en/blog/', section: 'main' },
   { label: labels.en.contact, href: '/en/contact/', section: 'main' },
   { label: labels.en.plan, href: '/en/site-map/', section: 'legal' },

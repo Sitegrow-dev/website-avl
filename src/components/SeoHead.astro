@@ -11,7 +11,7 @@
  */
 import { siteConfig } from '@/config/site';
 import { OG_IMAGE, absoluteUrl } from '@/lib/seo';
-import { alternatePath, hasEnAlternate } from '@/lib/i18n';
+import { alternatePath, hasEnAlternate, isEnOnlyPath } from '@/lib/i18n';
 
 interface Props {
   title: string;
@@ -54,12 +54,13 @@ const ogWidth = usingDefaultImage ? OG_IMAGE.width : imageWidth;
 const ogHeight = usingDefaultImage ? OG_IMAGE.height : imageHeight;
 const ogImageType = usingDefaultImage ? OG_IMAGE.type : undefined;
 
-// i18n : détecte la langue via le préfixe /en/ (ou chemin canonique EN .htm)
+// i18n : préfixe /en/, chemins .htm EN, ou pages EN-only à la racine (/photos.htm)
+const enOnly = isEnOnlyPath(pathname);
 const isEn =
+  enOnly ||
   pathname === '/en' ||
   pathname.startsWith('/en/') ||
-  pathname === '/en/about.htm' ||
-  pathname === '/en/photos.htm';
+  pathname === '/en/about.htm';
 const ogLocale = isEn ? 'en_CA' : 'fr_CA';
 const ogLocaleAlt = isEn ? 'fr_CA' : 'en_CA';
 
@@ -67,10 +68,10 @@ const frPath = alternatePath(pathname, 'fr');
 const enPath = alternatePath(pathname, 'en');
 const frUrl = absoluteUrl(frPath, site);
 const enUrl = absoluteUrl(enPath, site);
-const xDefaultUrl = frUrl;
+const xDefaultUrl = enOnly ? canonical : frUrl;
 
 // N'annoncer l'alternative EN que si le miroir est indexable ET qu'une paire existe.
-const showEnAlternate = siteConfig.enIndexable && hasEnAlternate(pathname);
+const showEnAlternate = !enOnly && siteConfig.enIndexable && hasEnAlternate(pathname);
 
 // Flux RSS correspondant à la langue de la page (découverte par les agrégateurs).
 const rssUrl = absoluteUrl(isEn ? '/en/rss.xml' : '/rss.xml', site);
@@ -80,7 +81,11 @@ const twitter = siteConfig.twitterHandle;
 ---
 <link rel="canonical" href={canonical} />
 
-<link rel="alternate" hreflang="fr-CA" href={frUrl} />
+{enOnly ? (
+  <link rel="alternate" hreflang="en-CA" href={canonical} />
+) : (
+  <link rel="alternate" hreflang="fr-CA" href={frUrl} />
+)}
 {showEnAlternate && <link rel="alternate" hreflang="en-CA" href={enUrl} />}
 <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
 

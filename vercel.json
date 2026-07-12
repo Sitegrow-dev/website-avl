@@ -67,7 +67,17 @@
     },
     {
       "source": "/en/photos",
-      "destination": "/en/photos.htm",
+      "destination": "/photos.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/photos/",
+      "destination": "/photos.htm",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/photos.htm",
+      "destination": "/photos.htm",
       "statusCode": 301
     },
     {
@@ -168,10 +178,6 @@
     {
       "source": "/en/about.htm",
       "destination": "/en/about/"
-    },
-    {
-      "source": "/en/photos.htm",
-      "destination": "/en/photos/"
     }
   ]
 }

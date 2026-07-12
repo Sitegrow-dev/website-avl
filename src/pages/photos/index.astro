@@ -1,81 +1,240 @@
 ---
+/**
+ * /photos.htm — English-only editorial gallery (legacy URL).
+ * No FR mirror; /en/photos.htm redirects here.
+ */
 import PageLayout from '@layouts/PageLayout.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
-import { getPhotosContent } from '@/data/photos';
+import JsonLd from '@components/JsonLd.astro';
+import { getPhotosContent, type PhotosRichPart } from '@/data/photos';
 import { breadcrumbTrails } from '@/lib/breadcrumb';
-import { localizedHref } from '@/lib/i18n';
+import { siteConfig } from '@/config/site';
 
-const lang = 'fr' as const;
-const brandEyebrow = 'American Friends of the Vatican Library';
-const { title, metaTitle, metaDescription, intro, archiveNote, galleryHeading, images, cta } =
-  getPhotosContent(lang);
+const content = getPhotosContent();
+const {
+  metaTitle,
+  metaDescription,
+  title,
+  intro,
+  sections,
+  photoRules,
+  seeAlso,
+  disclaimer,
+} = content;
+
+const origin = Astro.site ?? new URL(siteConfig.url);
+const base = origin.href.replace(/\/$/, '');
+
+const gallerySchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ImageGallery',
+      '@id': `${base}/photos.htm#gallery`,
+      name: title,
+      description: metaDescription,
+      inLanguage: 'en-CA',
+      isPartOf: { '@id': `${base}/#website` },
+    },
+  ],
+};
+
+function isLinkPart(part: PhotosRichPart): part is { label: string; href: string } {
+  return typeof part === 'object' && part !== null && 'href' in part;
+}
 ---
 <PageLayout
-  lang="fr-CA"
+  lang="en-CA"
   title={metaTitle}
   description={metaDescription}
-  breadcrumbs={breadcrumbTrails.photosHtm(lang)}
+  breadcrumbs={breadcrumbTrails.photosHtm('en')}
   activeHref="/photos.htm"
   canonicalPath="/photos.htm"
+  image="/images/photos/st-peters-square-colonnade.webp"
+  imageAlt="Bernini’s colonnade framing St. Peter’s Square"
 >
+  <JsonLd schema={gallerySchema} />
+
   <main>
     <section class="px-5 pb-10 pt-16 sm:px-8 sm:pb-12 sm:pt-20 lg:px-10">
       <div class="mx-auto max-w-3xl">
-        <p class="text-sm font-semibold uppercase tracking-[0.12em] text-brand">{brandEyebrow}</p>
-        <h1 class="mt-4 font-display text-4xl leading-tight text-ink sm:text-5xl lg:text-[52px] lg:leading-[1.1]">
+        <h1 class="font-display text-4xl leading-tight text-ink sm:text-5xl lg:text-[52px] lg:leading-[1.1]">
           {title}
         </h1>
-        <p class="mt-6 text-lg leading-relaxed text-muted">{intro}</p>
-      </div>
-    </section>
-
-    <section class="border-y border-black/[0.08] bg-surface px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
-      <div class="mx-auto max-w-3xl">
-        <h2 class="font-display text-3xl leading-tight text-ink sm:text-4xl">{archiveNote.title}</h2>
-        {archiveNote.paragraphs.map((paragraph) => (
-          <p class="mt-5 text-lg leading-relaxed text-muted">{paragraph}</p>
+        {intro.map((paragraph) => (
+          <p class="mt-6 text-lg leading-relaxed text-muted">{paragraph}</p>
         ))}
       </div>
     </section>
 
-    <section class="px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
-      <div class="mx-auto max-w-5xl">
-        <h2 class="font-display text-3xl leading-tight text-ink sm:text-4xl">{galleryHeading}</h2>
-        <div class="mt-10 grid grid-cols-1 gap-10 md:grid-cols-2">
-          {images.map((image, index) => (
-            <figure class:list={[index === 0 && 'md:col-span-2']}>
-              <div class="overflow-hidden bg-bg-alt">
-                <ResponsiveImage
-                  src={image.src}
-                  alt={image.alt}
-                  width={image.width}
-                  height={image.height}
-                  sizes={index === 0 ? '(min-width: 1024px) 64rem, 100vw' : '(min-width: 768px) 28rem, 100vw'}
-                  class={
-                    index === 0
-                      ? 'h-auto w-full object-contain'
-                      : 'mx-auto h-auto w-full max-w-[200px] object-contain'
-                  }
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  fetchpriority={index === 0 ? 'high' : undefined}
-                />
-              </div>
-              <figcaption class="mt-3 text-sm leading-relaxed text-muted">{image.caption}</figcaption>
+    {sections.map((section) => (
+      <section
+        id={section.id}
+        class="border-t border-black/[0.08] px-5 py-14 sm:px-8 sm:py-16 lg:px-10"
+      >
+        <div class="mx-auto max-w-3xl">
+          <h2 class="font-display text-3xl leading-tight text-ink sm:text-4xl">{section.title}</h2>
+
+          {section.image && (
+            <figure class="mt-8">
+              <ResponsiveImage
+                src={section.image.src}
+                alt={section.image.alt}
+                width={section.image.width}
+                height={section.image.height}
+                sizes="(min-width: 768px) 48rem, 100vw"
+                class="h-auto w-full object-cover"
+                loading={section.id === 'st-peters-square' ? 'eager' : 'lazy'}
+                fetchpriority={section.id === 'st-peters-square' ? 'high' : undefined}
+              />
+              <figcaption class="mt-3 text-sm leading-relaxed text-muted">
+                {section.image.alt}. Photo:{' '}
+                <a
+                  href={section.image.credit.commonsUrl}
+                  class="font-medium text-brand underline-offset-2 hover:underline"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {section.image.credit.author}
+                </a>
+                {section.image.credit.licenseUrl ? (
+                  <>
+                    ,{' '}
+                    <a
+                      href={section.image.credit.licenseUrl}
+                      class="underline-offset-2 hover:underline"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {section.image.credit.license}
+                    </a>
+                  </>
+                ) : (
+                  <>, {section.image.credit.license}</>
+                )}
+                .
+              </figcaption>
             </figure>
+          )}
+
+          {section.paragraphs.map((parts) => (
+            <p class="mt-5 text-lg leading-relaxed text-muted">
+              {parts.map((part) =>
+                isLinkPart(part) ? (
+                  <a href={part.href} class="font-medium text-brand underline-offset-2 hover:underline">
+                    {part.label}
+                  </a>
+                ) : (
+                  part
+                ),
+              )}
+            </p>
+          ))}
+
+          {section.imageAfter && (
+            <figure class="mt-8">
+              <ResponsiveImage
+                src={section.imageAfter.src}
+                alt={section.imageAfter.alt}
+                width={section.imageAfter.width}
+                height={section.imageAfter.height}
+                sizes="(min-width: 768px) 48rem, 100vw"
+                class="h-auto w-full object-cover"
+                loading="lazy"
+              />
+              <figcaption class="mt-3 text-sm leading-relaxed text-muted">
+                {section.imageAfter.alt}. Photo:{' '}
+                <a
+                  href={section.imageAfter.credit.commonsUrl}
+                  class="font-medium text-brand underline-offset-2 hover:underline"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {section.imageAfter.credit.author}
+                </a>
+                {section.imageAfter.credit.licenseUrl ? (
+                  <>
+                    ,{' '}
+                    <a
+                      href={section.imageAfter.credit.licenseUrl}
+                      class="underline-offset-2 hover:underline"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {section.imageAfter.credit.license}
+                    </a>
+                  </>
+                ) : (
+                  <>, {section.imageAfter.credit.license}</>
+                )}
+                .
+              </figcaption>
+            </figure>
+          )}
+
+          {section.paragraphsAfter?.map((parts) => (
+            <p class="mt-5 text-lg leading-relaxed text-muted">
+              {parts.map((part) =>
+                isLinkPart(part) ? (
+                  <a href={part.href} class="font-medium text-brand underline-offset-2 hover:underline">
+                    {part.label}
+                  </a>
+                ) : (
+                  part
+                ),
+              )}
+            </p>
           ))}
         </div>
+      </section>
+    ))}
+
+    <section class="border-t border-black/[0.08] bg-surface px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
+      <div class="mx-auto max-w-3xl">
+        <h2 class="font-display text-3xl leading-tight text-ink sm:text-4xl">{photoRules.title}</h2>
+        <div class="mt-8 overflow-x-auto">
+          <table class="w-full min-w-[36rem] border-collapse text-left text-sm">
+            <thead>
+              <tr class="border-b border-black/[0.12]">
+                {photoRules.headers.map((header) => (
+                  <th class="px-3 py-3 font-semibold text-ink">{header}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {photoRules.rows.map((row) => (
+                <tr class="border-b border-black/[0.06]">
+                  {row.map((cell) => (
+                    <td class="px-3 py-3 align-top text-muted">{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="mt-6 text-base leading-relaxed text-muted">{photoRules.note}</p>
       </div>
     </section>
 
-    <section class="border-t border-black/[0.08] bg-surface px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
-      <div class="mx-auto max-w-3xl text-center">
-        <p class="text-lg leading-relaxed text-muted">{cta.text}</p>
-        <a
-          href={localizedHref(cta.button.href, lang)}
-          class="mt-8 inline-flex items-center justify-center rounded-md bg-brand px-7 py-3.5 text-base font-semibold text-white shadow-[0_4px_7px_rgba(0,0,0,0.1)] transition-colors hover:bg-brand-hover"
-        >
-          {cta.button.label}
-        </a>
+    <section class="border-t border-black/[0.08] px-5 py-14 sm:px-8 sm:py-16 lg:px-10">
+      <div class="mx-auto max-w-3xl">
+        <h2 class="font-display text-3xl leading-tight text-ink sm:text-4xl">{seeAlso.title}</h2>
+        <ul class="mt-8 space-y-4">
+          {seeAlso.links.map((link) => (
+            <li class="flex gap-3 text-base leading-relaxed text-muted">
+              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand" aria-hidden="true"></span>
+              <a href={link.href} class="font-medium text-brand underline-offset-2 hover:underline">
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="border-t border-black/[0.08] px-5 py-12 sm:px-8 lg:px-10">
+      <div class="mx-auto max-w-3xl">
+        <p class="text-sm leading-relaxed text-muted">{disclaimer}</p>
       </div>
     </section>
   </main>

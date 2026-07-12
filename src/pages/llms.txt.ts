@@ -3,6 +3,7 @@ import { siteConfig } from '@/config/site';
 import { getHomeContent } from '@/data/home';
 import { getAboutContent } from '@/data/about';
 import { getContactContent } from '@/data/contact';
+import { getPhotosContent } from '@/data/photos';
 import { getPublishedPosts } from '@/data/posts';
 
 export const prerender = true;
@@ -19,15 +20,16 @@ export const GET: APIRoute = ({ site }) => {
   const home = getHomeContent('fr');
   const about = getAboutContent('fr');
   const contact = getContactContent('fr');
+  const photos = getPhotosContent();
 
   const pages = [
     { title: 'Accueil', href: '/', desc: home.hero.subtitle },
     { title: 'Destinations', href: '/destinations/rome/', desc: 'Mariage catholique à Rome' },
     { title: about.title, href: '/about.htm', desc: about.metaDescription },
     {
-      title: 'Galerie photos',
+      title: photos.title,
       href: '/photos.htm',
-      desc: 'Galerie AFVL : images d’archives restaurées',
+      desc: photos.metaDescription,
     },
     { title: contact.title, href: '/contact/', desc: contact.intro },
   ];

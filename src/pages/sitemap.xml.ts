@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { getPublishedPosts } from '@/data/posts';
 import { siteConfig } from '@/config/site';
 import { gitLastmod } from '@/lib/git-lastmod';
-import { alternatePath, hasEnAlternate } from '@/lib/i18n';
+import { alternatePath, hasEnAlternate, isEnOnlyPath } from '@/lib/i18n';
 
 export const prerender = true;
 
@@ -22,7 +22,6 @@ const PAGE_SOURCES: Record<string, string[]> = {
   ],
   '/en/': ['src/pages/en/index.astro', 'src/data/home.ts'],
   '/en/about.htm': ['src/pages/en/about/index.astro', 'src/data/about.ts'],
-  '/en/photos.htm': ['src/pages/en/photos/index.astro', 'src/data/photos.ts'],
   '/en/blog/': ['src/pages/en/blog/index.astro', 'src/data/posts.ts'],
   '/en/contact/': ['src/pages/en/contact/index.astro', 'src/data/contact.ts'],
 };
@@ -31,6 +30,7 @@ const PAGE_SOURCES: Record<string, string[]> = {
  * Pages statiques FR.
  * Liste maintenue à la main : synchronisée avec src/pages/*.astro.
  * /a-propos/ et /services/ exclus (redirection / retiré).
+ * /photos.htm est EN-only mais reste dans le sitemap (URL racine unique).
  */
 const FR_STATIC_PAGES = [
   '/',
@@ -44,11 +44,11 @@ const FR_STATIC_PAGES = [
 /**
  * Miroirs EN : pages réelles sous src/pages/en/ (URLs publiques).
  * /en/blog/[slug]/ n'est pas listée (générée dynamiquement).
+ * Pas de /en/photos.htm (redirige vers /photos.htm).
  */
 const EN_STATIC_PAGES = [
   '/en/',
   '/en/about.htm',
-  '/en/photos.htm',
   '/en/blog/',
   '/en/contact/',
 ];
@@ -56,6 +56,14 @@ const EN_STATIC_PAGES = [
 type Alternate = { hreflang: string; href: string };
 
 function buildAlternates(path: string, base: string): Alternate[] {
+  if (isEnOnlyPath(path)) {
+    const href = `${base}/photos.htm`;
+    return [
+      { hreflang: 'en-CA', href },
+      { hreflang: 'x-default', href },
+    ];
+  }
+
   const frPath = alternatePath(path, 'fr');
   const alts: Alternate[] = [{ hreflang: 'fr-CA', href: `${base}${frPath}` }];
   if (siteConfig.enIndexable && hasEnAlternate(frPath)) {

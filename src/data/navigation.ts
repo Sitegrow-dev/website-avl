@@ -6,7 +6,8 @@ import type { Lang } from '@/lib/i18n';
  * et les slugs EN traduits sont appliqués via `localizedHref`.
  *
  * Paires de slugs (voir src/lib/i18n.ts) : legacy AFVL + plan du site :
- * - /about.htm ↔ /en/about.htm, /photos.htm ↔ /en/photos.htm (pages OK, hors nav header)
+ * - /about.htm ↔ /en/about.htm
+ * - /photos.htm : EN-only (pas de miroir /en/photos.htm)
  * - /plan-du-site/ → /en/site-map/
  * - /a-propos/ redirige vers /about.htm (non listé au menu)
  */

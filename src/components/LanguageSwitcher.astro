@@ -5,7 +5,7 @@
  * Attribut hreflang en BCP 47 régional (fr-CA / en-CA).
  */
 import { siteConfig } from '@/config/site';
-import { alternatePath, hasEnAlternate, htmlLang, type Lang } from '@/lib/i18n';
+import { alternatePath, hasEnAlternate, htmlLang, isEnOnlyPath, type Lang } from '@/lib/i18n';
 
 interface Props {
   lang: Lang;
@@ -19,8 +19,10 @@ const { lang, path, class: className = '' } = Astro.props;
 const pathname = path ?? Astro.url.pathname;
 const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
 /** Pas de lien vers une page EN absente / non indexable (ex. destinations). */
+/** Pages EN-only (/photos.htm) : pas de miroir FR — masquer le sélecteur. */
 const showSwitcher =
-  otherLang === 'fr' || (siteConfig.enIndexable && hasEnAlternate(pathname));
+  !isEnOnlyPath(pathname) &&
+  (otherLang === 'fr' || (siteConfig.enIndexable && hasEnAlternate(pathname)));
 const href = alternatePath(pathname, otherLang);
 const label = lang === 'en' ? 'Language' : 'Langue';
 const linkText = otherLang.toUpperCase();

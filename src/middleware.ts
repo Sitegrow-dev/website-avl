@@ -53,8 +53,14 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   if (pathname === '/en/about.htm' || pathname === '/en/about.htm/') {
     return context.rewrite('/en/about/');
   }
-  if (pathname === '/en/photos.htm' || pathname === '/en/photos.htm/') {
-    return context.rewrite('/en/photos/');
+  // /photos.htm est EN-only : plus de miroir /en/photos*
+  if (
+    pathname === '/en/photos.htm' ||
+    pathname === '/en/photos.htm/' ||
+    pathname === '/en/photos' ||
+    pathname === '/en/photos/'
+  ) {
+    return context.redirect('/photos.htm', 301);
   }
   if (pathname === '/about') {
     return context.redirect('/about.htm', 301);
@@ -65,9 +71,6 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
   // Sans slash final uniquement : /en/about/ reste la route Astro interne (réécrite depuis .htm)
   if (pathname === '/en/about') {
     return context.redirect('/en/about.htm', 301);
-  }
-  if (pathname === '/en/photos') {
-    return context.redirect('/en/photos.htm', 301);
   }
 
   // /sitemap → sitemap.xml (indexation), redirections permanentes en 301
