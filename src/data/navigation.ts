@@ -138,6 +138,62 @@ const voyageChildrenEn = [
   },
 ] as const;
 
+const destinationsChildrenFr = [
+  {
+    label: 'Rome',
+    href: '/destinations/rome/',
+    description: 'Vol direct, quartiers, Vatican, budget et erreurs à éviter',
+  },
+  {
+    label: 'Toscane',
+    href: '/destinations/toscane/',
+    description: 'Voiture, permis international, bases et itinéraire sans courir',
+  },
+  {
+    label: 'Venise',
+    href: '/destinations/venise/',
+    description: 'Vol direct, contribution d’accès, quartiers et pièges',
+  },
+  {
+    label: 'Lac de Côme',
+    href: '/destinations/lac-de-come/',
+    description: 'Via Milan, villages, ferries et mariage en Italie du Nord',
+  },
+  {
+    label: 'Côte amalfitaine',
+    href: '/destinations/cote-amalfitaine/',
+    description: 'Sans voiture, choix du village, budget et logistique',
+  },
+] as const;
+
+const destinationsChildrenEn = [
+  {
+    label: 'Rome',
+    href: '/destinations/rome/',
+    description: 'Direct flights, neighborhoods, Vatican, budget, and pitfalls',
+  },
+  {
+    label: 'Tuscany',
+    href: '/destinations/toscane/',
+    description: 'Car rental, international permit, bases, and a calm itinerary',
+  },
+  {
+    label: 'Venice',
+    href: '/destinations/venise/',
+    description: 'Direct flights, access fee, neighborhoods, and tourist traps',
+  },
+  {
+    label: 'Lake Como',
+    href: '/destinations/lac-de-come/',
+    description: 'Via Milan, villages, ferries, and northern Italy weddings',
+  },
+  {
+    label: 'Amalfi Coast',
+    href: '/destinations/cote-amalfitaine/',
+    description: 'No car, which village to pick, budget, and logistics',
+  },
+] as const;
+
 /**
  * Navigation + footer localisés.
  * Les `href` sont stockés en chemins « FR » (sans /en/) ; le préfixe
@@ -164,7 +220,12 @@ export const navigationByLang = {
         variant: 'mega' as const,
         children: voyageChildrenFr,
       },
-      { label: 'Destinations', href: '/destinations/rome/' },
+      {
+        label: 'Destinations',
+        href: '/destinations/rome/',
+        variant: 'mega' as const,
+        children: destinationsChildrenFr,
+      },
       { label: 'Blog', href: '/blog/' },
     ] satisfies NavLink[],
     navCta: { label: 'Nous joindre', href: '/contact/' },
@@ -261,7 +322,12 @@ export const navigationByLang = {
         variant: 'mega' as const,
         children: voyageChildrenEn,
       },
-      { label: 'Destinations', href: '/destinations/rome/' },
+      {
+        label: 'Destinations',
+        href: '/destinations/rome/',
+        variant: 'mega' as const,
+        children: destinationsChildrenEn,
+      },
       { label: 'Blog', href: '/blog/' },
     ] satisfies NavLink[],
     navCta: { label: 'Contact Us', href: '/contact/' },
