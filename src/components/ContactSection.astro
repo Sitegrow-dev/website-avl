@@ -16,7 +16,6 @@ const {
   cannot,
   writeTitle,
   emailNote,
-  disclaimer,
   topics,
   form,
 } = content;
@@ -214,12 +213,6 @@ function isLinkPart(part: ContactRichPart): part is { label: string; href: strin
         {siteConfig.contactEmail}
       </a>.
     </p>
-  </div>
-</section>
-
-<section class="border-t border-black/[0.08] px-5 py-12 sm:px-8 lg:px-10">
-  <div class="mx-auto max-w-3xl">
-    <p class="text-sm leading-relaxed text-muted">{disclaimer}</p>
   </div>
 </section>
 

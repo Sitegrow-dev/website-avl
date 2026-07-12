@@ -87,8 +87,6 @@ const contactFr = {
   },
   writeTitle: 'Écrire',
   emailNote: 'Vous pouvez aussi écrire directement à',
-  disclaimer:
-    'Ce site est une publication indépendante. Il n’est affilié ni au Saint-Siège, ni à la Bibliothèque apostolique vaticane, ni à aucune institution vaticane, ni à aucun organisme de bienfaisance. Aucune adhésion ni aucun don n’est sollicité.',
   topics: [
     { value: 'wedding', label: 'Mariage catholique en Italie' },
     { value: 'travel', label: 'Voyage et pèlerinage' },
@@ -202,8 +200,6 @@ const contactEn = {
   },
   writeTitle: 'Write',
   emailNote: 'You can also write directly to',
-  disclaimer:
-    'This site is an independent publication. It is not affiliated with the Holy See, the Vatican Apostolic Library, any Vatican institution, or any charity. No membership and no donation is solicited.',
   topics: [
     { value: 'wedding', label: 'Catholic wedding in Italy' },
     { value: 'travel', label: 'Travel and pilgrimage' },
