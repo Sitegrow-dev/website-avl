@@ -58,8 +58,9 @@ function buildPhotos(lang: Lang) {
   if (lang === 'fr') {
     return {
       title: 'Galerie photos',
+      metaTitle: 'Galerie photos AFVL - Images d\'archives restaurées',
       metaDescription:
-        'Galerie photos des American Friends of the Vatican Library : images d’archives restaurées depuis afvl.org.',
+        'Découvrez la galerie photos de l\'AFVL : images d\'archives restaurées du site original, emblème du 25e anniversaire et graphismes historiques de',
       intro:
         'La galerie photos d’origine de l’AFVL était une présentation Flash interactive (gallery.swf) intégrée à cette page.',
       archiveNote: {
@@ -80,8 +81,9 @@ function buildPhotos(lang: Lang) {
 
   return {
     title: 'Photo Gallery',
+    metaTitle: 'AFVL Photo Gallery - Restored Archive Images',
     metaDescription:
-      'Photo gallery of the American Friends of the Vatican Library: restored archive imagery from afvl.org.',
+      'Explore the restored AFVL photo gallery featuring archived images from the American Friends of the Vatican Library, including the 25th anniversary emblem',
     intro:
       'The original AFVL photo gallery was an interactive Flash presentation (gallery.swf) embedded on this page.',
     archiveNote: {

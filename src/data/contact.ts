@@ -2,6 +2,9 @@ import type { Lang } from '@/lib/i18n';
 
 const contactFr = {
   title: 'Nous joindre',
+  metaTitle: 'Nous joindre - AFVL',
+  metaDescription:
+    'Contactez AFVL pour votre mariage catholique en Italie, un pèlerinage à Rome ou un partenariat. On vous répond rapidement.',
   subtitle:
     'Une question, un projet ou une demande de soumission ? Écrivez-nous, on vous répond rapidement.',
   blocks: [
@@ -54,6 +57,9 @@ const contactFr = {
 
 const contactEn = {
   title: 'Contact Us',
+  metaTitle: 'Contact AFVL - Catholic Wedding & Pilgrimage in Italy',
+  metaDescription:
+    'Reach out to AFVL with your questions about Catholic weddings in Italy, pilgrimages, or partnerships. We reply promptly to every message.',
   subtitle: 'A question, a project, or a quote request? Write to us: we reply promptly.',
   blocks: [
     {

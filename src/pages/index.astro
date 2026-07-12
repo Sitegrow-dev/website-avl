@@ -12,7 +12,6 @@ import FaqSection from '@components/home/FaqSection.astro';
 import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
 import JsonLd from '@components/JsonLd.astro';
 import { buildHomeGraph } from '@/lib/schema';
-import { siteConfig } from '@/config/site';
 import { getHomeContent } from '@/data/home';
 import { localizedHref } from '@/lib/i18n';
 
@@ -21,8 +20,8 @@ const homeGraph = buildHomeGraph(origin, { lang: 'fr-CA' });
 const home = getHomeContent('fr');
 ---
 <PageLayout
-  title={`${siteConfig.siteName} | ${home.meta.titleSuffix}`}
-  description={siteConfig.defaultDescription}
+  title={home.meta.title}
+  description={home.meta.description}
   showBreadcrumb={false}
   activeHref="/"
 >

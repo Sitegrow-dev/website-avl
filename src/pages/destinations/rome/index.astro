@@ -11,7 +11,6 @@ import EditorialCenterSection from '@components/destination/EditorialCenterSecti
 import FeaturedTestimonialSection from '@components/destination/FeaturedTestimonialSection.astro';
 import OtherDestinationsSection from '@components/destination/OtherDestinationsSection.astro';
 import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
-import { siteConfig } from '@/config/site';
 import { breadcrumbTrails } from '@/lib/breadcrumb';
 
 const destination = getDestinationBySlug('rome');
@@ -20,7 +19,7 @@ if (!destination) {
 }
 ---
 <PageLayout
-  title={`${destination.seo.title} | ${siteConfig.siteName}`}
+  title={destination.seo.title}
   description={destination.seo.description}
   breadcrumbs={breadcrumbTrails.destination(destination.title, 'fr')}
   activeHref="/destinations/rome/"

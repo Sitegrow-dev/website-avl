@@ -12,20 +12,17 @@ import FaqSection from '@components/home/FaqSection.astro';
 import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
 import JsonLd from '@components/JsonLd.astro';
 import { buildHomeGraph } from '@/lib/schema';
-import { siteConfig } from '@/config/site';
 import { getHomeContent } from '@/data/home';
 import { localizedHref } from '@/lib/i18n';
 
 const origin = Astro.site ?? new URL(Astro.url.origin);
 const homeGraph = buildHomeGraph(origin, { lang: 'en-CA' });
 const home = getHomeContent('en');
-const enDescription =
-  'AFVL - Amor Fides Via Lux: Catholic wedding and pilgrimage in Italy. Guidance for your union at the heart of faith and heritage.';
 ---
 <PageLayout
   lang="en-CA"
-  title={`${siteConfig.siteName} | ${home.meta.titleSuffix}`}
-  description={enDescription}
+  title={home.meta.title}
+  description={home.meta.description}
   showBreadcrumb={false}
   activeHref="/en/"
 >

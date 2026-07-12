@@ -2,14 +2,13 @@
 import PageLayout from '@layouts/PageLayout.astro';
 import BlogListing from '@components/post/BlogListing.astro';
 import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
-import { siteConfig } from '@/config/site';
 import { postUiEn } from '@/data/posts';
 import { breadcrumbTrails } from '@/lib/breadcrumb';
 ---
 <PageLayout
   lang="en-CA"
-  title={`${postUiEn.listTitle} | ${siteConfig.siteName}`}
-  description={postUiEn.listSubtitle}
+  title={postUiEn.metaTitle}
+  description={postUiEn.metaDescription}
   breadcrumbs={breadcrumbTrails.blog('en')}
   activeHref="/en/blog/"
 >

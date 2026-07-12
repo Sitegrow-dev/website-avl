@@ -63,6 +63,10 @@ export type Post = {
   listingImage?: string;
   imageAlt?: string;
   metaTitle?: string;
+  /** Titre meta spécifique à la variante AMP (si différent). */
+  ampMetaTitle?: string;
+  /** Description meta spécifique à la variante AMP (si différente). */
+  ampMetaDescription?: string;
   /** Corps Holding (Markdown) : rendu HTML côté site. */
   bodyMarkdown?: string;
   faq?: PostFaq[];
@@ -95,6 +99,9 @@ export const postUi = {
   listTitle: 'Guides & ressources',
   listSubtitle:
     'Conseils pratiques, démarches, destinations et inspirations pour votre mariage catholique en Italie.',
+  metaTitle: 'Guides & ressources - Mariage catholique en Italie',
+  metaDescription:
+    'Découvrez conseils pratiques, démarches et inspirations pour organiser votre mariage catholique en Italie, de Rome aux plus beaux diocèses.',
   readArticle: "Lire l'article",
   comingSoon: 'Bientôt disponible',
 } as const;
@@ -105,6 +112,9 @@ export const postUiEn = {
   listTitle: 'Guides & resources',
   listSubtitle:
     'Practical advice, procedures, destinations and inspiration for your Catholic wedding in Italy.',
+  metaTitle: 'Catholic Wedding in Italy: Guides & Resources - AFVL',
+  metaDescription:
+    'Explore practical guides on Catholic weddings in Italy: canonical steps, required documents, church destinations, and tips to plan your ceremony with',
   readArticle: 'Read the article',
   comingSoon: 'Coming soon',
 } as const;

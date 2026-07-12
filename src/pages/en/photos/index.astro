@@ -1,19 +1,18 @@
 ---
 import PageLayout from '@layouts/PageLayout.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
-import { siteConfig } from '@/config/site';
 import { getPhotosContent } from '@/data/photos';
 import { breadcrumbTrails } from '@/lib/breadcrumb';
 import { localizedHref } from '@/lib/i18n';
 
 const lang = 'en' as const;
 const brandEyebrow = 'American Friends of the Vatican Library';
-const { title, metaDescription, intro, archiveNote, galleryHeading, images, cta } =
+const { title, metaTitle, metaDescription, intro, archiveNote, galleryHeading, images, cta } =
   getPhotosContent(lang);
 ---
 <PageLayout
   lang="en-CA"
-  title={`${title} | ${siteConfig.siteName}`}
+  title={metaTitle}
   description={metaDescription}
   breadcrumbs={breadcrumbTrails.photosHtm(lang)}
   activeHref="/en/photos.htm"

@@ -78,9 +78,9 @@ export const destinations: Destination[] = [
     slug: 'rome',
     title: 'Rome',
     seo: {
-      title: 'Mariage catholique à Rome',
+      title: 'Mariage catholique à Rome - AFVL',
       description:
-        'Organisez votre mariage catholique à Rome : basiliques, démarches canoniques et accompagnement complet pour votre célébration.',
+        'Découvrez comment célébrer votre mariage catholique à Rome : dossier canonique, choix d\'église et logistique voyage pris en charge par AFVL.',
     },
     hero: {
       title: 'Se marier catholiquement à Rome',

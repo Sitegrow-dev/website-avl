@@ -127,8 +127,9 @@ const boardShared = {
 const aboutFr = {
   title: 'À propos',
   brandEyebrow: 'American Friends of the Vatican Library',
+  metaTitle: "À propos de l'AFVL - American Friends of the Vatican Library",
   metaDescription:
-    'Mission, histoire et direction des American Friends of the Vatican Library : soutien à la recherche et aux projets de la Bibliothèque apostolique.',
+    "Découvrez la mission et l'histoire des American Friends of the Vatican Library, fondés en 1981 pour soutenir la Bibliothèque apostolique du Vatican.",
   intro: [
     'La mission des American Friends of the Vatican Library est de faire connaître la Bibliothèque vaticane aux États-Unis. L’organisation contribue aussi au financement de publications savantes, de projets spéciaux et d’autres besoins au-delà du budget de fonctionnement de la Bibliothèque apostolique.',
   ],
@@ -207,8 +208,9 @@ const aboutFr = {
 const aboutEn = {
   title: 'About Us',
   brandEyebrow: 'American Friends of the Vatican Library',
+  metaTitle: 'About AFVL - American Friends of the Vatican Library',
   metaDescription:
-    'Purpose, history, and leadership of the American Friends of the Vatican Library: supporting scholarship and special projects of the Apostolic Library.',
+    'Discover the mission, history, and leadership of the American Friends of the Vatican Library, founded in 1981 to support the Vatican Apostolic Library.',
   intro: [
     'The purpose of the American Friends of the Vatican Library is to develop an awareness of the Vatican Library in the United States. The institution also helps to provide funds for the publication of scholarship, special projects and other needs beyond the operations budget of the Apostolic Library.',
   ],

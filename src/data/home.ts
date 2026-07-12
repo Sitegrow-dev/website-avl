@@ -172,7 +172,9 @@ const homeFr = {
     ctaHref: '/contact/',
   },
   meta: {
-    titleSuffix: 'Mariage catholique & pèlerinage en Italie',
+    title: 'Mariage catholique en Italie - AFVL',
+    description:
+      'Découvrez AFVL : accompagnement complet pour un mariage catholique en Italie, démarches canoniques, choix de l\'église et pèlerinage sur mesure.',
   },
 } as const;
 
@@ -348,7 +350,9 @@ const homeEn = {
     ctaHref: '/contact/',
   },
   meta: {
-    titleSuffix: 'Catholic wedding & pilgrimage in Italy',
+    title: 'Catholic Wedding in Italy - AFVL',
+    description:
+      'Discover how to plan your Catholic wedding in Italy. Canonical paperwork, church selection, and travel support from Rome to Tuscany and the Amalfi Coast.',
   },
 } as const;
 

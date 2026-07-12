@@ -1,7 +1,6 @@
 ---
 import PageLayout from '@layouts/PageLayout.astro';
 import ContactSection from '@components/ContactSection.astro';
-import { siteConfig } from '@/config/site';
 import { getContactContent } from '@/data/contact';
 import { breadcrumbTrails } from '@/lib/breadcrumb';
 
@@ -9,8 +8,8 @@ const content = getContactContent('en');
 ---
 <PageLayout
   lang="en-CA"
-  title={`${content.title} | ${siteConfig.siteName}`}
-  description={content.subtitle}
+  title={content.metaTitle}
+  description={content.metaDescription}
   breadcrumbs={breadcrumbTrails.contact('en')}
   activeHref="/en/contact/"
 >

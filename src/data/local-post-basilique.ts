@@ -172,6 +172,8 @@ function buildPost(opts: {
   alternateSlug: string;
   title: string;
   metaTitle: string;
+  ampMetaTitle?: string;
+  ampMetaDescription?: string;
   summary: string;
   bodyMarkdown: string;
   category: string;
@@ -200,6 +202,8 @@ function buildPost(opts: {
         ? "View of St. Peter's Basilica dome and façade from St. Peter's Square in Rome"
         : 'Vue de la coupole et de la façade de la basilique Saint-Pierre depuis la place Saint-Pierre à Rome',
     metaTitle: opts.metaTitle,
+    ampMetaTitle: opts.ampMetaTitle,
+    ampMetaDescription: opts.ampMetaDescription,
     bodyMarkdown,
     faq: opts.faq,
     primaryKeyword:
@@ -228,9 +232,12 @@ const frPost = buildPost({
   slug: BASILIQUE_FR_SLUG,
   alternateSlug: BASILIQUE_EN_SLUG,
   title: 'Marier à la basilique Saint-Pierre, ce qui est réellement possible',
-  metaTitle: 'Marier à la basilique Saint-Pierre, ce qui est possible',
+  metaTitle: 'Marier à la basilique Saint-Pierre : ce qui est possible',
+  ampMetaTitle: 'Se marier à la basilique Saint-Pierre : ce qui est possible',
+  ampMetaDescription:
+    'Découvrez les conditions réelles pour un mariage à la basilique Saint-Pierre : dossier canonique, chapelle du Chœur et délais à respecter.',
   summary:
-    'Découvrez comment se marier à la basilique Saint-Pierre au Vatican, les conditions réelles, les documents requis et les délais à prévoir avant de vous engager.',
+    'Découvrez les conditions, documents et délais pour se marier à la basilique Saint-Pierre au Vatican. Un guide clair pour réaliser ce projet catholique.',
   bodyMarkdown: frBody,
   category: 'Destinations',
   categorySlug: 'destinations',
@@ -264,9 +271,9 @@ const enPost = buildPost({
   slug: BASILIQUE_EN_SLUG,
   alternateSlug: BASILIQUE_FR_SLUG,
   title: "Getting married at St. Peter's Basilica: what is actually possible",
-  metaTitle: "Getting married at St. Peter's Basilica: what is possible",
+  metaTitle: "Getting Married at St. Peter's Basilica: What's Possible",
   summary:
-    "Learn how to marry at St. Peter's Basilica in the Vatican: the real conditions, required documents, and timelines to plan before you commit.",
+    "Discover how to marry at St. Peter's Basilica: Catholic requirements, canonical documents, Choir Chapel details, and timelines to plan your Vatican",
   bodyMarkdown: enBody,
   category: 'Destinations',
   categorySlug: 'destinations',

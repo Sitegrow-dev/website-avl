@@ -2,6 +2,7 @@
 import { siteConfig } from '@/config/site';
 import type { Post } from '@/data/posts';
 import { renderMarkdown } from '@/lib/markdown';
+import { formatTitle } from '@/lib/seo';
 
 interface Props {
   post: Post;
@@ -108,10 +109,10 @@ const ampCustomCss = `
 <html ⚡ lang="fr-CA">
   <head>
     <meta charset="utf-8" />
-    <title>{post.title} | {siteConfig.siteName}</title>
+    <title>{formatTitle(post.ampMetaTitle || post.metaTitle || post.title)}</title>
     <link rel="canonical" href={canonicalUrl} />
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1" />
-    <meta name="description" content={post.summary} />
+    <meta name="description" content={post.ampMetaDescription || post.summary} />
     <meta name="robots" content="noindex,follow" />
     <script is:inline async src="https://cdn.ampproject.org/v0.js"></script>
     <style amp-boilerplate>

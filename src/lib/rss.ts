@@ -23,6 +23,10 @@ type FeedOptions = {
   language: string;
   /** URL du flux lui-même (pour atom:link rel="self") */
   selfUrl: string;
+  /** Titre du channel RSS (défaut : siteConfig.siteName) */
+  title?: string;
+  /** Description du channel RSS (défaut : siteConfig.defaultDescription) */
+  description?: string;
   /** Filtre les posts selon la langue (par défaut : tous : pas encore de traduction EN) */
   filterPosts?: (posts: Post[]) => Post[];
 };
@@ -35,6 +39,8 @@ export function buildRssFeed(site: URL | undefined, opts: FeedOptions): string {
   // Par défaut : posts FR (le filtre EN est passé explicitement).
   const allPosts = getPublishedPosts(opts.langPrefix === '/en' ? 'en' : 'fr');
   const posts = opts.filterPosts ? opts.filterPosts(allPosts) : allPosts;
+  const channelTitle = opts.title ?? siteConfig.siteName;
+  const channelDescription = opts.description ?? siteConfig.defaultDescription;
 
   const items = posts
     .map((p) => {
@@ -52,9 +58,9 @@ export function buildRssFeed(site: URL | undefined, opts: FeedOptions): string {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>${escapeXml(siteConfig.siteName)}</title>
+    <title>${escapeXml(channelTitle)}</title>
     <link>${base}${opts.langPrefix}/</link>
-    <description>${escapeXml(siteConfig.defaultDescription)}</description>
+    <description>${escapeXml(channelDescription)}</description>
     <language>${opts.language}</language>
     <atom:link xmlns:atom="http://www.w3.org/2005/Atom" href="${opts.selfUrl}" rel="self" type="application/rss+xml" />
 ${items}

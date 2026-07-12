@@ -1,7 +1,6 @@
 ---
 import PageLayout from '@layouts/PageLayout.astro';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
-import { siteConfig } from '@/config/site';
 import { getAboutContent } from '@/data/about';
 import { breadcrumbTrails } from '@/lib/breadcrumb';
 import { localizedHref } from '@/lib/i18n';
@@ -10,6 +9,7 @@ const lang = 'en' as const;
 const {
   title,
   brandEyebrow,
+  metaTitle,
   metaDescription,
   intro,
   history,
@@ -21,7 +21,7 @@ const {
 ---
 <PageLayout
   lang="en-CA"
-  title={`${title} | ${siteConfig.siteName}`}
+  title={metaTitle}
   description={metaDescription}
   breadcrumbs={breadcrumbTrails.aboutHtm(lang)}
   activeHref="/en/about.htm"

@@ -10,7 +10,7 @@ export const siteConfig = {
   domain: 'afvl.org',
   url: 'https://afvl.org',
   defaultDescription:
-    'AFVL - Amor Fides Via Lux : mariage catholique et pèlerinage en Italie. Accompagnement pour votre union au cœur du patrimoine et de la foi.',
+    'Découvrez AFVL : accompagnement complet pour un mariage catholique en Italie, démarches canoniques, choix de l\'église et pèlerinage sur mesure.',
   /**
    * Miroir /en/ traduit : indexable + inclus dans hreflang / sitemap.
    * Navigation bilingue : voir aussi src/data/navigation.ts.

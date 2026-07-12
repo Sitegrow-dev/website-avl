@@ -255,6 +255,8 @@ function buildPost(opts: {
   alternateSlug: string;
   title: string;
   metaTitle: string;
+  ampMetaTitle?: string;
+  ampMetaDescription?: string;
   summary: string;
   bodyMarkdown: string;
   category: string;
@@ -285,6 +287,8 @@ function buildPost(opts: {
         ? 'Couple exchanging consent before a priest in an Italian church'
         : 'Couple échangeant ses consentements devant un prêtre dans une église italienne',
     metaTitle: opts.metaTitle,
+    ampMetaTitle: opts.ampMetaTitle,
+    ampMetaDescription: opts.ampMetaDescription,
     bodyMarkdown,
     faq: opts.faq,
     primaryKeyword:
@@ -310,9 +314,12 @@ const frPost = buildPost({
   slug: FR_SLUG,
   alternateSlug: EN_SLUG,
   title: "Se marier à l'église catholique en Italie",
-  metaTitle: "Se marier à l'église catholique en Italie, les démarches",
+  metaTitle: "Se marier à l'église catholique en Italie : les démarches",
+  ampMetaTitle: "Se marier à l'église catholique en Italie : démarches",
+  ampMetaDescription:
+    "Découvrez les étapes pour se marier à l'église catholique en Italie : dossier canonique, enquête prénuptiale et calendrier réaliste de 12 mois.",
   summary:
-    "Découvrez les démarches réelles pour se marier à l'église catholique en Italie, le dossier canonique, l'enquête prénuptiale et le parcours du dossier jusqu'au diocèse.",
+    "Découvrez les démarches pour se marier à l'église catholique en Italie : dossier canonique, enquête prénuptiale, dispenses et calendrier réaliste de 12",
   bodyMarkdown: frBody,
   category: 'Démarches',
   categorySlug: 'demarches',
@@ -348,9 +355,9 @@ const enPost = buildPost({
   slug: EN_SLUG,
   alternateSlug: FR_SLUG,
   title: 'Getting married in a Catholic church in Italy',
-  metaTitle: 'Getting married in a Catholic church in Italy: the steps',
+  metaTitle: 'Getting Married in a Catholic Church in Italy',
   summary:
-    'Learn the real steps to marry in a Catholic church in Italy: the canonical file, the prenuptial inquiry, and how the dossier reaches the Italian diocese.',
+    'Discover the full canonical process to marry in a Catholic church in Italy: required documents, prenuptial inquiry, dispensations, and a realistic',
   bodyMarkdown: enBody,
   category: 'Procedures',
   categorySlug: 'demarches',

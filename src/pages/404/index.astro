@@ -23,17 +23,20 @@ const copy = isEn
       body: 'This page does not exist or has been moved. The link may be outdated, or the address may contain a typo.',
       homeLabel: 'Back to home',
       contactLabel: 'Contact us',
+      pageTitle: formatTitle('Page not found'),
     }
   : {
       title: 'Page introuvable',
-      description: `La page que vous cherchez n'existe pas ou a été déplacée. Retournez à l'accueil de ${siteConfig.siteName}.`,
+      description:
+        'Découvrez le site AFVL et revenez à l\'accueil. La page demandée n\'existe plus ou a été déplacée. Explorez nos destinations et pèlerinages en Italie.',
       codeLabel: 'Erreur 404',
       body: 'Cette page n’existe pas ou a été déplacée. Le lien est peut-être obsolète, ou l’adresse contient une faute de frappe.',
       homeLabel: 'Retour à l’accueil',
       contactLabel: 'Nous joindre',
+      pageTitle: 'Page introuvable - Erreur 404 | AFVL',
     };
 
-const pageTitle = formatTitle(copy.title);
+const pageTitle = copy.pageTitle;
 ---
 <PageLayout
   title={pageTitle}
