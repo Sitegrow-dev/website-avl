@@ -16,4 +16,5 @@ Retrieved: 2026-07-11.
 
 - No photograph of the Sistine Chapel interior is used (photography ban + restoration reproduction rights).
 - Attribution required by CC BY-SA licences appears in each image caption on `/photos.htm`.
-- Optimized locally with `scripts/optimize-image.js` (AVIF + WebP responsive variants).
+- Optimized locally with `scripts/optimize-image.js` (AVIF + WebP, max width 1200px, responsive 400/800).
+- SEO slugs are kebab-case under `public/images/photos/`; each `<img>` has a descriptive English `alt`.

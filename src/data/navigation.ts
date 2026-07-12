@@ -14,7 +14,6 @@ import type { Lang } from '@/lib/i18n';
 export const navigationByLang = {
   fr: {
     nav: [
-      { label: 'Galerie photos', href: '/photos.htm' },
       { label: 'Destinations', href: '/destinations/rome/' },
       { label: 'Patrimoine & Vatican', href: '/#patrimoine' },
       { label: 'Blog', href: '/blog/' },
@@ -53,7 +52,6 @@ export const navigationByLang = {
   },
   en: {
     nav: [
-      { label: 'Photo Gallery', href: '/photos.htm' },
       { label: 'Destinations', href: '/destinations/rome/' },
       { label: 'Heritage & Vatican', href: '/#patrimoine' },
       { label: 'Blog', href: '/blog/' },

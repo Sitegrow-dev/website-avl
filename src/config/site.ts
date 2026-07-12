@@ -40,7 +40,6 @@ export const siteConfig = {
   },
   /** Nav FR par défaut (fallback Zod / skeleton). Préférer getNavigation(lang). */
   nav: [
-    { label: 'Galerie photos', href: '/photos.htm' },
     { label: 'Destinations', href: '/destinations/rome/' },
     { label: 'Patrimoine & Vatican', href: '/#patrimoine' },
     { label: 'Blog', href: '/blog/' },
