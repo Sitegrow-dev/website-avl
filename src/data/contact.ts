@@ -35,7 +35,7 @@ const contactFr = {
           ' et dans ',
           {
             label: 'les documents pour un mariage religieux à l’étranger',
-            href: '/blog/se-marier-eglise-catholique-italie/#les-pieces-du-dossier-de-mariage',
+            href: '/blog/documents-mariage-religieux-etranger/',
           },
           ". Si votre situation comporte une union antérieure, une dispense à obtenir ou une contrainte de date, écrivez plutôt que de deviner.",
         ],
@@ -148,7 +148,7 @@ const contactEn = {
           ' and in ',
           {
             label: 'documents for a religious marriage abroad',
-            href: '/en/blog/getting-married-catholic-church-italy/#documents-for-the-marriage-file',
+            href: '/en/blog/documents-religious-marriage-abroad/',
           },
           '. If your situation involves a previous union, a dispensation to obtain, or a hard date constraint, write rather than guess.',
         ],

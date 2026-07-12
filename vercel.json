@@ -164,6 +164,96 @@
       "source": "/en/destinations/:path*",
       "destination": "/destinations/:path*",
       "statusCode": 301
+    },
+    {
+      "source": "/se-marier-eglise-catholique-italie",
+      "destination": "/blog/se-marier-eglise-catholique-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/se-marier-eglise-catholique-italie/",
+      "destination": "/blog/se-marier-eglise-catholique-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/documents-mariage-religieux-etranger",
+      "destination": "/blog/documents-mariage-religieux-etranger/",
+      "statusCode": 301
+    },
+    {
+      "source": "/documents-mariage-religieux-etranger/",
+      "destination": "/blog/documents-mariage-religieux-etranger/",
+      "statusCode": 301
+    },
+    {
+      "source": "/cout-mariage-italie",
+      "destination": "/blog/cout-mariage-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/cout-mariage-italie/",
+      "destination": "/blog/cout-mariage-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/wedding-planner-mariage-italie",
+      "destination": "/blog/wedding-planner-mariage-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/wedding-planner-mariage-italie/",
+      "destination": "/blog/wedding-planner-mariage-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/mariage-catholique-italie",
+      "destination": "/blog/se-marier-eglise-catholique-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/mariage-catholique-italie/",
+      "destination": "/blog/se-marier-eglise-catholique-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/getting-married-catholic-church-italy",
+      "destination": "/en/blog/getting-married-catholic-church-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/getting-married-catholic-church-italy/",
+      "destination": "/en/blog/getting-married-catholic-church-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/documents-religious-marriage-abroad",
+      "destination": "/en/blog/documents-religious-marriage-abroad/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/documents-religious-marriage-abroad/",
+      "destination": "/en/blog/documents-religious-marriage-abroad/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/cost-wedding-italy",
+      "destination": "/en/blog/cost-wedding-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/cost-wedding-italy/",
+      "destination": "/en/blog/cost-wedding-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/wedding-planner-italy",
+      "destination": "/en/blog/wedding-planner-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/wedding-planner-italy/",
+      "destination": "/en/blog/wedding-planner-italy/",
+      "statusCode": 301
     }
   ],
   "rewrites": [

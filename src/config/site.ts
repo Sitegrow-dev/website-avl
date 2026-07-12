@@ -58,16 +58,30 @@ export const siteConfig = {
         ],
       },
       {
+        title: 'Mariage catholique',
+        links: [
+          {
+            label: 'Se marier à l’église',
+            href: '/blog/se-marier-eglise-catholique-italie/',
+          },
+          {
+            label: 'Documents',
+            href: '/blog/documents-mariage-religieux-etranger/',
+          },
+          { label: 'Coût & budget', href: '/blog/cout-mariage-italie/' },
+          {
+            label: 'Wedding planner',
+            href: '/blog/wedding-planner-mariage-italie/',
+          },
+        ],
+      },
+      {
         title: 'Ressources',
         links: [
           { label: 'Blog', href: '/blog/' },
           { label: 'Destinations', href: '/destinations/rome/' },
           { label: 'Patrimoine & Vatican', href: '/#patrimoine' },
         ],
-      },
-      {
-        title: 'Informations',
-        links: [{ label: 'Contact', href: '/contact/' }],
       },
     ],
     legal: {

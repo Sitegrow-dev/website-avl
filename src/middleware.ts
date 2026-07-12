@@ -73,6 +73,33 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     return context.redirect('/en/about.htm', 301);
   }
 
+  // Alias briefs T-09…T-12 : URLs racine → articles blog
+  const guideRedirects: Record<string, string> = {
+    '/se-marier-eglise-catholique-italie': '/blog/se-marier-eglise-catholique-italie/',
+    '/se-marier-eglise-catholique-italie/': '/blog/se-marier-eglise-catholique-italie/',
+    '/documents-mariage-religieux-etranger': '/blog/documents-mariage-religieux-etranger/',
+    '/documents-mariage-religieux-etranger/': '/blog/documents-mariage-religieux-etranger/',
+    '/cout-mariage-italie': '/blog/cout-mariage-italie/',
+    '/cout-mariage-italie/': '/blog/cout-mariage-italie/',
+    '/wedding-planner-mariage-italie': '/blog/wedding-planner-mariage-italie/',
+    '/wedding-planner-mariage-italie/': '/blog/wedding-planner-mariage-italie/',
+    '/mariage-catholique-italie': '/blog/se-marier-eglise-catholique-italie/',
+    '/mariage-catholique-italie/': '/blog/se-marier-eglise-catholique-italie/',
+    '/en/getting-married-catholic-church-italy': '/en/blog/getting-married-catholic-church-italy/',
+    '/en/getting-married-catholic-church-italy/': '/en/blog/getting-married-catholic-church-italy/',
+    '/en/documents-religious-marriage-abroad': '/en/blog/documents-religious-marriage-abroad/',
+    '/en/documents-religious-marriage-abroad/': '/en/blog/documents-religious-marriage-abroad/',
+    '/en/cost-wedding-italy': '/en/blog/cost-wedding-italy/',
+    '/en/cost-wedding-italy/': '/en/blog/cost-wedding-italy/',
+    '/en/wedding-planner-italy': '/en/blog/wedding-planner-italy/',
+    '/en/wedding-planner-italy/': '/en/blog/wedding-planner-italy/',
+    '/en/catholic-wedding-italy': '/en/blog/getting-married-catholic-church-italy/',
+    '/en/catholic-wedding-italy/': '/en/blog/getting-married-catholic-church-italy/',
+  };
+  if (guideRedirects[pathname]) {
+    return context.redirect(guideRedirects[pathname], 301);
+  }
+
   // /sitemap → sitemap.xml (indexation), redirections permanentes en 301
   if (pathname === '/sitemap' || pathname === '/sitemap/') {
     return context.redirect('/sitemap.xml', 301);

@@ -6,6 +6,15 @@ import {
   BASILIQUE_EN_SLUG,
   BASILIQUE_FR_SLUG,
 } from '@/data/local-post-basilique';
+import { COUT_EN_SLUG, COUT_FR_SLUG } from '@/data/local-post-cout';
+import {
+  DOCUMENTS_EN_SLUG,
+  DOCUMENTS_FR_SLUG,
+} from '@/data/local-post-documents';
+import {
+  WEDDING_PLANNER_EN_SLUG,
+  WEDDING_PLANNER_FR_SLUG,
+} from '@/data/local-post-wedding-planner';
 
 /**
  * Paires de slugs blog connues (locales + Holding).
@@ -19,6 +28,9 @@ const KNOWN_BLOG_SLUG_PAIRS: Array<{ fr: string; en: string }> = [
     en: 'getting-married-catholic-church-italy',
   },
   { fr: BASILIQUE_FR_SLUG, en: BASILIQUE_EN_SLUG },
+  { fr: DOCUMENTS_FR_SLUG, en: DOCUMENTS_EN_SLUG },
+  { fr: COUT_FR_SLUG, en: COUT_EN_SLUG },
+  { fr: WEDDING_PLANNER_FR_SLUG, en: WEDDING_PLANNER_EN_SLUG },
 ];
 
 export type TimelineItem = {

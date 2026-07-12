@@ -10,7 +10,7 @@
  * hreflang : fr-CA / en-CA + x-default (URL FR). og:locale : fr_CA / en_CA.
  */
 import { siteConfig } from '@/config/site';
-import { OG_IMAGE, absoluteUrl } from '@/lib/seo';
+import { OG_IMAGE, absoluteUrl, cleanCanonicalPath } from '@/lib/seo';
 import { alternatePath, hasEnAlternate, isEnOnlyPath } from '@/lib/i18n';
 
 interface Props {
@@ -40,7 +40,8 @@ const {
 } = Astro.props;
 
 const site = Astro.site ?? new URL(siteConfig.url);
-const pathname = canonicalPath ?? Astro.url.pathname;
+/** Toujours l’URL propre de la page (ou alias public forcé), sans ?utm / #… */
+const pathname = cleanCanonicalPath(canonicalPath ?? Astro.url.pathname);
 
 // URL canonique (toutes les routes portent un slash final grâce au middleware)
 const canonical = absoluteUrl(pathname, site);

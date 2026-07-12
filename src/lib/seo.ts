@@ -31,6 +31,16 @@ export function absoluteUrl(path: string, site: URL): string {
 }
 
 /**
+ * Chemin canonique « propre » : sans query, sans hash, slash initial garanti.
+ * À utiliser pour `<link rel="canonical">` et `og:url`.
+ */
+export function cleanCanonicalPath(path: string): string {
+  const bare = (path.split(/[?#]/)[0] || '/').trim() || '/';
+  if (bare === '/') return '/';
+  return bare.startsWith('/') ? bare : `/${bare}`;
+}
+
+/**
  * Assemble un <title> au format « Page | Marque ».
  * Passer `{ brand: false }` pour un titre déjà complet (ex. la home).
  */
