@@ -90,6 +90,11 @@ export const siteConfig = {
           { label: 'Pèlerinage à Rome', href: '/pelerinage-rome-italie/' },
           { label: 'Lune de miel', href: '/lune-de-miel-italie/' },
           { label: 'Rome en 3 jours', href: '/itineraire-rome-3-jours/' },
+          { label: 'Bibliothèque vaticane', href: '/bibliotheque-vaticane/' },
+          {
+            label: 'Patrimoine catholique de Rome',
+            href: '/patrimoine-catholique-rome/',
+          },
         ],
       },
       {

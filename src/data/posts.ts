@@ -43,6 +43,14 @@ import {
   ITINERAIRE_ROME_EN_SLUG,
   ITINERAIRE_ROME_FR_SLUG,
 } from '@/data/local-post-itineraire-rome';
+import {
+  BIBLIOTHEQUE_VATICANE_EN_SLUG,
+  BIBLIOTHEQUE_VATICANE_FR_SLUG,
+} from '@/data/local-post-bibliotheque-vaticane';
+import {
+  PATRIMOINE_ROME_EN_SLUG,
+  PATRIMOINE_ROME_FR_SLUG,
+} from '@/data/local-post-patrimoine-catholique-rome';
 
 /**
  * Paires de slugs guides FR ↔ EN (pages pilier à l’URL racine).
@@ -64,6 +72,8 @@ const KNOWN_GUIDE_SLUG_PAIRS: Array<{ fr: string; en: string }> = [
   { fr: PELERINAGE_FR_SLUG, en: PELERINAGE_EN_SLUG },
   { fr: LUNE_DE_MIEL_FR_SLUG, en: LUNE_DE_MIEL_EN_SLUG },
   { fr: ITINERAIRE_ROME_FR_SLUG, en: ITINERAIRE_ROME_EN_SLUG },
+  { fr: BIBLIOTHEQUE_VATICANE_FR_SLUG, en: BIBLIOTHEQUE_VATICANE_EN_SLUG },
+  { fr: PATRIMOINE_ROME_FR_SLUG, en: PATRIMOINE_ROME_EN_SLUG },
 ];
 
 export type TimelineItem = {

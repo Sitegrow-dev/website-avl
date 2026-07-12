@@ -222,6 +222,14 @@ export const navigationByLang = {
               label: 'Rome en 3 jours',
               href: '/itineraire-rome-3-jours/',
             },
+            {
+              label: 'Bibliothèque vaticane',
+              href: '/bibliotheque-vaticane/',
+            },
+            {
+              label: 'Patrimoine catholique de Rome',
+              href: '/patrimoine-catholique-rome/',
+            },
           ],
         },
         {
@@ -306,6 +314,14 @@ export const navigationByLang = {
             {
               label: 'Rome in 3 days',
               href: '/itineraire-rome-3-jours/',
+            },
+            {
+              label: 'Vatican Library',
+              href: '/bibliotheque-vaticane/',
+            },
+            {
+              label: 'Catholic heritage of Rome',
+              href: '/patrimoine-catholique-rome/',
             },
           ],
         },

@@ -81,8 +81,8 @@ const homeFr = {
       "Chaque basilique, chaque chapelle de village, raconte une histoire de dévotion et d'art sacré. Nous vous ouvrons les portes de ce patrimoine universel pour une célébration hors du temps.",
     ],
     links: [
-      { label: 'Visiter le Vatican →', href: '/#patrimoine' },
-      { label: 'Bibliothèque vaticane →', href: '/#patrimoine' },
+      { label: 'Visiter le Vatican →', href: '/visiter-le-vatican/' },
+      { label: 'Bibliothèque vaticane →', href: '/bibliotheque-vaticane/' },
     ],
   },
   steps: {
@@ -264,8 +264,8 @@ const homeEn = {
       'Every basilica and village chapel tells a story of devotion and sacred art. We open the doors of this universal heritage for a celebration beyond time.',
     ],
     links: [
-      { label: 'Visit the Vatican →', href: '/#patrimoine' },
-      { label: 'Vatican Library →', href: '/#patrimoine' },
+      { label: 'Visit the Vatican →', href: '/visiter-le-vatican/' },
+      { label: 'Vatican Library →', href: '/bibliotheque-vaticane/' },
     ],
   },
   steps: {

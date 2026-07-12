@@ -6,11 +6,13 @@ import { tocFromMarkdown } from '@/lib/markdown';
 import type { Post } from '@/data/posts';
 import { basiliquePosts } from '@/data/local-post-basilique';
 import { basiliqueVisitePosts } from '@/data/local-post-basilique-visite';
+import { bibliothequeVaticanePosts } from '@/data/local-post-bibliotheque-vaticane';
 import { coutPosts } from '@/data/local-post-cout';
 import { documentsPosts } from '@/data/local-post-documents';
 import { itineraireRomePosts } from '@/data/local-post-itineraire-rome';
 import { luneDeMielPosts } from '@/data/local-post-lune-de-miel';
 import { museesVaticanPosts } from '@/data/local-post-musees-vatican';
+import { patrimoineRomePosts } from '@/data/local-post-patrimoine-catholique-rome';
 import { pelerinagePosts } from '@/data/local-post-pelerinage';
 import { visiterVaticanPosts } from '@/data/local-post-visiter-vatican';
 import { voyageItaliePosts } from '@/data/local-post-voyage-italie';
@@ -417,4 +419,6 @@ export const localPosts: Post[] = [
   ...pelerinagePosts,
   ...luneDeMielPosts,
   ...itineraireRomePosts,
+  ...bibliothequeVaticanePosts,
+  ...patrimoineRomePosts,
 ].map((post) => ({ ...post, route: 'root' as const }));

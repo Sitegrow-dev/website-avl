@@ -134,6 +134,10 @@ const aboutFr = {
   intro: [
     'La mission des American Friends of the Vatican Library est de faire connaître la Bibliothèque vaticane aux États-Unis. L’organisation contribue aussi au financement de publications savantes, de projets spéciaux et d’autres besoins au-delà du budget de fonctionnement de la Bibliothèque apostolique.',
   ],
+  guideLink: {
+    label: 'Explorer la Bibliothèque apostolique vaticane →',
+    href: '/bibliotheque-vaticane/',
+  },
   history: {
     title: 'Histoire des American Friends of the Vatican Library',
     paragraphs: [
@@ -215,6 +219,10 @@ const aboutEn = {
   intro: [
     'The purpose of the American Friends of the Vatican Library is to develop an awareness of the Vatican Library in the United States. The institution also helps to provide funds for the publication of scholarship, special projects and other needs beyond the operations budget of the Apostolic Library.',
   ],
+  guideLink: {
+    label: 'Explore the Vatican Apostolic Library →',
+    href: '/bibliotheque-vaticane/',
+  },
   history: {
     title: 'History of the American Friends of the Vatican Library',
     paragraphs: [

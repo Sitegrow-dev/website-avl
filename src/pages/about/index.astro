@@ -16,6 +16,7 @@ const {
   metaTitle,
   metaDescription,
   intro,
+  guideLink,
   history,
   executive,
   termBoard,
@@ -41,6 +42,12 @@ const {
         {intro.map((paragraph) => (
           <p class="mt-6 text-lg leading-relaxed text-muted">{paragraph}</p>
         ))}
+        <a
+          href={localizedHref(guideLink.href, lang)}
+          class="mt-6 inline-flex text-base font-semibold text-brand transition-colors hover:text-brand-hover"
+        >
+          {guideLink.label}
+        </a>
       </div>
     </section>
 
