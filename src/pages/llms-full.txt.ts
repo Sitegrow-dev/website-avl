@@ -3,7 +3,7 @@ import { siteConfig } from '@/config/site';
 import { getHomeContent } from '@/data/home';
 import { servicesContent, services } from '@/data/services';
 import { getAboutContent } from '@/data/about';
-import { getPublishedPosts } from '@/data/posts';
+import { getPostHref, getPublishedPosts } from '@/data/posts';
 
 export const prerender = true;
 
@@ -72,16 +72,16 @@ export const GET: APIRoute = ({ site }) => {
   }
   out.push('');
 
-  // Blog (articles complets)
+  // Guides (articles complets)
   const posts = getPublishedPosts('fr');
   if (posts.length > 0) {
-    out.push('## Blog');
+    out.push('## Guides');
     out.push('');
     for (const post of posts) {
       out.push(`### ${post.title}`);
       out.push('');
       out.push(
-        `URL : ${base}/blog/${post.slug}/ · Publié : ${post.date}${post.updated ? ` · Modifié : ${post.updated}` : ''}`
+        `URL : ${base}${getPostHref(post)} · Publié : ${post.date}${post.updated ? ` · Modifié : ${post.updated}` : ''}`
       );
       out.push('');
       out.push(post.summary);

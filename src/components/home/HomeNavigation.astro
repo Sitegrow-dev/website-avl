@@ -38,7 +38,7 @@ function isGroupActive(link: NavLink) {
   <div class="relative z-[110] mx-auto flex h-[84px] max-w-[1440px] items-center justify-between gap-6 px-5 lg:px-20">
     <SiteLogo variant="dark" height={58} href={homeHref} />
 
-    <nav class="hidden items-center gap-7 xl:flex" aria-label={navLabel}>
+    <nav class="hidden items-center gap-6 xl:flex" aria-label={navLabel}>
       {nav.map((link) =>
         link.children?.length ? (
           <div class="nav-dropdown group relative">
@@ -68,30 +68,71 @@ function isGroupActive(link: NavLink) {
               <span class="absolute -bottom-[31px] left-0 h-0.5 w-5 bg-brand" aria-hidden="true"
               ></span>
             )}
-            <div
-              class="invisible absolute left-0 top-full z-50 min-w-[18rem] pt-4 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
-            >
-              <ul
-                class="rounded-md border border-black/[0.08] bg-white py-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.18)]"
-                role="list"
+            {link.variant === 'mega' ? (
+              <div
+                class="invisible absolute left-1/2 top-full z-50 w-[min(52rem,calc(100vw-2rem))] -translate-x-1/2 pt-3 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
               >
-                {link.children.map((child) => (
-                  <li>
-                    <a
-                      href={localizedHref(child.href, lang)}
-                      class:list={[
-                        'block px-4 py-2.5 text-sm transition-colors',
-                        isActive(child.href)
-                          ? 'bg-brand/5 font-semibold text-brand'
-                          : 'text-ink/80 hover:bg-black/[0.03] hover:text-ink',
-                      ]}
-                    >
-                      {child.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                <div
+                  class="rounded-md border border-black/[0.08] bg-white p-4 shadow-[0_16px_48px_-16px_rgba(0,0,0,0.2)]"
+                >
+                  <ul class="grid grid-cols-2 gap-1 sm:grid-cols-3" role="list">
+                    {link.children.map((child, index) => (
+                      <li class:list={[index === 0 && 'col-span-2 sm:col-span-3']}>
+                        <a
+                          href={localizedHref(child.href, lang)}
+                          class:list={[
+                            'block rounded-md px-3 py-3 transition-colors',
+                            isActive(child.href)
+                              ? 'bg-brand/5'
+                              : 'hover:bg-black/[0.03]',
+                            index === 0 && 'border border-black/[0.06] bg-stone-50/80',
+                          ]}
+                        >
+                          <span
+                            class:list={[
+                              'block text-sm font-semibold',
+                              isActive(child.href) ? 'text-brand' : 'text-ink',
+                            ]}
+                          >
+                            {child.label}
+                          </span>
+                          {child.description && (
+                            <span class="mt-0.5 block text-xs leading-snug text-muted">
+                              {child.description}
+                            </span>
+                          )}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ) : (
+              <div
+                class="invisible absolute left-0 top-full z-50 min-w-[18rem] pt-4 opacity-0 transition-[opacity,visibility] duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100"
+              >
+                <ul
+                  class="rounded-md border border-black/[0.08] bg-white py-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.18)]"
+                  role="list"
+                >
+                  {link.children.map((child) => (
+                    <li>
+                      <a
+                        href={localizedHref(child.href, lang)}
+                        class:list={[
+                          'block px-4 py-2.5 text-sm transition-colors',
+                          isActive(child.href)
+                            ? 'bg-brand/5 font-semibold text-brand'
+                            : 'text-ink/80 hover:bg-black/[0.03] hover:text-ink',
+                        ]}
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
         ) : (
           <a
@@ -166,14 +207,19 @@ function isGroupActive(link: NavLink) {
           >
             {link.label}
           </a>
-          <ul class="mt-3 space-y-2 text-center">
+          <ul class="mt-3 space-y-2.5 text-center">
             {link.children.map((child) => (
               <li>
                 <a
                   href={localizedHref(child.href, lang)}
-                  class="text-base text-muted transition-colors hover:text-ink"
+                  class="block text-base text-muted transition-colors hover:text-ink"
                 >
                   {child.label}
+                  {link.variant === 'mega' && child.description && (
+                    <span class="mt-0.5 block text-xs leading-snug text-muted/80">
+                      {child.description}
+                    </span>
+                  )}
                 </a>
               </li>
             ))}

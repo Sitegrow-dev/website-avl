@@ -2,7 +2,7 @@
 import PageLayout from '@layouts/PageLayout.astro';
 import { breadcrumbTrails, frPagesList } from '@/lib/breadcrumb';
 import { siteConfig } from '@/config/site';
-import { getPublishedPosts } from '@/data/posts';
+import { getPostHref, getPublishedPosts } from '@/data/posts';
 
 const mainLinks = frPagesList.filter((l) => l.section === 'main');
 const legalLinks = frPagesList.filter((l) => l.section === 'legal');
@@ -38,12 +38,12 @@ const blogPosts = getPublishedPosts('fr');
 
         {blogPosts.length > 0 && (
           <>
-            <h2 class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-brand">Blog</h2>
+            <h2 class="mt-12 text-sm font-semibold uppercase tracking-[0.1em] text-brand">Guides</h2>
             <ul class="mt-6 flex flex-col gap-3">
               {blogPosts.map((post) => (
                 <li>
                   <a
-                    href={`/blog/${post.slug}/`}
+                    href={getPostHref(post)}
                     class="inline-flex items-center gap-2 text-lg font-medium text-ink transition-colors hover:text-brand"
                   >
                     <span aria-hidden="true">→</span>

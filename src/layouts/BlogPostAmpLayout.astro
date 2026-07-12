@@ -1,6 +1,6 @@
 ---
 import { siteConfig } from '@/config/site';
-import type { Post } from '@/data/posts';
+import { getPostHref, type Post } from '@/data/posts';
 import { resolveImageAlt } from '@/lib/image-alt';
 import { renderMarkdown } from '@/lib/markdown';
 import { formatTitle } from '@/lib/seo';
@@ -16,7 +16,7 @@ const bodyHtml = post.bodyMarkdown
 
 const origin = Astro.site ?? new URL(Astro.url.origin);
 /** AMP → version HTML complète (intentionnel). AMP est aussi noindex. */
-const canonicalPath = `/blog/${post.slug}/`;
+const canonicalPath = getPostHref({ ...post, published: true, lang: 'fr' });
 const canonicalUrl = new URL(canonicalPath, origin).href;
 const heroUrl = post.image
   ? /^https?:\/\//i.test(post.image)

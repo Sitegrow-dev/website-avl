@@ -18,7 +18,7 @@ Cet article détaille comment déterminer la liste qui vous concerne, quels docu
 
 Avant de commander le moindre document, il faut trancher une question : votre mariage sera-t-il religieux seul, ou concordataire ?
 
-Si vous êtes déjà mariés civilement dans votre pays, ou si vous prévoyez de le faire avant votre départ, votre célébration en Italie est un mariage religieux simple. Elle ne produit aucun effet civil italien et ne nécessite donc aucun document civil italien, comme le confirme notre guide sur [se marier à l'église catholique en Italie](/blog/se-marier-eglise-catholique-italie/). Seul le dossier canonique s'applique, et c'est la situation de la grande majorité des couples québécois, français, belges et suisses qui organisent leur mariage en Italie.
+Si vous êtes déjà mariés civilement dans votre pays, ou si vous prévoyez de le faire avant votre départ, votre célébration en Italie est un mariage religieux simple. Elle ne produit aucun effet civil italien et ne nécessite donc aucun document civil italien, comme le confirme notre guide sur [se marier à l'église catholique en Italie](/se-marier-eglise-catholique-italie/). Seul le dossier canonique s'applique, et c'est la situation de la grande majorité des couples québécois, français, belges et suisses qui organisent leur mariage en Italie.
 
 Si, au contraire, vous n'êtes pas mariés civilement et souhaitez que la cérémonie italienne vale à la fois pour l'Église et pour l'état civil italien, vous entrez dans le régime du mariage concordataire. Ce choix ajoute l'intégralité du volet civil décrit plus bas : nulla osta, certificat de capacité matrimoniale, légalisation et publications.
 
@@ -86,14 +86,14 @@ Plusieurs erreurs reviennent régulièrement et peuvent, dans les cas les plus s
 - Confondre le nulla osta canonique, délivré par votre évêché, avec le nulla osta civil, délivré par votre consulat
 - Faire traduire un document par une personne non reconnue, alors que la traduction assermentée est exigée
 - Oublier la légalisation ou l'apostille d'un document civil avant son envoi en Italie
-- Sous-estimer le coût cumulé des démarches (traductions, légalisations, déplacements consulaires), qui s'ajoute au [budget global du mariage](/blog/cout-mariage-italie/)
+- Sous-estimer le coût cumulé des démarches (traductions, légalisations, déplacements consulaires), qui s'ajoute au [budget global du mariage](/cout-mariage-italie/)
 - Attendre le dernier mois pour lancer les démarches civiles, alors que certaines étapes ne peuvent commencer qu'après l'obtention d'un document précédent
 
 ## Conclusion
 
 La liste des documents pour un mariage religieux en Italie n'a rien d'insurmontable, mais elle exige de la méthode. Déterminez d'abord si votre mariage sera religieux seul ou concordataire, réunissez le dossier canonique dans tous les cas, puis ajoutez le volet civil italien si nécessaire, en respectant scrupuleusement les délais de validité de chaque pièce.
 
-Un accompagnement structuré permet d'éviter les erreurs qui coûtent une date, en particulier pour les couples qui préparent leur mariage à distance. Un [wedding planner spécialisé dans le mariage en Italie](/blog/wedding-planner-mariage-italie/) connaît les exigences propres à chaque diocèse et à chaque commune. Pour faire le point sur votre situation, [prenez contact](/contact/) avec notre équipe.
+Un accompagnement structuré permet d'éviter les erreurs qui coûtent une date, en particulier pour les couples qui préparent leur mariage à distance. Un [wedding planner spécialisé dans le mariage en Italie](/wedding-planner-mariage-italie/) connaît les exigences propres à chaque diocèse et à chaque commune. Pour faire le point sur votre situation, [prenez contact](/contact/) avec notre équipe.
 `;
 
 const enBody = `Getting married religiously in Italy requires a precise list of documents, but that list is not the same for every couple. It depends first on a simple question: will your Italian ceremony be religious only, or should it also produce civil effects in Italy? In the first case, only the canonical file matters. In the second, a full Italian civil track is added, with its own documents, its own timelines, and its own pitfalls.
@@ -106,7 +106,7 @@ This article explains how to determine which list applies to you, which canonica
 
 Before ordering a single document, you need to settle one question: will your marriage be religious only, or a concordat marriage?
 
-If you are already civilly married in your home country, or plan to be before you travel, your Italian celebration is a simple religious marriage. It produces no Italian civil effect and therefore requires no Italian civil document, as confirmed in our guide on [getting married in a Catholic church in Italy](/en/blog/getting-married-catholic-church-italy/). Only the canonical file applies, and this is the situation for the large majority of couples from Quebec, France, Belgium, and Switzerland who organize their wedding in Italy.
+If you are already civilly married in your home country, or plan to be before you travel, your Italian celebration is a simple religious marriage. It produces no Italian civil effect and therefore requires no Italian civil document, as confirmed in our guide on [getting married in a Catholic church in Italy](/en/getting-married-catholic-church-italy/). Only the canonical file applies, and this is the situation for the large majority of couples from Quebec, France, Belgium, and Switzerland who organize their wedding in Italy.
 
 If, on the other hand, you are not civilly married and want the Italian ceremony to count for both the Church and Italian civil status, you fall under the concordat marriage regime. That choice adds the entire civil track described below: nulla osta, certificate of no impediment, legalization, and banns.
 
@@ -174,14 +174,14 @@ Several mistakes come up again and again and, in the most serious cases, can cos
 - Confusing the canonical nulla osta, issued by your diocese, with the civil nulla osta, issued by your consulate
 - Having a document translated by someone not officially recognized, when a sworn translation is required
 - Forgetting to legalize or apostille a civil document before sending it to Italy
-- Underestimating the cumulative cost of the process (translations, legalizations, consular trips), which adds to the [overall wedding budget](/en/blog/cost-wedding-italy/)
+- Underestimating the cumulative cost of the process (translations, legalizations, consular trips), which adds to the [overall wedding budget](/en/cost-wedding-italy/)
 - Waiting until the last month to start the civil process, when some steps can only begin once a previous document has been obtained
 
 ## Conclusion
 
 The list of documents for a religious marriage in Italy is far from insurmountable, but it demands method. First determine whether your marriage will be religious only or a concordat marriage, assemble the canonical file in every case, then add the Italian civil track if needed, while strictly respecting each document's validity window.
 
-Structured support helps avoid the mistakes that cost a date, especially for couples planning their wedding from abroad. A [wedding planner specialized in weddings in Italy](/en/blog/wedding-planner-italy/) knows the specific requirements of each diocese and municipality. To review your situation, [get in touch](/en/contact/) with our team.
+Structured support helps avoid the mistakes that cost a date, especially for couples planning their wedding from abroad. A [wedding planner specialized in weddings in Italy](/en/wedding-planner-italy/) knows the specific requirements of each diocese and municipality. To review your situation, [get in touch](/en/contact/) with our team.
 `;
 
 function wordCount(text: string): number {

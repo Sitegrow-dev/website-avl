@@ -49,6 +49,11 @@ export const breadcrumbTrails = {
     { label: labels[lang].blog, href: localizedPath('/blog/', lang) },
     { label: title },
   ],
+  /** Guides / piliers à l’URL racine (pas sous /blog/). */
+  guide: (title: string, lang: Lang = 'fr'): BreadcrumbItem[] => [
+    homeItem(lang),
+    { label: title },
+  ],
   about: (lang: Lang = 'fr'): BreadcrumbItem[] => [homeItem(lang), { label: labels[lang].about }],
   /** Routes legacy AFVL EN-only (.htm) à la racine. */
   aboutHtm: (): BreadcrumbItem[] => [

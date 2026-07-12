@@ -5,8 +5,15 @@
 import { tocFromMarkdown } from '@/lib/markdown';
 import type { Post } from '@/data/posts';
 import { basiliquePosts } from '@/data/local-post-basilique';
+import { basiliqueVisitePosts } from '@/data/local-post-basilique-visite';
 import { coutPosts } from '@/data/local-post-cout';
 import { documentsPosts } from '@/data/local-post-documents';
+import { itineraireRomePosts } from '@/data/local-post-itineraire-rome';
+import { luneDeMielPosts } from '@/data/local-post-lune-de-miel';
+import { museesVaticanPosts } from '@/data/local-post-musees-vatican';
+import { pelerinagePosts } from '@/data/local-post-pelerinage';
+import { visiterVaticanPosts } from '@/data/local-post-visiter-vatican';
+import { voyageItaliePosts } from '@/data/local-post-voyage-italie';
 import { weddingPlannerPosts } from '@/data/local-post-wedding-planner';
 
 const FR_SLUG = 'se-marier-eglise-catholique-italie';
@@ -124,7 +131,7 @@ Se marier à l'église catholique en Italie n'est pas plus difficile qu'ailleurs
 
 Les deux erreurs qui coûtent le plus cher sont identifiables à l'avance. Réserver un lieu de réception avant d'avoir l'accord de l'église, et taire une situation personnelle qui aurait demandé une dispense.
 
-Pour aller plus loin, la liste exacte des pièces et leur circuit administratif sont détaillés dans [les documents pour un mariage religieux à l'étranger](/blog/documents-mariage-religieux-etranger/). Une fois la démarche comprise, le budget se prépare à partir des [coûts d'un mariage en Italie](/blog/cout-mariage-italie/), et l'accompagnement de bout en bout est décrit dans [wedding planner mariage en Italie](/blog/wedding-planner-mariage-italie/).
+Pour aller plus loin, la liste exacte des pièces et leur circuit administratif sont détaillés dans [les documents pour un mariage religieux à l'étranger](/documents-mariage-religieux-etranger/). Une fois la démarche comprise, le budget se prépare à partir des [coûts d'un mariage en Italie](/cout-mariage-italie/), et l'accompagnement de bout en bout est décrit dans [wedding planner mariage en Italie](/wedding-planner-mariage-italie/).
 
 Si votre situation comporte une union antérieure, une dispense à obtenir ou une contrainte de calendrier, un accompagnement permet d'identifier les points de blocage avant qu'ils ne coûtent une date. [Prenez contact](/contact/) pour faire le point sur votre dossier.
 `;
@@ -240,7 +247,7 @@ Getting married in a Catholic church in Italy is not harder than elsewhere, but 
 
 The two most expensive mistakes can be spotted in advance: booking a reception venue before you have the church's agreement, and withholding a personal situation that would have required a dispensation.
 
-To go further, the exact list of papers and their administrative path are detailed in [documents for a religious marriage abroad](/en/blog/documents-religious-marriage-abroad/). Once the process is clear, the budget is prepared from the [cost of a wedding in Italy](/en/blog/cost-wedding-italy/), and end-to-end support is described in [wedding planner for Italy](/en/blog/wedding-planner-italy/).
+To go further, the exact list of papers and their administrative path are detailed in [documents for a religious marriage abroad](/en/documents-religious-marriage-abroad/). Once the process is clear, the budget is prepared from the [cost of a wedding in Italy](/en/cost-wedding-italy/), and end-to-end support is described in [wedding planner for Italy](/en/wedding-planner-italy/).
 
 If your situation involves a previous union, a dispensation to obtain, or a tight timeline, accompaniment can identify blocking points before they cost you a date. [Get in touch](/en/contact/) to review your file.
 `;
@@ -393,7 +400,7 @@ const enPost = buildPost({
   usefulLinks: [{ label: 'Contact →', href: '/en/contact/' }],
 });
 
-/** Articles locaux publiés (FR + EN). */
+/** Articles locaux publiés (FR + EN) — guides à l’URL racine, pas sous /blog/. */
 export const localPosts: Post[] = [
   frPost,
   enPost,
@@ -401,4 +408,11 @@ export const localPosts: Post[] = [
   ...documentsPosts,
   ...coutPosts,
   ...weddingPlannerPosts,
-];
+  ...voyageItaliePosts,
+  ...visiterVaticanPosts,
+  ...museesVaticanPosts,
+  ...basiliqueVisitePosts,
+  ...pelerinagePosts,
+  ...luneDeMielPosts,
+  ...itineraireRomePosts,
+].map((post) => ({ ...post, route: 'root' as const }));

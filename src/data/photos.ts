@@ -275,7 +275,7 @@ export const photosContent = {
       },
       {
         label: 'History and access to the building in St. Peter’s Basilica',
-        href: '/en/blog/getting-married-st-peters-basilica/',
+        href: '/en/getting-married-st-peters-basilica/',
       },
       {
         label: 'The city’s basilicas and sacred art in the Catholic heritage of Rome',

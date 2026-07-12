@@ -7,7 +7,7 @@ import FinalCtaSection from '@components/shared/FinalCtaSection.astro';
 import { breadcrumbTrails } from '@/lib/breadcrumb';
 import { buildArticleGraph, buildFaqSchema } from '@/lib/schema';
 import { formatTitle } from '@/lib/seo';
-import type { Post } from '@/data/posts';
+import { getPostHref, getPostRoute, type Post } from '@/data/posts';
 import type { Lang } from '@/lib/i18n';
 
 interface Props {
@@ -18,14 +18,20 @@ interface Props {
 const { post, lang = 'fr' } = Astro.props;
 
 const origin = Astro.site ?? new URL(Astro.url.origin);
-const path = lang === 'en' ? `/en/blog/${post.slug}/` : `/blog/${post.slug}/`;
+const path = getPostHref({ ...post, published: true });
+const isRoot = getPostRoute(post) === 'root';
 const ampUrl =
-  lang === 'fr' ? new URL(`/blog/${post.slug}/amp/`, origin).href : undefined;
+  lang === 'fr'
+    ? new URL(isRoot ? `/${post.slug}/amp/` : `/blog/${post.slug}/amp/`, origin).href
+    : undefined;
 const articleGraph = buildArticleGraph(post, origin, {
   path,
   lang: lang === 'en' ? 'en-CA' : 'fr-CA',
 });
 const faqSchema = post.faq?.length ? buildFaqSchema(post.faq) : null;
+const breadcrumbs = isRoot
+  ? breadcrumbTrails.guide(post.title, lang)
+  : breadcrumbTrails.post(post.title, lang);
 ---
 <PageLayout
   lang={lang === 'en' ? 'en-CA' : 'fr-CA'}
@@ -41,8 +47,9 @@ const faqSchema = post.faq?.length ? buildFaqSchema(post.faq) : null;
   imageAlt={post.imageAlt}
   type="article"
   ampUrl={ampUrl}
-  breadcrumbs={breadcrumbTrails.post(post.title, lang)}
-  activeHref={lang === 'en' ? '/en/blog/' : '/blog/'}
+  breadcrumbs={breadcrumbs}
+  activeHref={path}
+  canonicalPath={path}
 >
   <JsonLd schema={articleGraph} />
   {faqSchema && <JsonLd schema={faqSchema} />}

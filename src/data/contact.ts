@@ -30,12 +30,12 @@ const contactFr = {
           'Les questions les plus fréquentes trouvent déjà réponse dans ',
           {
             label: "les démarches pour se marier à l'église catholique en Italie",
-            href: '/blog/se-marier-eglise-catholique-italie/',
+            href: '/se-marier-eglise-catholique-italie/',
           },
           ' et dans ',
           {
             label: 'les documents pour un mariage religieux à l’étranger',
-            href: '/blog/documents-mariage-religieux-etranger/',
+            href: '/documents-mariage-religieux-etranger/',
           },
           ". Si votre situation comporte une union antérieure, une dispense à obtenir ou une contrainte de date, écrivez plutôt que de deviner.",
         ],
@@ -143,12 +143,12 @@ const contactEn = {
           'The most frequent questions are already answered in ',
           {
             label: 'getting married in a Catholic church in Italy',
-            href: '/en/blog/getting-married-catholic-church-italy/',
+            href: '/en/getting-married-catholic-church-italy/',
           },
           ' and in ',
           {
             label: 'documents for a religious marriage abroad',
-            href: '/en/blog/documents-religious-marriage-abroad/',
+            href: '/en/documents-religious-marriage-abroad/',
           },
           '. If your situation involves a previous union, a dispensation to obtain, or a hard date constraint, write rather than guess.',
         ],

@@ -4,7 +4,7 @@ import { getHomeContent } from '@/data/home';
 import { getAboutContent } from '@/data/about';
 import { getContactContent } from '@/data/contact';
 import { getPhotosContent } from '@/data/photos';
-import { getPublishedPosts } from '@/data/posts';
+import { getPostHref, getPublishedPosts } from '@/data/posts';
 
 export const prerender = true;
 
@@ -52,11 +52,11 @@ export const GET: APIRoute = ({ site }) => {
   for (const p of pages) out.push(`- [${p.title}](${abs(p.href)}): ${p.desc}`);
   out.push('');
 
-  out.push('## Blog');
+  out.push('## Guides');
   out.push('');
   if (posts.length > 0) {
     for (const post of posts) {
-      out.push(`- [${post.title}](${abs(`/blog/${post.slug}/`)}): ${post.summary}`);
+      out.push(`- [${post.title}](${abs(getPostHref(post))}): ${post.summary}`);
     }
   } else {
     out.push(`- [Blog](${abs('/blog/')}): articles à venir.`);

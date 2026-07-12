@@ -1,4 +1,4 @@
-import { getPublishedPosts, type Post } from '@/data/posts';
+import { getPostHref, getPublishedPosts, type Post } from '@/data/posts';
 import { siteConfig } from '@/config/site';
 
 function escapeXml(s: string): string {
@@ -44,7 +44,7 @@ export function buildRssFeed(site: URL | undefined, opts: FeedOptions): string {
 
   const items = posts
     .map((p) => {
-      const url = `${base}${opts.langPrefix}/blog/${p.slug}/`;
+      const url = `${base}${getPostHref(p)}`;
       const pub = toRfc822(p.date);
       return `    <item>
       <title>${escapeXml(p.title)}</title>

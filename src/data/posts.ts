@@ -15,6 +15,34 @@ import {
   WEDDING_PLANNER_EN_SLUG,
   WEDDING_PLANNER_FR_SLUG,
 } from '@/data/local-post-wedding-planner';
+import {
+  VOYAGE_ITALIE_EN_SLUG,
+  VOYAGE_ITALIE_FR_SLUG,
+} from '@/data/local-post-voyage-italie';
+import {
+  VISITER_VATICAN_EN_SLUG,
+  VISITER_VATICAN_FR_SLUG,
+} from '@/data/local-post-visiter-vatican';
+import {
+  MUSEES_VATICAN_EN_SLUG,
+  MUSEES_VATICAN_FR_SLUG,
+} from '@/data/local-post-musees-vatican';
+import {
+  BASILIQUE_VISITE_EN_SLUG,
+  BASILIQUE_VISITE_FR_SLUG,
+} from '@/data/local-post-basilique-visite';
+import {
+  PELERINAGE_EN_SLUG,
+  PELERINAGE_FR_SLUG,
+} from '@/data/local-post-pelerinage';
+import {
+  LUNE_DE_MIEL_EN_SLUG,
+  LUNE_DE_MIEL_FR_SLUG,
+} from '@/data/local-post-lune-de-miel';
+import {
+  ITINERAIRE_ROME_EN_SLUG,
+  ITINERAIRE_ROME_FR_SLUG,
+} from '@/data/local-post-itineraire-rome';
 
 /**
  * Paires de slugs blog connues (locales + Holding).
@@ -31,6 +59,13 @@ const KNOWN_BLOG_SLUG_PAIRS: Array<{ fr: string; en: string }> = [
   { fr: DOCUMENTS_FR_SLUG, en: DOCUMENTS_EN_SLUG },
   { fr: COUT_FR_SLUG, en: COUT_EN_SLUG },
   { fr: WEDDING_PLANNER_FR_SLUG, en: WEDDING_PLANNER_EN_SLUG },
+  { fr: VOYAGE_ITALIE_FR_SLUG, en: VOYAGE_ITALIE_EN_SLUG },
+  { fr: VISITER_VATICAN_FR_SLUG, en: VISITER_VATICAN_EN_SLUG },
+  { fr: MUSEES_VATICAN_FR_SLUG, en: MUSEES_VATICAN_EN_SLUG },
+  { fr: BASILIQUE_VISITE_FR_SLUG, en: BASILIQUE_VISITE_EN_SLUG },
+  { fr: PELERINAGE_FR_SLUG, en: PELERINAGE_EN_SLUG },
+  { fr: LUNE_DE_MIEL_FR_SLUG, en: LUNE_DE_MIEL_EN_SLUG },
+  { fr: ITINERAIRE_ROME_FR_SLUG, en: ITINERAIRE_ROME_EN_SLUG },
 ];
 
 export type TimelineItem = {
@@ -54,10 +89,19 @@ export type PostFaq = {
   answer: string;
 };
 
+/** `root` = URL pilier `/slug/` ; `blog` = article sous `/slug/`. */
+export type PostRoute = 'root' | 'blog';
+
 export type Post = {
   slug: string;
   /** Langue du contenu (défaut fr). Les miroirs EN ont leur propre entrée + slug. */
   lang?: Lang;
+  /**
+   * Préfixe d’URL publique.
+   * - `root` : `/slug/` et `/en/slug/` (guides / piliers)
+   * - `blog` : `/slug/` (défaut, Holding)
+   */
+  route?: PostRoute;
   /** Slug de la version dans l’autre langue (hreflang / sélecteur). */
   alternateSlug?: string;
   title: string;
@@ -173,12 +217,25 @@ function applyKnownBlogSlugPairs(all: Post[]): Post[] {
 function registerAlternates(all: Post[]): void {
   const pairs: Array<{ fr: string; en: string }> = [];
   const seen = new Set<string>();
+  const byFrSlug = new Map(
+    all
+      .filter((p) => (p.lang ?? 'fr') === 'fr')
+      .map((p) => [p.slug, p] as const),
+  );
+
+  const toPaths = (frSlug: string, enSlug: string): { fr: string; en: string } => {
+    const route = getPostRoute(byFrSlug.get(frSlug) ?? { route: 'blog' });
+    if (route === 'root') {
+      return { fr: `/${frSlug}/`, en: `/en/${enSlug}/` };
+    }
+    return { fr: `/blog/${frSlug}/`, en: `/en/blog/${enSlug}/` };
+  };
 
   for (const pair of KNOWN_BLOG_SLUG_PAIRS) {
     const key = `${pair.fr}→${pair.en}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    pairs.push(pair);
+    pairs.push(toPaths(pair.fr, pair.en));
   }
 
   for (const post of all) {
@@ -186,7 +243,7 @@ function registerAlternates(all: Post[]): void {
     const key = `${post.slug}→${post.alternateSlug}`;
     if (seen.has(key)) continue;
     seen.add(key);
-    pairs.push({ fr: post.slug, en: post.alternateSlug });
+    pairs.push(toPaths(post.slug, post.alternateSlug));
   }
   setBlogSlugPairs(pairs);
 }
@@ -222,9 +279,28 @@ function hasRenderableBody(post: Post): boolean {
   return Boolean(post.bodyMarkdown?.trim()) || post.sections.length > 0;
 }
 
-export function getPostHref(post: Pick<Post, 'slug' | 'published' | 'lang'>): string {
+export function getPostRoute(post: Pick<Post, 'route'>): PostRoute {
+  return post.route ?? 'blog';
+}
+
+/** URL publique de l’article (racine pour les guides, /blog/ pour le reste). */
+export function getPostHref(
+  post: Pick<Post, 'slug' | 'published' | 'lang' | 'route'>,
+): string {
   if (!post.published) return '#';
-  return (post.lang ?? 'fr') === 'en' ? `/en/blog/${post.slug}/` : `/blog/${post.slug}/`;
+  const isEn = (post.lang ?? 'fr') === 'en';
+  if (getPostRoute(post) === 'root') {
+    return isEn ? `/en/${post.slug}/` : `/${post.slug}/`;
+  }
+  return isEn ? `/en/blog/${post.slug}/` : `/blog/${post.slug}/`;
+}
+
+export function getRootPosts(lang: Lang = 'fr'): Post[] {
+  return getPublishedPosts(lang).filter((p) => getPostRoute(p) === 'root');
+}
+
+export function getBlogRoutedPosts(lang: Lang = 'fr'): Post[] {
+  return getPublishedPosts(lang).filter((p) => getPostRoute(p) === 'blog');
 }
 
 export function getPostBySlug(slug: string, lang: Lang = 'fr'): Post | undefined {

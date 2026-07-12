@@ -89,7 +89,7 @@ const enBody = `A wedding planner who specializes in Catholic weddings in Italy 
 
 Many Quebec couples approach this project thinking logistics first: venue, photographer, caterer. But for a Catholic wedding, the centerpiece of the timeline is neither the reception hall nor the menu — it is the Italian diocese's acceptance of the religious file. Support that ignores this reality exposes the couple to delays, or even a refused date.
 
-This article details what serious support actually covers, the possible formulas, the step-by-step process, and above all the honest limits of this kind of service. For background on the religious process itself, see [getting married in a Catholic church in Italy](/en/blog/getting-married-catholic-church-italy/).
+This article details what serious support actually covers, the possible formulas, the step-by-step process, and above all the honest limits of this kind of service. For background on the religious process itself, see [getting married in a Catholic church in Italy](/en/getting-married-catholic-church-italy/).
 
 ## What sets a Catholic wedding apart from a destination wedding
 
@@ -110,11 +110,11 @@ Depending on the scope of the need, support can take several forms. Each couple 
 
 ### Administrative support
 
-This formula targets couples who already manage their own vendors (reception venue, photographer, caterer) but need help with the religious track. Support covers preparing the canonical file, listing the documents to gather in the home parish, arranging translations, and following up with the Italian diocese. For the document list itself, see [documents for a religious marriage abroad](/en/blog/documents-religious-marriage-abroad/).
+This formula targets couples who already manage their own vendors (reception venue, photographer, caterer) but need help with the religious track. Support covers preparing the canonical file, listing the documents to gather in the home parish, arranging translations, and following up with the Italian diocese. For the document list itself, see [documents for a religious marriage abroad](/en/documents-religious-marriage-abroad/).
 
 ### Full support
 
-This is the most requested formula. It combines follow-up on the canonical file with selecting and coordinating vendors in Italy: church, reception venue, photographer, florist, transport for guests. The couple keeps the final say on every choice, but does not have to manage a dozen contacts alone in a different language and a different administrative system. Budget planning naturally comes up at this stage; see [the cost of a wedding in Italy](/en/blog/cost-wedding-italy/) for a realistic view of what to anticipate.
+This is the most requested formula. It combines follow-up on the canonical file with selecting and coordinating vendors in Italy: church, reception venue, photographer, florist, transport for guests. The couple keeps the final say on every choice, but does not have to manage a dozen contacts alone in a different language and a different administrative system. Budget planning naturally comes up at this stage; see [the cost of a wedding in Italy](/en/cost-wedding-italy/) for a realistic view of what to anticipate.
 
 ### Tailored support
 

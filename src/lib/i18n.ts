@@ -41,12 +41,23 @@ const EN_ONLY_PATHS = new Set<string>([
 /** Paires de slugs blog FR ↔ EN (enregistrées depuis `src/data/posts.ts`). */
 let blogSlugPairs: Array<{ fr: string; en: string }> = [];
 
-/** Enregistre les alternates blog (slugs traduits) pour hreflang / sélecteur. */
+/**
+ * Enregistre les alternates d’articles (chemins publics complets) pour hreflang.
+ * Accepte soit des chemins (`/slug/`, `/slug/`) soit d’anciens slugs nus
+ * (alors préfixés `/blog/` pour rétrocompat).
+ */
 export function setBlogSlugPairs(pairs: Array<{ fr: string; en: string }>): void {
-  blogSlugPairs = pairs.map((p) => ({
-    fr: `/blog/${p.fr.replace(/^\/+|\/+$/g, '')}/`,
-    en: `/en/blog/${p.en.replace(/^\/+|\/+$/g, '')}/`,
-  }));
+  blogSlugPairs = pairs.map((p) => {
+    const frRaw = p.fr.trim();
+    const enRaw = p.en.trim();
+    const fr = frRaw.startsWith('/')
+      ? normalizePath(frRaw)
+      : `/blog/${frRaw.replace(/^\/+|\/+$/g, '')}/`;
+    const en = enRaw.startsWith('/')
+      ? normalizePath(enRaw)
+      : `/en/blog/${enRaw.replace(/^\/+|\/+$/g, '')}/`;
+    return { fr, en };
+  });
 }
 
 function allSlugPairs(): Array<{ fr: string; en: string }> {

@@ -74,28 +74,60 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     return context.redirect('/photos.htm', 301);
   }
 
-  // Alias briefs T-09…T-12 : URLs racine → articles blog
+  // Anciennes URLs /blog/… des guides → URLs racine (et alias courts)
   const guideRedirects: Record<string, string> = {
-    '/se-marier-eglise-catholique-italie': '/blog/se-marier-eglise-catholique-italie/',
-    '/se-marier-eglise-catholique-italie/': '/blog/se-marier-eglise-catholique-italie/',
-    '/documents-mariage-religieux-etranger': '/blog/documents-mariage-religieux-etranger/',
-    '/documents-mariage-religieux-etranger/': '/blog/documents-mariage-religieux-etranger/',
-    '/cout-mariage-italie': '/blog/cout-mariage-italie/',
-    '/cout-mariage-italie/': '/blog/cout-mariage-italie/',
-    '/wedding-planner-mariage-italie': '/blog/wedding-planner-mariage-italie/',
-    '/wedding-planner-mariage-italie/': '/blog/wedding-planner-mariage-italie/',
-    '/mariage-catholique-italie': '/blog/se-marier-eglise-catholique-italie/',
-    '/mariage-catholique-italie/': '/blog/se-marier-eglise-catholique-italie/',
-    '/en/getting-married-catholic-church-italy': '/en/blog/getting-married-catholic-church-italy/',
-    '/en/getting-married-catholic-church-italy/': '/en/blog/getting-married-catholic-church-italy/',
-    '/en/documents-religious-marriage-abroad': '/en/blog/documents-religious-marriage-abroad/',
-    '/en/documents-religious-marriage-abroad/': '/en/blog/documents-religious-marriage-abroad/',
-    '/en/cost-wedding-italy': '/en/blog/cost-wedding-italy/',
-    '/en/cost-wedding-italy/': '/en/blog/cost-wedding-italy/',
-    '/en/wedding-planner-italy': '/en/blog/wedding-planner-italy/',
-    '/en/wedding-planner-italy/': '/en/blog/wedding-planner-italy/',
-    '/en/catholic-wedding-italy': '/en/blog/getting-married-catholic-church-italy/',
-    '/en/catholic-wedding-italy/': '/en/blog/getting-married-catholic-church-italy/',
+    '/blog/se-marier-eglise-catholique-italie': '/se-marier-eglise-catholique-italie/',
+    '/blog/se-marier-eglise-catholique-italie/': '/se-marier-eglise-catholique-italie/',
+    '/blog/documents-mariage-religieux-etranger': '/documents-mariage-religieux-etranger/',
+    '/blog/documents-mariage-religieux-etranger/': '/documents-mariage-religieux-etranger/',
+    '/blog/cout-mariage-italie': '/cout-mariage-italie/',
+    '/blog/cout-mariage-italie/': '/cout-mariage-italie/',
+    '/blog/wedding-planner-mariage-italie': '/wedding-planner-mariage-italie/',
+    '/blog/wedding-planner-mariage-italie/': '/wedding-planner-mariage-italie/',
+    '/blog/marier-a-la-basilique-saint-pierre': '/marier-a-la-basilique-saint-pierre/',
+    '/blog/marier-a-la-basilique-saint-pierre/': '/marier-a-la-basilique-saint-pierre/',
+    '/mariage-catholique-italie': '/se-marier-eglise-catholique-italie/',
+    '/mariage-catholique-italie/': '/se-marier-eglise-catholique-italie/',
+    '/blog/voyage-italie-catholique': '/voyage-italie-catholique/',
+    '/blog/voyage-italie-catholique/': '/voyage-italie-catholique/',
+    '/blog/visiter-le-vatican': '/visiter-le-vatican/',
+    '/blog/visiter-le-vatican/': '/visiter-le-vatican/',
+    '/blog/musees-du-vatican-billets': '/musees-du-vatican-billets/',
+    '/blog/musees-du-vatican-billets/': '/musees-du-vatican-billets/',
+    '/blog/basilique-saint-pierre': '/basilique-saint-pierre/',
+    '/blog/basilique-saint-pierre/': '/basilique-saint-pierre/',
+    '/blog/pelerinage-rome-italie': '/pelerinage-rome-italie/',
+    '/blog/pelerinage-rome-italie/': '/pelerinage-rome-italie/',
+    '/blog/lune-de-miel-italie': '/lune-de-miel-italie/',
+    '/blog/lune-de-miel-italie/': '/lune-de-miel-italie/',
+    '/blog/itineraire-rome-3-jours': '/itineraire-rome-3-jours/',
+    '/blog/itineraire-rome-3-jours/': '/itineraire-rome-3-jours/',
+    '/en/blog/getting-married-catholic-church-italy': '/en/getting-married-catholic-church-italy/',
+    '/en/blog/getting-married-catholic-church-italy/': '/en/getting-married-catholic-church-italy/',
+    '/en/blog/documents-religious-marriage-abroad': '/en/documents-religious-marriage-abroad/',
+    '/en/blog/documents-religious-marriage-abroad/': '/en/documents-religious-marriage-abroad/',
+    '/en/blog/cost-wedding-italy': '/en/cost-wedding-italy/',
+    '/en/blog/cost-wedding-italy/': '/en/cost-wedding-italy/',
+    '/en/blog/wedding-planner-italy': '/en/wedding-planner-italy/',
+    '/en/blog/wedding-planner-italy/': '/en/wedding-planner-italy/',
+    '/en/blog/getting-married-st-peters-basilica': '/en/getting-married-st-peters-basilica/',
+    '/en/blog/getting-married-st-peters-basilica/': '/en/getting-married-st-peters-basilica/',
+    '/en/catholic-wedding-italy': '/en/getting-married-catholic-church-italy/',
+    '/en/catholic-wedding-italy/': '/en/getting-married-catholic-church-italy/',
+    '/en/blog/catholic-travel-italy': '/en/catholic-travel-italy/',
+    '/en/blog/catholic-travel-italy/': '/en/catholic-travel-italy/',
+    '/en/blog/visiting-the-vatican': '/en/visiting-the-vatican/',
+    '/en/blog/visiting-the-vatican/': '/en/visiting-the-vatican/',
+    '/en/blog/vatican-museums-tickets': '/en/vatican-museums-tickets/',
+    '/en/blog/vatican-museums-tickets/': '/en/vatican-museums-tickets/',
+    '/en/blog/st-peters-basilica': '/en/st-peters-basilica/',
+    '/en/blog/st-peters-basilica/': '/en/st-peters-basilica/',
+    '/en/blog/pilgrimage-rome-italy': '/en/pilgrimage-rome-italy/',
+    '/en/blog/pilgrimage-rome-italy/': '/en/pilgrimage-rome-italy/',
+    '/en/blog/honeymoon-italy': '/en/honeymoon-italy/',
+    '/en/blog/honeymoon-italy/': '/en/honeymoon-italy/',
+    '/en/blog/rome-3-day-itinerary': '/en/rome-3-day-itinerary/',
+    '/en/blog/rome-3-day-itinerary/': '/en/rome-3-day-itinerary/',
   };
   if (guideRedirects[pathname]) {
     return context.redirect(guideRedirects[pathname], 301);
@@ -125,7 +157,7 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     pathname === '/en/blog/marier-a-la-basilique-saint-pierre' ||
     pathname === '/en/blog/marier-a-la-basilique-saint-pierre/'
   ) {
-    return context.redirect('/en/blog/getting-married-st-peters-basilica/', 301);
+    return context.redirect('/en/getting-married-st-peters-basilica/', 301);
   }
   if (pathname === '/en/a-propos' || pathname === '/en/a-propos/') {
     return context.redirect('/about.htm', 301);

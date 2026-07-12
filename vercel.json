@@ -2,27 +2,58 @@
   "headers": [
     {
       "source": "/fonts/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/_astro/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     },
     {
       "source": "/sitemap.xml",
       "headers": [
-        { "key": "Content-Type", "value": "application/xml; charset=utf-8" },
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
+        {
+          "key": "Content-Type",
+          "value": "application/xml; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
       ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-XSS-Protection", "value": "1; mode=block" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
@@ -176,93 +207,263 @@
       "statusCode": 301
     },
     {
-      "source": "/se-marier-eglise-catholique-italie",
-      "destination": "/blog/se-marier-eglise-catholique-italie/",
+      "source": "/blog/se-marier-eglise-catholique-italie",
+      "destination": "/se-marier-eglise-catholique-italie/",
       "statusCode": 301
     },
     {
-      "source": "/se-marier-eglise-catholique-italie/",
-      "destination": "/blog/se-marier-eglise-catholique-italie/",
+      "source": "/blog/se-marier-eglise-catholique-italie/",
+      "destination": "/se-marier-eglise-catholique-italie/",
       "statusCode": 301
     },
     {
-      "source": "/documents-mariage-religieux-etranger",
-      "destination": "/blog/documents-mariage-religieux-etranger/",
+      "source": "/blog/documents-mariage-religieux-etranger",
+      "destination": "/documents-mariage-religieux-etranger/",
       "statusCode": 301
     },
     {
-      "source": "/documents-mariage-religieux-etranger/",
-      "destination": "/blog/documents-mariage-religieux-etranger/",
+      "source": "/blog/documents-mariage-religieux-etranger/",
+      "destination": "/documents-mariage-religieux-etranger/",
       "statusCode": 301
     },
     {
-      "source": "/cout-mariage-italie",
-      "destination": "/blog/cout-mariage-italie/",
+      "source": "/blog/cout-mariage-italie",
+      "destination": "/cout-mariage-italie/",
       "statusCode": 301
     },
     {
-      "source": "/cout-mariage-italie/",
-      "destination": "/blog/cout-mariage-italie/",
+      "source": "/blog/cout-mariage-italie/",
+      "destination": "/cout-mariage-italie/",
       "statusCode": 301
     },
     {
-      "source": "/wedding-planner-mariage-italie",
-      "destination": "/blog/wedding-planner-mariage-italie/",
+      "source": "/blog/wedding-planner-mariage-italie",
+      "destination": "/wedding-planner-mariage-italie/",
       "statusCode": 301
     },
     {
-      "source": "/wedding-planner-mariage-italie/",
-      "destination": "/blog/wedding-planner-mariage-italie/",
+      "source": "/blog/wedding-planner-mariage-italie/",
+      "destination": "/wedding-planner-mariage-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/marier-a-la-basilique-saint-pierre",
+      "destination": "/marier-a-la-basilique-saint-pierre/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/marier-a-la-basilique-saint-pierre/",
+      "destination": "/marier-a-la-basilique-saint-pierre/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/voyage-italie-catholique",
+      "destination": "/voyage-italie-catholique/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/voyage-italie-catholique/",
+      "destination": "/voyage-italie-catholique/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/visiter-le-vatican",
+      "destination": "/visiter-le-vatican/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/visiter-le-vatican/",
+      "destination": "/visiter-le-vatican/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/musees-du-vatican-billets",
+      "destination": "/musees-du-vatican-billets/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/musees-du-vatican-billets/",
+      "destination": "/musees-du-vatican-billets/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/basilique-saint-pierre",
+      "destination": "/basilique-saint-pierre/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/basilique-saint-pierre/",
+      "destination": "/basilique-saint-pierre/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/pelerinage-rome-italie",
+      "destination": "/pelerinage-rome-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/pelerinage-rome-italie/",
+      "destination": "/pelerinage-rome-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/lune-de-miel-italie",
+      "destination": "/lune-de-miel-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/lune-de-miel-italie/",
+      "destination": "/lune-de-miel-italie/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/itineraire-rome-3-jours",
+      "destination": "/itineraire-rome-3-jours/",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/itineraire-rome-3-jours/",
+      "destination": "/itineraire-rome-3-jours/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/getting-married-catholic-church-italy",
+      "destination": "/en/getting-married-catholic-church-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/getting-married-catholic-church-italy/",
+      "destination": "/en/getting-married-catholic-church-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/documents-religious-marriage-abroad",
+      "destination": "/en/documents-religious-marriage-abroad/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/documents-religious-marriage-abroad/",
+      "destination": "/en/documents-religious-marriage-abroad/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/cost-wedding-italy",
+      "destination": "/en/cost-wedding-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/cost-wedding-italy/",
+      "destination": "/en/cost-wedding-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/wedding-planner-italy",
+      "destination": "/en/wedding-planner-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/wedding-planner-italy/",
+      "destination": "/en/wedding-planner-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/getting-married-st-peters-basilica",
+      "destination": "/en/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/getting-married-st-peters-basilica/",
+      "destination": "/en/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/catholic-travel-italy",
+      "destination": "/en/catholic-travel-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/catholic-travel-italy/",
+      "destination": "/en/catholic-travel-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/visiting-the-vatican",
+      "destination": "/en/visiting-the-vatican/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/visiting-the-vatican/",
+      "destination": "/en/visiting-the-vatican/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/vatican-museums-tickets",
+      "destination": "/en/vatican-museums-tickets/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/vatican-museums-tickets/",
+      "destination": "/en/vatican-museums-tickets/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/st-peters-basilica",
+      "destination": "/en/st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/st-peters-basilica/",
+      "destination": "/en/st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/pilgrimage-rome-italy",
+      "destination": "/en/pilgrimage-rome-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/pilgrimage-rome-italy/",
+      "destination": "/en/pilgrimage-rome-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/honeymoon-italy",
+      "destination": "/en/honeymoon-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/honeymoon-italy/",
+      "destination": "/en/honeymoon-italy/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/rome-3-day-itinerary",
+      "destination": "/en/rome-3-day-itinerary/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/blog/rome-3-day-itinerary/",
+      "destination": "/en/rome-3-day-itinerary/",
       "statusCode": 301
     },
     {
       "source": "/mariage-catholique-italie",
-      "destination": "/blog/se-marier-eglise-catholique-italie/",
+      "destination": "/se-marier-eglise-catholique-italie/",
       "statusCode": 301
     },
     {
       "source": "/mariage-catholique-italie/",
-      "destination": "/blog/se-marier-eglise-catholique-italie/",
+      "destination": "/se-marier-eglise-catholique-italie/",
       "statusCode": 301
     },
     {
-      "source": "/en/getting-married-catholic-church-italy",
-      "destination": "/en/blog/getting-married-catholic-church-italy/",
+      "source": "/en/catholic-wedding-italy",
+      "destination": "/en/getting-married-catholic-church-italy/",
       "statusCode": 301
     },
     {
-      "source": "/en/getting-married-catholic-church-italy/",
-      "destination": "/en/blog/getting-married-catholic-church-italy/",
-      "statusCode": 301
-    },
-    {
-      "source": "/en/documents-religious-marriage-abroad",
-      "destination": "/en/blog/documents-religious-marriage-abroad/",
-      "statusCode": 301
-    },
-    {
-      "source": "/en/documents-religious-marriage-abroad/",
-      "destination": "/en/blog/documents-religious-marriage-abroad/",
-      "statusCode": 301
-    },
-    {
-      "source": "/en/cost-wedding-italy",
-      "destination": "/en/blog/cost-wedding-italy/",
-      "statusCode": 301
-    },
-    {
-      "source": "/en/cost-wedding-italy/",
-      "destination": "/en/blog/cost-wedding-italy/",
-      "statusCode": 301
-    },
-    {
-      "source": "/en/wedding-planner-italy",
-      "destination": "/en/blog/wedding-planner-italy/",
-      "statusCode": 301
-    },
-    {
-      "source": "/en/wedding-planner-italy/",
-      "destination": "/en/blog/wedding-planner-italy/",
+      "source": "/en/catholic-wedding-italy/",
+      "destination": "/en/getting-married-catholic-church-italy/",
       "statusCode": 301
     }
   ],

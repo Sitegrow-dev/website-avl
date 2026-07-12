@@ -41,7 +41,7 @@ export const siteConfig = {
   /** Nav FR par défaut (fallback Zod / skeleton). Préférer getNavigation(lang). */
   nav: [
     { label: 'Destinations', href: '/destinations/rome/' },
-    { label: 'Patrimoine & Vatican', href: '/#patrimoine' },
+    { label: 'Voyage Italie catholique', href: '/voyage-italie-catholique/' },
     { label: 'Blog', href: '/blog/' },
   ],
   navCta: { label: 'Nous joindre', href: '/contact/' },
@@ -62,17 +62,34 @@ export const siteConfig = {
         links: [
           {
             label: 'Se marier à l’église',
-            href: '/blog/se-marier-eglise-catholique-italie/',
+            href: '/se-marier-eglise-catholique-italie/',
           },
           {
             label: 'Documents',
-            href: '/blog/documents-mariage-religieux-etranger/',
+            href: '/documents-mariage-religieux-etranger/',
           },
-          { label: 'Coût & budget', href: '/blog/cout-mariage-italie/' },
+          { label: 'Coût & budget', href: '/cout-mariage-italie/' },
           {
             label: 'Wedding planner',
-            href: '/blog/wedding-planner-mariage-italie/',
+            href: '/wedding-planner-mariage-italie/',
           },
+        ],
+      },
+      {
+        title: 'Voyage & Vatican',
+        links: [
+          {
+            label: 'Voyage Italie catholique',
+            href: '/voyage-italie-catholique/',
+          },
+          { label: 'Visiter le Vatican', href: '/visiter-le-vatican/' },
+          {
+            label: 'Billets musées',
+            href: '/musees-du-vatican-billets/',
+          },
+          { label: 'Pèlerinage à Rome', href: '/pelerinage-rome-italie/' },
+          { label: 'Lune de miel', href: '/lune-de-miel-italie/' },
+          { label: 'Rome en 3 jours', href: '/itineraire-rome-3-jours/' },
         ],
       },
       {
@@ -80,7 +97,6 @@ export const siteConfig = {
         links: [
           { label: 'Blog', href: '/blog/' },
           { label: 'Destinations', href: '/destinations/rome/' },
-          { label: 'Patrimoine & Vatican', href: '/#patrimoine' },
         ],
       },
     ],

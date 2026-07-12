@@ -55,13 +55,13 @@ Le détail par poste, tiré des données déclarées par les couples italiens in
 | Cadeaux invités (bomboniere) | environ 725 € |
 | Gâteau de mariage | environ 490 € |
 
-À ces postes s'ajoutent, pour un mariage de destination, la coordination locale ou le wedding planner, souvent le poste le plus rentable à budgéter en premier puisqu'il permet de négocier les tarifs des autres prestataires. Voir notre guide sur le [rôle d'un wedding planner pour un mariage en Italie](/blog/wedding-planner-mariage-italie/) pour comprendre ce que ce service inclut réellement et comment il influence le reste du budget.
+À ces postes s'ajoutent, pour un mariage de destination, la coordination locale ou le wedding planner, souvent le poste le plus rentable à budgéter en premier puisqu'il permet de négocier les tarifs des autres prestataires. Voir notre guide sur le [rôle d'un wedding planner pour un mariage en Italie](/wedding-planner-mariage-italie/) pour comprendre ce que ce service inclut réellement et comment il influence le reste du budget.
 
 ## Les frais administratifs propres à un couple étranger
 
 Aucun des chiffres précédents ne tient compte des démarches administratives, puisque l'enquête Matrimonio.com s'adresse à des couples résidant déjà en Italie. Pour un couple québécois, cette ligne de budget existe bel et bien et reste souvent sous-estimée.
 
-Il faut prévoir les traductions assermentées des actes de naissance et autres documents, leur légalisation ou apostille, les frais de constitution du dossier canonique si le mariage est religieux, les honoraires d'un accompagnement local pour suivre le dossier auprès du diocèse ou de la commune, et éventuellement les frais de transcription de l'acte de mariage au retour au Canada. Le volet religieux ajoute son propre lot d'exigences documentaires ; notre article sur les [documents nécessaires pour un mariage religieux à l'étranger](/blog/documents-mariage-religieux-etranger/) détaille la liste complète, tandis que le guide pour [se marier à l'église catholique en Italie](/blog/se-marier-eglise-catholique-italie/) explique le calendrier et les validations à obtenir.
+Il faut prévoir les traductions assermentées des actes de naissance et autres documents, leur légalisation ou apostille, les frais de constitution du dossier canonique si le mariage est religieux, les honoraires d'un accompagnement local pour suivre le dossier auprès du diocèse ou de la commune, et éventuellement les frais de transcription de l'acte de mariage au retour au Canada. Le volet religieux ajoute son propre lot d'exigences documentaires ; notre article sur les [documents nécessaires pour un mariage religieux à l'étranger](/documents-mariage-religieux-etranger/) détaille la liste complète, tandis que le guide pour [se marier à l'église catholique en Italie](/se-marier-eglise-catholique-italie/) explique le calendrier et les validations à obtenir.
 
 Ces frais administratifs représentent rarement plus de 5 % du budget total, mais ils sont incompressibles et doivent être réglés dans des délais précis, souvent plusieurs mois avant la cérémonie. Les oublier dans une première estimation de budget est une erreur fréquente, corrigée trop tard.
 
@@ -86,7 +86,7 @@ Réduire la facture ne signifie pas renoncer à un mariage réussi. Quelques lev
 
 Choisir une date en semaine ou en basse saison, hors des mois de mai à septembre, permet souvent de négocier des tarifs plus bas auprès des lieux de réception et des traiteurs. Limiter la liste d'invités reste le levier le plus puissant, puisque le traiteur, le lieu et les cadeaux invités se calculent presque tous par personne. Regrouper les prestataires autour d'un même lieu réduit les frais de déplacement, et privilégier des fleurs de saison plutôt que des importations coûteuses fait une différence notable sur ce poste.
 
-Un accompagnement structuré dès le départ permet aussi d'éviter les dépenses imprévues et de négocier des forfaits plutôt que des tarifs à la carte. Notre guide sur le [wedding planner pour un mariage en Italie](/blog/wedding-planner-mariage-italie/) présente les options d'accompagnement selon le budget disponible et le type de cérémonie visé.
+Un accompagnement structuré dès le départ permet aussi d'éviter les dépenses imprévues et de négocier des forfaits plutôt que des tarifs à la carte. Notre guide sur le [wedding planner pour un mariage en Italie](/wedding-planner-mariage-italie/) présente les options d'accompagnement selon le budget disponible et le type de cérémonie visé.
 
 ## Conclusion
 
@@ -141,13 +141,13 @@ The line-item breakdown, drawn from data self-reported by the Italian couples su
 | Guest favours (bomboniere) | about €725 |
 | Wedding cake | about €490 |
 
-For a destination wedding, add local coordination or a wedding planner, often the single line item most worth budgeting first, since it lets you negotiate every other vendor's rate. See our guide on [what a wedding planner in Italy actually does](/en/blog/wedding-planner-italy/) to understand what this service includes and how it shapes the rest of the budget.
+For a destination wedding, add local coordination or a wedding planner, often the single line item most worth budgeting first, since it lets you negotiate every other vendor's rate. See our guide on [what a wedding planner in Italy actually does](/en/wedding-planner-italy/) to understand what this service includes and how it shapes the rest of the budget.
 
 ## Administrative fees specific to a foreign couple
 
 None of the figures above account for paperwork, since the Matrimonio.com survey targets couples already living in Italy. For a Quebec couple, this budget line is very real and consistently underestimated.
 
-Plan for sworn translations of birth certificates and other documents, their legalization or apostille, the cost of assembling the canonical file if the wedding is religious, fees for local support to follow the file with the diocese or the town hall, and potentially the cost of transcribing the marriage certificate once back in Canada. The religious track adds its own set of document requirements; our article on [documents required for a religious marriage abroad](/en/blog/documents-religious-marriage-abroad/) covers the full list, while our guide to [getting married in a Catholic church in Italy](/en/blog/getting-married-catholic-church-italy/) explains the timeline and approvals needed.
+Plan for sworn translations of birth certificates and other documents, their legalization or apostille, the cost of assembling the canonical file if the wedding is religious, fees for local support to follow the file with the diocese or the town hall, and potentially the cost of transcribing the marriage certificate once back in Canada. The religious track adds its own set of document requirements; our article on [documents required for a religious marriage abroad](/en/documents-religious-marriage-abroad/) covers the full list, while our guide to [getting married in a Catholic church in Italy](/en/getting-married-catholic-church-italy/) explains the timeline and approvals needed.
 
 These administrative fees rarely exceed 5% of the total budget, but they are non-negotiable and come with strict deadlines, often several months before the ceremony. Forgetting them in a first budget estimate is a common mistake, usually caught too late.
 
@@ -172,7 +172,7 @@ Cutting the bill does not mean giving up on a wedding that feels right. A few le
 
 Choosing a weekday or a low-season date, outside May through September, often makes it possible to negotiate lower rates with venues and caterers. Trimming the guest list remains the single most powerful lever, since catering, the venue, and guest favours are nearly all priced per person. Grouping vendors around a single venue cuts travel fees, and favouring seasonal flowers over costly imports makes a noticeable difference on that line.
 
-Structured support from the start also helps avoid unplanned expenses and negotiate package deals instead of à la carte pricing. Our guide on [wedding planners for a wedding in Italy](/en/blog/wedding-planner-italy/) lays out support options based on your available budget and the type of ceremony you're aiming for.
+Structured support from the start also helps avoid unplanned expenses and negotiate package deals instead of à la carte pricing. Our guide on [wedding planners for a wedding in Italy](/en/wedding-planner-italy/) lays out support options based on your available budget and the type of ceremony you're aiming for.
 
 ## Conclusion
 

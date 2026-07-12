@@ -1,9 +1,9 @@
 ---
 import PostLayout from '@layouts/PostLayout.astro';
-import { getBlogRoutedPosts, getPostBySlug } from '@/data/posts';
+import { getPostBySlug, getRootPosts } from '@/data/posts';
 
 export function getStaticPaths() {
-  return getBlogRoutedPosts('en').map((post) => ({
+  return getRootPosts('en').map((post) => ({
     params: { slug: post.slug },
   }));
 }
@@ -11,7 +11,7 @@ export function getStaticPaths() {
 const { slug } = Astro.params;
 const post = slug ? getPostBySlug(slug, 'en') : undefined;
 
-if (!post) {
+if (!post || post.route !== 'root') {
   return Astro.redirect('/404/');
 }
 ---

@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { getPublishedPosts } from '@/data/posts';
+import { getPostHref, getPublishedPosts } from '@/data/posts';
 import { siteConfig } from '@/config/site';
 import { gitLastmod } from '@/lib/git-lastmod';
 import { alternatePath, hasEnAlternate, isEnOnlyPath } from '@/lib/i18n';
@@ -114,7 +114,7 @@ export const GET: APIRoute = ({ site }) => {
   }
 
   for (const post of getPublishedPosts('fr')) {
-    const path = `/blog/${post.slug}/`;
+    const path = getPostHref(post);
     entries.push({
       loc: `${base}${path}`,
       lastmod: post.updated || post.date || undefined,
@@ -124,7 +124,7 @@ export const GET: APIRoute = ({ site }) => {
 
   if (siteConfig.enIndexable) {
     for (const post of getPublishedPosts('en')) {
-      const path = `/en/blog/${post.slug}/`;
+      const path = getPostHref(post);
       entries.push({
         loc: `${base}${path}`,
         lastmod: post.updated || post.date || undefined,
