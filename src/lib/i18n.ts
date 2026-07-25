@@ -67,7 +67,7 @@ function allSlugPairs(): Array<{ fr: string; en: string }> {
 
 /**
  * Pages FR sans miroir EN indexable (pas de hreflang en-CA).
- * Les destinations ont désormais des miroirs /en/destinations/* — ne plus les traiter ici.
+ * Les destinations ont des miroirs /en/destinations/* via les paires enregistrées.
  */
 const FR_ONLY_PATHS = new Set<string>([]);
 
@@ -120,6 +120,12 @@ function isBlogPostPath(path: string): boolean {
   return stripped.startsWith('/blog/') && stripped !== '/blog/';
 }
 
+/** Guide destination (hors index) : exige une paire FR↔EN enregistrée. */
+function isDestinationPath(path: string): boolean {
+  const stripped = normalizePath(stripLocalePrefix(path));
+  return stripped.startsWith('/destinations/') && stripped !== '/destinations/';
+}
+
 function findSlugPair(path: string): { fr: string; en: string } | undefined {
   const normalized = normalizePath(path);
   return allSlugPairs().find((p) => p.fr === normalized || p.en === normalized);
@@ -140,7 +146,7 @@ export function withLocalePrefix(path: string, lang: Lang): string {
   const pair = pairs.find((p) => p.fr === path || p.en === path);
   if (pair) return pair.en;
 
-  // Pages FR-only (ex. destinations) : garder l’URL FR même depuis la nav EN.
+  // Pages FR-only : garder l’URL FR même depuis la nav EN.
   if (isFrOnlyPath(path)) return normalizePath(stripLocalePrefix(path));
 
   if (path === '/en' || path.startsWith('/en/'))
@@ -183,10 +189,12 @@ export function alternatePath(pathname: string, targetLang: Lang): string {
 
   if (targetLang === 'en') {
     if (normalized === '/en' || normalized.startsWith('/en/')) return normalized;
-    // Pas de miroir EN : renvoyer le chemin FR (évite `/en/destinations/...` → 404).
+    // Pas de miroir EN : renvoyer le chemin FR.
     if (isFrOnlyPath(normalized)) return stripLocalePrefix(normalized);
-    // Article blog sans paire : ne pas inventer `/en/blog/<slug-fr>/`.
-    if (isBlogPostPath(normalized)) return normalizePath(stripLocalePrefix(normalized));
+    // Article blog / destination sans paire : ne pas inventer un slug EN.
+    if (isBlogPostPath(normalized) || isDestinationPath(normalized)) {
+      return normalizePath(stripLocalePrefix(normalized));
+    }
     return withLocalePrefix(normalized, 'en');
   }
 
@@ -203,12 +211,16 @@ export function hasEnAlternate(pathname: string): boolean {
   const frPath = normalizePath(stripLocalePrefix(alternatePath(normalized, 'fr')));
 
   if (FR_ONLY_PATHS.has(frPath)) return false;
-  if (frPath.startsWith('/destinations/')) return false;
   // /a-propos/ redirige vers /about.htm (EN-only) : pas de hreflang.
   if (frPath === '/a-propos/') return false;
 
-  // Articles blog : uniquement s’il existe une paire FR↔EN enregistrée.
-  if (isBlogPostPath(frPath) || isBlogPostPath(normalized)) {
+  // Articles blog et destinations : uniquement s’il existe une paire FR↔EN.
+  if (
+    isBlogPostPath(frPath) ||
+    isBlogPostPath(normalized) ||
+    isDestinationPath(frPath) ||
+    isDestinationPath(normalized)
+  ) {
     return Boolean(findSlugPair(normalized) || findSlugPair(frPath));
   }
 

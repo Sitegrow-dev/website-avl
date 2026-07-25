@@ -16,24 +16,15 @@ const PAGE_SOURCES: Record<string, string[]> = {
   '/photos.htm': ['src/pages/photos/index.astro', 'src/data/photos.ts'],
   '/blog/': ['src/pages/blog/index.astro', 'src/data/posts.ts'],
   '/contact/': ['src/pages/contact/index.astro', 'src/data/contact.ts'],
-  '/recherche/': [
-    'src/pages/recherche/index.astro',
-    'src/data/search.ts',
-    'src/lib/search-index.ts',
-  ],
   '/en/': ['src/pages/en/index.astro', 'src/data/home.ts'],
   '/en/blog/': ['src/pages/en/blog/index.astro', 'src/data/posts.ts'],
   '/en/contact/': ['src/pages/en/contact/index.astro', 'src/data/contact.ts'],
-  '/en/search/': [
-    'src/pages/en/search/index.astro',
-    'src/data/search.ts',
-    'src/lib/search-index.ts',
-  ],
 };
 
 /**
  * Pages statiques FR (+ pages EN-only à la racine).
  * Guides exclus (listés via getGuidePosts). Blog = Holding uniquement.
+ * Recherche exclue (noindex).
  */
 const FR_STATIC_PAGES = [
   '/',
@@ -41,17 +32,16 @@ const FR_STATIC_PAGES = [
   '/photos.htm',
   '/blog/',
   '/contact/',
-  '/recherche/',
 ];
 
 /**
  * Miroirs EN : pages réelles sous src/pages/en/ (URLs publiques).
+ * Recherche exclue (noindex).
  */
 const EN_STATIC_PAGES = [
   '/en/',
   '/en/blog/',
   '/en/contact/',
-  '/en/search/',
 ];
 
 type Alternate = { hreflang: string; href: string };
