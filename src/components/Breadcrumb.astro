@@ -12,17 +12,28 @@ const { items, lang = 'fr' } = Astro.props;
 
 if (!items?.length) return;
 
-// Données structurées BreadcrumbList pour Google
+// Données structurées BreadcrumbList pour Google.
+// Chaque ListItem doit avoir `item` (URL) — Google invalide les rich results sinon.
+// Le dernier crumb (page courante) n’a souvent pas de href visuel : on utilise l’URL courante.
 const origin = Astro.site ?? new URL(Astro.url.origin);
+const currentUrl = new URL(Astro.url.pathname, origin).href;
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
-  itemListElement: items.map((item, index) => ({
-    '@type': 'ListItem',
-    position: index + 1,
-    name: item.label,
-    ...(item.href ? { item: new URL(item.href, origin).href } : {}),
-  })),
+  itemListElement: items.map((item, index) => {
+    const isLast = index === items.length - 1;
+    const itemUrl = item.href
+      ? new URL(item.href, origin).href
+      : isLast
+        ? currentUrl
+        : undefined;
+    return {
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.label,
+      ...(itemUrl ? { item: itemUrl } : {}),
+    };
+  }),
 };
 
 const ariaLabel = lang === 'en' ? 'Breadcrumb' : "Fil d'Ariane";

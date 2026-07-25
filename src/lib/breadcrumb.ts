@@ -14,7 +14,6 @@ const labels = {
     photos: 'Galerie photos',
     contact: 'Nous joindre',
     services: 'Services',
-    destinations: 'Destinations',
     notFound: 'Page introuvable',
     plan: 'Plan du site',
     search: 'Recherche',
@@ -26,7 +25,6 @@ const labels = {
     photos: 'Photo Gallery',
     contact: 'Contact',
     services: 'Services',
-    destinations: 'Destinations',
     notFound: 'Page not found',
     plan: 'Sitemap',
     search: 'Search',
@@ -74,10 +72,13 @@ export const breadcrumbTrails = {
     homeItem(lang),
     { label: labels[lang].services },
   ],
-  /** Pas d’index destinations : Accueil › Destinations › {ville}. */
+  /**
+   * Pas d’index /destinations/ : Accueil › {ville}.
+   * Un crumb « Destinations » sans URL ferait échouer le rich result Google
+   * (Missing field "item" in itemListElement).
+   */
   destination: (name: string, lang: Lang = 'fr'): BreadcrumbItem[] => [
     homeItem(lang),
-    { label: labels[lang].destinations },
     { label: name },
   ],
   plan: (lang: Lang = 'fr'): BreadcrumbItem[] => [homeItem(lang), { label: labels[lang].plan }],
