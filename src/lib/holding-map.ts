@@ -161,7 +161,7 @@ export function mapHoldingArticleToPost(
     updated: date,
     category,
     categorySlug,
-    summary: article.summary || article.meta_description,
+    summary: article.meta_description || article.summary,
     chapo: article.meta_description || article.summary,
     readingTimeMinutes: readingMinutes(article.word_count || 0),
     published: true,
