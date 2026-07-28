@@ -10,9 +10,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SITE_URL: ${{ secrets.SITE_URL || 'https://afvl.org' }}
-      SITE_DOMAIN: ${{ secrets.SITE_DOMAIN || 'afvl.org' }}
-      CONTACT_EMAIL: ${{ secrets.CONTACT_EMAIL || 'info@afvl.org' }}
+      # Valeurs en dur pour la CI (build jetable). La prod utilise l'env Vercel.
+      # NB: le secret repo SITE_URL est invalide → on ne le référence pas ici.
+      SITE_URL: https://afvl.org
+      SITE_DOMAIN: afvl.org
+      CONTACT_EMAIL: info@afvl.org
       HOLDING_API_KEY: ${{ secrets.HOLDING_API_KEY }}
     steps:
       - uses: actions/checkout@v4
