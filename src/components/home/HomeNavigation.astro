@@ -1,7 +1,7 @@
 ---
 import SiteLogo from '@components/home/SiteLogo.astro';
 import LanguageSwitcher from '@components/LanguageSwitcher.astro';
-import { getNavigation, type NavLink } from '@/data/navigation';
+import { getNavigation, type NavLink, type NavChild } from '@/data/navigation';
 import { getSearchContent } from '@/data/search';
 import { localizedHref, type Lang } from '@/lib/i18n';
 
@@ -166,7 +166,7 @@ function isGroupActive(link: NavLink) {
                   class="rounded-md border border-black/[0.08] bg-white py-2 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.18)]"
                   role="list"
                 >
-                  {link.children.map((child) => (
+                  {((link as NavLink).children ?? []).map((child: NavChild) => (
                     <li>
                       <a
                         href={localizedHref(child.href, lang)}
@@ -375,17 +375,17 @@ function isGroupActive(link: NavLink) {
     openBtn.dataset.searchInit = 'true';
 
     function openSearch() {
-      panel.classList.add('is-open');
-      panel.setAttribute('aria-hidden', 'false');
-      openBtn.setAttribute('aria-expanded', 'true');
-      requestAnimationFrame(() => input.focus());
+      panel!.classList.add('is-open');
+      panel!.setAttribute('aria-hidden', 'false');
+      openBtn!.setAttribute('aria-expanded', 'true');
+      requestAnimationFrame(() => input!.focus());
     }
 
     function closeSearch() {
-      panel.classList.remove('is-open');
-      panel.setAttribute('aria-hidden', 'true');
-      openBtn.setAttribute('aria-expanded', 'false');
-      openBtn.focus();
+      panel!.classList.remove('is-open');
+      panel!.setAttribute('aria-hidden', 'true');
+      openBtn!.setAttribute('aria-expanded', 'false');
+      openBtn!.focus();
     }
 
     openBtn.addEventListener('click', openSearch);

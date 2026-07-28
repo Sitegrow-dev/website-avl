@@ -135,21 +135,21 @@ const index: SearchRecord[] = buildSearchIndex(lang).map((item) => ({
 
     function render(query: string) {
       const q = query.trim();
-      list.innerHTML = '';
+      list!.innerHTML = '';
 
       if (!q) {
-        status.textContent = emptyQuery;
+        status!.textContent = emptyQuery;
         return;
       }
 
       const hits = searchIndex(records, q);
       if (!hits.length) {
-        status.textContent = `${noResults} « ${q} ».`;
+        status!.textContent = `${noResults} « ${q} ».`;
         return;
       }
 
-      status.textContent = `${hits.length} ${resultsFor} « ${q} ».`;
-      list.innerHTML = hits
+      status!.textContent = `${hits.length} ${resultsFor} « ${q} ».`;
+      list!.innerHTML = hits
         .map((hit) => {
           const type = typeLabels[hit.type] || hit.type;
           const category = hit.category
