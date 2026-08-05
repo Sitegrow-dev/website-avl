@@ -21,7 +21,10 @@ const query = Astro.url.searchParams.get('q')?.trim() ?? '';
       <h1 class="font-display text-4xl leading-tight text-ink sm:text-5xl">{copy.heading}</h1>
       <p class="mt-4 text-lg leading-relaxed text-muted">{copy.intro}</p>
       <div class="mt-8">
-        <SearchForm lang="en" query={query} autofocus />
+        <h2 class="text-sm font-semibold uppercase tracking-[0.1em] text-brand">{copy.formHeading}</h2>
+        <div class="mt-4">
+          <SearchForm lang="en" query={query} autofocus />
+        </div>
       </div>
       <SearchResults lang="en" query={query} />
     </div>

@@ -68,8 +68,11 @@ function allSlugPairs(): Array<{ fr: string; en: string }> {
 /**
  * Pages FR sans miroir EN indexable (pas de hreflang en-CA).
  * Les destinations ont des miroirs /en/destinations/* via les paires enregistrées.
+ * `/recherche/` : le miroir `/en/search/` est bloqué via robots.txt (page de
+ * recherche interne, faible valeur d'indexation) — pas de hreflang vers une
+ * URL non crawlable.
  */
-const FR_ONLY_PATHS = new Set<string>([]);
+const FR_ONLY_PATHS = new Set<string>(['/recherche/']);
 
 export function isLang(value: string | undefined | null): value is Lang {
   return value === 'fr' || value === 'en';

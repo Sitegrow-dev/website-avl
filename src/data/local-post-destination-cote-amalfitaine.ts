@@ -149,7 +149,7 @@ La côte amalfitaine est superbe et exigeante, dans cet ordre. Le voyageur qui l
 
 Pas de voiture, une base unique à Amalfi ou Praiano, des ferries, et une saison entre avril et octobre. Et prévoyez une journée entière pour y arriver depuis Montréal.
 
-Pour les autres régions, voyez [Rome](/destinations/rome/) et [le lac de Côme](/destinations/lac-de-come/), ou l'ensemble des [destinations](/destinations/).
+Pour les autres régions, voyez [Rome](/destinations/rome/) et [le lac de Côme](/destinations/lac-de-come/), ou l'ensemble des [destinations](/destinations/rome/).
 `;
 
 const enBody = `The Amalfi Coast is Italy's most logistically demanding destination, and that's what most travelers discover too late. From Montreal, there is **no direct flight to Naples**. You have to go through Rome, then take a train and a transfer — a full day from door to door. On the ground, a car is a liability, not an asset, because of the narrow cliff roads and near-total absence of parking. The coast can be seen in four to six days, from a single base, between April and October.
@@ -293,7 +293,7 @@ The Amalfi Coast is spectacular and demanding, in that order. The traveler who a
 
 No car, a single base in Amalfi or Praiano, ferries, and a season between April and October. And allow a full day to get there from Montreal.
 
-For other regions, see [Rome](/en/destinations/rome/) and [Lake Como](/en/destinations/lake-como/), or all [destinations](/en/destinations/).
+For other regions, see [Rome](/en/destinations/rome/) and [Lake Como](/en/destinations/lake-como/), or all [destinations](/en/destinations/rome/).
 `;
 
 function wordCount(text: string): number {

@@ -261,7 +261,7 @@ Venice disappoints those who pass through it and marks those who sleep in it. It
 
 Two or three nights, a residential neighborhood, mornings before eight o'clock and evenings after the visitor tide has receded. On those terms, it delivers on every promise.
 
-For other regions, see [Rome](/en/destinations/rome/) and [Tuscany](/en/destinations/tuscany/), or all [destinations](/en/destinations/).
+For other regions, see [Rome](/en/destinations/rome/) and [Tuscany](/en/destinations/tuscany/), or all [destinations](/en/destinations/rome/).
 `;
 
 function wordCount(text: string): number {
