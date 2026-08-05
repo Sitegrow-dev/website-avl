@@ -112,6 +112,11 @@ export const onRequest: MiddlewareHandler = async (context, next) => {
     '/en/blog/wedding-planner-italy/': '/en/wedding-planner-italy/',
     '/en/blog/getting-married-st-peters-basilica': '/en/getting-married-st-peters-basilica/',
     '/en/blog/getting-married-st-peters-basilica/': '/en/getting-married-st-peters-basilica/',
+    // Variantes 404 relevées par l'audit : slug FR sous préfixe EN, et slug EN sans préfixe.
+    '/en/marier-a-la-basilique-saint-pierre': '/en/getting-married-st-peters-basilica/',
+    '/en/marier-a-la-basilique-saint-pierre/': '/en/getting-married-st-peters-basilica/',
+    '/getting-married-st-peters-basilica': '/en/getting-married-st-peters-basilica/',
+    '/getting-married-st-peters-basilica/': '/en/getting-married-st-peters-basilica/',
     '/en/catholic-wedding-italy': '/en/getting-married-catholic-church-italy/',
     '/en/catholic-wedding-italy/': '/en/getting-married-catholic-church-italy/',
     '/en/blog/catholic-travel-italy': '/en/catholic-travel-italy/',
