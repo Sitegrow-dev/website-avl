@@ -8,7 +8,7 @@ export const siteConfig = {
   city: 'Rome',
   region: 'Italie',
   domain: 'afvl.org',
-  url: 'https://afvl.org',
+  url: 'https://www.afvl.org',
   defaultDescription:
     'Découvrez AFVL : accompagnement complet pour un mariage catholique en Italie, démarches canoniques, choix de l\'église et pèlerinage sur mesure.',
   /**
