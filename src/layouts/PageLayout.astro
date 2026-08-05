@@ -95,6 +95,7 @@ const skipLabel = isEnPage ? 'Skip to main content' : 'Aller au contenu principa
       canonicalPath={canonicalPath}
     />
     {ampUrl && <link rel="amphtml" href={ampUrl} />}
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     <FaviconHead />
   </head>
   <body class="bg-white text-ink font-sans antialiased">
