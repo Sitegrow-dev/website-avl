@@ -167,6 +167,26 @@
       "statusCode": 301
     },
     {
+      "source": "/en/marier-a-la-basilique-saint-pierre",
+      "destination": "/en/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/marier-a-la-basilique-saint-pierre/",
+      "destination": "/en/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/getting-married-st-peters-basilica",
+      "destination": "/en/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/getting-married-st-peters-basilica/",
+      "destination": "/en/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
       "source": "/a-propos",
       "destination": "/about.htm",
       "statusCode": 301
