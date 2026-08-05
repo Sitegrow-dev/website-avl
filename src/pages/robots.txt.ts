@@ -26,6 +26,8 @@ export const GET: APIRoute = ({ site }) => {
 
 User-agent: *
 Allow: /
+# Page de recherche interne : faible valeur d'indexation
+Disallow: /en/search
 
 ${aiBlock}
 

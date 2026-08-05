@@ -4,6 +4,7 @@ import { getPostHref } from '@/data/posts';
 import ResponsiveImage from '@components/ResponsiveImage.astro';
 import Button from '@components/ui/Button.astro';
 import { resolveImageAlt } from '@/lib/image-alt';
+import { truncateHeading } from '@/lib/seo';
 
 interface Props {
   post: Post;
@@ -31,7 +32,7 @@ const listingImage = post.listingImage ?? post.image;
       Article à la une · {post.category}
     </p>
     <h2 class="mt-4 font-display text-3xl leading-tight text-ink lg:text-4xl">
-      <a href={getPostHref(post)} class="hover:text-brand">{post.title}</a>
+      <a href={getPostHref(post)} class="hover:text-brand">{truncateHeading(post.title)}</a>
     </h2>
     <p class="mt-6 text-lg leading-relaxed text-muted">{post.summary}</p>
     {post.author && (

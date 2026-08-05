@@ -137,7 +137,7 @@ La Toscane récompense la lenteur, et punit sévèrement ceux qui la traitent co
 
 Une base, une voiture, un permis international obtenu avant le départ, et des journées où l'on conduit sans plan. Le reste suit.
 
-Pour les autres régions, voyez [Rome](/destinations/rome/) et [Venise](/destinations/venise/), ou l'ensemble des [destinations](/destinations/).
+Pour les autres régions, voyez [Rome](/destinations/rome/) et [Venise](/destinations/venise/), ou l'ensemble des [destinations](/destinations/rome/).
 `;
 
 const enBody = `Tuscany is best explored by car, over eight to ten days, with a single base rather than six hotels. That constraint shapes everything else. From Montreal, there is **no direct flight to Florence or Pisa**. You connect through Rome or Milan, then take the train, which adds half a day. An international driving permit is required in Italy alongside your Quebec license, and it must be obtained before departure. The best window runs from late April to June, then September to early October.
@@ -269,7 +269,7 @@ Tuscany rewards slowness, and punishes anyone who treats it as a checklist of vi
 
 One base, one car, an international permit obtained before departure, and days spent driving without a plan. Everything else follows.
 
-For other regions, see [Rome](/en/destinations/rome/) and [Venice](/en/destinations/venice/), or the full [destinations](/en/destinations/) overview.
+For other regions, see [Rome](/en/destinations/rome/) and [Venice](/en/destinations/venice/), or the full [destinations](/en/destinations/rome/) overview.
 `;
 
 function wordCount(text: string): number {

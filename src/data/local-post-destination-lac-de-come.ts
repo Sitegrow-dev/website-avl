@@ -142,7 +142,7 @@ Le lac de Côme est la destination italienne la plus accessible depuis Montréal
 
 Trois à cinq jours, une base à Varenne ou Menaggio, des ferries plutôt qu'une voiture, et une saison entre avril et octobre. À ces conditions, il tient tout ce qu'il promet.
 
-Pour les autres régions, voyez [la Toscane](/destinations/toscane/) et [Venise](/destinations/venise/), ou l'ensemble des [destinations](/destinations/).
+Pour les autres régions, voyez [la Toscane](/destinations/toscane/) et [Venise](/destinations/venise/), ou l'ensemble des [destinations](/destinations/rome/).
 `;
 
 const enBody = `Lake Como is the most searched Italian wedding destination in the French-speaking market, ahead of Tuscany. From Montreal, a direct flight connects Trudeau to Milan Malpensa, from which the lake is reached in one to one and a half hours, making it one of the most accessible Italian destinations for a Quebec traveller. The lake can be visited in three to five days, preferably without a car, as the ferries are the most pleasant and most efficient means of transport. The useful season runs from April to October; outside that window, most establishments close.
@@ -279,7 +279,7 @@ Lake Como is the most accessible Italian destination from Montreal — a direct 
 
 Three to five days, a base in Varenna or Menaggio, ferries rather than a car, and a season between April and October. On those terms, it delivers everything it promises.
 
-For other regions, see [Tuscany](/en/destinations/tuscany/) and [Venice](/en/destinations/venice/), or the full list of [destinations](/en/destinations/).
+For other regions, see [Tuscany](/en/destinations/tuscany/) and [Venice](/en/destinations/venice/), or the full list of [destinations](/en/destinations/rome/).
 `;
 
 function wordCount(text: string): number {

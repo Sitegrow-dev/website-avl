@@ -1,6 +1,7 @@
 ---
 import type { Post } from '@/data/posts';
 import Container from '@components/ui/Container.astro';
+import { truncateHeading } from '@/lib/seo';
 
 interface Props {
   post: Post;
@@ -27,7 +28,7 @@ const readLabel = lang === 'en' ? 'min read' : 'min de lecture';
         {post.category}
       </span>
       <h1 class="mt-6 font-display text-4xl leading-tight text-ink lg:text-[70px] lg:leading-[1.1]">
-        {post.title}
+        {truncateHeading(post.title)}
       </h1>
       <p class="mt-6 text-sm text-muted">
         {updatedLabel} {formatDate(post.updated ?? post.date)} · {post.readingTimeMinutes ?? 5} {readLabel}

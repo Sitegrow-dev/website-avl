@@ -55,3 +55,15 @@ export function formatTitle(title: string, opts: { brand?: boolean } = {}): stri
   const { brand = true } = opts;
   return brand ? `${title} | ${SHORT_BRAND}` : title;
 }
+
+/**
+ * Raccourcit un texte de titre (H1/H2) à `maxLength` caractères, en coupant
+ * sur un mot entier et en ajoutant une ellipse. Utilisé pour les titres
+ * dynamiques (Holding CMS) dont la longueur n'est pas contrôlée côté site.
+ */
+export function truncateHeading(text: string, maxLength = 70): string {
+  if (text.length <= maxLength) return text;
+  const cut = text.slice(0, maxLength - 1);
+  const lastSpace = cut.lastIndexOf(' ');
+  return `${(lastSpace > 40 ? cut.slice(0, lastSpace) : cut).trimEnd()}…`;
+}
