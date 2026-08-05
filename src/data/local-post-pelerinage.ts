@@ -291,7 +291,7 @@ const frPost = buildPost({
   title: 'Pèlerinage à Rome',
   metaTitle: 'Pèlerinage à Rome, guide pratique et spirituel',
   summary:
-    'Organisez un pèlerinage à Rome, les quatre basiliques majeures, les catacombes et les lieux saints. Durée, itinéraire, préparation et conseils pour les Québécois.',
+    'Organisez un pèlerinage à Rome : quatre basiliques majeures, catacombes et lieux saints. Durée, itinéraire, préparation et conseils pratiques.',
   bodyMarkdown: frBody,
   category: 'Voyage',
   categorySlug: 'voyage',

@@ -282,9 +282,9 @@ const frPost = buildPost({
   slug: VOYAGE_ITALIE_FR_SLUG,
   alternateSlug: VOYAGE_ITALIE_EN_SLUG,
   title: 'Voyage en Italie catholique',
-  metaTitle: 'Voyage en Italie catholique, guide complet des lieux saints',
+  metaTitle: 'Voyage en Italie catholique : les lieux saints',
   summary:
-    "Préparez un voyage dans l'Italie catholique, de Rome à Assise. Lieux saints, itinéraires, saisons et conseils pratiques pensés pour les voyageurs québécois.",
+    "Préparez un voyage dans l'Italie catholique, de Rome à Assise : lieux saints, itinéraires, saisons et conseils pour les voyageurs québécois.",
   bodyMarkdown: frBody,
   category: 'Voyage',
   categorySlug: 'voyage',
@@ -320,7 +320,7 @@ const enPost = buildPost({
   slug: VOYAGE_ITALIE_EN_SLUG,
   alternateSlug: VOYAGE_ITALIE_FR_SLUG,
   title: 'Travel to Catholic Italy',
-  metaTitle: 'Catholic travel in Italy: a complete guide to holy sites',
+  metaTitle: 'Catholic travel in Italy: a guide to holy sites',
   summary:
     'Plan a trip through Catholic Italy, from Rome to Assisi. Holy sites, itineraries, seasons, and practical advice built for Quebec travelers.',
   bodyMarkdown: enBody,

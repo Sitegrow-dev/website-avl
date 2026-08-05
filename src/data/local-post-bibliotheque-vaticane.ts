@@ -325,9 +325,9 @@ const frPost = buildPost({
   slug: BIBLIOTHEQUE_VATICANE_FR_SLUG,
   alternateSlug: BIBLIOTHEQUE_VATICANE_EN_SLUG,
   title: 'La Bibliothèque apostolique vaticane',
-  metaTitle: 'Bibliothèque vaticane, manuscrits, fonds et numérisation',
+  metaTitle: 'Bibliothèque vaticane : manuscrits et fonds',
   summary:
-    'Explorez la Bibliothèque apostolique vaticane, ses fonds, ses manuscrits célèbres et la numérisation en cours. Ce que l’on peut consulter, en ligne et sur place.',
+    'Explorez la Bibliothèque apostolique vaticane : ses fonds, ses manuscrits célèbres et la numérisation en cours, en ligne et sur place.',
   bodyMarkdown: frBody,
   category: 'Patrimoine',
   categorySlug: 'patrimoine',
@@ -368,7 +368,7 @@ const enPost = buildPost({
   slug: BIBLIOTHEQUE_VATICANE_EN_SLUG,
   alternateSlug: BIBLIOTHEQUE_VATICANE_FR_SLUG,
   title: 'The Vatican Apostolic Library',
-  metaTitle: 'Vatican Library: manuscripts, holdings, and digitization',
+  metaTitle: 'Vatican Library: manuscripts and holdings',
   summary:
     'Explore the Vatican Apostolic Library, its holdings, famous manuscripts, and ongoing digitization. What you can consult online and on site.',
   bodyMarkdown: enBody,

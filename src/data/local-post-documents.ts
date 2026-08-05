@@ -262,9 +262,9 @@ const frPost = buildPost({
   slug: DOCUMENTS_FR_SLUG,
   alternateSlug: DOCUMENTS_EN_SLUG,
   title: 'Documents pour un mariage religieux à l’étranger',
-  metaTitle: 'Documents pour un mariage religieux à l’étranger en Italie',
+  metaTitle: 'Documents pour un mariage religieux en Italie',
   summary:
-    'Obtenez la liste complète des documents pour un mariage religieux en Italie, bans, nulla osta, certificat de capacité matrimoniale et pièces canoniques selon votre pays.',
+    'Liste complète des documents pour un mariage religieux en Italie : bans, nulla osta, certificat de capacité matrimoniale et pièces canoniques.',
   bodyMarkdown: frBody,
   category: 'Démarches',
   categorySlug: 'demarches',

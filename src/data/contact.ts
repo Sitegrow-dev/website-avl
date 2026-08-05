@@ -10,7 +10,7 @@ export type ContactReason = {
 
 const contactFr = {
   title: 'Nous joindre',
-  metaTitle: 'Nous joindre - AFVL',
+  metaTitle: 'Nous joindre — Mariage catholique en Italie | AFVL',
   metaDescription:
     'Contactez AFVL pour un mariage catholique en Italie, un voyage ou un partenariat. Réponse sous deux jours ouvrables, en français.',
   intro:
@@ -123,7 +123,7 @@ const contactFr = {
 
 const contactEn = {
   title: 'Contact us',
-  metaTitle: 'Contact AFVL',
+  metaTitle: 'Contact — Catholic weddings in Italy | AFVL',
   metaDescription:
     'Contact AFVL about a Catholic wedding in Italy, a pilgrimage, or a partnership. We reply within two business days, in French or English.',
   intro:

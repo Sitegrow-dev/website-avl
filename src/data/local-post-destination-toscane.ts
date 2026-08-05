@@ -344,9 +344,9 @@ const frPost = buildPost({
   slug: TOSCANE_FR_SLUG,
   alternateSlug: TOSCANE_EN_SLUG,
   title: 'Toscane, guide complet',
-  metaTitle: 'Toscane, guide complet et itinéraire depuis le Québec',
+  metaTitle: 'Toscane, guide complet et itinéraire du Québec',
   summary:
-    'Organisez votre voyage en Toscane depuis le Québec. Pas de vol direct, permis international, meilleures bases, budget et itinéraire pour ne pas courir.',
+    'Organisez votre voyage en Toscane depuis le Québec : pas de vol direct, permis international, meilleures bases, budget et itinéraire.',
   bodyMarkdown: frBody,
   category: 'Destinations',
   categorySlug: 'destinations',
@@ -383,7 +383,7 @@ const enPost = buildPost({
   title: 'Tuscany, complete guide',
   metaTitle: 'Tuscany, a complete guide and itinerary from Quebec',
   summary:
-    'Plan your trip to Tuscany from Quebec. No direct flight, international driving permit, best bases, budget, and an itinerary that keeps you from rushing.',
+    'Plan your trip to Tuscany from Quebec: no direct flight, international driving permit, best bases, budget and an unhurried itinerary.',
   bodyMarkdown: enBody,
   category: 'Destinations',
   categorySlug: 'destinations',

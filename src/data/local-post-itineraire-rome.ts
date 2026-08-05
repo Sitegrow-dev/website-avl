@@ -304,7 +304,7 @@ const frPost = buildPost({
   title: 'Itinéraire à Rome en 3 jours',
   metaTitle: 'Itinéraire à Rome en 3 jours, plan jour par jour',
   summary:
-    'Suivez un itinéraire de 3 jours à Rome, testé et réaliste. Vatican, Rome antique, centre historique, avec les horaires, les réservations et les pièges à éviter.',
+    'Un itinéraire de 3 jours à Rome, testé et réaliste : Vatican, Rome antique et centre historique, avec horaires, réservations et pièges à éviter.',
   bodyMarkdown: frBody,
   category: 'Voyage',
   categorySlug: 'voyage',

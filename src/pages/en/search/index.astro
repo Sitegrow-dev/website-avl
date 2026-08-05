@@ -15,6 +15,7 @@ const query = Astro.url.searchParams.get('q')?.trim() ?? '';
   breadcrumbs={breadcrumbTrails.search('en')}
   activeHref="/recherche/"
   canonicalPath="/en/search/"
+  robots="noindex, follow"
 >
   <main class="px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
     <div class="mx-auto max-w-3xl">

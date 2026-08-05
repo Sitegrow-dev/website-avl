@@ -353,9 +353,9 @@ const frPost = buildPost({
   slug: LAC_COME_FR_SLUG,
   alternateSlug: LAC_COME_EN_SLUG,
   title: 'Lac de Côme, guide complet',
-  metaTitle: 'Lac de Côme, guide complet et mariage en Italie du Nord',
+  metaTitle: 'Lac de Côme : guide complet et mariage',
   summary:
-    'Découvrez le lac de Côme depuis le Québec. Vol direct Milan, villages à choisir, saisons, budget et tout sur le mariage, première destination du marché francophone.',
+    'Découvrez le lac de Côme depuis le Québec : vol direct Milan, villages, saisons, budget et mariage, la destination phare des francophones.',
   bodyMarkdown: frBody,
   category: 'Destinations',
   categorySlug: 'destinations',
@@ -390,9 +390,9 @@ const enPost = buildPost({
   slug: LAC_COME_EN_SLUG,
   alternateSlug: LAC_COME_FR_SLUG,
   title: 'Lake Como, complete guide',
-  metaTitle: 'Lake Como, a complete guide and weddings in northern Italy',
+  metaTitle: 'Lake Como: complete guide and weddings in Italy',
   summary:
-    'Discover Lake Como from Quebec. Direct flights to Milan, villages to choose, seasons, budget, and everything on weddings — the top destination in the French-speaking market.',
+    'Discover Lake Como from Quebec: direct flights to Milan, villages, seasons, budget and weddings — the top destination for French speakers.',
   bodyMarkdown: enBody,
   category: 'Destinations',
   categorySlug: 'destinations',

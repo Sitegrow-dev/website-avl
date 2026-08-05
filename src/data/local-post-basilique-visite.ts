@@ -308,9 +308,9 @@ const frPost = buildPost({
   slug: BASILIQUE_VISITE_FR_SLUG,
   alternateSlug: BASILIQUE_VISITE_EN_SLUG,
   title: 'La basilique Saint-Pierre',
-  metaTitle: 'Basilique Saint-Pierre, visite, coupole et accès gratuit',
+  metaTitle: 'Basilique Saint-Pierre : visite, coupole et accès',
   summary:
-    'Préparez votre visite de la basilique Saint-Pierre, entrée gratuite, montée à la coupole, grottes vaticanes et nécropole. Horaires, files et code vestimentaire.',
+    'Préparez votre visite de la basilique Saint-Pierre : entrée gratuite, montée à la coupole, grottes vaticanes, horaires et code vestimentaire.',
   bodyMarkdown: frBody,
   category: 'Voyage',
   categorySlug: 'voyage',
@@ -345,7 +345,7 @@ const enPost = buildPost({
   slug: BASILIQUE_VISITE_EN_SLUG,
   alternateSlug: BASILIQUE_VISITE_FR_SLUG,
   title: "St. Peter's Basilica",
-  metaTitle: "St. Peter's Basilica: visit, dome, and free access",
+  metaTitle: "St. Peter's Basilica: visit, dome, free access",
   summary:
     "Plan your visit to St. Peter's Basilica: free entry, climbing the dome, the Vatican Grottoes, and the necropolis. Hours, lines, and dress code.",
   bodyMarkdown: enBody,
