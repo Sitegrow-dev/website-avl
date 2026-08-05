@@ -67,6 +67,12 @@
   ],
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.afvl.org" }],
+      "destination": "https://afvl.org/:path*",
+      "statusCode": 301
+    },
+    {
       "source": "/sitemap",
       "destination": "/sitemap.xml",
       "statusCode": 301
@@ -383,6 +389,26 @@
     },
     {
       "source": "/en/blog/getting-married-st-peters-basilica/",
+      "destination": "/en/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/marier-a-la-basilique-saint-pierre",
+      "destination": "/en/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/en/marier-a-la-basilique-saint-pierre/",
+      "destination": "/en/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/getting-married-st-peters-basilica",
+      "destination": "/en/getting-married-st-peters-basilica/",
+      "statusCode": 301
+    },
+    {
+      "source": "/getting-married-st-peters-basilica/",
       "destination": "/en/getting-married-st-peters-basilica/",
       "statusCode": 301
     },

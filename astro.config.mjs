@@ -18,6 +18,12 @@ function resolveSiteUrl() {
   const explicit = process.env.SITE_URL?.trim();
   if (explicit) return explicit.replace(/\/$/, '');
 
+  // Prod sans SITE_URL : ne jamais retomber sur VERCEL_URL (hash de déploiement,
+  // pas le domaine custom) — ça casserait canonical/OG/sitemap sur le domaine réel.
+  if (process.env.VERCEL_ENV === 'production') {
+    return 'https://afvl.org';
+  }
+
   const vercel = process.env.VERCEL_URL?.trim();
   if (vercel) {
     const host = vercel.replace(/^https?:\/\//, '');
