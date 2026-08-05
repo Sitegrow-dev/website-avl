@@ -12,7 +12,6 @@ const query = Astro.url.searchParams.get('q')?.trim() ?? '';
   lang="en-CA"
   title={copy.metaTitle}
   description={copy.metaDescription}
-  robots="noindex, follow"
   breadcrumbs={breadcrumbTrails.search('en')}
   activeHref="/recherche/"
   canonicalPath="/en/search/"
