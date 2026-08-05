@@ -41,10 +41,17 @@ export function cleanCanonicalPath(path: string): string {
 }
 
 /**
+ * Nom court de la marque pour le suffixe de <title> : le nom complet
+ * (`siteConfig.siteName`) fait dépasser les ~60 caractères recommandés
+ * dès que le titre de page a un contenu descriptif normal.
+ */
+const SHORT_BRAND = 'AFVL';
+
+/**
  * Assemble un <title> au format « Page | Marque ».
  * Passer `{ brand: false }` pour un titre déjà complet (ex. la home).
  */
 export function formatTitle(title: string, opts: { brand?: boolean } = {}): string {
   const { brand = true } = opts;
-  return brand ? `${title} | ${siteConfig.siteName}` : title;
+  return brand ? `${title} | ${SHORT_BRAND}` : title;
 }
