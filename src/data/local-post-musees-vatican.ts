@@ -282,9 +282,9 @@ const frPost = buildPost({
   slug: MUSEES_VATICAN_FR_SLUG,
   alternateSlug: MUSEES_VATICAN_EN_SLUG,
   title: 'Billets des musées du Vatican',
-  metaTitle: 'Billets des musées du Vatican, types, prix et réservation',
+  metaTitle: 'Billets des musées du Vatican : prix et réservation',
   summary:
-    'Comparez les types de billets pour les musées du Vatican et la chapelle Sixtine. Coupe-file, visite guidée, entrée gratuite, réductions et pièges à éviter.',
+    'Comparez les billets pour les musées du Vatican et la chapelle Sixtine : coupe-file, visite guidée, entrée gratuite et pièges à éviter.',
   bodyMarkdown: frBody,
   category: 'Voyage',
   categorySlug: 'voyage',

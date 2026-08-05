@@ -330,12 +330,12 @@ const frPost = buildPost({
   slug: FR_SLUG,
   alternateSlug: EN_SLUG,
   title: "Se marier à l'église catholique en Italie",
-  metaTitle: "Se marier à l'église catholique en Italie, les démarches",
-  ampMetaTitle: "Se marier à l'église catholique en Italie : démarches",
+  metaTitle: "Se marier à l'église catholique en Italie",
+  ampMetaTitle: "Se marier à l'église catholique : démarches",
   ampMetaDescription:
     "Découvrez les étapes pour se marier à l'église catholique en Italie : dossier canonique, enquête prénuptiale et calendrier réaliste de 12 mois.",
   summary:
-    'Découvrez les démarches réelles pour se marier à l\'église catholique en Italie, le dossier canonique, l\'enquête prénuptiale et le parcours du dossier jusqu\'au diocèse.',
+    'Les démarches pour se marier à l\'église catholique en Italie : dossier canonique, enquête prénuptiale, parcours du dossier et calendrier.',
   bodyMarkdown: frBody,
   category: 'Démarches',
   categorySlug: 'demarches',

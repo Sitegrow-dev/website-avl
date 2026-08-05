@@ -189,7 +189,7 @@ export const postUi = {
   listTitle: 'Blog',
   listSubtitle:
     'Articles et actualités depuis notre rédaction, distincts des guides mariage et voyage.',
-  metaTitle: 'Blog - AFVL Amor Fides Via Lux',
+  metaTitle: 'Blog — Se marier et voyager en Italie | AFVL',
   metaDescription:
     'Lisez les articles du blog AFVL sur le mariage catholique, le patrimoine et le voyage en Italie.',
   readArticle: "Lire l'article",
@@ -202,7 +202,7 @@ export const postUiEn = {
   listTitle: 'Blog',
   listSubtitle:
     'Articles and updates from our editorial team — separate from the wedding and travel guides.',
-  metaTitle: 'Blog - AFVL Amor Fides Via Lux',
+  metaTitle: 'Blog — Getting married & travel in Italy | AFVL',
   metaDescription:
     'Read AFVL blog articles on Catholic weddings, heritage, and travel in Italy.',
   readArticle: 'Read the article',

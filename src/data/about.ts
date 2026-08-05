@@ -215,7 +215,7 @@ const aboutEn = {
   brandEyebrow: 'American Friends of the Vatican Library',
   metaTitle: 'About AFVL - American Friends of the Vatican Library',
   metaDescription:
-    'Discover the mission, history, and leadership of the American Friends of the Vatican Library, founded in 1981 to support the Vatican Apostolic Library.',
+    'Discover the mission, history, and leadership of the American Friends of the Vatican Library, founded in 1981 to support the Vatican Library.',
   intro: [
     'The purpose of the American Friends of the Vatican Library is to develop an awareness of the Vatican Library in the United States. The institution also helps to provide funds for the publication of scholarship, special projects and other needs beyond the operations budget of the Apostolic Library.',
   ],

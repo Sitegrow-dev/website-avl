@@ -374,7 +374,7 @@ const frPost = buildPost({
   title: 'Côte amalfitaine, guide complet',
   metaTitle: 'Côte amalfitaine, guide complet et pièges à éviter',
   summary:
-    'Préparez la côte amalfitaine depuis le Québec. Aucun vol direct, pourquoi ne pas louer de voiture, quel village choisir, budget et erreurs qui gâchent le séjour.',
+    'Préparez la côte amalfitaine depuis le Québec : vols, pourquoi éviter la voiture, quel village choisir, budget et erreurs à ne pas faire.',
   bodyMarkdown: frBody,
   category: 'Destinations',
   categorySlug: 'destinations',
@@ -409,7 +409,7 @@ const enPost = buildPost({
   slug: COTE_AMALFI_EN_SLUG,
   alternateSlug: COTE_AMALFI_FR_SLUG,
   title: 'Amalfi Coast, complete guide',
-  metaTitle: 'Amalfi Coast, a complete guide and pitfalls to avoid',
+  metaTitle: 'Amalfi Coast: complete guide and pitfalls to avoid',
   summary:
     'Plan the Amalfi Coast from Quebec. No direct flight, why not to rent a car, which village to choose, budget, and mistakes that ruin the trip.',
   bodyMarkdown: enBody,

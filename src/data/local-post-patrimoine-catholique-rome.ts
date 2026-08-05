@@ -315,9 +315,9 @@ const frPost = buildPost({
   slug: PATRIMOINE_ROME_FR_SLUG,
   alternateSlug: PATRIMOINE_ROME_EN_SLUG,
   title: 'Le patrimoine catholique de Rome',
-  metaTitle: 'Patrimoine catholique de Rome, basiliques et art sacré',
+  metaTitle: 'Patrimoine catholique de Rome et art sacré',
   summary:
-    'Explorez le patrimoine catholique de Rome, les quatre basiliques majeures, les églises méconnues, les Caravage gratuits et les catacombes. Guide complet et pratique.',
+    'Explorez le patrimoine catholique de Rome : quatre basiliques majeures, églises méconnues, Caravage gratuits et catacombes. Guide pratique.',
   bodyMarkdown: frBody,
   category: 'Patrimoine',
   categorySlug: 'patrimoine',

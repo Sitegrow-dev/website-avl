@@ -356,7 +356,7 @@ const enPost = buildPost({
   title: 'Rome, complete guide',
   metaTitle: 'Rome, a complete guide for a successful first trip',
   summary:
-    'Plan your trip to Rome from Quebec. Direct flights, length of stay, neighborhoods, the Vatican, budget in dollars, and mistakes to avoid before you go.',
+    'Plan your trip to Rome from Quebec: direct flights, length of stay, neighborhoods, the Vatican, budget in dollars and mistakes to avoid.',
   bodyMarkdown: enBody,
   category: 'Destinations',
   categorySlug: 'destinations',

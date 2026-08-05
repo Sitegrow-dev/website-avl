@@ -362,7 +362,7 @@ const homeEn = {
   meta: {
     title: 'Catholic Wedding in Italy - AFVL',
     description:
-      'Discover how to plan your Catholic wedding in Italy. Canonical paperwork, church selection, and travel support from Rome to Tuscany and the Amalfi Coast.',
+      'Plan your Catholic wedding in Italy: canonical paperwork, church selection, and travel support from Rome to Tuscany and the Amalfi Coast.',
   },
 } as const;
 

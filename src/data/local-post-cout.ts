@@ -253,9 +253,9 @@ const frPost = buildPost({
   slug: COUT_FR_SLUG,
   alternateSlug: COUT_EN_SLUG,
   title: "Coût d'un mariage en Italie",
-  metaTitle: "Coût d'un mariage en Italie, budget et postes réels",
+  metaTitle: "Coût d'un mariage en Italie : budget réel",
   summary:
-    "Estimez le coût d'un mariage en Italie, poste par poste, avec les fourchettes par région, les frais administratifs et les dépenses que les couples oublient systématiquement.",
+    "Estimez le coût d'un mariage en Italie poste par poste : fourchettes par région, frais administratifs et dépenses souvent oubliées.",
   bodyMarkdown: frBody,
   category: 'Budget',
   categorySlug: 'budget',
@@ -288,7 +288,7 @@ const enPost = buildPost({
   slug: COUT_EN_SLUG,
   alternateSlug: COUT_FR_SLUG,
   title: 'Cost of a wedding in Italy',
-  metaTitle: 'Cost of a wedding in Italy: budget and real line items',
+  metaTitle: 'Cost of a wedding in Italy: the real budget',
   summary:
     'Estimate the cost of a wedding in Italy, line by line, with regional ranges, administrative fees, and the expenses couples almost always forget.',
   bodyMarkdown: enBody,

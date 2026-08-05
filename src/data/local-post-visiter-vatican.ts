@@ -341,7 +341,7 @@ const frPost = buildPost({
   title: 'Visiter le Vatican',
   metaTitle: 'Visiter le Vatican, guide pratique et conseils',
   summary:
-    'Organisez votre visite du Vatican, musées, chapelle Sixtine et basilique Saint-Pierre. Jours à éviter, code vestimentaire, durée réelle et pièges à connaître.',
+    'Organisez votre visite du Vatican : musées, chapelle Sixtine et basilique Saint-Pierre. Jours à éviter, code vestimentaire et durée réelle.',
   bodyMarkdown: frBody,
   category: 'Voyage',
   categorySlug: 'voyage',

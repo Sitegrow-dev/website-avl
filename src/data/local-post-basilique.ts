@@ -232,12 +232,12 @@ const frPost = buildPost({
   slug: BASILIQUE_FR_SLUG,
   alternateSlug: BASILIQUE_EN_SLUG,
   title: 'Marier à la basilique Saint-Pierre, ce qui est réellement possible',
-  metaTitle: 'Marier à la basilique Saint-Pierre : ce qui est possible',
-  ampMetaTitle: 'Se marier à la basilique Saint-Pierre : ce qui est possible',
+  metaTitle: 'Se marier à la basilique Saint-Pierre au Vatican',
+  ampMetaTitle: 'Se marier à la basilique Saint-Pierre',
   ampMetaDescription:
     'Découvrez les conditions réelles pour un mariage à la basilique Saint-Pierre : dossier canonique, chapelle du Chœur et délais à respecter.',
   summary:
-    'Découvrez les conditions, documents et délais pour se marier à la basilique Saint-Pierre au Vatican. Un guide clair pour réaliser ce projet catholique.',
+    'Conditions, documents et délais pour se marier à la basilique Saint-Pierre au Vatican. Un guide clair pour concrétiser ce projet catholique.',
   bodyMarkdown: frBody,
   category: 'Destinations',
   categorySlug: 'destinations',
@@ -271,7 +271,7 @@ const enPost = buildPost({
   slug: BASILIQUE_EN_SLUG,
   alternateSlug: BASILIQUE_FR_SLUG,
   title: "Getting married at St. Peter's Basilica: what is actually possible",
-  metaTitle: "Getting Married at St. Peter's Basilica: What's Possible",
+  metaTitle: "Marrying at St. Peter's Basilica: what's possible",
   summary:
     "Discover how to marry at St. Peter's Basilica: Catholic requirements, canonical documents, Choir Chapel details, and timelines to plan your Vatican",
   bodyMarkdown: enBody,

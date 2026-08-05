@@ -36,7 +36,7 @@ export type PhotosSection = {
 export const photosContent = {
   metaTitle: 'Vatican photo gallery: heritage and sacred art in Rome',
   metaDescription:
-    'Browse a commented gallery of the Vatican and Rome: St. Peter’s Basilica, museums, Sistine Chapel, and sacred art, with historical context for each place.',
+    'Browse a commented gallery of the Vatican and Rome: St. Peter’s Basilica, museums, Sistine Chapel, and sacred art, with context for each place.',
   title: 'Photo gallery of the Vatican and Roman heritage',
   intro: [
     'The Vatican fits in half a square kilometre, yet it holds one of the densest artistic ensembles in the world. This gallery walks through its most striking places: the square and colonnade, St. Peter’s Basilica, the museums, the Sistine Chapel, and the decorated halls of the Apostolic Library. Each image comes with the context that explains what you are looking at, who built it, when, and why the piece matters.',

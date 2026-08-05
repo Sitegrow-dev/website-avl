@@ -295,9 +295,9 @@ const frPost = buildPost({
   slug: LUNE_DE_MIEL_FR_SLUG,
   alternateSlug: LUNE_DE_MIEL_EN_SLUG,
   title: 'Lune de miel en Italie',
-  metaTitle: 'Lune de miel en Italie, régions, budget et itinéraires',
+  metaTitle: 'Lune de miel en Italie : régions et budget',
   summary:
-    'Choisissez votre lune de miel en Italie selon la région, la saison et le budget. Itinéraires après un mariage catholique et conseils pour les couples québécois.',
+    'Choisissez votre lune de miel en Italie selon la région, la saison et le budget : itinéraires après un mariage catholique et conseils pratiques.',
   bodyMarkdown: frBody,
   category: 'Voyage',
   categorySlug: 'voyage',
@@ -332,7 +332,7 @@ const enPost = buildPost({
   slug: LUNE_DE_MIEL_EN_SLUG,
   alternateSlug: LUNE_DE_MIEL_FR_SLUG,
   title: 'Honeymoon in Italy',
-  metaTitle: 'Honeymoon in Italy: regions, budget, and itineraries',
+  metaTitle: 'Honeymoon in Italy: regions, budget, itineraries',
   summary:
     'Choose your honeymoon in Italy by region, season, and budget. Itineraries after a Catholic wedding and tips for couples planning from abroad.',
   bodyMarkdown: enBody,

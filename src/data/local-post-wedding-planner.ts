@@ -237,9 +237,9 @@ const frPost = buildPost({
   slug: WEDDING_PLANNER_FR_SLUG,
   alternateSlug: WEDDING_PLANNER_EN_SLUG,
   title: 'Wedding planner pour un mariage catholique en Italie',
-  metaTitle: 'Wedding planner mariage en Italie, accompagnement complet',
+  metaTitle: 'Wedding planner pour un mariage en Italie',
   summary:
-    'Faites-vous accompagner pour un mariage catholique en Italie, du dossier canonique au jour J. Église, diocèse, prestataires et logistique, gérés de bout en bout.',
+    'Faites-vous accompagner pour un mariage catholique en Italie, du dossier canonique au jour J : église, diocèse, prestataires et logistique.',
   bodyMarkdown: frBody,
   category: 'Démarches',
   categorySlug: 'demarches',
@@ -268,7 +268,7 @@ const enPost = buildPost({
   slug: WEDDING_PLANNER_EN_SLUG,
   alternateSlug: WEDDING_PLANNER_FR_SLUG,
   title: 'Wedding planner for a Catholic wedding in Italy',
-  metaTitle: 'Wedding planner for a wedding in Italy: full support',
+  metaTitle: 'Wedding planner for a wedding in Italy',
   summary:
     'Get support for a Catholic wedding in Italy, from the canonical file to the day itself. Church, diocese, vendors, and logistics handled end to end.',
   bodyMarkdown: enBody,
