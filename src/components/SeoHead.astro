@@ -78,6 +78,9 @@ const showEnAlternate = !enOnly && siteConfig.enIndexable && hasEnAlternate(path
 const rssUrl = absoluteUrl(isEn ? '/en/rss.xml' : '/rss.xml', site);
 const rssTitle = isEn ? `${siteConfig.siteName} - RSS feed` : `${siteConfig.siteName} - Flux RSS`;
 
+// Découverte explicite du sitemap XML depuis le <head> (en plus de robots.txt).
+const sitemapUrl = absoluteUrl('/sitemap.xml', site);
+
 const twitter = siteConfig.twitterHandle;
 ---
 <link rel="canonical" href={canonical} />
@@ -91,6 +94,7 @@ const twitter = siteConfig.twitterHandle;
 <link rel="alternate" hreflang="x-default" href={xDefaultUrl} />
 
 <link rel="alternate" type="application/rss+xml" title={rssTitle} href={rssUrl} />
+<link rel="sitemap" type="application/xml" href={sitemapUrl} />
 
 <meta property="og:type" content={type} />
 <meta property="og:site_name" content={siteConfig.siteName} />
