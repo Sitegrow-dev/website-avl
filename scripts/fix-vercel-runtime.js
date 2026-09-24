@@ -13,10 +13,10 @@ function updateRuntimeConfigs(dir) {
       } else if (entry.name === '.vc-config.json') {
         try {
           const config = JSON.parse(readFileSync(fullPath, 'utf-8'));
-          if (config.runtime && config.runtime !== 'nodejs20.x') {
-            config.runtime = 'nodejs20.x';
+          if (config.runtime && config.runtime !== 'nodejs24.x') {
+            config.runtime = 'nodejs24.x';
             writeFileSync(fullPath, JSON.stringify(config, null, '\t') + '\n');
-            console.log(`✅ Updated ${fullPath} to use nodejs20.x`);
+            console.log(`✅ Updated ${fullPath} to use nodejs24.x`);
           }
         } catch (error) {
           console.warn(`⚠️  Error processing ${fullPath}:`, error.message);
